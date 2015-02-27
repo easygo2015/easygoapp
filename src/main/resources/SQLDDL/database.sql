@@ -1,6 +1,12 @@
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema easygo_db
+-- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema easygo_db
@@ -20,7 +26,8 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`USER` (
   `car` VARCHAR(128) NULL DEFAULT NULL,
   `phone_number` VARCHAR(20) NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC))
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC))
 ENGINE = InnoDB;
 
 
