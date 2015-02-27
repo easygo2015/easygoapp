@@ -9,8 +9,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by Padonag on 24.02.2015.
@@ -18,17 +18,26 @@ import java.util.Date;
 @Entity
 @Table(name = "TRIP")
 public class Trip {
+
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
-    private Date startTime;
+    @Column(name = "start_trip", nullable = false)
+    private Timestamp startTime;
+    @OneToOne
+    @JoinColumn(name="user_id", unique= true, nullable=true, insertable=true, updatable=true)
     private User driver;
+    @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
+    @Column(name = "price")
     private Double price;
 
     @JoinTable(name = "TRIP_POINTS")
+    @JoinColumn(name = "")
     @ManyToMany
-    private Collection<PNP> pnps;
+    private Collection<PassengerNodePoint> passengerNodePoints;
 
-    @Column(name = "car_capacity", nullable = false)
     public Integer getCarCapacity() {
         return carCapacity;
     }
@@ -37,8 +46,6 @@ public class Trip {
         this.carCapacity = carCapacity;
     }
 
-    @OneToOne
-    @JoinColumn(name="user_id", unique= true, nullable=true, insertable=true, updatable=true)
     public User getDriver() {
         return driver;
     }
@@ -47,10 +54,6 @@ public class Trip {
         this.driver = driver;
     }
 
-
-    @Id
-    @Column(name = "trip_id", nullable = false)
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -59,8 +62,6 @@ public class Trip {
         this.id = id;
     }
 
-
-    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
@@ -69,12 +70,11 @@ public class Trip {
         this.price = price;
     }
 
-    @Column(name = "start_trip", nullable = false)
-    public Date getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
@@ -99,6 +99,7 @@ public class Trip {
         if (!carCapacity.equals(trip.carCapacity)) return false;
         if (!driver.equals(trip.driver)) return false;
         if (!id.equals(trip.id)) return false;
+        if (!passengerNodePoints.equals(trip.passengerNodePoints)) return false;
         if (price != null ? !price.equals(trip.price) : trip.price != null) return false;
         if (!startTime.equals(trip.startTime)) return false;
 
@@ -112,6 +113,7 @@ public class Trip {
         result = 31 * result + driver.hashCode();
         result = 31 * result + carCapacity.hashCode();
         result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + passengerNodePoints.hashCode();
         return result;
     }
 }

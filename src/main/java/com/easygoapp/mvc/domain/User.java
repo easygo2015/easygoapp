@@ -16,12 +16,21 @@ import javax.persistence.Table;
 @Table(name = "USER")
 public class User {
 
+    @Id
+    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "login", nullable = false)
     private String login;
+    @Column(name = "gender", nullable = false)
     private Gender gender;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "car")
     private String car;
 
     public User() {
@@ -33,7 +42,7 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "car")
+
     public String getCar() {
         return car;
     }
@@ -42,7 +51,6 @@ public class User {
         this.car = car;
     }
 
-    @Column(name = "gender", nullable = false)
     public Gender getGender() {
         return gender;
     }
@@ -51,9 +59,6 @@ public class User {
         this.gender = gender;
     }
 
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -62,7 +67,6 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "login", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -71,8 +75,6 @@ public class User {
         this.login = login;
     }
 
-
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -81,7 +83,6 @@ public class User {
         this.name = name;
     }
 
-    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -90,7 +91,6 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "phone_number")
     public String getPhoneNumber() {
         return phoneNumber;
     }

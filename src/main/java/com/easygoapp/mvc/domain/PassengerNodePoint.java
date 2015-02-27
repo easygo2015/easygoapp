@@ -8,26 +8,34 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "PNP")
-public class PNP {
-    private Long pnpId;
+public class PassengerNodePoint {
+
+    @Id
+    @Column(name = "trip_id", nullable = false, unique = true)
+    @GeneratedValue
+    private Long id;
+    @Column(name = "latitude", nullable = false)
     private Double latitude;
+    @Column(name = "longitude", nullable = false)
     private Double longitude;
+    @Column(name = "description")
     private String description;
+    @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
     @ManyToMany(mappedBy = "pnps")
     private Collection<Trip> trips;
 
-    public PNP() {
+    public PassengerNodePoint() {
     }
 
-    public PNP(boolean isLeft, double latitude, double longitude) {
+    public PassengerNodePoint(boolean isLeft, double latitude, double longitude) {
         this.isLeft = isLeft;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    @Column(name = "description")
+
     public String getDescription() {
         return description;
     }
@@ -36,7 +44,6 @@ public class PNP {
         this.description = description;
     }
 
-    @Column(name = "isleft", nullable = false)
     public boolean isLeft() {
         return isLeft;
     }
@@ -45,7 +52,6 @@ public class PNP {
         this.isLeft = isLeft;
     }
 
-    @Column(name = "latitude", nullable = false)
     public Double getLatitude() {
         return latitude;
     }
@@ -54,7 +60,6 @@ public class PNP {
         this.latitude = latitude;
     }
 
-    @Column(name = "longitude", nullable = false)
     public Double getLongitude() {
         return longitude;
     }
@@ -63,16 +68,12 @@ public class PNP {
         this.longitude = longitude;
     }
 
-
-    @Id
-    @Column(name = "trip_id", nullable = false, unique = true)
-    @GeneratedValue
-    public Long getPnpId() {
-        return pnpId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPnpId(Long pnpId) {
-        this.pnpId = pnpId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -82,30 +83,30 @@ public class PNP {
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", pnpId=" + pnpId +
+                ", id=" + id +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PNP)) return false;
+        if (!(o instanceof PassengerNodePoint)) return false;
 
-        PNP pnp = (PNP) o;
+        PassengerNodePoint passengerNodePoint = (PassengerNodePoint) o;
 
-        if (isLeft != pnp.isLeft) return false;
-        if (description != null ? !description.equals(pnp.description) : pnp.description != null) return false;
-        if (!latitude.equals(pnp.latitude)) return false;
-        if (!longitude.equals(pnp.longitude)) return false;
-        if (!pnpId.equals(pnp.pnpId)) return false;
-        if (trips != null ? !trips.equals(pnp.trips) : pnp.trips != null) return false;
+        if (isLeft != passengerNodePoint.isLeft) return false;
+        if (description != null ? !description.equals(passengerNodePoint.description) : passengerNodePoint.description != null) return false;
+        if (!latitude.equals(passengerNodePoint.latitude)) return false;
+        if (!longitude.equals(passengerNodePoint.longitude)) return false;
+        if (!id.equals(passengerNodePoint.id)) return false;
+        if (trips != null ? !trips.equals(passengerNodePoint.trips) : passengerNodePoint.trips != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = pnpId.hashCode();
+        int result = id.hashCode();
         result = 31 * result + latitude.hashCode();
         result = 31 * result + longitude.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
