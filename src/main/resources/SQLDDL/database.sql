@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `easygo_db`.`PNP`
+-- Table `easygo_db`.`Point`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `easygo_db`.`PNP` (
   `pnp_id` BIGINT(20) NOT NULL AUTO_INCREMENT,

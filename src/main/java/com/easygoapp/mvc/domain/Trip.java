@@ -26,7 +26,7 @@ public class Trip {
 
     @JoinTable(name = "TRIP_POINTS")
     @ManyToMany
-    private Collection<PNP> pnps;
+    private Collection<Point> points;
 
     @Column(name = "car_capacity", nullable = false)
     public Integer getCarCapacity() {

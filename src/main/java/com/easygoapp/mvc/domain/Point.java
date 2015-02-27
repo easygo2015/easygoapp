@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "PNP")
-public class PNP {
+public class Point {
     private Long pnpId;
     private Double latitude;
     private Double longitude;
@@ -18,10 +18,10 @@ public class PNP {
     @ManyToMany(mappedBy = "pnps")
     private Collection<Trip> trips;
 
-    public PNP() {
+    public Point() {
     }
 
-    public PNP(boolean isLeft, double latitude, double longitude) {
+    public Point(boolean isLeft, double latitude, double longitude) {
         this.isLeft = isLeft;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -65,7 +65,7 @@ public class PNP {
 
 
     @Id
-    @Column(name = "trip_id", nullable = false, unique = true)
+    @Column(name = "pnp_id", nullable = false, unique = true)
     @GeneratedValue
     public Long getPnpId() {
         return pnpId;
@@ -77,7 +77,7 @@ public class PNP {
 
     @Override
     public String toString() {
-        return "PNP{" +
+        return "Point{" +
                 "isLeft=" + isLeft +
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
@@ -89,16 +89,16 @@ public class PNP {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PNP)) return false;
+        if (!(o instanceof Point)) return false;
 
-        PNP pnp = (PNP) o;
+        Point point = (Point) o;
 
-        if (isLeft != pnp.isLeft) return false;
-        if (description != null ? !description.equals(pnp.description) : pnp.description != null) return false;
-        if (!latitude.equals(pnp.latitude)) return false;
-        if (!longitude.equals(pnp.longitude)) return false;
-        if (!pnpId.equals(pnp.pnpId)) return false;
-        if (trips != null ? !trips.equals(pnp.trips) : pnp.trips != null) return false;
+        if (isLeft != point.isLeft) return false;
+        if (description != null ? !description.equals(point.description) : point.description != null) return false;
+        if (!latitude.equals(point.latitude)) return false;
+        if (!longitude.equals(point.longitude)) return false;
+        if (!pnpId.equals(point.pnpId)) return false;
+        if (trips != null ? !trips.equals(point.trips) : point.trips != null) return false;
 
         return true;
     }
