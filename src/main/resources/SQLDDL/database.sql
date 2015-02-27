@@ -29,13 +29,13 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`USER` (
 -- Table `easygo_db`.`TRIP`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `easygo_db`.`TRIP` (
-  `trip_id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL,
   `start_trip` TIMESTAMP NOT NULL,
   `driver_id` BIGINT(20) NOT NULL,
   `car_capacity` INT NOT NULL,
   `price` DOUBLE NULL DEFAULT 0,
-  PRIMARY KEY (`trip_id`),
-  UNIQUE INDEX `id_UNIQUE` (`trip_id` ASC),
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `driver_id_idx` (`driver_id` ASC),
   CONSTRAINT `driver_id`
   FOREIGN KEY (`driver_id`)
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`RATIO` (
   INDEX `person_id_idx` (`user_id` ASC),
   CONSTRAINT `trip_id`
   FOREIGN KEY (`trip_id`)
-  REFERENCES `easygo_db`.`TRIP` (`trip_id`)
+  REFERENCES `easygo_db`.`TRIP` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `person_id`
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`TRIP_POINTS` (
   INDEX `pnp_idx` (`pnp_id` ASC),
   CONSTRAINT `trip`
   FOREIGN KEY (`trip_id`)
-  REFERENCES `easygo_db`.`TRIP` (`trip_id`)
+  REFERENCES `easygo_db`.`TRIP` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `pnp`
@@ -105,4 +105,3 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`TRIP_POINTS` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
