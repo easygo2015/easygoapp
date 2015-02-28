@@ -1,14 +1,17 @@
 package com.easygoapp.mvc.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -17,7 +20,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip {
+public class Trip implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -25,17 +28,18 @@ public class Trip {
     private Long id;
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
-    @OneToOne
-    @JoinColumn(name="user_id", unique= true, nullable=true, insertable=true, updatable=true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
     private User driver;
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
     @Column(name = "price")
     private Double price;
-
-    @JoinTable(name = "TRIP_POINTS")
-    @JoinColumn(name = "")
-    @ManyToMany
+    @JoinTable(name = "TRIP_POINTS",
+            joinColumns = {@JoinColumn(name = "trip_id")},
+            inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
+    @JoinColumn(name = "trip_id")
+    @ManyToMany(cascade = CascadeType.ALL)
     private Collection<PassengerNodePoint> passengerNodePoints;
 
     public Integer getCarCapacity() {

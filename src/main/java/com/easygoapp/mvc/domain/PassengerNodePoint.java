@@ -1,6 +1,7 @@
 package com.easygoapp.mvc.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -8,10 +9,10 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint {
+public class PassengerNodePoint implements Serializable{
 
     @Id
-    @Column(name = "trip_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue
     private Long id;
     @Column(name = "latitude", nullable = false)
@@ -23,7 +24,7 @@ public class PassengerNodePoint {
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
-    @ManyToMany(mappedBy = "pnps")
+    @ManyToMany(mappedBy = "passengerNodePoints")
     private Collection<Trip> trips;
 
     public PassengerNodePoint() {

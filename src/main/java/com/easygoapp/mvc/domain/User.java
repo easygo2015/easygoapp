@@ -4,9 +4,14 @@ import com.easygoapp.mvc.type.Gender;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Padonag on 24.02.2015.
@@ -14,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -32,6 +37,8 @@ public class User {
     private String phoneNumber;
     @Column(name = "car")
     private String car;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver_id")
+    private List<Trip> trips;
 
     public User() {
     }
@@ -99,6 +106,14 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -125,6 +140,7 @@ public class User {
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (!password.equals(user.password)) return false;
         if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (trips != null ? !trips.equals(user.trips) : user.trips != null) return false;
 
         return true;
     }
@@ -138,6 +154,7 @@ public class User {
         result = 31 * result + password.hashCode();
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (car != null ? car.hashCode() : 0);
+        result = 31 * result + (trips != null ? trips.hashCode() : 0);
         return result;
     }
 }
