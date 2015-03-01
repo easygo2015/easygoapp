@@ -1,6 +1,9 @@
 package com.easygoapp.mvc.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -8,11 +11,12 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint {
+public class PassengerNodePoint implements Serializable {
 
     @Id
-    @Column(name = "trip_id", nullable = false, unique = true)
-    @GeneratedValue
+    @Column(name = "id", nullable = false, unique = true)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     @Column(name = "latitude", nullable = false)
     private Double latitude;
@@ -23,7 +27,7 @@ public class PassengerNodePoint {
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
-    @ManyToMany(mappedBy = "pnps")
+    @ManyToMany(mappedBy = "passengerNodePoints")
     private Collection<Trip> trips;
 
     public PassengerNodePoint() {
@@ -35,6 +39,14 @@ public class PassengerNodePoint {
         this.longitude = longitude;
     }
 
+
+    public Collection<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(Collection<Trip> trips) {
+        this.trips = trips;
+    }
 
     public String getDescription() {
         return description;

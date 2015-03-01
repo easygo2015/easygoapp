@@ -1,14 +1,9 @@
 package com.easygoapp.mvc.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -17,26 +12,38 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip {
+public class Trip implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
-    @OneToOne
-    @JoinColumn(name="user_id", unique= true, nullable=true, insertable=true, updatable=true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private User driver;
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
     @Column(name = "price")
     private Double price;
 
-    @JoinTable(name = "TRIP_POINTS")
-    @JoinColumn(name = "")
-    @ManyToMany
+   // @JoinColumn(name = "trip_id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "TRIP_POINTS",
+            joinColumns = {@JoinColumn(name = "trip_id")},
+            inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
     private Collection<PassengerNodePoint> passengerNodePoints;
+
+    public Collection<PassengerNodePoint> getPassengerNodePoints() {
+
+        return passengerNodePoints;
+    }
+
+    public void setPassengerNodePoints(Collection<PassengerNodePoint> passengerNodePoints) {
+        this.passengerNodePoints = passengerNodePoints;
+    }
 
     public Integer getCarCapacity() {
         return carCapacity;
