@@ -13,6 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @DirtiesContext
@@ -24,6 +25,7 @@ public class DaoPnpTest {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+
     @Test
     public void save(){
         PassengerNodePoint point = new PassengerNodePoint();
@@ -31,8 +33,6 @@ public class DaoPnpTest {
         point.setLatitude(111d);
         point.setLongitude(222d);
         point.setLeft(true);
-
-
 
         PassengerNodePoint saved = passengerNodePointService.save(point);
         System.out.println(saved);

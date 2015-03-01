@@ -30,7 +30,8 @@ public class DaoUserTest {
     }
 
     @Test
-    public void saveAndDeleteUser(){
+    public void save(){
+
         System.out.println("saveUser");
         User user = new User();
         user.setPhoneNumber("000-000-00-00");
@@ -40,11 +41,15 @@ public class DaoUserTest {
         user.setPassword("1234");
         User user1 = userService.saveUser(user);
         System.out.println(user1);
-
-//        System.out.println("deleteUser");
-//        userService.delete(2l);
-
     }
+
+    @Test
+    public void delete(){
+        System.out.println("deleteUser");
+        userService.delete(2l);
+    }
+
+
 
     @Test
     public void getUserByLogin(){

@@ -1,14 +1,17 @@
 package com.easygoapp.mvc.domain;
 
 import com.easygoapp.mvc.type.Gender;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by Padonag on 24.02.2015.
+ * Created by Markov on 24.02.2015.
  */
 
 @Entity
@@ -32,7 +35,14 @@ public class User implements Serializable {
     private String phoneNumber;
     @Column(name = "car")
     private String car;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
+
+    @OneToMany(mappedBy = "driver", cascade=CascadeType.ALL)
+    private Collection<Trip> tripDriver;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "RATIO",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
     private List<Trip> trips;
 
     public User() {
@@ -44,6 +54,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+
+    public Collection<Trip> getTripDriver() {
+        return tripDriver;
+    }
+
+    public void setTripDriver(Collection<Trip> tripDriver) {
+        this.tripDriver = tripDriver;
+    }
 
     public String getCar() {
         return car;
@@ -121,35 +139,42 @@ public class User implements Serializable {
                 '}';
     }
 
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (car != null ? !car.equals(user.car) : user.car != null) return false;
-        if (gender != user.gender) return false;
-        if (!id.equals(user.id)) return false;
-        if (!login.equals(user.login)) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (!password.equals(user.password)) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
-        if (trips != null ? !trips.equals(user.trips) : user.trips != null) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        User rhs = (User) obj;
+        return new EqualsBuilder()
+                .append(this.id, rhs.id)
+                .append(this.name, rhs.name)
+                .append(this.login, rhs.login)
+                .append(this.gender, rhs.gender)
+                .append(this.password, rhs.password)
+                .append(this.phoneNumber, rhs.phoneNumber)
+                .append(this.car, rhs.car)
+                .append(this.trips, rhs.trips)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + login.hashCode();
-        result = 31 * result + gender.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (car != null ? car.hashCode() : 0);
-        result = 31 * result + (trips != null ? trips.hashCode() : 0);
-        return result;
+        return new HashCodeBuilder()
+                .append(id)
+                .append(name)
+                .append(login)
+                .append(gender)
+                .append(password)
+                .append(phoneNumber)
+                .append(car)
+                .append(trips)
+                .toHashCode();
     }
 }

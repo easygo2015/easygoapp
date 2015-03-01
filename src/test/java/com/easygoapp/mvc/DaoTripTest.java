@@ -33,8 +33,7 @@ public class DaoTripTest {
     private UserService userService;
 
     @Test
-    public void save(){
-
+    public void saveJustTrip(){
         Trip trip = new Trip();
         trip.setCarCapacity(3);
         User driver = userService.getById(1l);
@@ -42,29 +41,44 @@ public class DaoTripTest {
         trip.setDriver(driver);
         trip.setPrice(5d);
         trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-
-        List<Trip> trips = new ArrayList<>();
-        trips.add(trip);
-        driver.setTrips(trips);
-
-        List<PassengerNodePoint> points = new ArrayList<>();
-
-        PassengerNodePoint point = new PassengerNodePoint();
-        point.setDescription("one");
-        point.setLatitude(111d);
-        point.setLongitude(222d);
-        point.setLeft(true);
-
-        points.add(point);
-
-        trip.setPassengerNodePoints(points);
-
         Trip savedTrip = tripService.save(trip);
         System.out.println(savedTrip);
     }
 
 
-
-
+//    @Test
+//    public void saveWithDriver(){
+//
+//        Trip trip = new Trip();
+//        trip.setCarCapacity(3);
+//        User driver = userService.getById(1l);
+//        System.out.println(driver);
+//        trip.setDriver(driver);
+//        trip.setPrice(5d);
+//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+//
+//        List<Trip> trips = new ArrayList<>();
+//        trips.add(trip);
+//        driver.setTrips(trips);
+//        Trip savedTrip = tripService.save(trip);
+//        System.out.println(savedTrip);
+//
+//        List<Trip> trips = new ArrayList<>();
+//        trips.add(trip);
+//        driver.setTrips(trips);
+//
+//        List<PassengerNodePoint> points = new ArrayList<>();
+//
+//        PassengerNodePoint point = new PassengerNodePoint();
+//        point.setDescription("one");
+//        point.setLatitude(111d);
+//        point.setLongitude(222d);
+//        point.setLeft(true);
+//
+//        points.add(point);
+//
+//        trip.setPassengerNodePoints(points);
+//
+//    }
 
 }
