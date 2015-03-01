@@ -1,10 +1,13 @@
 package com.easygoapp.mvc.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,12 +27,12 @@ public class Trip implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private User driver;
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;

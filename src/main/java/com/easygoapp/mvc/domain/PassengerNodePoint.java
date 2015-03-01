@@ -1,5 +1,6 @@
 package com.easygoapp.mvc.domain;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -13,7 +14,7 @@ public class PassengerNodePoint implements Serializable{
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "latitude", nullable = false)
     private Double latitude;
