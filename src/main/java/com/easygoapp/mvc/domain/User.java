@@ -1,13 +1,16 @@
 package com.easygoapp.mvc.domain;
 
 import com.easygoapp.mvc.type.Gender;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -23,7 +26,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;
@@ -37,7 +40,7 @@ public class User implements Serializable {
     private String phoneNumber;
     @Column(name = "car")
     private String car;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
     private List<Trip> trips;
 
     public User() {
