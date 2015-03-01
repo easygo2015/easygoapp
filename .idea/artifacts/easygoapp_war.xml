@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="easygoapp:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="easygoapp.war">
-      <element id="artifact" artifact-name="easygoapp:war exploded" />
-    </root>
-  </artifact>
-</component>
