@@ -1,11 +1,9 @@
-package com.easygoapp.mvc.service.impl;
+package com.easygoapp.service.impl;
 
-import com.easygoapp.mvc.domain.Trip;
+import com.easygoapp.domain.Trip;
 import com.easygoapp.repository.TripRepository;
-import com.easygoapp.repository.UserRepository;
-import com.easygoapp.mvc.service.TripService;
+import com.easygoapp.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -17,7 +15,6 @@ import java.util.List;
 @Service
 public class TripServiceImpl implements TripService {
 
-    @Qualifier("tripRepository")
     @Autowired
     private TripRepository tripRepository;
 

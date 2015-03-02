@@ -1,4 +1,4 @@
-package com.easygoapp.mvc.type;
+package com.easygoapp.type;
 
 /**
  * Created by Padonag on 24.02.2015.

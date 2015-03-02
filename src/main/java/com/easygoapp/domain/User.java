@@ -1,6 +1,6 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
-import com.easygoapp.mvc.type.Gender;
+import com.easygoapp.type.Gender;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;

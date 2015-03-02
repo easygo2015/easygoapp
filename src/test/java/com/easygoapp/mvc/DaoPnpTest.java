@@ -1,8 +1,8 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.mvc.config.PersistanceConfig;
-import com.easygoapp.mvc.domain.PassengerNodePoint;
-import com.easygoapp.mvc.service.PassengerNodePointService;
+import com.easygoapp.config.PersistenceConfig;
+import com.easygoapp.domain.PassengerNodePoint;
+import com.easygoapp.service.PassengerNodePointService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = PersistanceConfig.class)
+@ContextConfiguration(classes = PersistenceConfig.class)
 public class DaoPnpTest {
 
     @Autowired

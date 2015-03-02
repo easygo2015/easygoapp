@@ -1,5 +1,10 @@
 package com.easygoapp.mvc;
 
+import com.easygoapp.config.PersistenceConfig;
+import com.easygoapp.domain.Trip;
+import com.easygoapp.domain.User;
+import com.easygoapp.service.TripService;
+import com.easygoapp.service.UserService;
 import com.easygoapp.mvc.config.PersistanceConfig;
 import com.easygoapp.mvc.domain.PassengerNodePoint;
 import com.easygoapp.mvc.domain.Trip;
@@ -30,7 +35,7 @@ import java.util.List;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = PersistanceConfig.class)
+@ContextConfiguration(classes = PersistenceConfig.class)
 public class DaoTripTest {
 
     @Autowired

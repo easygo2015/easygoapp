@@ -1,12 +1,9 @@
-package com.easygoapp.mvc.service.impl;
+package com.easygoapp.service.impl;
 
-import com.easygoapp.mvc.domain.User;
+import com.easygoapp.domain.User;
 import com.easygoapp.repository.UserRepository;
-import com.easygoapp.mvc.service.UserService;
+import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
 
