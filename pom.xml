@@ -9,6 +9,8 @@
 
     <properties>
         <spring.version>4.1.5.RELEASE</spring.version>
+        <java.version>1.7</java.version>
+        <hibernate.manager>4.3.8.Final</hibernate.manager>
     </properties>
 
     <dependencies>
@@ -21,6 +23,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.manager}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
@@ -28,8 +36,8 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
         </dependency>
 
         <dependency>
@@ -59,6 +67,19 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.7.2.RELEASE</version>
+        </dependency>
+
         <!--JPA-->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -86,8 +107,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
