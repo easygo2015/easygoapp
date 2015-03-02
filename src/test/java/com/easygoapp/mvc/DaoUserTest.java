@@ -14,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -26,25 +25,25 @@ public class DaoUserTest {
     @Autowired
     private UserService userService;
 
-    @Before
-    public void saveUser(){
-        User user = new User();
-        user.setPhoneNumber("000-000-00-00");
-        user.setCar("lexus");
-        user.setGender(Gender.MALE);
-        user.setLogin("Markov");
-        user.setPassword("1234");
-        User user1 = userService.saveUser(user);
-        id = user1.getId();
-        System.out.println(id);
-        System.out.println(user1);
-    }
+//    @Before
+//    public void saveUser(){
+//        User user = new User();
+//        user.setPhoneNumber("000-000-00-00");
+//        user.setCar("lexus");
+//        user.setGender(Gender.MALE);
+//        user.setLogin("Markov");
+//        user.setPassword("1234");
+//        User user1 = userService.saveUser(user);
+//        id = user1.getId();
+//        System.out.println(id);
+//        System.out.println(user1);
+//    }
 
-    @After
-    public void deleteUser(){
-        System.out.println("deleteUser");
-        userService.delete(id);
-    }
+//    @After
+//    public void deleteUser(){
+//        System.out.println("deleteUser");
+//        userService.delete(id);
+//    }
 
     @Test
     public void getUserByLogin(){
@@ -59,5 +58,7 @@ public class DaoUserTest {
         User user = userService.getById(1l);
         System.out.println(user);
     }
+
+
 
 }

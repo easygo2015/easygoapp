@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Markov on 24.02.2015.
@@ -20,20 +21,21 @@ public class PassengerNodePoint implements Serializable {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
     @Column(name = "latitude", nullable = false)
     private Double latitude;
+
     @Column(name = "longitude", nullable = false)
     private Double longitude;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "TRIP_POINTS",
-            joinColumns = {@JoinColumn(name = "pnp_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
-    private Collection<Trip> trips;
+    @ManyToMany(mappedBy = "passengerNodePoints")
+    private List<Trip> trips;
 
     public PassengerNodePoint() {
     }
@@ -45,11 +47,11 @@ public class PassengerNodePoint implements Serializable {
     }
 
 
-    public Collection<Trip> getTrips() {
+    public List<Trip> getTrips() {
         return trips;
     }
 
-    public void setTrips(Collection<Trip> trips) {
+    public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
 

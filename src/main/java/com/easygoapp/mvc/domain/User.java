@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,26 +22,29 @@ public class User implements Serializable {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "login", nullable = false)
     private String login;
+
     @Column(name = "gender", nullable = false)
     private Gender gender;
+
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "car")
     private String car;
 
-    @OneToMany(mappedBy = "driver", cascade=CascadeType.ALL)
-    private Collection<Trip> tripDriver;
+    @OneToMany(mappedBy = "driver")
+    private List<Trip> tripsWhereUserDriver;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "RATIO",
-            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
+    @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
 
     public User() {
@@ -52,15 +54,6 @@ public class User implements Serializable {
         this.gender = gender;
         this.name = name;
         this.password = password;
-    }
-
-
-    public Collection<Trip> getTripDriver() {
-        return tripDriver;
-    }
-
-    public void setTripDriver(Collection<Trip> tripDriver) {
-        this.tripDriver = tripDriver;
     }
 
     public String getCar() {

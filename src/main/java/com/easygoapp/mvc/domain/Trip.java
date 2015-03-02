@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Markov on 24.02.2015.
@@ -21,45 +22,45 @@ public class Trip implements Serializable {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @ManyToOne
     private User driver;
 
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
+
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "RATIO",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Collection<User> companions;
+    private List<User> companions;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "TRIP_POINTS",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
-    private Collection<PassengerNodePoint> passengerNodePoints;
+    private List<PassengerNodePoint> passengerNodePoints;
 
-    public Collection<PassengerNodePoint> getPassengerNodePoints() {
-
+    public List<PassengerNodePoint> getPassengerNodePoints() {
         return passengerNodePoints;
     }
 
-    public void setPassengerNodePoints(Collection<PassengerNodePoint> passengerNodePoints) {
+    public void setPassengerNodePoints(List<PassengerNodePoint> passengerNodePoints) {
         this.passengerNodePoints = passengerNodePoints;
     }
 
-    public Collection<User> getCompanions() {
+    public List<User> getCompanions() {
         return companions;
     }
 
-    public void setCompanions(Collection<User> companions) {
+    public void setCompanions(List<User> companions) {
         this.companions = companions;
     }
 

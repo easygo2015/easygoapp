@@ -23,8 +23,7 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public Trip save(Trip trip) {
-        Trip savedTrip = tripRepository.saveAndFlush(trip);
-        return savedTrip;
+        return tripRepository.saveAndFlush(trip);
     }
 
     @Override
