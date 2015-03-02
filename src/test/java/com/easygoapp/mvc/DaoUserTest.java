@@ -1,9 +1,9 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.mvc.config.PersistanceConfig;
-import com.easygoapp.mvc.domain.User;
-import com.easygoapp.mvc.service.UserService;
-import com.easygoapp.mvc.type.Gender;
+import com.easygoapp.config.PersistenceConfig;
+import com.easygoapp.domain.User;
+import com.easygoapp.service.UserService;
+import com.easygoapp.type.Gender;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = PersistanceConfig.class)
+@ContextConfiguration(classes = PersistenceConfig.class)
 public class DaoUserTest {
 
     Long id;
