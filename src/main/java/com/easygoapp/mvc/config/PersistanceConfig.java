@@ -24,10 +24,10 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.easygoapp.mvc")
+@ComponentScan("com.easygoapp")
 @PropertySource("classpath:app.properties")
-@EnableJpaRepositories("com.easygoapp.mvc.repository")
-public class DataConfig {
+@EnableJpaRepositories("com.easygoapp.repository")
+public class PersistanceConfig {
 
     private static final String PROP_DATABASE_DRIVER = "com.mysql.jdbc.Driver";
     private static final String PROP_DATABASE_URL = "jdbc:mysql://localhost:3306/easygo_db";

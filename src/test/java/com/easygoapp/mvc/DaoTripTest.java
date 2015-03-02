@@ -1,12 +1,10 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.mvc.config.DataConfig;
-import com.easygoapp.mvc.domain.PassengerNodePoint;
+import com.easygoapp.mvc.config.PersistanceConfig;
 import com.easygoapp.mvc.domain.Trip;
 import com.easygoapp.mvc.domain.User;
 import com.easygoapp.mvc.service.TripService;
 import com.easygoapp.mvc.service.UserService;
-import com.easygoapp.mvc.type.Gender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +14,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = DataConfig.class)
+@ContextConfiguration(classes = PersistanceConfig.class)
 public class DaoTripTest {
 
     @Autowired

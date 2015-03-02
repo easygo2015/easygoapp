@@ -1,7 +1,7 @@
 package com.easygoapp.mvc.service.impl;
 
 import com.easygoapp.mvc.domain.PassengerNodePoint;
-import com.easygoapp.mvc.repository.PassengerNodePointRepository;
+import com.easygoapp.repository.PassengerNodePointRepository;
 import com.easygoapp.mvc.service.PassengerNodePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

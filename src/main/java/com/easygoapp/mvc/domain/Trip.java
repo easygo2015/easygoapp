@@ -26,7 +26,7 @@ public class Trip implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private User driver;
 
     @Column(name = "car_capacity", nullable = false)

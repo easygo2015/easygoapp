@@ -1,4 +1,4 @@
-package com.easygoapp.mvc.repository;
+package com.easygoapp.repository;
 
 import com.easygoapp.mvc.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

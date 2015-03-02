@@ -16,15 +16,11 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-<<<<<<< HEAD
-      <configuration />
-=======
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml</file>
         </fileset>
       </configuration>
->>>>>>> 1cfc436a2b5d4027f9b33465058620be9d32f020
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
@@ -85,3 +81,4 @@
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.4" level="project" />
   </component>
 </module>
+

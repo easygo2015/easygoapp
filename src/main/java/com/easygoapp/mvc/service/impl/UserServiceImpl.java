@@ -1,7 +1,7 @@
 package com.easygoapp.mvc.service.impl;
 
 import com.easygoapp.mvc.domain.User;
-import com.easygoapp.mvc.repository.UserRepository;
+import com.easygoapp.repository.UserRepository;
 import com.easygoapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

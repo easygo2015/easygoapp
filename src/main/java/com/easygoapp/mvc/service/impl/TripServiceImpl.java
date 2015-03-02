@@ -1,8 +1,8 @@
 package com.easygoapp.mvc.service.impl;
 
 import com.easygoapp.mvc.domain.Trip;
-import com.easygoapp.mvc.repository.TripRepository;
-import com.easygoapp.mvc.repository.UserRepository;
+import com.easygoapp.repository.TripRepository;
+import com.easygoapp.repository.UserRepository;
 import com.easygoapp.mvc.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
