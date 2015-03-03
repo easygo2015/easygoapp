@@ -1,32 +1,41 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
- * Created by Padonag on 24.02.2015.
+ * Created by Markov on 24.02.2015.
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint implements Serializable{
+public class PassengerNodePoint implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
     @Column(name = "latitude", nullable = false)
     private Double latitude;
+
     @Column(name = "longitude", nullable = false)
     private Double longitude;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
     @ManyToMany(mappedBy = "passengerNodePoints")
-    private Collection<Trip> trips;
+    private List<Trip> trips;
 
     public PassengerNodePoint() {
     }
@@ -37,6 +46,14 @@ public class PassengerNodePoint implements Serializable{
         this.longitude = longitude;
     }
 
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
 
     public String getDescription() {
         return description;
@@ -89,31 +106,38 @@ public class PassengerNodePoint implements Serializable{
                 '}';
     }
 
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PassengerNodePoint)) return false;
-
-        PassengerNodePoint passengerNodePoint = (PassengerNodePoint) o;
-
-        if (isLeft != passengerNodePoint.isLeft) return false;
-        if (description != null ? !description.equals(passengerNodePoint.description) : passengerNodePoint.description != null) return false;
-        if (!latitude.equals(passengerNodePoint.latitude)) return false;
-        if (!longitude.equals(passengerNodePoint.longitude)) return false;
-        if (!id.equals(passengerNodePoint.id)) return false;
-        if (trips != null ? !trips.equals(passengerNodePoint.trips) : passengerNodePoint.trips != null) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        PassengerNodePoint rhs = (PassengerNodePoint) obj;
+        return new EqualsBuilder()
+                .append(this.id, rhs.id)
+                .append(this.latitude, rhs.latitude)
+                .append(this.longitude, rhs.longitude)
+                .append(this.description, rhs.description)
+                .append(this.isLeft, rhs.isLeft)
+                .append(this.trips, rhs.trips)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + latitude.hashCode();
-        result = 31 * result + longitude.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (isLeft ? 1 : 0);
-        result = 31 * result + (trips != null ? trips.hashCode() : 0);
-        return result;
+        return new HashCodeBuilder()
+                .append(id)
+                .append(latitude)
+                .append(longitude)
+                .append(description)
+                .append(isLeft)
+                .append(trips)
+                .toHashCode();
     }
 }

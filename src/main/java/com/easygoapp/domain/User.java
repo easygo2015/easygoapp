@@ -1,23 +1,15 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
-import com.easygoapp.mvc.type.Gender;
-import org.hibernate.annotations.GenericGenerator;
+import com.easygoapp.type.Gender;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Padonag on 24.02.2015.
+ * Created by Markov on 24.02.2015.
  */
 
 @Entity
@@ -28,19 +20,32 @@ public class User implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "login", nullable = false)
     private String login;
+
     @Column(name = "gender", nullable = false)
     private Gender gender;
+
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "car")
     private String car;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
+
+    @Column(name="email")
+    private String email;
+
+    @OneToMany(mappedBy = "driver")
+    private List<Trip> tripsWhereUserDriver;
+
+    @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
 
     public User() {
@@ -51,7 +56,6 @@ public class User implements Serializable {
         this.name = name;
         this.password = password;
     }
-
 
     public String getCar() {
         return car;
@@ -101,6 +105,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -129,35 +141,42 @@ public class User implements Serializable {
                 '}';
     }
 
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (car != null ? !car.equals(user.car) : user.car != null) return false;
-        if (gender != user.gender) return false;
-        if (!id.equals(user.id)) return false;
-        if (!login.equals(user.login)) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (!password.equals(user.password)) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
-        if (trips != null ? !trips.equals(user.trips) : user.trips != null) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        User rhs = (User) obj;
+        return new EqualsBuilder()
+                .append(this.id, rhs.id)
+                .append(this.name, rhs.name)
+                .append(this.login, rhs.login)
+                .append(this.gender, rhs.gender)
+                .append(this.password, rhs.password)
+                .append(this.phoneNumber, rhs.phoneNumber)
+                .append(this.car, rhs.car)
+                .append(this.trips, rhs.trips)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + login.hashCode();
-        result = 31 * result + gender.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (car != null ? car.hashCode() : 0);
-        result = 31 * result + (trips != null ? trips.hashCode() : 0);
-        return result;
+        return new HashCodeBuilder()
+                .append(id)
+                .append(name)
+                .append(login)
+                .append(gender)
+                .append(password)
+                .append(phoneNumber)
+                .append(car)
+                .append(trips)
+                .toHashCode();
     }
 }
