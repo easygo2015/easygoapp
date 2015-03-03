@@ -1,6 +1,5 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.config.PersistenceConfig;
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.service.PassengerNodePointService;

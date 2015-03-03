@@ -13,24 +13,14 @@ import java.util.List;
  * Created by Станислав on 28.02.2015.
  */
 @Service
-public class TripServiceImpl implements TripService {
+public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> implements TripService {
 
-    @Autowired
     private TripRepository tripRepository;
 
-    @Override
-    public Trip save(Trip trip) {
-        return tripRepository.saveAndFlush(trip);
-    }
-
-    @Override
-    public void delete(Long id) {
-        tripRepository.delete(id);
-    }
-
-    @Override
-    public Trip getById(Long id) {
-        return tripRepository.findOne(id);
+    @Autowired
+    public void setTripRepository(TripRepository tripRepository) {
+        this.tripRepository = tripRepository;
+        super.setRepository(tripRepository);
     }
 
     @Override

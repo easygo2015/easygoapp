@@ -40,14 +40,14 @@ public class DaoTripTest {
     private PassengerNodePointService passengerNodePointService;
 
 //    @Before
-//    public void saveUser(){
+//    public void save(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
 //        user.setCar("lexus");
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
 //        user.setPassword("1234");
-//        User user1 = userService.saveUser(user);
+//        User user1 = userService.save(user);
 //        System.out.println(user1);
 //
 //        User passanger = new User();
@@ -56,7 +56,7 @@ public class DaoTripTest {
 //        passanger.setGender(Gender.MALE);
 //        passanger.setLogin("adf");
 //        passanger.setPassword("1234");
-//        User saved = userService.saveUser(passanger);
+//        User saved = userService.save(passanger);
 //        System.out.println(saved);
 //    }
 
@@ -64,15 +64,15 @@ public class DaoTripTest {
     public void saveTripWithRatio(){
         Trip trip = new Trip();
         trip.setCarCapacity(3);
-        User driver = userService.getById(1l);
+        User driver = userService.findOne(1l);
         System.out.println(driver);
         trip.setDriver(driver);
         trip.setPrice(5d);
         trip.setStartTime(new Timestamp(System.currentTimeMillis()));
 
         List<User> companions = new ArrayList<>();
-        User user1 = userService.getById(1l);
-        User user2 = userService.getById(2l);
+        User user1 = userService.findOne(1l);
+        User user2 = userService.findOne(2l);
         companions.add(user1);
         companions.add(user2);
 
@@ -87,13 +87,13 @@ public class DaoTripTest {
 
         Trip trip = new Trip();
         trip.setCarCapacity(3);
-        User driver = userService.getById(1l);
+        User driver = userService.findOne(1l);
         System.out.println(driver);
         trip.setDriver(driver);
         trip.setPrice(5d);
         trip.setStartTime(new Timestamp(System.currentTimeMillis()));
         List<PassengerNodePoint> points = new ArrayList<>();
-        PassengerNodePoint point = passengerNodePointService.getById(1l);
+        PassengerNodePoint point = passengerNodePointService.findOne(1l);
         System.out.println(point);
         points.add(point);
         trip.setPassengerNodePoints(points);

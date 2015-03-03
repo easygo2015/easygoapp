@@ -25,6 +25,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+//@EnableJpaRepositories(basePackages = RootConfig.REPOSITORY_PACKAGE)
 @EnableJpaRepositories(basePackages = "com.easygoapp.repository")
 @PropertySource({ "classpath:db-mysql.properties" })
 public class PersistenceConfig {

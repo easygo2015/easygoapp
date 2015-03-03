@@ -3,6 +3,7 @@ package com.easygoapp.domain;
 import com.easygoapp.type.Gender;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,12 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
-public class User implements Serializable {
-
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends AbstractPersistable<Long>{
 
     @Column(name = "name")
     private String name;
@@ -73,14 +69,6 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -132,7 +120,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", login='" + login + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender=" + gender +
@@ -155,7 +143,7 @@ public class User implements Serializable {
         }
         User rhs = (User) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.name, rhs.name)
                 .append(this.login, rhs.login)
                 .append(this.gender, rhs.gender)
@@ -169,7 +157,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .appendSuper(super.hashCode())
                 .append(name)
                 .append(login)
                 .append(gender)

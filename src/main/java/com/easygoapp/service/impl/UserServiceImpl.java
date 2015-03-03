@@ -11,29 +11,19 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public User saveUser(User user) {
-       User savedUser = userRepository.saveAndFlush(user);
-        return savedUser;
-    }
-
-    @Override
-    public void delete(Long id) {
-        userRepository.delete(id);
-    }
-
-    @Override
-    public User getById(Long id) {
-        return userRepository.findOne(id);
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        super.setRepository(userRepository);
     }
 
     @Override
     public User getByLogin(String login) {
         return userRepository.findByLogin(login);
     }
+
 }
