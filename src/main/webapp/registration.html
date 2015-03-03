@@ -38,7 +38,7 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Меню <span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="#">Action</a></li>
                                             <li><a href="#">Another action</a></li>
@@ -49,9 +49,9 @@
                                             <li><a href="#">One more separated link</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">About Us</a></li>
-                                    <li class="active"><a href="#">Registration <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">О нас</a></li>
+                                    <li class="active"><a href="#">Регистрация <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">Контакты</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h1 id="forms">Registration</h1>
+                    <h1 id="forms">Регистрация</h1>
                 </div>
             </div>
         </div>
@@ -79,51 +79,64 @@
                     <form class="form-horizontal" id="form" action="index.html" method="post">
                         <!---->
                         <fieldset>
-                            <legend>Personal Info</legend>
-                            <div class="form-group" id="name">
-                                <label for="fullname" class="col-lg-2 control-label">Full name:</label>
+                            <legend>Персональная информация</legend>
+                            <div class="form-group" id="login">
+                                <label for="login" class="col-lg-2 control-label">Логин:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="fullname" placeholder="Full name">
-                                    <span id="nameError" class="center-block hidden text-danger"> at least 3 characters</span>
+                                    <input type="text" class="form-control" id="enterlogin" placeholder="Введите логин">
+                                    <span id="loginError" class="center-block hidden text-danger">минимум 3 символа</span>
+                                    <span id="loginError2" class="center-block hidden text-danger">такой логин уже зарегестрирован</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="name">
+                                <label for="fullname" class="col-lg-2 control-label">Имя:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="fullname" placeholder="Введите ваше имя">
+                                    <span id="nameError" class="center-block hidden text-danger">минимум 3 символа</span>
                                 </div>
                             </div>
 
                             <div class="form-group" id="gender">
-                                <label class="col-lg-2 control-label">I am:</label>
+                                <label class="col-lg-2 control-label">Пол:</label>
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="gender" id="female" value="female">
-                                            Woman
+                                            Женщина
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="gender" id="male" value="male">
-                                            Man
+                                            Мужчина
                                         </label>
                                     </div>
-                                    <span id="genderError" class="center-block hidden text-danger"> make your choice</span>
+                                    <span id="genderError" class="center-block hidden text-danger"> сделайте выбор </span>
                                 </div>
                             </div>
 
-
                             <div class="form-group" id="car">
-                                <label class="col-lg-2 control-label">Car:</label>
+                                <label class="col-lg-2 control-label">Машина:</label>
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="car" id="idonthavcar" value="">
-                                            I don't have a car
+                                            <input type="radio" name="car" id="idonthavcar" value="idonthave">
+                                            Нет машины
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="car" id="ihavecar" value="">
-                                            I have a car
+                                            <input type="radio" name="car" id="ihavecar" value="ihave">
+                                            Есть машина
                                         </label>
                                     </div>
-                                    <span id="carError" class="center-block hidden text-danger">Do you have a car or not?</span>
+                                    <span id="carError" class="center-block hidden text-danger">Есть ли у вас машина?</span>
+                                    <div class="col-lg-5" id="info">
+                                        <input type="text" class="form-control hidden" id="aboutcar" placeholder="Введите марку и цвет машины">
+                                        <span id="infocar" class="center-block hidden text-danger">минимум 3 символа</span>
+                                    </div>
+
                                 </div>
                             </div>
                         </fieldset>
@@ -131,21 +144,21 @@
                         <hr/>
 
                         <fieldset>
-                            <legend>Contacts</legend>
+                            <legend>Контакты</legend>
                             <div class="form-group" id="blockemail">
                                 <label for="email" class="col-lg-2 control-label">Email:</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                    <span id="emailError" class="center-block hidden text-danger"> example: rob@gmail.com </span>
+                                    <span id="emailError" class="center-block hidden text-danger"> пример: rob@gmail.com </span>
                                 </div>
                             </div>
 
 
                             <div class="form-group" id="blockphone">
-                                <label for="phone" class="col-lg-2 control-label">Phone:</label>
+                                <label for="phone" class="col-lg-2 control-label">Телефон:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
-                                    <span id="phoneError" class="center-block hidden text-danger"> example: 8 050 333 22 11</span>
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Телефон">
+                                    <span id="phoneError" class="center-block hidden text-danger"> пример: 8 050 333 22 11</span>
                                 </div>
                             </div>
                         </fieldset>
@@ -155,18 +168,18 @@
                         <fieldset>
                             <legend>Security</legend>
                             <div class="form-group" id="blockpassword">
-                                <label for="password" class="col-lg-2 control-label">Password:</label>
+                                <label for="password" class="col-lg-2 control-label">Пароль:</label>
                                 <div class="col-lg-10">
                                     <input type="password"  class="form-control" name="password" id="password" placeholder="Password">
-                                    <span id="passwordError" class="center-block hidden text-danger"> password is too short, min 3 characters </span>
+                                    <span id="passwordError" class="center-block hidden text-danger"> пароль слишком короткий, минимум 3 символа </span>
                                 </div>
                             </div>
 
                             <div class="form-group" id="blockcompare">
-                                <label for="compas" class="col-lg-2 control-label">Compare:</label>
+                                <label for="compas" class="col-lg-2 control-label">Подтверждение:</label>
                                 <div class="col-lg-10">
                                     <input type="password" class="form-control" name="compas" id="compas" placeholder="Password">
-                                    <span id="comError" class="center-block hidden text-danger"> password does not match </span>
+                                    <span id="comError" class="center-block hidden text-danger"> пароль не совпадает </span>
                                 </div>
                             </div>
                         </fieldset>
@@ -180,63 +193,6 @@
                 </div>
             </div>
 
-
-            <div class="col-lg-4">
-
-                <!--<form class="bs-component">-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="focusedInput">Focused input</label>-->
-                        <!--<input class="form-control" id="focusedInput" type="text" value="This is focused...">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="disabledInput">Disabled input</label>-->
-                        <!--<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group has-warning">-->
-                        <!--<label class="control-label" for="inputWarning">Input warning</label>-->
-                        <!--<input type="text" class="form-control" id="inputWarning">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group has-error">-->
-                        <!--<label class="control-label" for="inputError">Input error</label>-->
-                        <!--<input type="text" class="form-control" id="inputError">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group has-success">-->
-                        <!--<label class="control-label" for="inputSuccess">Input success</label>-->
-                        <!--<input type="text" class="form-control" id="inputSuccess">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="inputLarge">Large input</label>-->
-                        <!--<input class="form-control input-lg" type="text" id="inputLarge">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="inputDefault">Default input</label>-->
-                        <!--<input type="text" class="form-control" id="inputDefault">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="inputSmall">Small input</label>-->
-                        <!--<input class="form-control input-sm" type="text" id="inputSmall">-->
-                    <!--</div>-->
-
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label">Input addons</label>-->
-                        <!--<div class="input-group">-->
-                            <!--<span class="input-group-addon">$</span>-->
-                            <!--<input type="text" class="form-control">-->
-                    <!--<span class="input-group-btn">-->
-                      <!--<button class="btn btn-default" type="button">Button</button>-->
-                    <!--</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</form>-->
-
-            </div>
         </div>
     </div>
 
@@ -267,7 +223,8 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+<script src="assets/js/jquery-2.1.3.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/validate.js"></script>
 </body>

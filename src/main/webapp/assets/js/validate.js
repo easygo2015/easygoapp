@@ -1,5 +1,32 @@
 $(document).ready(function(){
 			var validate = {
+                'login' : function(){
+                    var name = $('#login');
+                    var ele = $('#enterlogin');
+                    if(ele.val().length < 3) {
+                        validate.errors = true;
+                        name.removeClass('has-success').addClass('has-error has-feedback');
+                        $('.glyphicon').remove();
+                        ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+                        $('#loginError').removeClass('hidden').addClass('show');
+                    }else {
+                        if(ele.val().toLowerCase()==='admin'||ele.val().toLowerCase()==='administrator'){
+                            validate.errors = true;
+                            name.removeClass('has-success').addClass('has-error has-feedback');
+                            $('.glyphicon').remove();
+                            ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
+                            $('#loginError').removeClass('show').addClass('hidden');
+                            $('#loginError2').removeClass('hidden').addClass('show');
+                        }else{
+                            $('#loginError2').removeClass('show').addClass('hidden');
+                            name.removeClass('has-error').addClass('has-success has-feedback');
+                            $('.glyphicon').remove();
+                            ele.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+                            $('#loginError').removeClass('show').addClass('hidden');
+                        }
+                    }
+                },
+
 				'fullName' : function() {
 					var name = $('#name');
 					var ele = $('#fullname');					
@@ -16,7 +43,7 @@ $(document).ready(function(){
 							$('#nameError').removeClass('show').addClass('hidden');
 					}
 				},
-				
+
 				'gender' : function() {
 					if($('input[name="gender"]:checked').length === 0){
 						validate.errors = true;
@@ -27,18 +54,35 @@ $(document).ready(function(){
 						$('#genderError').removeClass('show').addClass('hidden');
 					}
 				},
-				
+
 				'car' : function() {
 					if($('input[name="car"]:checked').length === 0){
 						validate.errors = true;
                         $('#car').removeClass('has-success').addClass('has-error');
-						$('#carError').removeClass('hidden').addClass('show');	
+						$('#carError').removeClass('hidden').addClass('show');
+                        $('#aboutcar').removeClass('show').addClass('hidden');
 					}else{
-                        $('#car').removeClass('has-error').addClass('has-success');
-						$('#carError').removeClass('show').addClass('hidden');
+                        if($('input[name="car"]:checked').val()==="ihave"){
+                            $('#aboutcar').removeClass('hidden').addClass('show');
+                        }else{
+                            validate.errors = true;
+                            $('#aboutcar').removeClass('show').addClass('hidden');
+                            $('#car').removeClass('has-error').addClass('has-success');
+                            $('#carError').removeClass('show').addClass('hidden');
+                        }
 					}
 				},
-				
+
+                'infocar': function(){
+                    var ele = $('#aboutcar');
+                    if(ele.val().length < 3) {
+                        validate.errors = true;
+                        $('#infocar').removeClass('hidden').addClass('show');
+                    } else {
+                        $('#infocar').removeClass('show').addClass('hidden');
+                    }
+                },
+
 				'email' : function() {
 					var name = $('#blockemail');
 					var ele = $('#email');
@@ -73,8 +117,8 @@ $(document).ready(function(){
 							ele.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 							$('#phoneError').removeClass('show').addClass('hidden');
 					}
-				},				
-				
+				},
+
 				'password' : function() {
 					var name = $('#blockpassword');
 					var ele = $('#password');					
@@ -109,34 +153,39 @@ $(document).ready(function(){
 							$('#comError').removeClass('show').addClass('hidden');
 					}
 				},
-					
+
 				'sendIt' : function(){
 					if(!validate.errors){
 						$('#form').submit();
 					}
-				}	
-				
+				}
+
 			};
 
 // ======================================================
 
-    $('#send').click(function (){
-        validate.errors = false;
-        validate.fullName();
-        validate.gender();
-        validate.car();
-        validate.email();
-        validate.phone();
-        validate.password();
-        validate.compas();
-        validate.sendIt();
-        return false;
-    });
+        $('#send').click(function (){
+            validate.errors = false;
+            validate.login();
+            validate.fullName();
+            validate.gender();
+            validate.car();
+            if ( $('#aboutcar').hasClass('show')){
+                validate.infocar();
+            }
+            validate.email();
+            validate.phone();
+            validate.password();
+            validate.compas();
+            validate.sendIt();
+            return false;
+        });
 
-			
+        $('#enterlogin').change(validate.login);
 		$('#fullname').change(validate.fullName);
 		$('input[name="gender"]').change(validate.gender);
 		$('input[name="car"]').change(validate.car);
+        $('#aboutcar').change(validate.infocar);
 		$('#blockemail').change(validate.email);
 		$('#blockphone').change(validate.phone);
 		$('#password').change(validate.password);
