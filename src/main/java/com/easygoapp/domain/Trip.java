@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class Trip implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JoinTable(name = "RATIO",
+    @JoinTable(name = "TRIP_USER",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> companions;

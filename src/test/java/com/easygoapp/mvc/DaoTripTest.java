@@ -1,20 +1,12 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.config.PersistenceConfig;
+import com.easygoapp.config.RootConfig;
+import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
+import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
-import com.easygoapp.mvc.config.PersistanceConfig;
-import com.easygoapp.mvc.domain.PassengerNodePoint;
-import com.easygoapp.mvc.domain.Trip;
-import com.easygoapp.mvc.domain.User;
-import com.easygoapp.mvc.service.PassengerNodePointService;
-import com.easygoapp.mvc.service.TripService;
-import com.easygoapp.mvc.service.UserService;
-import com.easygoapp.mvc.type.Gender;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +27,7 @@ import java.util.List;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = PersistenceConfig.class)
+@ContextConfiguration(classes = RootConfig.class)
 public class DaoTripTest {
 
     @Autowired
