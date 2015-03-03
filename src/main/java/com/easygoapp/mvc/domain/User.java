@@ -1,28 +1,49 @@
 package com.easygoapp.mvc.domain;
 
 import com.easygoapp.mvc.type.Gender;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * Created by Padonag on 24.02.2015.
+ * Created by Markov on 24.02.2015.
  */
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
 
+    @Id
+    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "login", nullable = false)
     private String login;
+    @Column(name = "gender", nullable = false)
     private Gender gender;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "car")
     private String car;
+
+    @OneToMany(mappedBy = "driver", cascade=CascadeType.ALL)
+    private Collection<Trip> tripDriver;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "RATIO",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
+    private List<Trip> trips;
 
     public User() {
     }
@@ -33,7 +54,15 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "car")
+
+    public Collection<Trip> getTripDriver() {
+        return tripDriver;
+    }
+
+    public void setTripDriver(Collection<Trip> tripDriver) {
+        this.tripDriver = tripDriver;
+    }
+
     public String getCar() {
         return car;
     }
@@ -42,7 +71,6 @@ public class User {
         this.car = car;
     }
 
-    @Column(name = "gender", nullable = false)
     public Gender getGender() {
         return gender;
     }
@@ -51,9 +79,6 @@ public class User {
         this.gender = gender;
     }
 
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -62,7 +87,6 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "login", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -71,8 +95,6 @@ public class User {
         this.login = login;
     }
 
-
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -81,7 +103,6 @@ public class User {
         this.name = name;
     }
 
-    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -90,13 +111,20 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "phone_number")
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 
     @Override
@@ -111,33 +139,42 @@ public class User {
                 '}';
     }
 
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (car != null ? !car.equals(user.car) : user.car != null) return false;
-        if (gender != user.gender) return false;
-        if (!id.equals(user.id)) return false;
-        if (!login.equals(user.login)) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (!password.equals(user.password)) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        User rhs = (User) obj;
+        return new EqualsBuilder()
+                .append(this.id, rhs.id)
+                .append(this.name, rhs.name)
+                .append(this.login, rhs.login)
+                .append(this.gender, rhs.gender)
+                .append(this.password, rhs.password)
+                .append(this.phoneNumber, rhs.phoneNumber)
+                .append(this.car, rhs.car)
+                .append(this.trips, rhs.trips)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + login.hashCode();
-        result = 31 * result + gender.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (car != null ? car.hashCode() : 0);
-        return result;
+        return new HashCodeBuilder()
+                .append(id)
+                .append(name)
+                .append(login)
+                .append(gender)
+                .append(password)
+                .append(phoneNumber)
+                .append(car)
+                .append(trips)
+                .toHashCode();
     }
 }

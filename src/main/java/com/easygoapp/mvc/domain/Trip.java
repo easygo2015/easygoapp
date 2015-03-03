@@ -1,34 +1,68 @@
 package com.easygoapp.mvc.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
 
 /**
- * Created by Padonag on 24.02.2015.
+ * Created by Markov on 24.02.2015.
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip {
-    private Long id;
-    private Date startTime;
-    private User driver;
-    private Integer carCapacity;
-    private Double price;
+public class Trip implements Serializable {
 
-    @JoinTable(name = "TRIP_POINTS")
-    @ManyToMany
-    private Collection<PNP> pnps;
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private Long id;
+    @Column(name = "start_trip", nullable = false)
+    private Timestamp startTime;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    private User driver;
 
     @Column(name = "car_capacity", nullable = false)
+    private Integer carCapacity;
+    @Column(name = "price")
+    private Double price;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "RATIO",
+            joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Collection<User> companions;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "TRIP_POINTS",
+            joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
+    private Collection<PassengerNodePoint> passengerNodePoints;
+
+    public Collection<PassengerNodePoint> getPassengerNodePoints() {
+
+        return passengerNodePoints;
+    }
+
+    public void setPassengerNodePoints(Collection<PassengerNodePoint> passengerNodePoints) {
+        this.passengerNodePoints = passengerNodePoints;
+    }
+
+    public Collection<User> getCompanions() {
+        return companions;
+    }
+
+    public void setCompanions(Collection<User> companions) {
+        this.companions = companions;
+    }
+
     public Integer getCarCapacity() {
         return carCapacity;
     }
@@ -37,8 +71,6 @@ public class Trip {
         this.carCapacity = carCapacity;
     }
 
-    @OneToOne
-    @JoinColumn(name="user_id", unique= true, nullable=true, insertable=true, updatable=true)
     public User getDriver() {
         return driver;
     }
@@ -47,10 +79,6 @@ public class Trip {
         this.driver = driver;
     }
 
-
-    @Id
-    @Column(name = "trip_id", nullable = false)
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -59,8 +87,6 @@ public class Trip {
         this.id = id;
     }
 
-
-    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
@@ -69,12 +95,11 @@ public class Trip {
         this.price = price;
     }
 
-    @Column(name = "start_trip", nullable = false)
-    public Date getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
@@ -90,28 +115,36 @@ public class Trip {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Trip)) return false;
-
-        Trip trip = (Trip) o;
-
-        if (!carCapacity.equals(trip.carCapacity)) return false;
-        if (!driver.equals(trip.driver)) return false;
-        if (!id.equals(trip.id)) return false;
-        if (price != null ? !price.equals(trip.price) : trip.price != null) return false;
-        if (!startTime.equals(trip.startTime)) return false;
-
-        return true;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        Trip rhs = (Trip) obj;
+        return new EqualsBuilder()
+                .append(this.id, rhs.id)
+                .append(this.startTime, rhs.startTime)
+                .append(this.driver, rhs.driver)
+                .append(this.carCapacity, rhs.carCapacity)
+                .append(this.price, rhs.price)
+                .append(this.passengerNodePoints, rhs.passengerNodePoints)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + startTime.hashCode();
-        result = 31 * result + driver.hashCode();
-        result = 31 * result + carCapacity.hashCode();
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
+        return new HashCodeBuilder()
+                .append(id)
+                .append(startTime)
+                .append(driver)
+                .append(carCapacity)
+                .append(price)
+                .append(passengerNodePoints)
+                .toHashCode();
     }
 }
