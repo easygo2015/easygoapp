@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -17,15 +19,20 @@ import java.util.List;
 @Table(name = "PNP")
 public class PassengerNodePoint extends AbstractPersistable<Long> {
 
+    @NotNull
     @Column(name = "latitude", nullable = false)
     private Double latitude;
 
+    @NotNull
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @NotNull
+    @Min(5)
     @Column(name = "description")
     private String description;
 
+    @NotNull
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 

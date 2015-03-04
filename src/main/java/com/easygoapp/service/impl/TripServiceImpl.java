@@ -5,6 +5,7 @@ import com.easygoapp.repository.TripRepository;
 import com.easygoapp.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Станислав on 28.02.2015.
  */
+@Transactional(readOnly = true)
 @Service
 public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> implements TripService {
 
@@ -26,5 +28,13 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     public void setTripRepository(TripRepository tripRepository) {
         this.tripRepository = tripRepository;
         super.setRepository(tripRepository);
+    }
+
+    @Override
+    public Trip findOne(Long id) {
+        Trip trip = super.findOne(id);
+        trip.getPassengerNodePoints().size();
+        trip.getCompanions().size();
+        return trip;
     }
 }

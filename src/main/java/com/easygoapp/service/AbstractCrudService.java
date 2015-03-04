@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface AbstractCrudService <T extends Persistable<PK>, PK extends Serializable> {
     public T findOne(PK id);
-    public T save(T user);
+    public T save(T entity);
     public List<T> findAll();
     public void delete(PK id);
 }

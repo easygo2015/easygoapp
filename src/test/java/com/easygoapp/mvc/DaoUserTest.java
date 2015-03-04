@@ -3,6 +3,7 @@ package com.easygoapp.mvc;
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
+import com.easygoapp.type.Gender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.validation.ConstraintViolationException;
+
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = RootConfig.class)
 public class DaoUserTest {
-
-    Long id;
 
     @Autowired
     private UserService userService;
@@ -42,20 +43,32 @@ public class DaoUserTest {
 //        userService.delete(id);
 //    }
 
-    @Test
-    public void getUserByLogin(){
-        System.out.println("getByLogin");
-        User user = userService.getByLogin("Markov");
-        System.out.println(user);
-    }
+//    @Test
+//    public void getUserByLogin(){
+//        System.out.println("getByLogin");
+//        User user = userService.getByLogin("Markov");
+//        System.out.println(user);
+//    }
+//
+//    @Test
+//    public void getUserById(){
+//        System.out.println("getById");
+//        User user = userService.findOne(1l);
+//        System.out.println(user);
+//    }
 
-    @Test
-    public void getUserById(){
-        System.out.println("getById");
-        User user = userService.findOne(1l);
-        System.out.println(user);
+    @Test(expected = ConstraintViolationException.class)
+    public void SaveWithWrongLowShortPassword(){
+        User user = new User();
+        user.setName("Stas");
+        user.setPhoneNumber("000-000-00-00");
+        user.setCar("lexus");
+        user.setGender(Gender.MALE);
+        user.setLogin("Markovaaa");
+        user.setPassword("1234");
+        user.setEmail("qadsadsadsad");
+        System.out.println(userService.save(user));
     }
-
 
 
 }

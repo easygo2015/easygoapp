@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/index")
 public class HelloController {
 
     @Autowired
