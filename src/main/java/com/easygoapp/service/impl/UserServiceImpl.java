@@ -25,10 +25,13 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    public User save(User user){
-        encoder.encode(user.getPassword());
-        //TODO complete this method
-        return  null;
+    public User save(User user) {
+        if (user.isNew()) {
+            String cryptedPassword = encoder.encode(user.getPassword());
+            user.setPassword(cryptedPassword);
+        }
+        userRepository.save(user);
+        return user;
     }
 
     @Override
