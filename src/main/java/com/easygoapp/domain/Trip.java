@@ -1,65 +1,58 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Markov on 24.02.2015.
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip implements Serializable {
+public class Trip extends AbstractPersistable<Long> {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @ManyToOne
     private User driver;
 
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
+
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "RATIO",
+    @ManyToMany
+    @JoinTable(name = "TRIP_USER",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Collection<User> companions;
+    private List<User> companions;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "TRIP_POINTS",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
-    private Collection<PassengerNodePoint> passengerNodePoints;
+    private List<PassengerNodePoint> passengerNodePoints;
 
-    public Collection<PassengerNodePoint> getPassengerNodePoints() {
-
+    public List<PassengerNodePoint> getPassengerNodePoints() {
         return passengerNodePoints;
     }
 
-    public void setPassengerNodePoints(Collection<PassengerNodePoint> passengerNodePoints) {
+    public void setPassengerNodePoints(List<PassengerNodePoint> passengerNodePoints) {
         this.passengerNodePoints = passengerNodePoints;
     }
 
-    public Collection<User> getCompanions() {
+    public List<User> getCompanions() {
         return companions;
     }
 
-    public void setCompanions(Collection<User> companions) {
+    public void setCompanions(List<User> companions) {
         this.companions = companions;
     }
 
@@ -77,14 +70,6 @@ public class Trip implements Serializable {
 
     public void setDriver(User driver) {
         this.driver = driver;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Double getPrice() {
@@ -107,7 +92,7 @@ public class Trip implements Serializable {
     public String toString() {
         return "Trip{" +
                 "carCapacity=" + carCapacity +
-                ", id=" + id +
+                ", id=" + getId() +
                 ", startTime=" + startTime +
                 ", driver=" + driver +
                 ", price=" + price +
@@ -127,7 +112,7 @@ public class Trip implements Serializable {
         }
         Trip rhs = (Trip) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.startTime, rhs.startTime)
                 .append(this.driver, rhs.driver)
                 .append(this.carCapacity, rhs.carCapacity)
@@ -139,7 +124,7 @@ public class Trip implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .appendSuper(super.hashCode())
                 .append(startTime)
                 .append(driver)
                 .append(carCapacity)

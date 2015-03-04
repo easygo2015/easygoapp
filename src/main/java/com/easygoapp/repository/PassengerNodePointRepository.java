@@ -1,6 +1,6 @@
 package com.easygoapp.repository;
 
-import com.easygoapp.mvc.domain.PassengerNodePoint;
+import com.easygoapp.domain.PassengerNodePoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

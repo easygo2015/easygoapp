@@ -1,39 +1,36 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Markov on 24.02.2015.
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint implements Serializable {
+public class PassengerNodePoint extends AbstractPersistable<Long> {
 
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
     @Column(name = "latitude", nullable = false)
     private Double latitude;
+
     @Column(name = "longitude", nullable = false)
     private Double longitude;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "TRIP_POINTS",
-            joinColumns = {@JoinColumn(name = "pnp_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
-    private Collection<Trip> trips;
+    @ManyToMany(mappedBy = "passengerNodePoints")
+    private List<Trip> trips;
 
     public PassengerNodePoint() {
     }
@@ -45,11 +42,11 @@ public class PassengerNodePoint implements Serializable {
     }
 
 
-    public Collection<Trip> getTrips() {
+    public List<Trip> getTrips() {
         return trips;
     }
 
-    public void setTrips(Collection<Trip> trips) {
+    public void setTrips(List<Trip> trips) {
         this.trips = trips;
     }
 
@@ -85,14 +82,6 @@ public class PassengerNodePoint implements Serializable {
         this.longitude = longitude;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "PNP{" +
@@ -100,7 +89,7 @@ public class PassengerNodePoint implements Serializable {
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", id=" + id +
+                ", id=" + getId() +
                 '}';
     }
 
@@ -118,7 +107,7 @@ public class PassengerNodePoint implements Serializable {
         }
         PassengerNodePoint rhs = (PassengerNodePoint) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.latitude, rhs.latitude)
                 .append(this.longitude, rhs.longitude)
                 .append(this.description, rhs.description)
@@ -130,7 +119,7 @@ public class PassengerNodePoint implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .append(super.hashCode())
                 .append(latitude)
                 .append(longitude)
                 .append(description)

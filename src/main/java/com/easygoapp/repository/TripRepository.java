@@ -1,6 +1,6 @@
 package com.easygoapp.repository;
 
-import com.easygoapp.mvc.domain.Trip;
+import com.easygoapp.domain.Trip;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

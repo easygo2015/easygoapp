@@ -1,13 +1,12 @@
-package com.easygoapp.mvc.domain;
+package com.easygoapp.domain;
 
-import com.easygoapp.mvc.type.Gender;
+import com.easygoapp.type.Gender;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,33 +15,33 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
-public class User implements Serializable {
+public class User extends AbstractPersistable<Long>{
 
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
     @Column(name = "name")
     private String name;
+
     @Column(name = "login", nullable = false)
     private String login;
+
     @Column(name = "gender", nullable = false)
     private Gender gender;
+
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "car")
     private String car;
 
-    @OneToMany(mappedBy = "driver", cascade=CascadeType.ALL)
-    private Collection<Trip> tripDriver;
+    @Column(name="email")
+    private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "RATIO",
-            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "trip_id")})
+    @OneToMany(mappedBy = "driver")
+    private List<Trip> tripsWhereUserDriver;
+
+    @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
 
     public User() {
@@ -54,13 +53,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
-    public Collection<Trip> getTripDriver() {
-        return tripDriver;
+    public List<Trip> getTripsWhereUserDriver() {
+        return tripsWhereUserDriver;
     }
 
-    public void setTripDriver(Collection<Trip> tripDriver) {
-        this.tripDriver = tripDriver;
+    public void setTripsWhereUserDriver(List<Trip> tripsWhereUserDriver) {
+        this.tripsWhereUserDriver = tripsWhereUserDriver;
     }
 
     public String getCar() {
@@ -77,14 +75,6 @@ public class User implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -111,6 +101,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -130,7 +128,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", login='" + login + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender=" + gender +
@@ -153,7 +151,7 @@ public class User implements Serializable {
         }
         User rhs = (User) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.name, rhs.name)
                 .append(this.login, rhs.login)
                 .append(this.gender, rhs.gender)
@@ -167,7 +165,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .appendSuper(super.hashCode())
                 .append(name)
                 .append(login)
                 .append(gender)
