@@ -11,11 +11,11 @@ import org.springframework.context.annotation.Import;
 @Import({
         PersistenceConfig.class
 })
-@ComponentScan({"com.easygoapp.service" })
+@ComponentScan({RootConfig.ROOT_PACKAGE + RootConfig.SERVICE_PACKAGE })
 public class RootConfig {
     public static final String ROOT_PACKAGE = "com.easygoapp";
-    public static final String SERVICE_PACKAGE = "com.easygoapp.service";
-    public static final String DOMAIN_PACKAGE = "com.easygoapp.domain";
-    public static final String CONTROLLERS_PACKAGE = "com.easygoapp.controllers";
-    public static final String REPOSITORY_PACKAGE = "com.easygoapp.repository";
+    public static final String SERVICE_PACKAGE = ".service";
+    public static final String DOMAIN_PACKAGE = ".domain";
+    public static final String CONTROLLERS_PACKAGE = ".controllers";
+    public static final String REPOSITORY_PACKAGE = ".repository";
 }

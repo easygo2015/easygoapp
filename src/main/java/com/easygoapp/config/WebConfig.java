@@ -14,13 +14,14 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.easygoapp.controllers")
-//@ComponentScan(RootConfig.CONTROLLERS_PACKAGE)
+//@ComponentScan("com.easygoapp.controllers")
+@ComponentScan(RootConfig.ROOT_PACKAGE + RootConfig.CONTROLLERS_PACKAGE)
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/WEB-INF/views/**").addResourceLocations("/views/");
     }
+
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();

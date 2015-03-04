@@ -7,6 +7,9 @@ import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
+import com.easygoapp.type.Gender;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +43,14 @@ public class DaoTripTest {
     private PassengerNodePointService passengerNodePointService;
 
 //    @Before
-//    public void save(){
+//    public void saveUser(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
 //        user.setCar("lexus");
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
 //        user.setPassword("1234");
-//        User user1 = userService.save(user);
+//        User user1 = userService.saveUser(user);
 //        System.out.println(user1);
 //
 //        User passanger = new User();
@@ -56,31 +59,63 @@ public class DaoTripTest {
 //        passanger.setGender(Gender.MALE);
 //        passanger.setLogin("adf");
 //        passanger.setPassword("1234");
-//        User saved = userService.save(passanger);
+//        User saved = userService.saveUser(passanger);
 //        System.out.println(saved);
 //    }
 
-    @Test
-    public void saveTripWithRatio(){
-        Trip trip = new Trip();
-        trip.setCarCapacity(3);
-        User driver = userService.findOne(1l);
-        System.out.println(driver);
-        trip.setDriver(driver);
-        trip.setPrice(5d);
-        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+//    @Test
+//    public void saveTripWithRatio(){
+//        Trip trip = new Trip();
+//        trip.setCarCapacity(3);
+//        User driver = userService.findOne(1l);
+//        System.out.println(driver);
+//        trip.setDriver(driver);
+//        trip.setPrice(5d);
+//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+//
+//        List<User> companions = new ArrayList<>();
+//        User user1 = userService.findOne(1l);
+//        User user2 = userService.findOne(2l);
+//        companions.add(user1);
+//        companions.add(user2);
 
-        List<User> companions = new ArrayList<>();
-        User user1 = userService.findOne(1l);
-        User user2 = userService.findOne(2l);
-        companions.add(user1);
-        companions.add(user2);
+//    @Test
+//    public void getAllTrips() throws ParseException {
+//        System.out.println("getAllTrips");
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Date date = dateFormat.parse("02/03/2015");
+//        long time = date.getTime();
+//        Timestamp start = new Timestamp(time);
+//        List<Trip> trips = tripService.getBetweenStartAndEnd(start, new Timestamp(System.currentTimeMillis()));
+//        for (Trip trip: trips){
+//        System.out.println(trip);
+//        }
+//    }
 
-        trip.setCompanions(companions);
-
-        Trip savedTrip = tripService.save(trip);
-        System.out.println(savedTrip);
-    }
+//    @Test
+//    public void saveTripWithDriverCompanionsAndAllPoints(){
+//        Trip trip = new Trip();
+//        trip.setCarCapacity(3);
+//        User driver = userService.getById(1l);
+//        System.out.println(driver);
+//        trip.setDriver(driver);
+//        trip.setPrice(5d);
+//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+//
+//        List<User> companions = new ArrayList<>();
+//        User user2 = userService.getById(2l);
+//        companions.add(user2);
+//        companions.add(driver);
+//
+//        trip.setCompanions(companions);
+//
+//        List<PassengerNodePoint> points = passengerNodePointService.getAll();
+//
+//        trip.setPassengerNodePoints(points);
+//
+//        Trip savedTrip = tripService.save(trip);
+//        System.out.println(savedTrip);
+//    }
 
     @Test
     public void saveWithPnp(){
@@ -101,16 +136,20 @@ public class DaoTripTest {
     }
 
     @Test
-    public void getAllTrips() throws ParseException {
-        System.out.println("getAllTrips");
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = dateFormat.parse("02/03/2015");
-        long time = date.getTime();
-        Timestamp start = new Timestamp(time);
-        List<Trip> trips = tripService.getBetweenStartAndEnd(start, new Timestamp(System.currentTimeMillis()));
-        for (Trip trip: trips){
-        System.out.println(trip);
-        }
+    public void saveNewPassenger(){
+        Trip trip = tripService.findOne(1l);
+        List<User> companions = trip.getCompanions();
+        User user3 = new User();
+        user3.setPhoneNumber("000-000-00-00");
+        user3.setCar("lexus");
+        user3.setGender(Gender.MALE);
+        user3.setLogin("Markovasd");
+        user3.setEmail("markasdov@gmail.com");
+        user3.setPassword("1234");
+        User savedUser = userService.save(user3);
+        companions.add(savedUser);
+        trip.setCompanions(companions);
+        tripService.save(trip);
     }
 
 }

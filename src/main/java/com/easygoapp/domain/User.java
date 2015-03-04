@@ -53,6 +53,14 @@ public class User extends AbstractPersistable<Long>{
         this.password = password;
     }
 
+    public List<Trip> getTripsWhereUserDriver() {
+        return tripsWhereUserDriver;
+    }
+
+    public void setTripsWhereUserDriver(List<Trip> tripsWhereUserDriver) {
+        this.tripsWhereUserDriver = tripsWhereUserDriver;
+    }
+
     public String getCar() {
         return car;
     }
