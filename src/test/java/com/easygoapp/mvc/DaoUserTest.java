@@ -3,6 +3,9 @@ package com.easygoapp.mvc;
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
+import com.easygoapp.type.Gender;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +33,18 @@ public class DaoUserTest {
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
 //        user.setPassword("1234");
+//        user.setEmail("wer@wer.com");
 //        User user1 = userService.save(user);
 //        id = user1.getId();
 //        System.out.println(id);
 //        System.out.println(user1);
 //    }
 
-//    @After
-//    public void deleteUser(){
-//        System.out.println("deleteUser");
-//        userService.delete(id);
-//    }
+    @After
+    public void deleteUser(){
+        System.out.println("deleteUser");
+        userService.delete(id);
+    }
 
     @Test
     public void getUserByLogin(){

@@ -1,3 +1,4 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -8,6 +9,7 @@
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,7 +34,7 @@
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                     </button>
-                                    <a class="navbar-brand active" href="#">EasyGo <span class="sr-only">(current)</span></a>
+                                    <a class="navbar-brand active" href="/main">EasyGo <span class="sr-only">(current)</span></a>
                                 </div>
 
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,7 +52,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="#">О нас</a></li>
-                                        <li><a href="registration.html">Регистрация </a></li>
+                                        <li><a href="/registration">Регистрация </a></li>
                                         <li><a href="#">Контакты</a></li>
                                     </ul>
                                 </div>
@@ -161,7 +163,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <!--<button type="reset" class="btn btn-default">Registration</button>-->
-                                                <a class="btn btn-info" href="registration.html">Регистрация</a>
+                                                <a class="btn btn-info" href="/registration">Регистрация</a>
                                                 <button type="submit" class="btn btn-primary pull-right">Submit</button>
                                             </div>
                                         </div>

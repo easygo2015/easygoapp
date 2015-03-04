@@ -17,6 +17,7 @@ import java.util.List;
 @Table(name = "USER")
 public class User extends AbstractPersistable<Long>{
 
+
     @Column(name = "name")
     private String name;
 

@@ -1,3 +1,5 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -32,7 +34,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="index.html">EasyGo</a>
+                                <a class="navbar-brand" href="/main">EasyGo</a>
                             </div>
 
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,7 +52,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">О нас</a></li>
-                                    <li class="active"><a href="#">Регистрация <span class="sr-only">(current)</span></a></li>
+                                    <li class="active"><a href="/main">Регистрация <span class="sr-only">(current)</span></a></li>
                                     <li><a href="#">Контакты</a></li>
                                 </ul>
                             </div>
@@ -76,14 +78,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="well bs-component">
-                    <form class="form-horizontal" id="form" action="index.html" method="post">
+                    <form:form class="form-horizontal" id="form" action="/registration" method="post" modelAttribute = "user">
                         <!---->
                         <fieldset>
                             <legend>Персональная информация</legend>
                             <div class="form-group" id="login">
                                 <label for="login" class="col-lg-2 control-label">Логин:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="enterlogin" placeholder="Введите логин">
+                                    <form:input type="text" path="login" class="form-control" id="enterlogin" placeholder="Введите логин"/>
                                     <span id="loginError" class="center-block hidden text-danger">минимум 3 символа</span>
                                     <span id="loginError2" class="center-block hidden text-danger">такой логин уже зарегестрирован</span>
                                 </div>
@@ -92,7 +94,7 @@
                             <div class="form-group" id="name">
                                 <label for="fullname" class="col-lg-2 control-label">Имя:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="fullname" placeholder="Введите ваше имя">
+                                    <form:input type="text" path="name" class="form-control" id="fullname" placeholder="Введите ваше имя"/>
                                     <span id="nameError" class="center-block hidden text-danger">минимум 3 символа</span>
                                 </div>
                             </div>
@@ -102,13 +104,13 @@
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="gender" id="female" value="female">
+                                            <form:radiobutton path="gender" id="female" value="female"/>
                                             Женщина
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="gender" id="male" value="male">
+                                            <form:radiobutton path="gender" id="male" value="male"/>
                                             Мужчина
                                         </label>
                                     </div>
@@ -121,13 +123,13 @@
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="car" id="idonthavcar" value="idonthave">
+                                            <form:radiobutton path="car" value="idonthave"/>
                                             Нет машины
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="car" id="ihavecar" value="ihave">
+                                            <form:radiobutton path="car" value="ihave"/>
                                             Есть машина
                                         </label>
                                     </div>
@@ -148,7 +150,7 @@
                             <div class="form-group" id="blockemail">
                                 <label for="email" class="col-lg-2 control-label">Email:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                    <form:input path="email" type="text" class="form-control" name="email" id="email" placeholder="Email"/>
                                     <span id="emailError" class="center-block hidden text-danger"> пример: rob@gmail.com </span>
                                 </div>
                             </div>
@@ -189,7 +191,7 @@
                                     <button type="submit" id="send" class="btn btn-primary pull-right">Submit</button>
                                 </div>
                             </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
 

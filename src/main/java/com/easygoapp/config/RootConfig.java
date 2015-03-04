@@ -17,5 +17,5 @@ public class RootConfig {
     public static final String SERVICE_PACKAGE = "com.easygoapp.service";
     public static final String DOMAIN_PACKAGE = "com.easygoapp.domain";
     public static final String CONTROLLERS_PACKAGE = "com.easygoapp.controllers";
-    public static final String REPOSITORY_PACKAGE = "com.easygoapp.repository";
+    public static final String REPOSITORY_PACKAGE = ROOT_PACKAGE + ".repository";
 }
