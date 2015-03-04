@@ -140,12 +140,13 @@ public class DaoTripTest {
 //        Trip trip = tripService.findOne(1l);
 //        List<User> companions = trip.getCompanions();
 //        User user3 = new User();
+//        user3.setName("asdasdasd");
 //        user3.setPhoneNumber("000-000-00-00");
 //        user3.setCar("lexus");
 //        user3.setGender(Gender.MALE);
-//        user3.setLogin("Markovasd");
-//        user3.setEmail("markasdov@gmail.com");
-//        user3.setPassword("1234");
+//        user3.setLogin("Markovasdasdasd");
+//        user3.setEmail("markasssdov@gmail.com");
+//        user3.setPassword("1234rewrewr");
 //        User savedUser = userService.save(user3);
 //        companions.add(savedUser);
 //        trip.setCompanions(companions);
@@ -153,16 +154,26 @@ public class DaoTripTest {
 //    }
 
     @Test
-    public void findTrip(){
+    public void addNewPassenger(){
         Trip trip = tripService.findOne(1l);
-        System.out.println(trip);
         List<User> companions = trip.getCompanions();
-        for (User user: companions){
-            System.out.println(user);
-        }
-        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
-        for (PassengerNodePoint point: points){
-            System.out.println(point);
-        }
+        User user4 = userService.findOne(4l);
+        companions.add(user4);
+        trip.setCompanions(companions);
+        tripService.save(trip);
     }
+
+//    @Test
+//    public void findTrip(){
+//        Trip trip = tripService.findOne(1l);
+//        System.out.println(trip);
+//        List<User> companions = trip.getCompanions();
+//        for (User user: companions){
+//            System.out.println(user);
+//        }
+//        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
+//        for (PassengerNodePoint point: points){
+//            System.out.println(point);
+//        }
+//    }
 }
