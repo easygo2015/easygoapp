@@ -36,7 +36,7 @@ public class DaoPnpTest {
 
     @Test
     public void findAll(){
-        List<PassengerNodePoint> points = passengerNodePointService.getAll();
+        List<PassengerNodePoint> points = passengerNodePointService.findAll();
         for (PassengerNodePoint point: points){
             System.out.println(point);
         }
