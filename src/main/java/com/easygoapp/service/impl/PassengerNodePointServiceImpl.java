@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by Станислав on 28.02.2015.
  */
@@ -34,5 +37,10 @@ public class PassengerNodePointServiceImpl implements PassengerNodePointService 
     @Override
     public PassengerNodePoint getById(Long id) {
         return passengerNodePointRepository.findOne(id);
+    }
+
+    @Override
+    public List<PassengerNodePoint> getAll() {
+        return passengerNodePointRepository.findAll();
     }
 }

@@ -37,7 +37,7 @@ public class Trip implements Serializable {
     private Double price;
 
     @ManyToMany
-    @JoinTable(name = "RATIO",
+    @JoinTable(name = "TRIP_USER",
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> companions;

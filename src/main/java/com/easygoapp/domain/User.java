@@ -41,6 +41,9 @@ public class User implements Serializable {
     @Column(name = "car")
     private String car;
 
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "driver")
     private List<Trip> tripsWhereUserDriver;
 
@@ -54,6 +57,22 @@ public class User implements Serializable {
         this.gender = gender;
         this.name = name;
         this.password = password;
+    }
+
+    public List<Trip> getTripsWhereUserDriver() {
+        return tripsWhereUserDriver;
+    }
+
+    public void setTripsWhereUserDriver(List<Trip> tripsWhereUserDriver) {
+        this.tripsWhereUserDriver = tripsWhereUserDriver;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCar() {

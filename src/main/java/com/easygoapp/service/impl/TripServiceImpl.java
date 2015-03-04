@@ -30,7 +30,10 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public Trip getById(Long id) {
-        return tripRepository.findOne(id);
+        Trip trip = tripRepository.findOne(id);
+        trip.getCompanions().size();
+        trip.getPassengerNodePoints().size();
+        return trip;
     }
 
     @Override
