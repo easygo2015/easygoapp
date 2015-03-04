@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Markov on 24.02.2015.
@@ -62,6 +63,9 @@ public class User extends AbstractPersistable<Long>{
 
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
+//Security
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<UserRole> userRole = new ArrayList<>(0);
 
     public User() {
     }
@@ -144,6 +148,14 @@ public class User extends AbstractPersistable<Long>{
         this.trips = trips;
     }
 
+    public List<UserRole> getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(List<UserRole> userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,6 +169,7 @@ public class User extends AbstractPersistable<Long>{
     }
 
 
+    //TODO change set to list roles
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

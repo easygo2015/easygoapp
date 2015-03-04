@@ -10,6 +10,7 @@
     <properties>
         <!--Spring framework-->
         <spring.version>4.1.5.RELEASE</spring.version>
+        <spring.security.version>3.2.6.RELEASE</spring.security.version>
         <java.version>1.7</java.version>
         <hibernate.manager>4.3.8.Final</hibernate.manager>
     </properties>
@@ -72,7 +73,29 @@
             <version>1.7.2.RELEASE</version>
         </dependency>
 
-                <!--Testing-->
+        <!--  Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+
+        <!--Testing-->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>

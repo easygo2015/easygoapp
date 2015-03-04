@@ -1,8 +1,10 @@
 package com.easygoapp.config;
 
+import com.easygoapp.service.impl.CustomUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,8 +16,8 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-//@ComponentScan("com.easygoapp.controllers")
-@ComponentScan(RootConfig.ROOT_PACKAGE + RootConfig.CONTROLLERS_PACKAGE)
+@ComponentScan("com.easygoapp.controllers")
+//@ComponentScan(RootConfig.CONTROLLERS_PACKAGE)
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -29,5 +31,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
         return resolver;
+    }
+
+    @Bean
+    public UserDetailsService getUserDetailsService(){
+        return new CustomUserDetailService();
     }
 }

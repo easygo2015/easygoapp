@@ -4,6 +4,7 @@ import com.easygoapp.domain.User;
 import com.easygoapp.repository.UserRepository;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +20,15 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
         super.setRepository(userRepository);
+    }
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
+    public User save(User user){
+        encoder.encode(user.getPassword());
+        //TODO complete this method
+        return  null;
     }
 
     @Override
