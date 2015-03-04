@@ -122,29 +122,41 @@ public class DaoTripTest {
 
         Trip trip = new Trip();
         trip.setCarCapacity(3);
-        User driver = userService.findOne(1l);
-        System.out.println(driver);
+        User user = new User();
+        user.setPhoneNumber("000-000-00-00");
+        user.setCar("lexus");
+        user.setGender(Gender.MALE);
+        user.setLogin("Markov");
+        user.setPassword("1234");
+        user.setEmail("hh@we.ii");
+        User user1 = userService.save(user);
+        User driver = userService.findOne(user1.getId());
+        //System.out.println(driver);
         trip.setDriver(driver);
         trip.setPrice(5d);
         trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-        List<PassengerNodePoint> points = new ArrayList<>();
-        PassengerNodePoint point = passengerNodePointService.findOne(1l);
-        System.out.println(point);
-        points.add(point);
-        trip.setPassengerNodePoints(points);
+        List<User> companions = new ArrayList<User>();
+        companions.add(driver);
+        trip.setCompanions(companions);
+        //List<PassengerNodePoint> points = new ArrayList<>();
+       // PassengerNodePoint point = passengerNodePointService.findOne(1l);
+       // System.out.println(point);
+       // points.add(point);
+        //trip.setPassengerNodePoints(points);
         tripService.save(trip);
     }
 
     @Test
     public void saveNewPassenger(){
-        Trip trip = tripService.findOne(1l);
+
+        Trip trip = tripService.findOne(4l);
         List<User> companions = trip.getCompanions();
         User user3 = new User();
         user3.setPhoneNumber("000-000-00-00");
         user3.setCar("lexus");
         user3.setGender(Gender.MALE);
-        user3.setLogin("Markovasd");
-        user3.setEmail("markasdov@gmail.com");
+        user3.setLogin("Markovasd998891");
+        user3.setEmail("markasdov@gmail.neteggu");
         user3.setPassword("1234");
         User savedUser = userService.save(user3);
         companions.add(savedUser);

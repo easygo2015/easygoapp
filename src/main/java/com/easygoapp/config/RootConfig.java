@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Import;
 @Import({
         PersistenceConfig.class
 })
-@ComponentScan({RootConfig.ROOT_PACKAGE + RootConfig.SERVICE_PACKAGE })
+//@ComponentScan({RootConfig.ROOT_PACKAGE + RootConfig.SERVICE_PACKAGE })
+@ComponentScan("com.easygoapp.service")
 public class RootConfig {
     public static final String ROOT_PACKAGE = "com.easygoapp";
     public static final String SERVICE_PACKAGE = ".service";
