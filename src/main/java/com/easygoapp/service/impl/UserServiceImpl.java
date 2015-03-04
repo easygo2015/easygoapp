@@ -26,4 +26,14 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
         return userRepository.findByLogin(login);
     }
 
+    @Override
+    public boolean checkLoginPassword(String login, String password) {
+        User user = getByLogin(login);
+        if (user != null){
+            return user.getPassword().equals(password);
+        }
+        return false;
+    }
+
+
 }

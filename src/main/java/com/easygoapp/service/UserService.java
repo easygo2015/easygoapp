@@ -10,4 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService extends AbstractCrudService<User, Long > {
     User getByLogin(String login);
+    boolean checkLoginPassword(String login, String password);
+
+
 }

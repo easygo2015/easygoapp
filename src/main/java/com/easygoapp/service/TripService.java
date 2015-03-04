@@ -1,6 +1,8 @@
 package com.easygoapp.service;
 
+import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
+import com.easygoapp.domain.User;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -12,4 +14,10 @@ import java.util.List;
 @Service
 public interface TripService extends AbstractCrudService<Trip, Long> {
     List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end);
+    boolean addPassenger(User user, Trip trip);
+    boolean removePassenger(User user, Trip trip);
+    boolean addPassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
+    boolean removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
+    boolean modifyTrip(Trip trip);
+    void cancelTrip(Trip trip);
 }
