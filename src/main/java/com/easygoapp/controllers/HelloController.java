@@ -2,7 +2,6 @@ package com.easygoapp.controllers;
 
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
-import com.easygoapp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
