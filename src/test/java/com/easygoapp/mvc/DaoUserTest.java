@@ -1,6 +1,5 @@
 package com.easygoapp.mvc;
 
-import com.easygoapp.config.PersistenceConfig;
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
@@ -24,14 +23,14 @@ public class DaoUserTest {
     private UserService userService;
 
 //    @Before
-//    public void saveUser(){
+//    public void save(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
 //        user.setCar("lexus");
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
 //        user.setPassword("1234");
-//        User user1 = userService.saveUser(user);
+//        User user1 = userService.save(user);
 //        id = user1.getId();
 //        System.out.println(id);
 //        System.out.println(user1);
@@ -53,7 +52,7 @@ public class DaoUserTest {
     @Test
     public void getUserById(){
         System.out.println("getById");
-        User user = userService.getById(1l);
+        User user = userService.findOne(1l);
         System.out.println(user);
     }
 

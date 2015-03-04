@@ -7,7 +7,6 @@ import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
-import com.easygoapp.type.Gender;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +48,6 @@ public class DaoTripTest {
 //        user.setCar("lexus");
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
-//        user.setEmail("markov@gmail.com");
 //        user.setPassword("1234");
 //        User user1 = userService.saveUser(user);
 //        System.out.println(user1);
@@ -57,7 +55,6 @@ public class DaoTripTest {
 //        User passanger = new User();
 //        passanger.setPhoneNumber("000-000-00-00");
 //        passanger.setCar("lexus");
-//        passanger.setEmail("pass@gmail.com");
 //        passanger.setGender(Gender.MALE);
 //        passanger.setLogin("adf");
 //        passanger.setPassword("1234");
@@ -65,45 +62,21 @@ public class DaoTripTest {
 //        System.out.println(saved);
 //    }
 
-//    @Test
-//    public void saveTripWithUser(){
-//        Trip trip = new Trip();
-//        trip.setCarCapacity(3);
-//        User driver = userService.getById(1l);
-//        System.out.println(driver);
-//        trip.setDriver(driver);
-//        trip.setPrice(5d);
-//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-//
-//        List<User> companions = new ArrayList<>();
-//        User user1 = userService.getById(1l);
-//        User user2 = userService.getById(2l);
-//        companions.add(user1);
-//        companions.add(user2);
-//
-//        trip.setCompanions(companions);
-//
-//        Trip savedTrip = tripService.save(trip);
-//        System.out.println(savedTrip);
-//    }
+    @Test
+    public void saveTripWithRatio(){
+        Trip trip = new Trip();
+        trip.setCarCapacity(3);
+        User driver = userService.getById(1l);
+        System.out.println(driver);
+        trip.setDriver(driver);
+        trip.setPrice(5d);
+        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
 
-//    @Test
-//    public void saveWithPnp(){
-//
-//        Trip trip = new Trip();
-//        trip.setCarCapacity(3);
-//        User driver = userService.getById(1l);
-//        System.out.println(driver);
-//        trip.setDriver(driver);
-//        trip.setPrice(5d);
-//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-//        List<PassengerNodePoint> points = new ArrayList<>();
-//        PassengerNodePoint point = passengerNodePointService.getById(1l);
-//        System.out.println(point);
-//        points.add(point);
-//        trip.setPassengerNodePoints(points);
-//        tripService.save(trip);
-//    }
+        List<User> companions = new ArrayList<>();
+        User user1 = userService.getById(1l);
+        User user2 = userService.getById(2l);
+        companions.add(user1);
+        companions.add(user2);
 
 //    @Test
 //    public void getAllTrips() throws ParseException {
@@ -144,16 +117,21 @@ public class DaoTripTest {
 //    }
 
     @Test
-    public void getById(){
-        Trip trip = tripService.getById(1l);
-        List<User> companions = trip.getCompanions();
-        for (User user: companions){
-            System.out.println(user);
-        }
-        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
-        for(PassengerNodePoint point: points){
-            System.out.println(point);
-        }
+    public void saveWithPnp(){
+
+        Trip trip = new Trip();
+        trip.setCarCapacity(3);
+        User driver = userService.getById(1l);
+        System.out.println(driver);
+        trip.setDriver(driver);
+        trip.setPrice(5d);
+        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+        List<PassengerNodePoint> points = new ArrayList<>();
+        PassengerNodePoint point = passengerNodePointService.getById(1l);
+        System.out.println(point);
+        points.add(point);
+        trip.setPassengerNodePoints(points);
+        tripService.save(trip);
     }
 
     @Test
@@ -172,4 +150,5 @@ public class DaoTripTest {
         trip.setCompanions(companions);
         tripService.save(trip);
     }
+
 }

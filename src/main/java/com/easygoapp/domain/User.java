@@ -3,7 +3,7 @@ package com.easygoapp.domain;
 import com.easygoapp.type.Gender;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,13 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "USER")
-public class User implements Serializable {
-
-    @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
+public class User extends AbstractPersistable<Long>{
 
     @Column(name = "name")
     private String name;
@@ -41,7 +35,7 @@ public class User implements Serializable {
     @Column(name = "car")
     private String car;
 
-    @Column(name = "email")
+    @Column(name="email")
     private String email;
 
     @OneToMany(mappedBy = "driver")
@@ -67,14 +61,6 @@ public class User implements Serializable {
         this.tripsWhereUserDriver = tripsWhereUserDriver;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getCar() {
         return car;
     }
@@ -89,14 +75,6 @@ public class User implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -123,6 +101,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -142,7 +128,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", login='" + login + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", gender=" + gender +
@@ -165,7 +151,7 @@ public class User implements Serializable {
         }
         User rhs = (User) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.name, rhs.name)
                 .append(this.login, rhs.login)
                 .append(this.gender, rhs.gender)
@@ -179,7 +165,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .appendSuper(super.hashCode())
                 .append(name)
                 .append(login)
                 .append(gender)
