@@ -25,5 +25,4 @@ public class FindClientController {
         map.put("info", user.toString());
         return new ModelAndView("userInfo", map);
     }
-
 }

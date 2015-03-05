@@ -9,12 +9,12 @@
         <table cellspacing="0">
             <tr>
                 <td><div>Введите количество мест:</div>
-                    <form:input path="carCapacity" id="capasity"/>
+                    <form:select path="carCapacity" items="${list}"/>
                 </td>
             </tr>
             <tr>
                 <td><div>Установите стоимость проезда:</div>
-                    <form:input path="price"/>
+                    <form:select path="price" items="${list}"/>
                 </td>
             </tr>
             <tr>
@@ -24,12 +24,10 @@
             <tr>
                 <td>
                     <h4>
-                        <c:set var="count" value="0" scope="page"/>
                         <c:forEach var="point" items="${points}" varStatus="status">
                             <c:if test="${point.isLeft()}">
                                 <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
                                 <%--<form:checkbox path="passengerNodePoints[${status.index}].id" label="${point.description}" value="${point.id}"/>--%>
-                               <%--// <c: count="${count+1}"/>--%>
                                 <c:out value="${point.description}"/><br>
                             </c:if>
                         </c:forEach>
@@ -38,12 +36,13 @@
                 </td>
                 <td>
                     <h4>
-                        <%--<c:forEach var="point" items="${points}">--%>
-                        <%--<c:if test="${!point.isLeft()}">--%>
-                            <%--<input type="checkbox" name="${count + 1}">--%>
-                            <%--<c:out value="${point.getDescription()}"/><br>--%>
-                        <%--</c:if>--%>
-                        <%--</c:forEach>--%>
+                        <c:forEach var="point" items="${points}" varStatus="status">
+                            <c:if test="${!point.isLeft()}">
+                                <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
+                                <%--<form:checkbox path="passengerNodePoints[${status.index}].id" label="${point.description}" value="${point.id}"/>--%>
+                                <c:out value="${point.description}"/><br>
+                            </c:if>
+                        </c:forEach>
                     </h4>
                 </td>
             </tr>

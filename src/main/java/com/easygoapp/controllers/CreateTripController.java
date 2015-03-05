@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,6 +38,11 @@ public class CreateTripController {
     public String createTrip(Model model) {
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
         points.size();
+        List<Integer> listCount20 = new ArrayList<>();
+        for (int i = 1; i < 21; i++) {
+            listCount20.add(i);
+        }
+        model.addAttribute("list", listCount20);
         model.addAttribute("points", points);
         model.addAttribute("trip", new Trip());
         return "createTrip";
@@ -44,15 +50,19 @@ public class CreateTripController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String saveTrip(@ModelAttribute Trip trip) {
-        User driver = userService.findOne(1l);
+        User driver = userService.getByLogin("Markov");
         trip.setDriver(driver);
         List<User> companions = new ArrayList<>();
         companions.add(driver);
         trip.setCompanions(companions);
-        PassengerNodePoint point = passengerNodePointService.findOne(1l);
-        List<PassengerNodePoint> points = new ArrayList<>();
-        points.add(point);
-        trip.setPassengerNodePoints(points);
+        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
+        Iterator iterator = points.iterator();
+        while (iterator.hasNext()){
+            PassengerNodePoint point = (PassengerNodePoint) iterator.next();
+            if(point.getId() == null){
+                iterator.remove();
+            }
+        }
         tripService.save(trip);
         return "index";
     }
