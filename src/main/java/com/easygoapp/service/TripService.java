@@ -18,7 +18,11 @@ public interface TripService extends AbstractCrudService<Trip, Long> {
     User addPassenger(User user, Trip trip);
     boolean removePassenger(User user, Trip trip);
     PassengerNodePoint addPassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
-    boolean removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
-    boolean modifyTrip(Trip trip);
+    void removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
+    List<PassengerNodePoint> addPassengerNodePointsList(List<PassengerNodePoint> points, Trip trip);
+    Trip modifyTrip(Trip trip);
     void cancelTrip(Trip trip);
+    List<Trip> getTripsByDate(Timestamp timestamp);
+    List<Trip> getTripsByDateInTimeRange(Timestamp timestamp, int startHour, int endHour);
+    List<Trip> getTripByDateAndPassengerNodePoints(Timestamp timestamp, int startHour, int endHour, List<PassengerNodePoint> points);
 }

@@ -20,9 +20,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Admin on 04.03.15.
@@ -41,10 +45,8 @@ public class TripServiceTest {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
-    private Long driver_id;
-    private Long passenger1_id;
-    private Long passenger2_id;
-    private Long trip_id;
+    private Long driver_id, passenger1_id, passenger2_id, trip_id,
+            passengerNodePoint1_id, passengerNodePoint2_id;
 
     @Before
     public void initForTest(){
@@ -83,14 +85,16 @@ public class TripServiceTest {
         passengerNodePoint1.setLatitude(54545d);
         passengerNodePoint1.setDescription("bldsdd");
         passengerNodePoint1.setLeft(true);
-        passengerNodePointService.save(passengerNodePoint1);
+        passengerNodePoint1 = passengerNodePointService.save(passengerNodePoint1);
+        passengerNodePoint1_id = passengerNodePoint1.getId();
 
         PassengerNodePoint passengerNodePoint2 = new PassengerNodePoint();
-        passengerNodePoint2.setLongitude(5454d);
-        passengerNodePoint2.setLatitude(54545d);
-        passengerNodePoint2.setDescription("bldsdd");
-        passengerNodePoint2.setLeft(true);
-        passengerNodePointService.save(passengerNodePoint2);
+        passengerNodePoint2.setLongitude(111d);
+        passengerNodePoint2.setLatitude(1115d);
+        passengerNodePoint2.setDescription("aaaaa");
+        passengerNodePoint2.setLeft(false);
+        passengerNodePoint2 = passengerNodePointService.save(passengerNodePoint2);
+        passengerNodePoint2_id = passengerNodePoint2.getId();
 
         Trip trip = new Trip();
         trip.setCarCapacity(3);
@@ -131,12 +135,89 @@ public class TripServiceTest {
 
     @Test
     public void testAddPassengerNodePoint(){
-        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(1l);
+        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePoint2_id);
         Trip tripBefore = tripService.findOne(trip_id);
         tripService.addPassengerNodePoint(passengerNodePoint, tripBefore);
         Trip tripAfter = tripService.findOne(trip_id);
         assertEquals(tripAfter.getPassengerNodePoints().size(),2);
 
+    }
+
+    @Test
+    public void testRemovePassengerNodePoint(){
+        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePoint2_id);
+        Trip tripBefore = tripService.findOne(trip_id);
+        tripService.removePassengerNodePoint(passengerNodePoint, tripBefore);
+        Trip tripAfter = tripService.findOne(trip_id);
+        assertEquals(tripAfter.getPassengerNodePoints().size(),1);
+    }
+
+    @Test
+    public void testModifyTrip(){
+        Trip modifiedTrip;
+        int wantedCapacity;
+        int realCapacity;
+        Trip trip = tripService.findOne(trip_id);
+        List<User> companions = trip.getCompanions();
+        companions.add(userService.findOne(passenger2_id));
+        trip = tripService.save(trip);
+        //modify1
+        trip.setPrice(40d);
+        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+        trip.setCarCapacity(2);
+        wantedCapacity = trip.getCarCapacity();
+        modifiedTrip = tripService.modifyTrip(trip);
+        realCapacity = modifiedTrip.getCarCapacity();
+        assertEquals(wantedCapacity, realCapacity);
+        assertEquals(trip.getPrice(), modifiedTrip.getPrice());
+        assertEquals(trip.getStartTime(), trip.getStartTime());
+        //modify2
+        trip.setCarCapacity(1);
+        wantedCapacity = trip.getCarCapacity();
+        modifiedTrip = tripService.modifyTrip(trip);
+        realCapacity = modifiedTrip.getCarCapacity();
+        assertNotEquals(wantedCapacity, realCapacity);
+        assertEquals(trip.getPrice(), modifiedTrip.getPrice());
+        assertEquals(trip.getStartTime(), trip.getStartTime());
+    }
+
+    @Test
+    public void testCancelTrip(){
+        Trip trip = tripService.findOne(trip_id);
+        tripService.cancelTrip(trip);
+        List<Trip> trips = tripService.findAll();
+        assertTrue(!trips.contains(trip));
+
+    }
+
+    @Test
+    public void testAddPassengerNodePointsList(){
+        Trip trip = tripService.findOne(trip_id);
+        List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
+        points.add(passengerNodePointService.findOne(passengerNodePoint1_id));
+        points.add(passengerNodePointService.findOne(passengerNodePoint2_id));
+        assertTrue(tripService.addPassengerNodePointsList(points, trip).equals(points));
+    }
+
+    @Test
+    public void testGetTripsByDate(){
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        List<Trip> trips = tripService.getTripsByDate(currentDate);
+    }
+
+    @Test
+    public void testGetTripsByDateInTimeRange(){
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        List<Trip> trips = tripService.getTripsByDateInTimeRange(currentDate, 10, 11);
+    }
+
+    @Test
+    public void testGetTripsByDateAndPassengerNodePoints(){
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+        List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
+        points.add(passengerNodePointService.findOne(passengerNodePoint1_id));
+        points.add(passengerNodePointService.findOne(passengerNodePoint2_id));
+        List<Trip> trips = tripService.getTripByDateAndPassengerNodePoints(currentDate, 10, 11, points);
     }
 
     @After
@@ -145,6 +226,8 @@ public class TripServiceTest {
         userService.delete(driver_id);
         userService.delete(passenger1_id);
         userService.delete(passenger2_id);
+        passengerNodePointService.delete(passengerNodePoint1_id);
+        passengerNodePointService.delete(passengerNodePoint2_id);
     }
 
 }

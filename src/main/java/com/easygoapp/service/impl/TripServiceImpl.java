@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -91,44 +94,121 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     }
 
     @Override
-    public boolean removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip) {
+    @Transactional
+    public void removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip) {
         List<PassengerNodePoint> passengerNodePoints = trip.getPassengerNodePoints();
-        /*need limits: range from, to */
-        if (passengerNodePoints.size()>2 && passengerNodePoints.contains(passengerNodePoint)){
-            passengerNodePoints.remove(passengerNodePoint);
-            trip.setPassengerNodePoints(passengerNodePoints);
-            for (User passenger : trip.getCompanions()) {
-                /* passengers notification */
-            }
-            return true;
+        passengerNodePoints.remove(passengerNodePoint);
+        trip.setPassengerNodePoints(passengerNodePoints);
+        for (User passenger : trip.getCompanions()) {
+               /* passengers notification */
         }
-        return false;
     }
 
     @Override
-    public boolean modifyTrip(Trip trip) {
-        Trip oldTrip = tripRepository.findOne(trip.getId());
-        List<User> companions = oldTrip.getCompanions();
-        if (companions.size() <= trip.getCarCapacity()){
-            tripRepository.save(trip);
+    @Transactional
+    public List<PassengerNodePoint> addPassengerNodePointsList(List<PassengerNodePoint> points, Trip trip) {
+        Trip currentTrip = tripRepository.findOne(trip.getId());
+        currentTrip.setPassengerNodePoints(points);
+        currentTrip = tripRepository.save(currentTrip);
+        return currentTrip.getPassengerNodePoints();
+    }
+
+
+    @Override
+    @Transactional
+    public Trip modifyTrip(Trip trip) {
+        Trip originalTrip = tripRepository.findOne(trip.getId());
+        Trip modifiedTrip;
+        List<User> companions = originalTrip.getCompanions();
+        if (companions.size()-1 <= trip.getCarCapacity()){
+            modifiedTrip = tripRepository.save(trip);
             /*passengers notification*/
-            return true;
         }else{
-            /*passengers conflict*/
-            return false;
+            trip.setCarCapacity(originalTrip.getCarCapacity());
+            modifiedTrip = tripRepository.save(trip);
+            /*if passengers conflict: do not change car capacity*/
         }
+        return modifiedTrip;
     }
 
     @Override
+    @Transactional
     public void cancelTrip(Trip trip) {
         List<User> companions = trip.getCompanions();
         if (companions.size() != 0){
             for (User companion : companions) {
                 /*passengers notification*/
             }
-            tripRepository.delete(trip.getId());
         }
         tripRepository.delete(trip.getId());
+    }
+
+    @Override
+    public List<Trip> getTripsByDate(Timestamp timestamp) {
+        Timestamp start;
+        Timestamp end;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp.getTime());
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 01);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        start = new Timestamp(cal.getTimeInMillis());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        end = new Timestamp(cal.getTimeInMillis());
+
+        return tripRepository.findByStartTimeBetween(start, end);
+    }
+
+    @Override
+    public List<Trip> getTripsByDateInTimeRange(Timestamp timestamp, int startHour, int endHour) {
+        Timestamp start;
+        Timestamp end;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp.getTime());
+        cal.set(Calendar.HOUR_OF_DAY, startHour);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        start = new Timestamp(cal.getTimeInMillis());
+        cal.set(Calendar.HOUR_OF_DAY, endHour);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        end = new Timestamp(cal.getTimeInMillis());
+
+        return tripRepository.findByStartTimeBetween(start, end);
+    }
+
+    @Override
+    public List<Trip> getTripByDateAndPassengerNodePoints(Timestamp timestamp, int startHour, int endHour, List<PassengerNodePoint> points) {
+        Timestamp start;
+        Timestamp end;
+        List<PassengerNodePoint> tripPoints;
+        List<Trip> resultTrips = new ArrayList<Trip>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp.getTime());
+        cal.set(Calendar.HOUR_OF_DAY, startHour);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        start = new Timestamp(cal.getTimeInMillis());
+        cal.set(Calendar.HOUR_OF_DAY, endHour);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        end = new Timestamp(cal.getTimeInMillis());
+        List<Trip> trips = tripRepository.findByStartTimeBetween(start, end);
+        for (Trip trip : trips) {
+            tripPoints = trip.getPassengerNodePoints();
+            if (tripPoints.retainAll(points)){
+                resultTrips.add(trip);
+            }
+        }
+        return resultTrips;
     }
 
 
