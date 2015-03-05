@@ -4,11 +4,14 @@ import com.easygoapp.domain.User;
 import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,20 +23,23 @@ import java.util.Set;
 /**
  * Created by Kir Kolesnikov on 04.03.2015.
  */
-@Service
+//@Service
+@Component("customUserDetailsService")
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserService userService;
 
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         //our domain entity User
-        User usertoAuthorise = userService.getByLogin(login);
-        List<GrantedAuthority> authorities = buildUserAuthority(usertoAuthorise.getUserRole());
-        return new org.springframework.security.core.userdetails.User(usertoAuthorise.getLogin(),
-                usertoAuthorise.getPassword(), authorities);
+        User userToAuthorise = userService.getByLogin(login);
+        List<GrantedAuthority> authorities = buildUserAuthority(userToAuthorise.getUserRole());
+
+        return new org.springframework.security.core.userdetails.User(userToAuthorise.getLogin(),
+                userToAuthorise.getPassword(), authorities);
     }
 
     private List<GrantedAuthority> buildUserAuthority(List<UserRole> userRoles) {

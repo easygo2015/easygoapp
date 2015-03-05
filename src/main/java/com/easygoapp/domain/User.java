@@ -10,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -64,8 +65,8 @@ public class User extends AbstractPersistable<Long>{
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
 //Security
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<UserRole> userRole = new ArrayList<>(0);
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<UserRole> userRole;
 
     public User() {
     }
@@ -169,7 +170,6 @@ public class User extends AbstractPersistable<Long>{
     }
 
 
-    //TODO change set to list roles
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

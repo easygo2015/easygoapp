@@ -1,26 +1,41 @@
 package com.easygoapp.config;
 
-import com.easygoapp.service.impl.CustomUserDetailService;
+
+import com.easygoapp.security.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * Created by Kir Kolesnikov on 04.03.2015.
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan("com.easygoapp.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
-    CustomUserDetailService customUserDetailService;
+    @Qualifier("customUserDetailsService")
+    private UserDetailsService customUserDetailService;
+
+    //It's autowired ! Idea not correct views this!
+    @Autowired
+    private AuthenticationManagerBuilder auth;
+
+    @Autowired
+    AuthenticationSuccessHandler successHandler;
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,8 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.formLogin()
                 // login form page
                 .loginPage("/login")
+
+                .loginProcessingUrl("/j_spring_security_check")
                         // URL login not success
+//                .defaultSuccessUrl("/message")
+                .successHandler(successHandler)
                 .failureUrl("/login?error")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
                         // add permissions to login page to all
                 .permitAll();
 
@@ -58,12 +79,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         // invalidation of current session
                 .invalidateHttpSession(true);
 
+        http.authorizeRequests()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+                .and().formLogin();
     }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManager() throws Exception {
+        auth.userDetailsService(customUserDetailService);
+        return auth.build();
+    }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    //TODO encode password when user saves
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler(){
+        return new CustomSuccessHandler();
+    }
 
 }

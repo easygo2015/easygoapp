@@ -109,6 +109,23 @@ CREATE TABLE IF NOT EXISTS `easygo_db`.`TRIP_POINTS` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `easygo_db`.`USER_ROLE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `easygo_db`.`USER_ROLE` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(45) NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `login_idx` (`login` ASC),
+  CONSTRAINT `login`
+    FOREIGN KEY (`login`)
+    REFERENCES `easygo_db`.`USER` (`login`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

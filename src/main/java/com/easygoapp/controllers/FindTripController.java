@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by SCJP on 04.03.2015.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/trip")
 public class FindTripController  {
 
     @Autowired

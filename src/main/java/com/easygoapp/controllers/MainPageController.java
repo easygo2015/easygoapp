@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Padonag on 03.03.2015.
  */
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainPageController {
 
 @RequestMapping(method = RequestMethod.GET)
