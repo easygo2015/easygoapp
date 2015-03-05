@@ -22,7 +22,7 @@ public class RegistrationController {
     private UserService userService;
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-    public String printRegistration(Model model) {
+    public String showRegistrationPage(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "registration";
@@ -30,7 +30,14 @@ public class RegistrationController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String saveUser(@ModelAttribute User user){
-        userService.save(user);
-        return "main";
+//        userService.save(user);
+//        return "main";
+        return "userInfo";
     }
+
+//    @RequestMapping(method = RequestMethod.POST)
+//    public String showUserInfo(@ModelAttribute User user){
+//
+//        return "userInfo";
+//    }
 }

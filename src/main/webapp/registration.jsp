@@ -78,7 +78,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="well bs-component">
-                    <form:form class="form-horizontal" id="form" action="/registration" method="post" modelAttribute = "user">
+                    <form:form class="form-horizontal" id="form" action="/main" method="get" modelAttribute = "user">
                         <!---->
                         <fieldset>
                             <legend>Персональная информация</legend>
@@ -159,7 +159,7 @@
                             <div class="form-group" id="blockphone">
                                 <label for="phone" class="col-lg-2 control-label">Телефон:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Телефон">
+                                    <form:input path="phoneNumber" type="text" class="form-control" name="phone" id="phone" placeholder="Телефон"/>
                                     <span id="phoneError" class="center-block hidden text-danger"> пример: 8 050 333 22 11</span>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                             <div class="form-group" id="blockpassword">
                                 <label for="password" class="col-lg-2 control-label">Пароль:</label>
                                 <div class="col-lg-10">
-                                    <input type="password"  class="form-control" name="password" id="password" placeholder="Password">
+                                    <form:input path="password" type="password"  class="form-control" name="password" id="password" placeholder="Password"/>
                                     <span id="passwordError" class="center-block hidden text-danger"> пароль слишком короткий, минимум 3 символа </span>
                                 </div>
                             </div>
