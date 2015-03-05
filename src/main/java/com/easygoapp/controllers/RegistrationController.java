@@ -29,15 +29,18 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute User user){
-//        userService.save(user);
-//        return "main";
+        public String saveUser(@ModelAttribute User user){
+        if(user.getCar().equals("on,")){
+            user.setCar(null);
+        }else{
+            String str = user.getCar().substring(4);
+            user.setCar(str);
+        }
+        userService.save(user);
+
+        if(user.getCar()==null){
+            user.setCar("");
+        }
         return "userInfo";
     }
-
-//    @RequestMapping(method = RequestMethod.POST)
-//    public String showUserInfo(@ModelAttribute User user){
-//
-//        return "userInfo";
-//    }
 }

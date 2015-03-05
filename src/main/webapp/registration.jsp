@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -78,7 +79,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="well bs-component">
-                    <form:form class="form-horizontal" id="form" action="/main" method="get" modelAttribute = "user">
+                    <form:form class="form-horizontal" id="form" method="post" modelAttribute = "user">
                         <!---->
                         <fieldset>
                             <legend>Персональная информация</legend>
@@ -104,16 +105,15 @@
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
-                                            <form:radiobutton path="gender" id="female" value="female"/>
+                                            <form:radiobutton path="gender" id="female" name="gender" value="FEMALE"/>
                                             Женщина
                                         </label>
-                                    </div>
-                                    <div class="radio">
                                         <label>
-                                            <form:radiobutton path="gender" id="male" value="male"/>
+                                            <form:radiobutton path="gender" id="male" name="gender" value="MALE"/>
                                             Мужчина
                                         </label>
                                     </div>
+
                                     <span id="genderError" class="center-block hidden text-danger"> сделайте выбор </span>
                                 </div>
                             </div>
@@ -122,20 +122,21 @@
                                 <label class="col-lg-2 control-label">Машина:</label>
                                 <div class="col-lg-10">
                                     <div class="radio">
+
                                         <label>
-                                            <form:radiobutton path="car" value="idonthave"/>
+                                            <input type="radio" name="car" id="idonthavcar">
                                             Нет машины
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <form:radiobutton path="car" value="ihave"/>
+                                            <input type="radio" name="car" id="ihavecar" value="car">
                                             Есть машина
                                         </label>
                                     </div>
                                     <span id="carError" class="center-block hidden text-danger">Есть ли у вас машина?</span>
                                     <div class="col-lg-5" id="info">
-                                        <input type="text" class="form-control hidden" id="aboutcar" placeholder="Введите марку и цвет машины">
+                                        <form:input path="car" type="text" class="form-control hidden" id="aboutcar" placeholder="Введите марку и цвет машины"/>
                                         <span id="infocar" class="center-block hidden text-danger">минимум 3 символа</span>
                                     </div>
 
@@ -188,7 +189,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" id="send" class="btn btn-primary pull-right">Submit</button>
+                                    <button type="submit" id="send"  class="btn btn-primary pull-right">Submit</button>
                                 </div>
                             </div>
                     </form:form>
