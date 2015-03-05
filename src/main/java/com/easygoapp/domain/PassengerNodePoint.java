@@ -3,6 +3,7 @@ package com.easygoapp.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,13 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint implements Serializable {
-
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
+public class PassengerNodePoint extends AbstractPersistable<Long> {
 
     @Column(name = "latitude", nullable = false)
     private Double latitude;
@@ -87,14 +82,6 @@ public class PassengerNodePoint implements Serializable {
         this.longitude = longitude;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "PNP{" +
@@ -102,7 +89,7 @@ public class PassengerNodePoint implements Serializable {
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", id=" + id +
+                ", id=" + getId() +
                 '}';
     }
 
@@ -120,7 +107,7 @@ public class PassengerNodePoint implements Serializable {
         }
         PassengerNodePoint rhs = (PassengerNodePoint) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.latitude, rhs.latitude)
                 .append(this.longitude, rhs.longitude)
                 .append(this.description, rhs.description)
@@ -132,7 +119,7 @@ public class PassengerNodePoint implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .append(super.hashCode())
                 .append(latitude)
                 .append(longitude)
                 .append(description)

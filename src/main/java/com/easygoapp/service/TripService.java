@@ -10,9 +10,6 @@ import java.util.List;
  * Created by Станислав on 28.02.2015.
  */
 @Service
-public interface TripService {
-    Trip save(Trip trip);
-    void delete(Long id);
-    Trip getById(Long id);
+public interface TripService extends AbstractCrudService<Trip, Long> {
     List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end);
 }
