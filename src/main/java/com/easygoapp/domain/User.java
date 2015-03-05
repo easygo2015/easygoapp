@@ -5,14 +5,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Markov on 24.02.2015.
@@ -20,7 +24,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "USER")
-public class User extends AbstractPersistable<Long>{
+public class User extends AbstractPersistable<Long> {
 
     @NotNull
     @Size(min = 2, message = "Длина имени должны содержать как минимум 2 символа")
@@ -56,7 +60,7 @@ public class User extends AbstractPersistable<Long>{
             "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
             "+(?:[a-zA-Z]){2,}\\.?)$",
             message = "заданный имэйл не может существовать")
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
     @OneToMany(mappedBy = "driver")
@@ -64,8 +68,9 @@ public class User extends AbstractPersistable<Long>{
 
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
-//Security
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    //Security
+    @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+    @JoinColumn(name = "login", referencedColumnName = "login")
     private List<UserRole> userRole;
 
     public User() {
@@ -145,11 +150,13 @@ public class User extends AbstractPersistable<Long>{
         return trips;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void addUserRole(UserRole role) {
+        if (!getUserRoles().contains(role)) {
+            getUserRoles().add(role);
+        }
     }
 
-    public List<UserRole> getUserRole() {
+    public List<UserRole> getUserRoles() {
         return userRole;
     }
 

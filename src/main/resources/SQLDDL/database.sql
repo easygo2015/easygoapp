@@ -1,12 +1,6 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema easygo_db
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema easygo_db
@@ -114,10 +108,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `easygo_db`.`USER_ROLE` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(128) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `login_idx` (`login` ASC),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   CONSTRAINT `login`
     FOREIGN KEY (`login`)
     REFERENCES `easygo_db`.`USER` (`login`)
