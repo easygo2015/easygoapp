@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .disable()
                         // requests rules
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
+                .antMatchers("/assets/**", "/**").permitAll()
                 .anyRequest().permitAll()
                 .and();
 

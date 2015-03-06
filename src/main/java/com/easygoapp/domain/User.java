@@ -71,7 +71,7 @@ public class User extends AbstractPersistable<Long> {
     //Security
     @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
     @JoinColumn(name = "login", referencedColumnName = "login")
-    private List<UserRole> userRole;
+    private List<UserRole> userRoles;
 
     public User() {
     }
@@ -157,11 +157,11 @@ public class User extends AbstractPersistable<Long> {
     }
 
     public List<UserRole> getUserRoles() {
-        return userRole;
+        return userRoles;
     }
 
-    public void setUserRole(List<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override

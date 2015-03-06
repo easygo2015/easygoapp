@@ -19,11 +19,11 @@ public class HelloController {
     @Autowired
     private UserService userService;
 
-	@RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-	public ModelAndView printWelcome() {
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
+    public ModelAndView printWelcome() {
         User toView = userService.findOne(1L);
         Map<String, Object> map = new HashMap<>();
         map.put("message", toView.toString());
         return new ModelAndView("hello", map);
-	}
+    }
 }

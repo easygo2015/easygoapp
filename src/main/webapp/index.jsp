@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="sec"
+          uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -145,19 +148,23 @@
                         <div class="panel-heading">Log In</div>
                         <div class="panel-body">
                             <div class="well bs-component">
-                                <form class="form-horizontal">
+
+                                <c:url value="/j_spring_security_check" var="loginUrl" />
+
+
+                                <form class="form-horizontal" action="${loginUrl}" method="post" >
                                     <fieldset>
                                         <legend></legend>
                                         <div class="form-group">
                                             <!--<label for="inputEmail" class="col-lg-2 control-label">Name</label>-->
                                             <div class="col-lg-12">
-                                                <input type="text" class="form-control" id="inputEmail1" placeholder="Login">
+                                                <input type="text" class="form-control" id="inputEmail1" name="j_username" placeholder="Login">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <!--<label for="inputEmail" class="col-lg-2 control-label">Password</label>-->
                                             <div class="col-lg-12">
-                                                <input type="text" class="form-control" id="inputEmail" placeholder="Password">
+                                                <input type="text" class="form-control" id="inputEmail" name="j_password" placeholder="Password">
                                             </div>
                                         </div>
                                         <div class="form-group">

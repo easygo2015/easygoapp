@@ -17,10 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView logged(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("login");
+        model.setViewName("index");
         return model;
     }
 
@@ -48,17 +48,17 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "/message**", method = RequestMethod.GET)
-    public ModelAndView message() {
-
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Hello World");
-        model.addObject("message", "This is protected page - Under Spring Security Page!");
-        model.setViewName("message");
-
-        return model;
-
-    }
+//    @RequestMapping(value = "/message**", method = RequestMethod.GET)
+//    public ModelAndView message() {
+//
+//        ModelAndView model = new ModelAndView();
+//        model.addObject("title", "Spring Security Hello World");
+//        model.addObject("message", "This is protected page - Under Spring Security Page!");
+//        model.setViewName("message");
+//
+//        return model;
+//
+//    }
 
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
