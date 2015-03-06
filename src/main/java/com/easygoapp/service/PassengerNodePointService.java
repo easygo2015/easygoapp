@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
  * Created by Станислав on 28.02.2015.
  */
 @Service
-public interface PassengerNodePointService {
-    PassengerNodePoint save(PassengerNodePoint point);
-    void delete(Long id);
-    PassengerNodePoint getById(Long id);
+public interface PassengerNodePointService extends AbstractCrudService<PassengerNodePoint, Long> {
+
 }

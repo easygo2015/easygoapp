@@ -1,8 +1,10 @@
 package com.easygoapp.service.impl;
 
 import com.easygoapp.domain.PassengerNodePoint;
+import com.easygoapp.domain.User;
 import com.easygoapp.repository.PassengerNodePointRepository;
 import com.easygoapp.service.PassengerNodePointService;
+import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -15,24 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Repository
 @Transactional(readOnly = true)
-public class PassengerNodePointServiceImpl implements PassengerNodePointService {
+public class PassengerNodePointServiceImpl extends AbstractCrudServiceImpl<PassengerNodePoint, Long> implements PassengerNodePointService {
 
-    @Autowired
     private PassengerNodePointRepository passengerNodePointRepository;
 
-    @Override
-    public PassengerNodePoint save(PassengerNodePoint point) {
-        PassengerNodePoint savedPoint = passengerNodePointRepository.saveAndFlush(point);
-        return savedPoint;
+
+    @Autowired
+    public void setPassengerNodePointRepository(PassengerNodePointRepository passengerNodePointRepository) {
+        this.passengerNodePointRepository = passengerNodePointRepository;
+        super.setRepository(passengerNodePointRepository);
     }
 
-    @Override
-    public void delete(Long id) {
-        passengerNodePointRepository.delete(id);
-    }
-
-    @Override
-    public PassengerNodePoint getById(Long id) {
-        return passengerNodePointRepository.findOne(id);
-    }
 }

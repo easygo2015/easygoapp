@@ -3,8 +3,11 @@ package com.easygoapp.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -14,23 +17,22 @@ import java.util.List;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint implements Serializable {
+public class PassengerNodePoint extends AbstractPersistable<Long> {
 
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
-
+    @NotNull
     @Column(name = "latitude", nullable = false)
     private Double latitude;
 
+    @NotNull
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @NotNull
+    @Min(5)
     @Column(name = "description")
     private String description;
 
+    @NotNull
     @Column(name = "isleft", nullable = false)
     private boolean isLeft;
 
@@ -87,14 +89,6 @@ public class PassengerNodePoint implements Serializable {
         this.longitude = longitude;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "PNP{" +
@@ -102,7 +96,7 @@ public class PassengerNodePoint implements Serializable {
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", id=" + id +
+                ", id=" + getId() +
                 '}';
     }
 
@@ -120,7 +114,7 @@ public class PassengerNodePoint implements Serializable {
         }
         PassengerNodePoint rhs = (PassengerNodePoint) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.latitude, rhs.latitude)
                 .append(this.longitude, rhs.longitude)
                 .append(this.description, rhs.description)
@@ -132,7 +126,7 @@ public class PassengerNodePoint implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .append(super.hashCode())
                 .append(latitude)
                 .append(longitude)
                 .append(description)

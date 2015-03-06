@@ -25,15 +25,16 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.easygoapp.repository")
-@PropertySource({ "classpath:db-mysql.properties" })
+//@EnableJpaRepositories(basePackages = RootConfig.REPOSITORY_PACKAGE)
+@EnableJpaRepositories("com.easygoapp.repository")
+@PropertySource({"classpath:db-mysql.properties"})
 public class PersistenceConfig {
 
     @Autowired
     Environment environment;
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Preconditions.checkNotNull(environment.getProperty("jdbc.driverClassName")));
         dataSource.setUrl(Preconditions.checkNotNull(environment.getProperty("jdbc.url")));
@@ -46,7 +47,7 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPackagesToScan("com.easygoapp.domain");
+        entityManagerFactoryBean.setPackagesToScan(/*RootConfig.DOMAIN_PACKAGE*/ "com.easygoapp.domain");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);

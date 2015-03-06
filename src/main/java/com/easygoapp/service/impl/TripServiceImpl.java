@@ -5,6 +5,7 @@ import com.easygoapp.repository.TripRepository;
 import com.easygoapp.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,29 +13,28 @@ import java.util.List;
 /**
  * Created by Станислав on 28.02.2015.
  */
+@Transactional(readOnly = true)
 @Service
-public class TripServiceImpl implements TripService {
+public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> implements TripService {
 
-    @Autowired
     private TripRepository tripRepository;
 
     @Override
-    public Trip save(Trip trip) {
-        return tripRepository.saveAndFlush(trip);
-    }
-
-    @Override
-    public void delete(Long id) {
-        tripRepository.delete(id);
-    }
-
-    @Override
-    public Trip getById(Long id) {
-        return tripRepository.findOne(id);
-    }
-
-    @Override
     public List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end) {
-        return tripRepository.findByStartTimeBetween(start, end);
+        return tripRepository.findByStartTimeBetween(start,end);
+    }
+
+    @Autowired
+    public void setTripRepository(TripRepository tripRepository) {
+        this.tripRepository = tripRepository;
+        super.setRepository(tripRepository);
+    }
+
+    @Override
+    public Trip findOne(Long id) {
+        Trip trip = super.findOne(id);
+        trip.getPassengerNodePoints().size();
+        trip.getCompanions().size();
+        return trip;
     }
 }

@@ -9,9 +9,15 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import({
-        PersistenceConfig.class
+        PersistenceConfig.class,
+        SecurityConfig.class
 })
-@ComponentScan({ "com.easygoapp.service" })
+//@ComponentScan({RootConfig.SERVICE_PACKAGE })
+@ComponentScan("com.easygoapp.service")
 public class RootConfig {
-
+    public static final String ROOT_PACKAGE = "com.easygoapp";
+    public static final String SERVICE_PACKAGE = ".service";
+    public static final String DOMAIN_PACKAGE = ".domain";
+    public static final String CONTROLLERS_PACKAGE = ".controllers";
+    public static final String REPOSITORY_PACKAGE = ".repository";
 }

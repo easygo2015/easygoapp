@@ -2,10 +2,10 @@ package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,24 +14,21 @@ import java.util.List;
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip implements Serializable {
+public class Trip extends AbstractPersistable<Long> {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    private Long id;
-
+    @NotNull
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
 
-
+    @NotNull
     @ManyToOne
     private User driver;
 
+    @NotNull
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
 
+    @NotNull
     @Column(name = "price")
     private Double price;
 
@@ -79,14 +76,6 @@ public class Trip implements Serializable {
         this.driver = driver;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -107,7 +96,7 @@ public class Trip implements Serializable {
     public String toString() {
         return "Trip{" +
                 "carCapacity=" + carCapacity +
-                ", id=" + id +
+                ", id=" + getId() +
                 ", startTime=" + startTime +
                 ", driver=" + driver +
                 ", price=" + price +
@@ -127,7 +116,7 @@ public class Trip implements Serializable {
         }
         Trip rhs = (Trip) obj;
         return new EqualsBuilder()
-                .append(this.id, rhs.id)
+                .appendSuper(super.equals(rhs))
                 .append(this.startTime, rhs.startTime)
                 .append(this.driver, rhs.driver)
                 .append(this.carCapacity, rhs.carCapacity)
@@ -139,7 +128,7 @@ public class Trip implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .append(id)
+                .appendSuper(super.hashCode())
                 .append(startTime)
                 .append(driver)
                 .append(carCapacity)
