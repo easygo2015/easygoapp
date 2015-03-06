@@ -39,12 +39,18 @@ public class DaoUserTest {
 //        System.out.println(id);
 //        System.out.println(user1);
 //    }
-
-    @After
-    public void deleteUser(){
-        System.out.println("deleteUser");
-        userService.delete(id);
-    }
+    @Test
+    public void saveUser() {
+    User user = new User();
+    user.setPhoneNumber("000-000-00-00");
+    user.setCar("lexus");
+    user.setGender(Gender.MALE);
+    user.setLogin("Markov");
+    user.setPassword("123456");
+        user.setName("Stas");
+    user.setEmail("wer@wer.com");
+        userService.save(user);
+}
 
     @Test
     public void getUserByLogin(){

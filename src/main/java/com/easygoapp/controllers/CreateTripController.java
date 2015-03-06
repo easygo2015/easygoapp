@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,8 +54,13 @@ public class CreateTripController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String saveTrip(@ModelAttribute Trip trip) {
+    public String saveTrip(@ModelAttribute Trip trip, String startDate) throws ParseException {
         User driver = userService.getByLogin("Markov");
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date date = dateFormat.parse(startDate);
+        long time = date.getTime();
+        Timestamp start = new Timestamp(time);
+        trip.setStartTime(start);
         trip.setDriver(driver);
         List<User> companions = new ArrayList<>();
         companions.add(driver);

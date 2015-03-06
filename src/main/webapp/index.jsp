@@ -68,8 +68,7 @@
           <div  id="banner">
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6">
-                    <h1>EasyGo</h1>
-                    <p class="lead">Have a nice trip!</p>
+                    <h1>Мы заботимся о Вашей комфортной поездке</h1>
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6">
                     <hr/>
