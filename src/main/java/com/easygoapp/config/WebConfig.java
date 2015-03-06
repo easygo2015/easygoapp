@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -26,14 +27,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/**").addResourceLocations("/");
     }
 
-    @Bean
-    public InternalResourceViewResolver setupViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        return resolver;
-    }
+//    @Bean
+//    public InternalResourceViewResolver setupViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setViewClass(JstlView.class);
+//        return resolver;
+//    }
+
 
     @Bean
     public UserDetailsService getUserDetailsService(){
@@ -45,4 +47,30 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
+
+    @Bean
+    public ViewResolver viewResolver(
+            solver templateResolver() {
+        TemplateResolSpringTemplateEngine templateEngine) {
+            ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+            viewResolver.setTemplateEngine(templateEngine);
+            return viewResolver;
+        }
+        @Bean
+        public TemplateEngine templateEngine(
+                TemplateResolver templateResolver) {
+            SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+            templateEngine.setTemplateResolver(templateResolver);
+            return templateEngine;
+        }
+        @Bean
+        public TemplateRever templateResolver =
+                new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }
+
+
 }

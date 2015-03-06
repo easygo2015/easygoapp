@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({
         PersistenceConfig.class,
-        SecurityConfig.class
+        SecurityConfig.class,
+        TilesConfig.class
 })
 //@ComponentScan({RootConfig.SERVICE_PACKAGE })
 @ComponentScan("com.easygoapp.service")
