@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
@@ -64,21 +63,23 @@ public class DaoTripTest {
 //        System.out.println(saved);
 //    }
 
-//    @Test
-//    public void saveTripWithRatio(){
-//        Trip trip = new Trip();
-//        trip.setCarCapacity(3);
-//        User driver = userService.findOne(1l);
-//        System.out.println(driver);
-//        trip.setDriver(driver);
-//        trip.setPrice(5d);
-//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-//
-//        List<User> companions = new ArrayList<>();
-//        User user1 = userService.findOne(1l);
-//        User user2 = userService.findOne(2l);
-//        companions.add(user1);
-//        companions.add(user2);
+    @Test
+    public void saveTripWithRatio() {
+        Trip trip = new Trip();
+        trip.setCarCapacity(3);
+        User driver = userService.findOne(1l);
+        System.out.println(driver);
+        trip.setDriver(driver);
+        trip.setPrice(5d);
+        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+
+        List<User> companions = new ArrayList<>();
+        //User user2 = userService.findOne(2l);
+        companions.add(driver);
+       // companions.add(user2);
+        trip.setCompanions(companions);
+        tripService.save(trip);
+    }
 
 //    @Test
 //    public void getAllTrips() throws ParseException {
@@ -141,40 +142,16 @@ public class DaoTripTest {
 //        Trip trip = tripService.findOne(1l);
 //        List<User> companions = trip.getCompanions();
 //        User user3 = new User();
-//        user3.setName("asdasdasd");
 //        user3.setPhoneNumber("000-000-00-00");
 //        user3.setCar("lexus");
 //        user3.setGender(Gender.MALE);
-//        user3.setLogin("Markovasdasdasd");
-//        user3.setEmail("markasssdov@gmail.com");
-//        user3.setPassword("1234rewrewr");
+//        user3.setLogin("Markovasd");
+//        user3.setEmail("markasdov@gmail.com");
+//        user3.setPassword("1234");
 //        User savedUser = userService.save(user3);
 //        companions.add(savedUser);
 //        trip.setCompanions(companions);
 //        tripService.save(trip);
 //    }
 
-    @Test
-    public void addNewPassenger(){
-        Trip trip = tripService.findOne(1l);
-        List<User> companions = trip.getCompanions();
-        User user4 = userService.findOne(4l);
-        companions.add(user4);
-        trip.setCompanions(companions);
-        tripService.save(trip);
-    }
-
-//    @Test
-//    public void findTrip(){
-//        Trip trip = tripService.findOne(1l);
-//        System.out.println(trip);
-//        List<User> companions = trip.getCompanions();
-//        for (User user: companions){
-//            System.out.println(user);
-//        }
-//        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
-//        for (PassengerNodePoint point: points){
-//            System.out.println(point);
-//        }
-//    }
 }
