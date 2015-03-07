@@ -14,15 +14,13 @@ import java.util.List;
  */
 @Service
 public interface TripService extends AbstractCrudService<Trip, Long> {
+    Trip findOneEager(Long id);
     List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end);
-    User addPassenger(User user, Trip trip);
-    boolean removePassenger(User user, Trip trip);
-    PassengerNodePoint addPassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
-    void removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip);
-    List<PassengerNodePoint> addPassengerNodePointsList(List<PassengerNodePoint> points, Trip trip);
+    void addPassenger(Long tripId, Long userId);
+    boolean removePassenger(Long tripId, Long userId);
+    void addPassengerNodePoint(Long tripId, Long passengerNodePointId);
+    void removePassengerNodePoint(Long tripId, Long passengerNodePointId);
+    void setPassengerNodePointsList(Long tripId, List<PassengerNodePoint> points);
     Trip modifyTrip(Trip trip);
     void cancelTrip(Trip trip);
-    List<Trip> getTripsByDate(Timestamp timestamp);
-    List<Trip> getTripsByDateInTimeRange(Timestamp timestamp, int startHour, int endHour);
-    List<Trip> getTripByDateAndPassengerNodePoints(Timestamp timestamp, int startHour, int endHour, List<PassengerNodePoint> points);
 }

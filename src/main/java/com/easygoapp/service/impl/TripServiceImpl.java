@@ -42,7 +42,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     }
 
     @Override
-    public Trip findOne(Long id){
+    public Trip findOneEager(Long id){
         Trip trip = super.findOne(id);
         trip.getCompanions().size();
         trip.getPassengerNodePoints().size();
@@ -51,31 +51,28 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Override
     @Transactional
-    public User addPassenger(User user, Trip trip) {
-        User passenger = userRepository.findOne(user.getId());
-        Trip current_trip = tripRepository.findOne(trip.getId());
-        int capacity = current_trip.getCarCapacity();
-        List<User> companions = current_trip.getCompanions();
+    public void addPassenger(Long tripId, Long userId) {
+        Trip currentTrip = tripRepository.findOne(tripId);
+        User passenger = userRepository.getOne(userId);
+        int capacity = currentTrip.getCarCapacity();
+        List<User> companions = currentTrip.getCompanions();
         if (companions.size()-1 < capacity){
             companions.add(passenger);
-            current_trip.setCompanions(companions);
-            tripRepository.save(current_trip);
-            /* here will be driver notification */
+            tripRepository.save(currentTrip);
+            //TODO driver notification
         }
-        return passenger;
     }
 
     @Override
     @Transactional
-    public boolean removePassenger(User user, Trip trip) {
-        Trip current_trip = tripRepository.findOne(trip.getId());
-        User passenger = userRepository.findOne(user.getId());
-        List<User> companions = current_trip.getCompanions();
-        if (companions.size()>1 && companions.contains(passenger)){
+    public boolean removePassenger(Long tripId, Long userId) {
+        Trip currentTrip = tripRepository.findOne(tripId);
+        User passenger = userRepository.findOne(userId);
+        List<User> companions = currentTrip.getCompanions();
+        if (companions.size() > 1 && companions.contains(passenger)){
             companions.remove(passenger);
-            trip.setCompanions(companions);
-            tripRepository.save(current_trip);
-            /* here will be driver notification */
+            tripRepository.save(currentTrip);
+            //TODO driver notification
             return true;
         }
         return false;
@@ -83,34 +80,33 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Override
     @Transactional
-    public PassengerNodePoint addPassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip) {
-        PassengerNodePoint curPassengerNodePoint = passengerNodePointRepository.findOne(passengerNodePoint.getId());
-        Trip currentTrip = tripRepository.findOne(trip.getId());
+    public void addPassengerNodePoint(Long tripId, Long passengerNodePointId) {
+        Trip currentTrip = tripRepository.findOne(tripId);
+        PassengerNodePoint passengerNodePoint = passengerNodePointRepository.findOne(passengerNodePointId);
         List<PassengerNodePoint> passengerNodePoints = currentTrip.getPassengerNodePoints();
         passengerNodePoints.add(passengerNodePoint);
-        currentTrip.setPassengerNodePoints(passengerNodePoints);
         tripRepository.save(currentTrip);
-        return passengerNodePoint;
     }
 
     @Override
     @Transactional
-    public void removePassengerNodePoint(PassengerNodePoint passengerNodePoint, Trip trip) {
-        List<PassengerNodePoint> passengerNodePoints = trip.getPassengerNodePoints();
+    public void removePassengerNodePoint(Long tripId, Long passengerNodePointId) {
+        Trip currentTrip = tripRepository.findOne(tripId);
+        PassengerNodePoint passengerNodePoint = passengerNodePointRepository.getOne(passengerNodePointId);
+        List<PassengerNodePoint> passengerNodePoints = currentTrip.getPassengerNodePoints();
         passengerNodePoints.remove(passengerNodePoint);
-        trip.setPassengerNodePoints(passengerNodePoints);
-        for (User passenger : trip.getCompanions()) {
-               /* passengers notification */
+        tripRepository.save(currentTrip);
+        for (User passenger : currentTrip.getCompanions()) {
+               //TODO passengers notification
         }
     }
 
     @Override
     @Transactional
-    public List<PassengerNodePoint> addPassengerNodePointsList(List<PassengerNodePoint> points, Trip trip) {
-        Trip currentTrip = tripRepository.findOne(trip.getId());
+    public void setPassengerNodePointsList(Long tripId, List<PassengerNodePoint> points) {
+        Trip currentTrip = tripRepository.findOne(tripId);
         currentTrip.setPassengerNodePoints(points);
-        currentTrip = tripRepository.save(currentTrip);
-        return currentTrip.getPassengerNodePoints();
+        tripRepository.save(currentTrip);
     }
 
 
@@ -122,11 +118,11 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         List<User> companions = originalTrip.getCompanions();
         if (companions.size()-1 <= trip.getCarCapacity()){
             modifiedTrip = tripRepository.save(trip);
-            /*passengers notification*/
+            //TODO passengers notification
         }else{
             trip.setCarCapacity(originalTrip.getCarCapacity());
             modifiedTrip = tripRepository.save(trip);
-            /*if passengers conflict: do not change car capacity*/
+            //TODO passengers notification
         }
         return modifiedTrip;
     }
@@ -135,81 +131,11 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Transactional
     public void cancelTrip(Trip trip) {
         List<User> companions = trip.getCompanions();
-        if (companions.size() != 0){
+        if (companions.size() > 1){
             for (User companion : companions) {
-                /*passengers notification*/
+                //TODO passengers notification
             }
         }
-        tripRepository.delete(trip.getId());
+        tripRepository.delete(trip);
     }
-
-    @Override
-    public List<Trip> getTripsByDate(Timestamp timestamp) {
-        Timestamp start;
-        Timestamp end;
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(timestamp.getTime());
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 01);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        start = new Timestamp(cal.getTimeInMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        end = new Timestamp(cal.getTimeInMillis());
-
-        return tripRepository.findByStartTimeBetween(start, end);
-    }
-
-    @Override
-    public List<Trip> getTripsByDateInTimeRange(Timestamp timestamp, int startHour, int endHour) {
-        Timestamp start;
-        Timestamp end;
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(timestamp.getTime());
-        cal.set(Calendar.HOUR_OF_DAY, startHour);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        start = new Timestamp(cal.getTimeInMillis());
-        cal.set(Calendar.HOUR_OF_DAY, endHour);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        end = new Timestamp(cal.getTimeInMillis());
-
-        return tripRepository.findByStartTimeBetween(start, end);
-    }
-
-    @Override
-    public List<Trip> getTripByDateAndPassengerNodePoints(Timestamp timestamp, int startHour, int endHour, List<PassengerNodePoint> points) {
-        Timestamp start;
-        Timestamp end;
-        List<PassengerNodePoint> tripPoints;
-        List<Trip> resultTrips = new ArrayList<Trip>();
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(timestamp.getTime());
-        cal.set(Calendar.HOUR_OF_DAY, startHour);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        start = new Timestamp(cal.getTimeInMillis());
-        cal.set(Calendar.HOUR_OF_DAY, endHour);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        end = new Timestamp(cal.getTimeInMillis());
-        List<Trip> trips = tripRepository.findByStartTimeBetween(start, end);
-        for (Trip trip : trips) {
-            tripPoints = trip.getPassengerNodePoints();
-            if (tripPoints.retainAll(points)){
-                resultTrips.add(trip);
-            }
-        }
-        return resultTrips;
-    }
-
-
 }

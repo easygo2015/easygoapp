@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -117,39 +119,31 @@ public class TripServiceTest {
 
     @Test
     public void testAddPassenger(){
-        Trip trip = tripService.findOne(trip_id);
-        User user = userService.findOne(passenger2_id);
-        tripService.addPassenger(user, trip);
-        Trip trip1 = tripService.findOne(trip_id);
-        assertEquals(trip1.getCompanions().size(), 3);
+        tripService.addPassenger(trip_id, passenger2_id);
+        Trip trip = tripService.findOneEager(trip_id);
+        assertEquals(3, trip.getCompanions().size());
     }
 
     @Test
     public void testRemovePassenger(){
-        Trip trip = tripService.findOne(trip_id);
-        User user = userService.findOne(passenger1_id);
-        tripService.removePassenger(user, trip);
-        Trip trip1 = tripService.findOne(trip_id);
-        assertEquals(trip1.getCompanions().size(), 1);
+        tripService.removePassenger(trip_id, passenger1_id);
+        Trip trip = tripService.findOneEager(trip_id);
+        assertEquals(1, trip.getCompanions().size());
     }
 
     @Test
     public void testAddPassengerNodePoint(){
-        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePoint2_id);
-        Trip tripBefore = tripService.findOne(trip_id);
-        tripService.addPassengerNodePoint(passengerNodePoint, tripBefore);
-        Trip tripAfter = tripService.findOne(trip_id);
-        assertEquals(tripAfter.getPassengerNodePoints().size(),2);
+        tripService.addPassengerNodePoint(trip_id, passengerNodePoint2_id);
+        Trip tripAfter = tripService.findOneEager(trip_id);
+        assertEquals(2, tripAfter.getPassengerNodePoints().size());
 
     }
 
     @Test
     public void testRemovePassengerNodePoint(){
-        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePoint2_id);
-        Trip tripBefore = tripService.findOne(trip_id);
-        tripService.removePassengerNodePoint(passengerNodePoint, tripBefore);
-        Trip tripAfter = tripService.findOne(trip_id);
-        assertEquals(tripAfter.getPassengerNodePoints().size(),1);
+        tripService.removePassengerNodePoint(trip_id, passengerNodePoint2_id);
+        Trip tripAfter = tripService.findOneEager(trip_id);
+        assertEquals(1, tripAfter.getPassengerNodePoints().size());
     }
 
     @Test
@@ -183,41 +177,29 @@ public class TripServiceTest {
 
     @Test
     public void testCancelTrip(){
-        Trip trip = tripService.findOne(trip_id);
+        Trip trip = tripService.findOneEager(trip_id);
         tripService.cancelTrip(trip);
         List<Trip> trips = tripService.findAll();
         assertTrue(!trips.contains(trip));
-
     }
 
     @Test
-    public void testAddPassengerNodePointsList(){
-        Trip trip = tripService.findOne(trip_id);
+    public void testSetPassengerNodePointsList(){
         List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
         points.add(passengerNodePointService.findOne(passengerNodePoint1_id));
         points.add(passengerNodePointService.findOne(passengerNodePoint2_id));
-        assertTrue(tripService.addPassengerNodePointsList(points, trip).equals(points));
+        tripService.setPassengerNodePointsList(trip_id,points);
+        Trip trip = tripService.findOneEager(trip_id);
+        assertTrue(trip.getPassengerNodePoints().size() == points.size());
     }
 
     @Test
-    public void testGetTripsByDate(){
-        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-        List<Trip> trips = tripService.getTripsByDate(currentDate);
-    }
+    public void testGetBetweenStartAndEnd(){
+        Timestamp startDate = new Timestamp(System.currentTimeMillis()-10000000);
+        Timestamp endDate = new Timestamp(System.currentTimeMillis());
+        List<Trip> trips = tripService.getBetweenStartAndEnd(startDate,endDate);
+        assertTrue(trips.size()>0);
 
-    @Test
-    public void testGetTripsByDateInTimeRange(){
-        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-        List<Trip> trips = tripService.getTripsByDateInTimeRange(currentDate, 10, 11);
-    }
-
-    @Test
-    public void testGetTripsByDateAndPassengerNodePoints(){
-        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
-        List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
-        points.add(passengerNodePointService.findOne(passengerNodePoint1_id));
-        points.add(passengerNodePointService.findOne(passengerNodePoint2_id));
-        List<Trip> trips = tripService.getTripByDateAndPassengerNodePoints(currentDate, 10, 11, points);
     }
 
     @After

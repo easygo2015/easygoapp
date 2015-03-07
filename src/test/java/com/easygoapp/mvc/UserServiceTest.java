@@ -39,12 +39,7 @@ public class UserServiceTest {
         userService.save(user);
     }
 
-    @Test
-    public void testCheckLoginPassword(){
-        assertEquals(userService.checkLoginPassword("john123", "password"), true);
-        assertEquals(userService.checkLoginPassword("john123", "badPassword"), false);
-        assertEquals(userService.checkLoginPassword("noLogin", "password"), false);
-    }
+
 
     @After
     public void finalizeForTest(){
