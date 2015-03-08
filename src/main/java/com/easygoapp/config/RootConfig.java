@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import({
-        PersistenceConfig.class
+        PersistenceConfig.class,
+        SecurityConfig.class
 })
-//@ComponentScan({RootConfig.ROOT_PACKAGE + RootConfig.SERVICE_PACKAGE })
+//@ComponentScan({RootConfig.SERVICE_PACKAGE })
 @ComponentScan("com.easygoapp.service")
 public class RootConfig {
     public static final String ROOT_PACKAGE = "com.easygoapp";

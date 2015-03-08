@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,16 +16,19 @@ import java.util.List;
 @Table(name = "TRIP")
 public class Trip extends AbstractPersistable<Long> {
 
+    @NotNull
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
 
-
+    @NotNull
     @ManyToOne
     private User driver;
 
+    @NotNull
     @Column(name = "car_capacity", nullable = false)
     private Integer carCapacity;
 
+    @NotNull
     @Column(name = "price")
     private Double price;
 

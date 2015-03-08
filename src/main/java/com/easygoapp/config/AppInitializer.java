@@ -23,7 +23,6 @@ public class AppInitializer implements WebApplicationInitializer {
 
         AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(WebConfig.class);
-//        rootContext.setServletContext(servletContext);
         ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME,
                 new DispatcherServlet(webContext));
         servlet.addMapping("/");
