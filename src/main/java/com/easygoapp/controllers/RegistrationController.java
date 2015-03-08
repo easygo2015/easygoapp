@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/registration")
@@ -16,11 +17,12 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-    public String showRegistrationPage(Model model) {
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public ModelAndView createUserForm(ModelAndView uiModel) {
         User user = new User();
-        model.addAttribute("user", user);
-        return "registration";
+        uiModel.addObject("user", user);
+        uiModel.setViewName("registration");
+        return uiModel;
     }
 
     @RequestMapping(method = RequestMethod.POST)

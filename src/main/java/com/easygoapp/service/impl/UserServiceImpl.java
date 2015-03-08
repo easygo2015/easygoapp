@@ -32,6 +32,7 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
             user.setPassword(cryptedPassword);
         }
         userRepository.save(user);
+//        userRepository.saveAndFlush(user);
         return user;
     }
 

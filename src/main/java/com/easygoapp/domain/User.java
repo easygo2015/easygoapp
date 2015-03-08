@@ -61,6 +61,7 @@ public class User extends AbstractPersistable<Long> {
 
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
+
     //Security
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "login", referencedColumnName = "login")
