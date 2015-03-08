@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 /**
  * Created by Kir Kolesnikov on 02.03.2015.
@@ -22,9 +22,12 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan("com.easygoapp.controllers")
 //@ComponentScan(RootConfig.CONTROLLERS_PACKAGE)
 public class WebConfig extends WebMvcConfigurerAdapter {
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+        registry.addResourceHandler("/WEB-INF/jsp/**").addResourceLocations("/jsp/");
+        registry.addResourceHandler("/WEB-INF/templates/**").addResourceLocations("/templates/");
     }
 
 //    @Bean
@@ -36,11 +39,17 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //        return resolver;
 //    }
 
+    @Bean
+    public ViewResolver viewResolver() {
+        return new TilesViewResolver();
+    }
 
     @Bean
-    public UserDetailsService getUserDetailsService(){
+    public UserDetailsService getUserDetailsService() {
         return new CustomUserDetailService();
     }
+
+
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -49,28 +58,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ViewResolver viewResolver(
-            solver templateResolver() {
-        TemplateResolSpringTemplateEngine templateEngine) {
-            ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-            viewResolver.setTemplateEngine(templateEngine);
-            return viewResolver;
-        }
-        @Bean
-        public TemplateEngine templateEngine(
-                TemplateResolver templateResolver) {
-            SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-            templateEngine.setTemplateResolver(templateResolver);
-            return templateEngine;
-        }
-        @Bean
-        public TemplateRever templateResolver =
-                new ServletContextTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
-        return templateResolver;
+    public TilesConfigurer tilesConfigurer() {
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles-definitions.xml" });
+        tilesConfigurer.setCheckRefresh(true);
+        return tilesConfigurer;
     }
-
-
 }

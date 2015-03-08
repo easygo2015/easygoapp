@@ -7,18 +7,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Padonag on 04.03.2015.
  */
 @Controller
-
 public class LoginController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView logged(){
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    public ModelAndView logged() {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
         return model;
@@ -31,9 +29,7 @@ public class LoginController {
         model.addObject("title", "Spring Security Hello World");
         model.addObject("message", "This is protected page - ADMIN Page!");
         model.setViewName("message");
-
         return model;
-
     }
 
     @RequestMapping(value = "/user**", method = RequestMethod.GET)
@@ -45,20 +41,7 @@ public class LoginController {
         model.setViewName("message");
 
         return model;
-
     }
-
-//    @RequestMapping(value = "/message**", method = RequestMethod.GET)
-//    public ModelAndView message() {
-//
-//        ModelAndView model = new ModelAndView();
-//        model.addObject("title", "Spring Security Hello World");
-//        model.addObject("message", "This is protected page - Under Spring Security Page!");
-//        model.setViewName("message");
-//
-//        return model;
-//
-//    }
 
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -75,6 +58,5 @@ public class LoginController {
 
         model.setViewName("403");
         return model;
-
     }
 }

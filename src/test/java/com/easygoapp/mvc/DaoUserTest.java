@@ -3,9 +3,7 @@ package com.easygoapp.mvc;
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
-import com.easygoapp.type.Gender;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,25 +39,22 @@ public class DaoUserTest {
 //    }
 
     @After
-    public void deleteUser(){
+    public void deleteUser() {
         System.out.println("deleteUser");
         userService.delete(id);
     }
 
     @Test
-    public void getUserByLogin(){
+    public void getUserByLogin() {
         System.out.println("getByLogin");
         User user = userService.getByLogin("Markov");
         System.out.println(user);
     }
 
     @Test
-    public void getUserById(){
+    public void getUserById() {
         System.out.println("getById");
         User user = userService.findOne(1l);
         System.out.println(user);
     }
-
-
-
 }

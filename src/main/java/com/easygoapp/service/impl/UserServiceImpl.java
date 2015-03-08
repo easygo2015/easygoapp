@@ -25,6 +25,7 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     @Autowired
     BCryptPasswordEncoder encoder;
 
+    @Override
     public User save(User user) {
         if (user.isNew()) {
             String cryptedPassword = encoder.encode(user.getPassword());
@@ -38,5 +39,4 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     public User getByLogin(String login) {
         return userRepository.findByLogin(login);
     }
-
 }

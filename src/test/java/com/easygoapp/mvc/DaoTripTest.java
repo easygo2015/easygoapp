@@ -1,15 +1,11 @@
 package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
-import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
-import com.easygoapp.type.Gender;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -76,7 +68,7 @@ public class DaoTripTest {
         List<User> companions = new ArrayList<>();
         //User user2 = userService.findOne(2l);
         companions.add(driver);
-       // companions.add(user2);
+        // companions.add(user2);
         trip.setCompanions(companions);
         tripService.save(trip);
     }
@@ -153,5 +145,4 @@ public class DaoTripTest {
 //        trip.setCompanions(companions);
 //        tripService.save(trip);
 //    }
-
 }

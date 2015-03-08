@@ -70,5 +70,4 @@ public class PersistenceConfig {
         pfb.afterPropertiesSet();
         return pfb.getObject();
     }
-
 }

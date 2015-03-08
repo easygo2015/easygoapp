@@ -13,6 +13,7 @@ import javax.servlet.ServletRegistration;
  * Created by Станислав on 28.02.2015.
  */
 public class AppInitializer implements WebApplicationInitializer {
+
     private static final String DISPATCHER_SERVLET_NAME = "mvc-dispatcher";
 
     @Override

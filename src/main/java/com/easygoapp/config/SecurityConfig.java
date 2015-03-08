@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(securedEnabled = true)
 @ComponentScan("com.easygoapp.service")
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("customUserDetailsService")
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         http.formLogin()
                 // login form page
-                .loginPage("/login")
+                .loginPage("/")
 
                 .loginProcessingUrl("/j_spring_security_check")
                         // URL login not success
@@ -94,13 +94,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationSuccessHandler successHandler(){
+    public AuthenticationSuccessHandler successHandler() {
         return new CustomSuccessHandler();
     }
-
 }

@@ -23,8 +23,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
-                                        HttpServletResponse httpServletResponse,
-                                        Authentication authentication) throws IOException, ServletException {
+            HttpServletResponse httpServletResponse,
+            Authentication authentication) throws IOException, ServletException {
         String targetUrl = getSuccessUrl(authentication);
         redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, targetUrl);
         clearAuthenticationAttributes(httpServletRequest);

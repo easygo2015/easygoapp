@@ -2,7 +2,9 @@ package com.easygoapp.domain;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Kir Kolesnikov on 04.03.2015.

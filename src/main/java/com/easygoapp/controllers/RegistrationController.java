@@ -8,11 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/registration")
@@ -29,16 +24,16 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-        public String saveUser(@ModelAttribute User user){
-        if(user.getCar().equals("on,")){
+    public String saveUser(@ModelAttribute User user) {
+        if (user.getCar().equals("on,")) {
             user.setCar(null);
-        }else{
+        } else {
             String str = user.getCar().substring(4);
             user.setCar(str);
         }
         userService.save(user);
 
-        if(user.getCar()==null){
+        if (user.getCar() == null) {
             user.setCar("");
         }
         return "userInfo";

@@ -1,7 +1,6 @@
 package com.easygoapp.controllers;
 
 import com.easygoapp.domain.Trip;
-import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
@@ -19,7 +18,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/trip")
-public class FindTripController  {
+public class FindTripController {
 
     @Autowired
     private TripService tripService;

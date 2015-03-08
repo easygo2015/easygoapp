@@ -19,11 +19,10 @@ public class FindClientController {
     private UserService userService;
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView printClientInfo(){
+    public ModelAndView printClientInfo() {
         User user = userService.findOne(1L);
         Map<String, Object> map = new HashMap<>();
         map.put("info", user.toString());
         return new ModelAndView("userInfo", map);
     }
-
 }

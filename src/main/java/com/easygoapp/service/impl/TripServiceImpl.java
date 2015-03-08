@@ -21,7 +21,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Override
     public List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end) {
-        return tripRepository.findByStartTimeBetween(start,end);
+        return tripRepository.findByStartTimeBetween(start, end);
     }
 
     @Autowired

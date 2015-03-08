@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Service
 public interface TripService extends AbstractCrudService<Trip, Long> {
+
     List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end);
-
-
 }
