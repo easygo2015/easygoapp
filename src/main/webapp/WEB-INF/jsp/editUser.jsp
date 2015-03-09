@@ -18,9 +18,9 @@
 <c:set var="userToEdit" value="${requestScope.userToEdit}"/>
 
 <div class="container">
-  <form:form class="form-horizontal" id="editUserForm" method="post" commandName="user">
-    <form:hidden path="password"/>
-    <form:hidden path="id"/>
+  <form class="form-horizontal" id="editUserForm" method="post" action="/admin/userlist/edit">
+    <input type="hidden" id="id" value="${userToEdit.id}">
+    <input type="hidden" id="password" value="${userToEdit.password}">
     <fieldset>
       <legend>User Details</legend>
       <div class="form-group">
@@ -29,14 +29,14 @@
         <label class="col-lg-2 control-label">User Login</label>
 
         <div class="col-lg-10">
-          <form:input path="login"/>
+          <input type="text" class="form-control" id="login" placeholder="Login" value="${userToEdit.login}">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputEmail" class="col-lg-2 control-label">User email</label>
+        <label for="email" class="col-lg-2 control-label">User email</label>
 
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputEmail" placeholder="Email" value="${userToEdit.email}">
+          <input type="text" class="form-control" id="email" placeholder="Email" value="${userToEdit.email}">
         </div>
 
         <div class="form-group">
@@ -45,13 +45,13 @@
           <div class="col-lg-10">
             <div class="radio">
               <label>
-                <input type="radio" name="inputGender" id="male" value="1" checked="">
+                <input type="radio" name="gender" id="male" value="MALE" checked="">
                 Male
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="inputGender" id="female" value="0">
+                <input type="radio" name="gender" id="female" value="FEMALE">
                 Female
               </label>
             </div>
@@ -59,18 +59,18 @@
         </div>
 
         <div class="form-group">
-          <label for="inputName" class="col-lg-2 control-label">User Name</label>
+          <label for="name" class="col-lg-2 control-label">User Name</label>
 
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputName" placeholder="Name" value="${userToEdit.name}">
+            <input type="text" class="form-control" id="name" placeholder="Name" value="${userToEdit.name}">
           </div>
         </div>
 
         <div class="form-group">
-          <label for="inputPhone" class="col-lg-2 control-label">Phone number</label>
+          <label for="phone" class="col-lg-2 control-label">Phone number</label>
 
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputPhone" placeholder="Phone"
+            <input type="text" class="form-control" id="phone" placeholder="Phone"
                    value="${userToEdit.phoneNumber}">
           </div>
         </div>
@@ -78,10 +78,10 @@
 
       </div>
       <div class="form-group">
-        <label for="inputCar" class="col-lg-2 control-label">Car description</label>
+        <label for="car" class="col-lg-2 control-label">Car description</label>
 
         <div class="col-lg-10">
-          <textarea class="form-control" rows="3" id="inputCar"></textarea>
+          <textarea class="form-control" rows="3" id="car"></textarea>
         <span
             class="help-block">${userToEdit.car}</span>
         </div>
@@ -94,7 +94,8 @@
         </div>
       </div>
     </fieldset>
-  </form:form>
+  </form>
 </div>
+
 </body>
 </html>

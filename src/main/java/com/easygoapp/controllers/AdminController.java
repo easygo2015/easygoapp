@@ -2,10 +2,12 @@ package com.easygoapp.controllers;
 
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
+import com.easygoapp.type.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +48,27 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value="/admin/userlist/edit**", method=RequestMethod.POST)
-    public String submitForm(@ModelAttribute User user, Model m) {
-        m.addAttribute("message", "Successfully saved person: " + user.toString());
-        return "message";
+    public ModelAndView editedUser(ModelAndView modelAndView, HttpServletRequest request){
+        User editedUser = getUserFromHttpRequest(request);
+        userService.save(editedUser);
+        modelAndView.addObject("editedUser", editedUser);
+        modelAndView.setViewName("editUser");
+        return modelAndView;
+    }
+
+    public User getUserFromHttpRequest(HttpServletRequest request){
+        User result = new User();
+        result.setId(Long.parseLong(request.getParameter("id")));
+        result.setName(request.getParameter("name"));
+        result.setPassword(request.getParameter("password"));
+        result.setLogin(request.getParameter("login"));
+        result.setEmail(request.getParameter("email"));
+        result.setPhoneNumber(request.getParameter("phone"));
+        if (request.getParameter("gender").equals("MALE")) {
+            result.setGender(Gender.MALE);
+        } else {
+            result.setGender(Gender.FEMALE);
+        }
+        return result;
     }
 }

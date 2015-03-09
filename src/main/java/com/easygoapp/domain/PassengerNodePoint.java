@@ -6,10 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -42,6 +39,7 @@ public class PassengerNodePoint implements Persistable<Long> {
     private List<Trip> trips;
 
     @Id @GeneratedValue private Long id;
+
     public PassengerNodePoint() {
     }
 

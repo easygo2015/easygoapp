@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "USER")
 public class User extends AbstractPersistable<Long> {
 
-    @NotNull
+
     @Size(min = 2, message = "Длина имени должны содержать как минимум 2 символа")
     @Column(name = "name")
     private String name;
@@ -38,7 +38,7 @@ public class User extends AbstractPersistable<Long> {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull
+
     @Size(min = 6, message = "Длина номера телефона должна содержать как минимум 6 символов")
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -82,6 +82,12 @@ public class User extends AbstractPersistable<Long> {
 
     public void setTripsWhereUserDriver(List<Trip> tripsWhereUserDriver) {
         this.tripsWhereUserDriver = tripsWhereUserDriver;
+    }
+
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
     }
 
     public String getCar() {

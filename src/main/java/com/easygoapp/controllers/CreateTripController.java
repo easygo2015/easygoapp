@@ -7,6 +7,7 @@ import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,7 +28,7 @@ import java.util.List;
  * Created by Markov on 04.03.2015.
  */
 @Controller
-@RequestMapping("/createTrip")
+@RequestMapping("/user/createTrip")
 public class CreateTripController {
 
     @Autowired
@@ -39,6 +40,7 @@ public class CreateTripController {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String createTrip(Model model) {
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
@@ -53,8 +55,10 @@ public class CreateTripController {
         return "createTrip";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
     public String saveTrip(@ModelAttribute Trip trip, String startDate) throws ParseException {
+        //here must be current user from session
         User driver = userService.getByLogin("Markov");
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         Date date = dateFormat.parse(startDate);

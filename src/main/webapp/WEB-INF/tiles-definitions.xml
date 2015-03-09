@@ -24,6 +24,10 @@
     <put-attribute name="body" value="/WEB-INF/jsp/registration.jsp" />
   </definition>
 
+  <definition name="createTrip" extends="base">
+    <put-attribute name="body" value="/WEB-INF/jsp/createTrip.jsp" />
+  </definition>
+
   <definition name="admin" extends="base">
     <put-attribute name="header" value="/WEB-INF/templates/adminHeader.jsp"/>
     <put-attribute name="body" value="/WEB-INF/jsp/admin.jsp" />
