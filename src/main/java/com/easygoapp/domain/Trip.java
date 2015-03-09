@@ -3,7 +3,6 @@ package com.easygoapp.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -52,7 +51,7 @@ public class Trip implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return getId()==null;
+        return getId() == null;
     }
 
     public void setId(Long id) {

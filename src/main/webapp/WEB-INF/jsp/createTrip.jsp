@@ -4,13 +4,16 @@
 
 <html>
 <head>
+  <c:set var="js" value="/assets/js/"/>
+  <c:set var="css" value="/assets/css/"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <script type="text/javascript" src="../../assets/js/jquery-2.1.3.min.js"></script>
-  <script type="text/javascript" src="../../assets/js/moment-with-locales.min.js"></script>
-  <script src="../../assets/js/bootstrap.js"></script>
-  <script type="text/javascript" src="../../assets/js/bootstrap-datetimepicker.js"></script>
-  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="../../assets/css/bootstrap-datetimepicker.min.css"/>
+  <script type="text/javascript" src="${js}jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="${js}moment-with-locales.min.js"></script>
+  <script type="text/javascript" src="${js}bootstrap.js"></script>
+  <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
+  <script type="text/javascript" src="${js}validateTrip.js"></script>
+  <link rel="stylesheet" href="${css}bootstrap.min.css"/>
+  <link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
 </head>
 <body>
 <div class="container">

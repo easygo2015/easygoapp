@@ -22,6 +22,7 @@
 <body>
 <div class="container">
   <h1>Моя страница</h1>
+
   <div class="row">
     <div class="col-lg-12">
       <div class="well bs-component">
@@ -37,7 +38,7 @@
               </thead>
               <tbody>
               <tr class="success">
-                <td>Имя: </td>
+                <td>Имя:</td>
                 <td>${user.name}</td>
               </tr>
               <tr class="active">
@@ -79,16 +80,16 @@
           </div>
           <div class="col-lg-6">
             <div class="btn-group-vertical btn-block center-block">
-                <a class="btn btn-primary" href="/showTrips">Мои поездки</a>
-                <a class="btn btn-success" href="/findTrip">Найти поездку</a>
-                <c:choose>
-                  <c:when test="${empty user.car}">
-                  </c:when>
-                  <c:otherwise>
-                    <a class="btn btn-info" href="/createTrip">Создать поездку</a>
-                  </c:otherwise>
-                </c:choose>
-                <a class="btn btn-warning" href="/editProfile">Редактировать профиль</a>
+              <a class="btn btn-primary" href="/user/showTrips">Мои поездки</a>
+              <a class="btn btn-success" href="/user/findTrip">Найти поездку</a>
+              <c:choose>
+                <c:when test="${empty user.car}">
+                </c:when>
+                <c:otherwise>
+                  <a class="btn btn-info" href="/user/createTrip">Создать поездку</a>
+                </c:otherwise>
+              </c:choose>
+              <a class="btn btn-warning" href="/user/editProfile">Редактировать профиль</a>
             </div>
           </div>
         </div>

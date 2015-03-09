@@ -2,9 +2,7 @@ package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -48,17 +46,20 @@ public class PassengerNodePoint implements Persistable<Long> {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     @Override
     public boolean isNew() {
-        return getId()==null;
+        return getId() == null;
     }
+
     public List<Trip> getTrips() {
         return trips;
     }

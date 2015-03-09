@@ -50,7 +50,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
 
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
@@ -60,7 +59,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
-        tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles-definitions.xml" });
+        tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/tiles-definitions.xml"});
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }

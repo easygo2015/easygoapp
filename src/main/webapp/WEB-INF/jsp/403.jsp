@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 09.03.15
-  Time: 14:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="sec"
           uri="http://www.springframework.org/security/tags" %>
@@ -20,19 +13,18 @@
   <!-- CSS
   ================================================== -->
 </head>
-<head>
-  <title></title>
-</head>
 <body>
 <div class="container">
   <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6">
-    <h1>Редактировать профиль</h1>
-
-    <h3>Он тут скоро будет! Правда правда!</h3>
-
     <div>
-      <img class="img-rounded" src="/assets/img/cat.jpeg">
+      <img class="img-rounded" src="/assets/img/failed.jpg">
     </div>
+
+    <h1>Неверный логин или пароль</h1>
+
+    <h3>Или Вы просто не зарегестрированы</h3>
+
+    <a class="btn btn-primary" href="/">На главную</a>
 
   </div>
 </div>

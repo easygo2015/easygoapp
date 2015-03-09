@@ -8,12 +8,14 @@ import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -57,9 +59,11 @@ public class CreateTripController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public String saveTrip(@ModelAttribute Trip trip, String startDate) throws ParseException {
-        //here must be current user from session
-        User driver = userService.getByLogin("Markov");
+    public String saveTrip(@ModelAttribute Trip trip, String startDate, Model model) throws ParseException {
+//        //here must be current user from session
+//        User driver = userService.getByLogin("Markov");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User driver = userService.getByLogin(authentication.getName());
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         Date date = dateFormat.parse(startDate);
         long time = date.getTime();
@@ -71,14 +75,22 @@ public class CreateTripController {
         trip.setCompanions(companions);
         List<PassengerNodePoint> points = trip.getPassengerNodePoints();
         Iterator iterator = points.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             PassengerNodePoint point = (PassengerNodePoint) iterator.next();
-            if(point.getId() == null){
+            if (point.getId() == null) {
                 iterator.remove();
             }
         }
         tripService.save(trip);
-        return "index";
+        model.addAttribute("user", driver);
+        return "user";
     }
 
+    @RequestMapping(value = "/user/declineTrip", method = RequestMethod.GET)
+    public String declineTrip(@RequestParam("id") long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getByLogin(auth.getName());
+        tripService.removeCompanionFromTrip(currentUser.getId(), id);
+        return "user";
+    }
 }

@@ -4,14 +4,14 @@ $(document).ready(function () {
             var name = $('#login');
             var ele = $('#enterlogin');
             if (ele.val().length < 3) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
                 $('#loginError').removeClass('hidden').addClass('show');
             } else {
                 if (ele.val().toLowerCase() === 'admin' || ele.val().toLowerCase() === 'administrator') {
-                    validate.hasErrors = true;
+                    validate.errors = true;
                     name.removeClass('has-success').addClass('has-error has-feedback');
                     $('.glyphicon').remove();
                     ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -31,7 +31,7 @@ $(document).ready(function () {
             var name = $('#name');
             var ele = $('#fullname');
             if (ele.val().length < 3) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -46,7 +46,7 @@ $(document).ready(function () {
 
         'gender': function () {
             if ($('input[name="gender"]:checked').length === 0) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 $('#gender').removeClass('has-success').addClass('has-error');
                 $('#genderError').removeClass('hidden').addClass('show');
             } else {
@@ -57,15 +57,15 @@ $(document).ready(function () {
 
         'car': function () {
             if ($('input[name="car"]:checked').length === 0) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 $('#car').removeClass('has-success').addClass('has-error');
                 $('#carError').removeClass('hidden').addClass('show');
                 $('#aboutcar').removeClass('show').addClass('hidden');
             } else {
-                if ($('input[name="car"]:checked').val() === "car") {
+                if ($('input[name="car"]:checked').val() === "ihave") {
                     $('#aboutcar').removeClass('hidden').addClass('show');
                 } else {
-                    validate.hasErrors = true;
+                    validate.errors = true;
                     $('#aboutcar').removeClass('show').addClass('hidden');
                     $('#car').removeClass('has-error').addClass('has-success');
                     $('#carError').removeClass('show').addClass('hidden');
@@ -76,7 +76,7 @@ $(document).ready(function () {
         'infocar': function () {
             var ele = $('#aboutcar');
             if (ele.val().length < 3) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 $('#infocar').removeClass('hidden').addClass('show');
             } else {
                 $('#infocar').removeClass('show').addClass('hidden');
@@ -88,7 +88,7 @@ $(document).ready(function () {
             var ele = $('#email');
             var patt = /^.+@.+[.].{2,}$/i;
             if (!patt.test(ele.val())) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -106,7 +106,7 @@ $(document).ready(function () {
             var ele = $('#phone');
             var patt = /^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
             if (!patt.test(ele.val())) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -123,7 +123,7 @@ $(document).ready(function () {
             var name = $('#blockpassword');
             var ele = $('#password');
             if (ele.val().length < 3) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -141,7 +141,7 @@ $(document).ready(function () {
             var pas = $('#password');
             var ele = $('#compas');
             if (ele.val() === "" || (ele.val() != pas.val())) {
-                validate.hasErrors = true;
+                validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -155,7 +155,7 @@ $(document).ready(function () {
         },
 
         'sendIt': function () {
-            if (!validate.hasErrors) {
+            if (!validate.errors) {
                 $('#form').submit();
             }
         }
@@ -165,7 +165,7 @@ $(document).ready(function () {
 // ======================================================
 
     $('#send').click(function () {
-        validate.hasErrors = false;
+        validate.errors = false;
         validate.login();
         validate.fullName();
         validate.gender();

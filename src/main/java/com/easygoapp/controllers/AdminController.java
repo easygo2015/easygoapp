@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,9 +43,17 @@ public class AdminController {
         return modelAndView;
     }
 
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @RequestMapping(value="/admin/userlist/edit**", method=RequestMethod.POST)
+//    public String result(@ModelAttribute("editUserForm")User user,
+//            BindingResult result,
+//            Model model){
+//        return "admin";
+//    }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value="/admin/userlist/edit**", method=RequestMethod.POST)
-    public ModelAndView editedUser(ModelAndView modelAndView, HttpServletRequest request){
+    @RequestMapping(value = "/admin/userlist/edit**", method = RequestMethod.POST)
+    public ModelAndView editedUser(ModelAndView modelAndView, HttpServletRequest request) {
         User editedUser = getUserFromHttpRequest(request);
         userService.save(editedUser);
         modelAndView.addObject("editedUser", editedUser);
@@ -56,7 +61,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    public User getUserFromHttpRequest(HttpServletRequest request){
+    public User getUserFromHttpRequest(HttpServletRequest request) {
         User result = new User();
         result.setId(Long.parseLong(request.getParameter("id")));
         result.setName(request.getParameter("name"));

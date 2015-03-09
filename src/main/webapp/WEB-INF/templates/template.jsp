@@ -13,6 +13,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/assets/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
 </head>
 <body>
 
@@ -23,9 +24,9 @@
   <t:insertAttribute name="body"/>
 </div>
 <footer>
-<div id="footer">
-  <t:insertAttribute name="footer"/>
-</div>
+  <div id="footer">
+    <t:insertAttribute name="footer"/>
+  </div>
 </footer>
 
 </body>

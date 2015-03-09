@@ -2,10 +2,9 @@ package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
+import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,7 +46,7 @@ public class DaoUserTest {
         User getSaved = userService.findOne(saved.getId());
     }
 
-//    @Before
+    //    @Before
 //    public void save(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
@@ -60,31 +62,28 @@ public class DaoUserTest {
 //    }
     @Test
     public void saveUser() {
-    User user = new User();
-    user.setPhoneNumber("000-000-00-00");
-    user.setCar("lexus");
-    user.setGender(Gender.MALE);
-    user.setLogin("Markov");
-    user.setPassword("123456");
+        User user = new User();
+        user.setPhoneNumber("000-000-00-00");
+        user.setCar("lexus");
+        user.setGender(Gender.MALE);
+        user.setLogin("Markov");
+        user.setPassword("123456");
         user.setName("Stas");
-    user.setEmail("wer@wer.com");
+        user.setEmail("wer@wer.com");
         userService.save(user);
-}
+    }
 
     @Test
-    public void getUserByLogin(){
+    public void getUserByLogin() {
         System.out.println("getByLogin");
         User user = userService.getByLogin("Markov");
         System.out.println(user);
     }
 
     @Test
-    public void getUserById(){
+    public void getUserById() {
         System.out.println("getById");
         User user = userService.findOne(1l);
         System.out.println(user);
     }
-
-
-
 }
