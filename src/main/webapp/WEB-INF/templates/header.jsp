@@ -3,7 +3,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
-<div class="container">
+
   <!-- Navbar -->
   <div class="bs-docs-section clearfix">
     <div class="row">
@@ -48,4 +48,3 @@
       </div>
     </div>
   </div>
-</div>

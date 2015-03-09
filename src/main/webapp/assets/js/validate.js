@@ -62,10 +62,12 @@ $(document).ready(function () {
                 $('#carError').removeClass('hidden').addClass('show');
                 $('#aboutcar').removeClass('show').addClass('hidden');
             } else {
-                if ($('input[name="car"]:checked').val() === "ihave") {
+                if ($('input[name="car"]:checked').val() === "car") {
+                    $('#car').removeClass('has-error').addClass('has-success');
                     $('#aboutcar').removeClass('hidden').addClass('show');
+                    $('#carError').removeClass('show').addClass('hidden');
                 } else {
-                    validate.errors = true;
+                    //validate.hasErrors = true;
                     $('#aboutcar').removeClass('show').addClass('hidden');
                     $('#car').removeClass('has-error').addClass('has-success');
                     $('#carError').removeClass('show').addClass('hidden');
