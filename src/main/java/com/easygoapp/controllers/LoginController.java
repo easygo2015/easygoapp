@@ -2,6 +2,7 @@ package com.easygoapp.controllers;
 
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -52,7 +53,9 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security Hello World");
         model.addObject("message", "This is protected page - USER Page!");
-        model.setViewName("message");
+        //TODO get user from session
+        model.addObject("user", userService.findOne(61l));
+        model.setViewName("user");
 
         return model;
     }

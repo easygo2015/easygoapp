@@ -25,6 +25,25 @@ public class DaoUserTest {
     @Autowired
     private UserService userService;
 
+    @Test
+    public void masha() {
+        User user = new User();
+        user.setName("user2");
+        user.setEmail("us@ad.us");
+        user.setPhoneNumber("78945612");
+        user.setGender(Gender.MALE);
+        user.setCar("my car");
+        user.setLogin("user2");
+        user.setPassword("password");
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        List<UserRole> userRoles = new ArrayList<UserRole>();
+        userRoles.add(userRole);
+        user.setUserRoles(userRoles);
+        User saved = userService.save(user);
+        User getSaved = userService.findOne(saved.getId());
+    }
+
 //    @Before
 //    public void save(){
 //        User user = new User();
