@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                         // requests rules
                 .authorizeRequests()
-                .antMatchers("/assets/**", "*").permitAll()
+                .antMatchers("/assets/**").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .and().formLogin();

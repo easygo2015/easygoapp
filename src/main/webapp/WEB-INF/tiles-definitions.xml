@@ -29,4 +29,8 @@
     <put-attribute name="body" value="/WEB-INF/jsp/admin.jsp" />
   </definition>
 
+  <definition name="editUser" extends="base">
+    <put-attribute name="body" value="/WEB-INF/jsp/editUser.jsp" />
+  </definition>
+
 </tiles-definitions>

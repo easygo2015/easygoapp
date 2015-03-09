@@ -123,7 +123,7 @@
                     <div class="col-lg-12">
                       <!--<button type="reset" class="btn btn-default">Registration</button>-->
                       <a class="btn btn-info" href="/registration">Регистрация</a>
-                      <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                      <button type="submit" class="btn btn-primary pull-right">Вход</button>
                     </div>
                   </div>
                 </fieldset>
