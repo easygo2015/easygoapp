@@ -49,8 +49,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new CustomUserDetailService();
     }
 
-
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");

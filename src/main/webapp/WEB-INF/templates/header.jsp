@@ -3,7 +3,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
-<div class="container">
+
   <!-- Navbar -->
   <div class="bs-docs-section clearfix">
     <div class="row">
@@ -19,7 +19,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand active" href="/main">EasyGo <span class="sr-only">(current)</span></a>
+                <a class="navbar-brand active" href="/">EasyGo <span class="sr-only">(current)</span></a>
               </div>
 
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -48,4 +48,3 @@
       </div>
     </div>
   </div>
-</div>

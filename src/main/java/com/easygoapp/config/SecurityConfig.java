@@ -16,9 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-/**
- * Created by Kir Kolesnikov on 04.03.2015.
- */
 @Configuration
 @EnableWebSecurity
 @ComponentScan("com.easygoapp.service")
