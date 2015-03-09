@@ -2,6 +2,8 @@ package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Column;
@@ -17,7 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint extends AbstractPersistable<Long> {
+public class PassengerNodePoint implements Persistable<Long> {
 
     @NotNull
     @Column(name = "latitude", nullable = false)
@@ -39,6 +41,7 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy = "passengerNodePoints")
     private List<Trip> trips;
 
+    @Id @GeneratedValue private Long id;
     public PassengerNodePoint() {
     }
 
@@ -47,8 +50,17 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-
+    @Override
+    public boolean isNew() {
+        return getId()==null;
+    }
     public List<Trip> getTrips() {
         return trips;
     }

@@ -2,6 +2,7 @@ package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -14,13 +15,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "TRIP")
-public class Trip extends AbstractPersistable<Long> {
+public class Trip implements Persistable<Long> {
 
-    @NotNull
+    @Id @GeneratedValue private Long id;
+
     @Column(name = "start_trip", nullable = false)
     private Timestamp startTime;
 
-    @NotNull
+
     @ManyToOne
     private User driver;
 
@@ -43,6 +45,20 @@ public class Trip extends AbstractPersistable<Long> {
             joinColumns = {@JoinColumn(name = "trip_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "pnp_id")})
     private List<PassengerNodePoint> passengerNodePoints;
+
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return getId()==null;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public List<PassengerNodePoint> getPassengerNodePoints() {
         return passengerNodePoints;
