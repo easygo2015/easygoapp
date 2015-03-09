@@ -48,7 +48,7 @@
               </c:forEach>
               </td>
               <td>
-                <a href="/user/showTrips/deleteTrip?id=${trip.id}">
+                <a href="/user/deleteTrip?id=${trip.id}">
                   <button type="button" class="btn btn-danger btn-sm">Удалить поездку</button>
                 </a>
               </td>

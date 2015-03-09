@@ -44,7 +44,7 @@ public class ShowUserTripsController {
         return "showTrips";
     }
 
-    @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/deleteTrip**", method = RequestMethod.GET)
     public String deleteTrip(@RequestParam("id") long id) {
         tripService.delete(id);
         return "index";
