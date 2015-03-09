@@ -4,6 +4,7 @@ import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
+import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
@@ -55,11 +56,17 @@ public class TripServiceTest {
         //get driver
         User driver = new User();
         driver.setName("Luke Driver");
-        driver.setEmail("luke@l.l");
+        driver.setPhoneNumber("1234567");
+        driver.setEmail("luke@gmail.com");
         driver.setCar("Car");
         driver.setGender(Gender.MALE);
         driver.setLogin("bro");
         driver.setPassword("bro999");
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        List<UserRole> userRoles = new ArrayList<UserRole>();
+        userRoles.add(userRole);
+        driver.setUserRole(userRoles);
         driver = userService.save(driver);
         driver_id = driver.getId();
         //get passengers
@@ -67,35 +74,37 @@ public class TripServiceTest {
         passenger1.setName("Jack");
         passenger1.setLogin("black_jack");
         passenger1.setEmail("jack@jack.mi");
+        passenger1.setPhoneNumber("123456789");
         passenger1.setGender(Gender.MALE);
         passenger1.setPassword("blabla");
+        UserRole userRole1 = new UserRole();
+        userRole1.setRole("ROLE_USER");
+        List<UserRole> userRoles1 = new ArrayList<UserRole>();
+        userRoles1.add(userRole1);
+        passenger1.setUserRole(userRoles1);
         passenger1 = userService.save(passenger1);
         passenger1_id = passenger1.getId();
 
         User passenger2 = new User();
         passenger2.setName("Jane");
         passenger2.setLogin("janee");
-        passenger2.setEmail("jane@j.mi");
+        passenger2.setEmail("jane@ij.mi");
+        passenger2.setPhoneNumber("7896543");
         passenger2.setGender(Gender.FEMALE);
         passenger2.setPassword("blabla");
+        UserRole userRole2 = new UserRole();
+        userRole2.setRole("ROLE_USER");
+        List<UserRole> userRoles2 = new ArrayList<UserRole>();
+        userRoles2.add(userRole2);
+        passenger2.setUserRole(userRoles2);
         passenger2 = userService.save(passenger2);
         passenger2_id = passenger2.getId();
 
         // create pnps
-        PassengerNodePoint passengerNodePoint1 = new PassengerNodePoint();
-        passengerNodePoint1.setLongitude(5454d);
-        passengerNodePoint1.setLatitude(54545d);
-        passengerNodePoint1.setDescription("bldsdd");
-        passengerNodePoint1.setLeft(true);
-        passengerNodePoint1 = passengerNodePointService.save(passengerNodePoint1);
+        PassengerNodePoint passengerNodePoint1 = passengerNodePointService.findOne(1l);
         passengerNodePoint1_id = passengerNodePoint1.getId();
 
-        PassengerNodePoint passengerNodePoint2 = new PassengerNodePoint();
-        passengerNodePoint2.setLongitude(111d);
-        passengerNodePoint2.setLatitude(1115d);
-        passengerNodePoint2.setDescription("aaaaa");
-        passengerNodePoint2.setLeft(false);
-        passengerNodePoint2 = passengerNodePointService.save(passengerNodePoint2);
+        PassengerNodePoint passengerNodePoint2 = passengerNodePointService.findOne(40l);
         passengerNodePoint2_id = passengerNodePoint2.getId();
 
         Trip trip = new Trip();
@@ -151,14 +160,14 @@ public class TripServiceTest {
         Trip modifiedTrip;
         int wantedCapacity;
         int realCapacity;
-        Trip trip = tripService.findOne(trip_id);
+        Trip trip = tripService.findOneEager(trip_id);
         List<User> companions = trip.getCompanions();
         companions.add(userService.findOne(passenger2_id));
         trip = tripService.save(trip);
         //modify1
         trip.setPrice(40d);
         trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-        trip.setCarCapacity(2);
+        trip.setCarCapacity(10);
         wantedCapacity = trip.getCarCapacity();
         modifiedTrip = tripService.modifyTrip(trip);
         realCapacity = modifiedTrip.getCarCapacity();
@@ -186,8 +195,8 @@ public class TripServiceTest {
     @Test
     public void testSetPassengerNodePointsList(){
         List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
-        points.add(passengerNodePointService.findOne(passengerNodePoint1_id));
-        points.add(passengerNodePointService.findOne(passengerNodePoint2_id));
+        points.add(passengerNodePointService.findOne(1l));
+        points.add(passengerNodePointService.findOne(40l));
         tripService.setPassengerNodePointsList(trip_id,points);
         Trip trip = tripService.findOneEager(trip_id);
         assertTrue(trip.getPassengerNodePoints().size() == points.size());
@@ -208,8 +217,6 @@ public class TripServiceTest {
         userService.delete(driver_id);
         userService.delete(passenger1_id);
         userService.delete(passenger2_id);
-        passengerNodePointService.delete(passengerNodePoint1_id);
-        passengerNodePointService.delete(passengerNodePoint2_id);
     }
 
 }

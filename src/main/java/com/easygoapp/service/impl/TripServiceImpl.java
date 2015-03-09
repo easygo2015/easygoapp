@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,8 +53,9 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         User passenger = userRepository.getOne(userId);
         int capacity = currentTrip.getCarCapacity();
         List<User> companions = currentTrip.getCompanions();
-        if (companions.size()-1 < capacity){
+        if (capacity > 0){
             companions.add(passenger);
+            capacity--;
             tripRepository.save(currentTrip);
             //TODO driver notification
         }
@@ -69,8 +67,10 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         Trip currentTrip = tripRepository.findOne(tripId);
         User passenger = userRepository.findOne(userId);
         List<User> companions = currentTrip.getCompanions();
+        int capacity = currentTrip.getCarCapacity();
         if (companions.size() > 1 && companions.contains(passenger)){
             companions.remove(passenger);
+            capacity++;
             tripRepository.save(currentTrip);
             //TODO driver notification
             return true;
@@ -116,15 +116,14 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         Trip originalTrip = tripRepository.findOne(trip.getId());
         Trip modifiedTrip;
         List<User> companions = originalTrip.getCompanions();
-        if (companions.size()-1 <= trip.getCarCapacity()){
+        if (trip.getCarCapacity() > originalTrip.getCarCapacity()){
             modifiedTrip = tripRepository.save(trip);
             //TODO passengers notification
+            return modifiedTrip;
         }else{
-            trip.setCarCapacity(originalTrip.getCarCapacity());
-            modifiedTrip = tripRepository.save(trip);
-            //TODO passengers notification
+            return originalTrip;
         }
-        return modifiedTrip;
+
     }
 
     @Override
