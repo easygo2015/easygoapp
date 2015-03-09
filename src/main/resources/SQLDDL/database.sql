@@ -108,11 +108,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `easygo_db`.`USER_ROLE` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(128) NOT NULL,
+  `login` VARCHAR(128) NULL,
   `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `login_idx` (`login` ASC),
-  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   CONSTRAINT `login`
     FOREIGN KEY (`login`)
     REFERENCES `easygo_db`.`USER` (`login`)

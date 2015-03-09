@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(securedEnabled = true)
 @ComponentScan("com.easygoapp.service")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,11 +36,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AuthenticationSuccessHandler successHandler;
 
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(customUserDetailService)
-                .passwordEncoder(passwordEncoder());
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .userDetailsService(customUserDetailService)
+//                .passwordEncoder(passwordEncoder());
+//    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -51,17 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                         // requests rules
                 .authorizeRequests()
-                .antMatchers("/assets/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
+                .antMatchers("/assets/**", "*").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+                .and().formLogin();
 
         http.formLogin()
                 // login form page
                 .loginPage("/")
-
                 .loginProcessingUrl("/j_spring_security_check")
                         // URL login not success
-//                .defaultSuccessUrl("/message")
                 .successHandler(successHandler)
                 .failureUrl("/login?error")
                 .usernameParameter("j_username")
@@ -78,11 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
                         // invalidation of current session
                 .invalidateHttpSession(true);
-
-        http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .and().formLogin();
     }
 
     @Bean

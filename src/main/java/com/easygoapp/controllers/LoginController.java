@@ -3,7 +3,10 @@ package com.easygoapp.controllers;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,16 +37,15 @@ public class LoginController {
         return model;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin**", method = RequestMethod.GET)
     public ModelAndView adminPage() {
-
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Hello World");
-        model.addObject("message", "This is protected page - ADMIN Page!");
-        model.setViewName("message");
+        model.setViewName("admin");
         return model;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/user**", method = RequestMethod.GET)
     public ModelAndView dbaPage() {
 
