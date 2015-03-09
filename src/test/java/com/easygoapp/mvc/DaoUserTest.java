@@ -31,11 +31,12 @@ public class DaoUserTest {
     @Test
     public void masha() {
         User user = new User();
-        user.setName("John Doe");
-        user.setEmail("john@doe.us");
+        user.setName("user2");
+        user.setEmail("us@ad.us");
         user.setPhoneNumber("78945612");
         user.setGender(Gender.MALE);
-        user.setLogin("john123");
+        user.setCar("my car");
+        user.setLogin("user2");
         user.setPassword("password");
         UserRole userRole = new UserRole();
         userRole.setRole("ROLE_USER");
