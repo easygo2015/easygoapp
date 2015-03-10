@@ -16,10 +16,13 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <c:set var="js" value="/assets/js/"/>
   <meta charset="UTF-8">
   <title>EasyGo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <script src="${js}validate.js"></script>
+    <script src="${js}showModals.js"></script>
   <!-- CSS
   ================================================== -->
   <link rel="stylesheet" href="/assets/css/bootstrap.css">
