@@ -11,13 +11,11 @@
   </definition>
 
 
-
   <definition name="index" extends="base">
     <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
   </definition>
 
   <definition name="user" extends="base">
-    <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
     <put-attribute name="body" value="/WEB-INF/jsp/user.jsp" />
   </definition>
 
@@ -26,12 +24,11 @@
   </definition>
 
   <definition name="admin" extends="base">
-    <put-attribute name="header" value="/WEB-INF/templates/adminHeader.jsp"/>
+    <put-attribute name="header" value="/WEB-INF/templates/adminHeader.jsp" />
     <put-attribute name="body" value="/WEB-INF/jsp/admin.jsp" />
   </definition>
 
   <definition name="editProfile" extends="base">
-    <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
     <put-attribute name="body" value="/WEB-INF/jsp/editProfile.jsp" />
   </definition>
 

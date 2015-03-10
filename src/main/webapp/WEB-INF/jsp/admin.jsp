@@ -21,12 +21,13 @@
 <body>
 <div class="container">
   <h1>ADMIN'S ROOM</h1>
+
   <form class="form-horizontal" action="${loginUrl}" method="post">
     <fieldset>
       <legend></legend>
       <div class="form-group">
 
-          <button type="submit" class="btn btn-primary pull-right">View users</button>
+        <button type="submit" class="btn btn-primary pull-right">View users</button>
 
       </div>
     </fieldset>

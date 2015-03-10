@@ -23,5 +23,4 @@ public class UserRole extends AbstractPersistable<Long> {
     public void setRole(String role) {
         this.role = role;
     }
-
 }

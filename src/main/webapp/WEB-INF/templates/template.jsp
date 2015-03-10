@@ -23,9 +23,9 @@
   <t:insertAttribute name="body"/>
 </div>
 <footer>
-<div id="footer">
-  <t:insertAttribute name="footer"/>
-</div>
+  <div id="footer">
+    <t:insertAttribute name="footer"/>
+  </div>
 </footer>
 
 </body>
