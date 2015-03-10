@@ -103,7 +103,7 @@ public class FindTripController {
         capacity = capacity - 1;
         trip.setCarCapacity(capacity);
         tripService.save(trip);
-        return "user";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/user/declineTrip", method = RequestMethod.GET)

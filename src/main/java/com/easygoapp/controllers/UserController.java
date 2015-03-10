@@ -21,12 +21,12 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView editProfile(ModelAndView modelAndView) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.getByLogin(authentication.getName());
-        modelAndView.setViewName("editProfile");
-        modelAndView.addObject("user", user);
-        return modelAndView;
+        public ModelAndView editProfile(ModelAndView modelAndView) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.getByLogin(authentication.getName());
+            modelAndView.setViewName("editProfile");
+            modelAndView.addObject("user", user);
+            return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.POST)

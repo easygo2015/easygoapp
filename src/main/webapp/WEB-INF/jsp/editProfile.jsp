@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 09.03.15
-  Time: 14:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="sec"
           uri="http://www.springframework.org/security/tags" %>
@@ -103,7 +96,7 @@
             </div>
             <div id="deleteMessage" class="well bg-success" style="display:none">
               <p class="center-block text-warning">Вы уверены?</p>
-              <a class="btn btn-danger" href="/editProfile/deleteProfile">Удалить</a>
+              <a class="btn btn-danger" href="/user/editProfile/deleteProfile">Удалить</a>
               <a class="btn btn-success" href="#" id="continue">Остаться</a>
             </div>
           </div>
@@ -112,7 +105,6 @@
     </div>
   </div>
 </div>
-<script src="assets/js/validate.js"></script>
-<script src="assets/js/showModals.js"></script>
+
 </body>
 </html>

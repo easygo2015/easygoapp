@@ -80,6 +80,10 @@ public class PassengerNodePoint implements Persistable<Long> {
         return isLeft;
     }
 
+    public boolean isIsLeft() {
+        return isLeft;
+    }
+
     public void setLeft(boolean isLeft) {
         this.isLeft = isLeft;
     }
