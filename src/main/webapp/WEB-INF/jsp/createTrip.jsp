@@ -69,7 +69,7 @@
           <td>
             <h4>
               <c:forEach var="point" items="${points}" varStatus="status">
-                <c:if test="${point.isLeft()}">
+                <c:if test="${point.left()}">
                   <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
                   <%--<form:checkbox path="passengerNodePoints[${status.index}].id" label="${point.description}" value="${point.id}"/>--%>
                   <c:out value="${point.description}"/><br>
@@ -81,7 +81,7 @@
           <td>
             <h4>
               <c:forEach var="point" items="${points}" varStatus="status">
-                <c:if test="${!point.isLeft()}">
+                <c:if test="${!point.left()}">
                   <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
                   <%--<form:checkbox path="passengerNodePoints[${status.index}].id" label="${point.description}" value="${point.id}"/>--%>
                   <c:out value="${point.description}"/><br>

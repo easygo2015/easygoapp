@@ -7,6 +7,8 @@ import org.springframework.data.domain.Persistable;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import java.util.List;
 
 /**
@@ -25,13 +27,12 @@ public class PassengerNodePoint implements Persistable<Long> {
     private Double longitude;
 
     @NotNull
-    @Min(5)
     @Column(name = "description")
     private String description;
 
     @NotNull
     @Column(name = "isleft", nullable = false)
-    private boolean isLeft;
+    private boolean left;
 
     @ManyToMany(mappedBy = "passengerNodePoints")
     private List<Trip> trips;
@@ -41,8 +42,8 @@ public class PassengerNodePoint implements Persistable<Long> {
     public PassengerNodePoint() {
     }
 
-    public PassengerNodePoint(boolean isLeft, double latitude, double longitude) {
-        this.isLeft = isLeft;
+    public PassengerNodePoint(boolean left, double latitude, double longitude) {
+        this.left = left;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -77,15 +78,11 @@ public class PassengerNodePoint implements Persistable<Long> {
     }
 
     public boolean isLeft() {
-        return isLeft;
-    }
-
-    public boolean isIsLeft() {
-        return isLeft;
+        return left;
     }
 
     public void setLeft(boolean isLeft) {
-        this.isLeft = isLeft;
+        this.left = isLeft;
     }
 
     public Double getLatitude() {
@@ -107,7 +104,7 @@ public class PassengerNodePoint implements Persistable<Long> {
     @Override
     public String toString() {
         return "PNP{" +
-                "isLeft=" + isLeft +
+                "left=" + left +
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
@@ -133,7 +130,7 @@ public class PassengerNodePoint implements Persistable<Long> {
                 .append(this.latitude, rhs.latitude)
                 .append(this.longitude, rhs.longitude)
                 .append(this.description, rhs.description)
-                .append(this.isLeft, rhs.isLeft)
+                .append(this.left, rhs.left)
                 .append(this.trips, rhs.trips)
                 .isEquals();
     }
@@ -145,7 +142,7 @@ public class PassengerNodePoint implements Persistable<Long> {
                 .append(latitude)
                 .append(longitude)
                 .append(description)
-                .append(isLeft)
+                .append(left)
                 .append(trips)
                 .toHashCode();
     }

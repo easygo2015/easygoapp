@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var validate = {
         'latitude': function () {
-            var latitude = $('#latitude');
-            var ele = $('#enterlatitude');
-            var isCoordinate = /^[0-9]+([,.][0-9]{1,6})?$/
-            if(!ele.match(isCoordinate)){
+            var latitude = $('#enterlatitude');
+            var ele = $('#latitude');
+            var isCoordinate = /-?\d{1,3}\.\d+/
+            if (!ele.val().match(isCoordinate)) {
                 validate.errors = true;
                 latitude.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
@@ -18,15 +18,15 @@ $(document).ready(function () {
             }
         },
         'longitude': function () {
-            var longitude = $('#longitude');
-            var ele = $('#enterlongitude');
-            var isCoordinate = /^[0-9]+([,.][0-9]{1,6})?$/
-            if (!ele.match(isCoordinate)) {
+            var longitude = $('#enterlongitude');
+            var ele = $('#longitude');
+            var isCoordinate = /-?\d{1,3}\.\d+/
+            if (!ele.val().match(isCoordinate)) {
                 validate.errors = true;
                 longitude.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-                $('#longitudeError').removeClass('hidden').addClass('show');
+                $('#latitudeError').removeClass('hidden').addClass('show');
             } else {
                 longitude.removeClass('has-error').addClass('has-success has-feedback');
                 $('.glyphicon').remove();
@@ -34,19 +34,19 @@ $(document).ready(function () {
                 $('#longitudeError').removeClass('show').addClass('hidden');
             }
         },
-        'isleft': function () {
-            if ($('input[name="isLeft"]:checked').length === 0) {
+        'left': function () {
+            if ($('input[name="left"]:checked').length === 0) {
                 validate.errors = true;
-                $('#isLeft').removeClass('has-success').addClass('has-error');
-                $('#isLeftError').removeClass('hidden').addClass('show');
+                $('#left').removeClass('has-success').addClass('has-error');
+                $('#leftError').removeClass('hidden').addClass('show');
             } else {
-                $('#isLeft').removeClass('has-error').addClass('has-success');
-                $('#isLeftError').removeClass('show').addClass('hidden');
+                $('#left').removeClass('has-error').addClass('has-success');
+                $('#leftError').removeClass('show').addClass('hidden');
             }
         },
         'description': function () {
-            var description = $('#description');
-            var ele = $('#enterdescription');
+            var description = $('#enterdescription');
+            var ele = $('#description');
             if (ele.val().length < 3) {
                 validate.errors = true;
                 description.removeClass('has-success').addClass('has-error has-feedback');
@@ -59,11 +59,28 @@ $(document).ready(function () {
                 ele.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
                 $('#descriptionError').removeClass('show').addClass('hidden');
             }
+        },
+
+        'sendIt': function () {
+            if (!validate.errors) {
+                $('#form').submit();
+            }
         }
     };
 
-    $('#enterlatitude').change(validate.latitude);
-    $('#enterlongitude').change(validate.longitude);
+    $('#send').click(function () {
+        validate.errors = false;
+        validate.latitude();
+        validate.longitude();
+        validate.left();
+        validate.description();
+        validate.sendIt();
+        return false;
+    });
+
+
+    $('#latitude').change(validate.latitude);
+    $('#longitude').change(validate.longitude);
     $('input[name="isleft"]').change(validate.gender);
-    $('#enterdescription').change(validate.longitude);
+    $('#description').change(validate.description);
 });
