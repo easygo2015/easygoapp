@@ -31,4 +31,8 @@
     <put-attribute name="body" value="/WEB-INF/jsp/admin.jsp" />
   </definition>
 
+    <definition name = "maps" extends="base">
+        <put-attribute name="body" value="/WEB-INF/jsp/maps.jsp"/>
+    </definition>
+
 </tiles-definitions>
