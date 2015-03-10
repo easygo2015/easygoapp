@@ -26,6 +26,7 @@
   <!-- CSS
   ================================================== -->
   <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
   <![endif]-->
 </head>
 <head>
@@ -97,14 +98,43 @@
           </div>
           <div class="col-lg-3">
             <div class="btn-group-vertical btn-block center-block">
-              <a class="btn btn-success" href="#">Сменить пароль</a>
+              <a class="btn btn-success" href="#" id="changePasswordLink">Сменить пароль</a>
               <a class="btn btn-warning" id="deleteLink" href="#">Удалить профиль</a>
               <a class="btn btn-info" href="/user">На мою страницу</a>
             </div>
-            <div id="deleteMessage" class="well bg-success" style="display:none">
+            <div id="deleteMessage" class="well bg-success" style="visibility: hidden">
               <p class="center-block text-warning">Вы уверены?</p>
-              <a class="btn btn-danger" href="/editProfile/deleteProfile">Удалить</a>
+              <a class="btn btn-danger" href="/user/editProfile/deleteProfile">Удалить</a>
               <a class="btn btn-success" href="#" id="continue">Остаться</a>
+            </div>
+            <div id="changePassword" class="well bg-success" style="display:none">
+                <form role="form">
+                    <fieldset>
+                    <div class="form-group form-group-sm">
+                        <label for="currentPassword"></label>
+                        Текущий пароль:
+                        <input type="password" class="form-control input-sm" id="currentPassword" placeholder="Введите текущий пароль">
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label for="newPassword">Новый пароль:</label>
+                        <input type="password" class="form-control input-sm" id="newPassword" placeholder="Введите новый пароль">
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label for="repeatPassword">Подтверждение:</label>
+                        <input type="password" class="form-control input-sm" id="repeatPassword" placeholder="Подтвердите новый пароль">
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" class="btn btn-sm btn-info pull-right" id="cancel">Отмена</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-sm btn-info pull-right">Сохранить</button>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
             </div>
           </div>
         </div>

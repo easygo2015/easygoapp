@@ -26,6 +26,7 @@ public class UserController {
         User user = userService.getByLogin(authentication.getName());
         modelAndView.setViewName("editProfile");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("oldPassword","");
         return modelAndView;
     }
 
