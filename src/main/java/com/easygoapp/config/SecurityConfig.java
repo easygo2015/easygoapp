@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                         // requests rules
                 .authorizeRequests()
-                .antMatchers("/assets/**", "*").permitAll()
+                .antMatchers("/assets/**").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .and().formLogin();
@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check")
                         // URL login not success
                 .successHandler(successHandler)
-                .failureUrl("/login?error")
+                .failureUrl("/403")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                         // add permissions to login page to all

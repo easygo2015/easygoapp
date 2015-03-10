@@ -159,7 +159,11 @@
       <artifactId>slf4j-api</artifactId>
       <version>1.7.10</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.efsavage.jquery</groupId>
+      <artifactId>jquery-maven</artifactId>
+      <version>1.7.2</version>
+    </dependency>
 
     <!--JPA-->
     <dependency>

@@ -5,7 +5,6 @@ import com.easygoapp.domain.User;
 import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +30,12 @@ public class DaoUserTest {
     @Test
     public void masha() {
         User user = new User();
-        user.setName("John Doe");
-        user.setEmail("john@doe.us");
+        user.setName("user2");
+        user.setEmail("us@ad.us");
         user.setPhoneNumber("78945612");
         user.setGender(Gender.MALE);
-        user.setLogin("john123");
+        user.setCar("my car");
+        user.setLogin("user2");
         user.setPassword("password");
         UserRole userRole = new UserRole();
         userRole.setRole("ROLE_USER");
@@ -46,7 +46,7 @@ public class DaoUserTest {
         User getSaved = userService.findOne(saved.getId());
     }
 
-//    @Before
+    //    @Before
 //    public void save(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
@@ -60,12 +60,18 @@ public class DaoUserTest {
 //        System.out.println(id);
 //        System.out.println(user1);
 //    }
-
-//    @After
-//    public void deleteUser() {
-//        System.out.println("deleteUser");
-//        userService.delete(id);
-//    }
+    @Test
+    public void saveUser() {
+        User user = new User();
+        user.setPhoneNumber("000-000-00-00");
+        user.setCar("lexus");
+        user.setGender(Gender.MALE);
+        user.setLogin("Markov");
+        user.setPassword("123456");
+        user.setName("Stas");
+        user.setEmail("wer@wer.com");
+        userService.save(user);
+    }
 
     @Test
     public void getUserByLogin() {

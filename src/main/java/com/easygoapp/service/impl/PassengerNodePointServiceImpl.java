@@ -19,7 +19,6 @@ public class PassengerNodePointServiceImpl extends AbstractCrudServiceImpl<Passe
 
     private PassengerNodePointRepository passengerNodePointRepository;
 
-
     @Autowired
     public void setPassengerNodePointRepository(PassengerNodePointRepository passengerNodePointRepository) {
         this.passengerNodePointRepository = passengerNodePointRepository;

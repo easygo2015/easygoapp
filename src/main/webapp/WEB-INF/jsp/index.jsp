@@ -91,57 +91,76 @@
                             <c:url value="/j_spring_security_check" var="loginUrl"/>
 
 
-                            <form class="form-horizontal" action="${loginUrl}" method="post">
-                                <fieldset>
-                                    <%--<legend></legend>--%>
-                                    <br/>
+              <form class="form-horizontal" action="${loginUrl}" method="post">
+                <fieldset>
+                  <%--<legend></legend>--%>
+                  <br/>
 
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <input type="text" class="form-control" id="inputEmail1"
-                                                   name="j_username" placeholder="Login">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <input type="password" class="form-control" id="inputEmail"
-                                                   name="j_password"
-                                                   placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <!--<button type="reset" class="btn btn-default">Registration</button>-->
-                                            <a class="btn btn-info" href="/registration">Регистрация</a>
-                                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                            <hr/>
-                        </div>
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                      <input type="text" class="form-control" id="inputEmail1"
+                             name="j_username" placeholder="Login">
                     </div>
-                </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                      <input type="password" class="form-control" id="inputEmail"
+                             name="j_password"
+                             placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-12">
+                      <!--<button type="reset" class="btn btn-default">Registration</button>-->
+                      <a class="btn btn-info" href="/registration">Регистрация</a>
+                      <button type="submit" class="btn btn-primary pull-right">Вход</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+              <hr/>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <!--content-->
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="bs-component">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h2>main content</h2>
 
-                        <p>
-                            Raw denim you probably haven't heard of them jean shorts Austin.
-                            Nesciunt tofu stumptown aliqua, retro synth master cleanse.
-                            Mustache cliche tempor, williamsburg carles vegan helvetica.
-                            Reprehenderit butcher retro keffiyeh dreamcatcher synth.
-                            Cosby sweater eu banh mi, qui irure terry richardson ex squid.
-                            Aliquip placeat salvia cillum iphone.
-                            Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                        </p>
+            <p>
+              Raw denim you probably haven't heard of them jean shorts Austin.
+              Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+              Mustache cliche tempor, williamsburg carles vegan helvetica.
+              Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+              Cosby sweater eu banh mi, qui irure terry richardson ex squid.
+              Aliquip placeat salvia cillum iphone.
+              Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+            </p>
+
+            <p>
+              Raw denim you probably haven't heard of them jean shorts Austin.
+              Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+              Mustache cliche tempor, williamsburg carles vegan helvetica.
+              Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+              Cosby sweater eu banh mi, qui irure terry richardson ex squid.
+              Aliquip placeat salvia cillum iphone.
+              Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+            </p>
+
+            <p>
+              Raw denim you probably haven't heard of them jean shorts Austin.
+              Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+              Mustache cliche tempor, williamsburg carles vegan helvetica.
+              Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+              Cosby sweater eu banh mi, qui irure terry richardson ex squid.
+              Aliquip placeat salvia cillum iphone.
+              Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+            </p>
 
                         <p>
                             Raw denim you probably haven't heard of them jean shorts Austin.
@@ -162,21 +181,6 @@
                             Aliquip placeat salvia cillum iphone.
                             Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
                         </p>
-
-                        <p>
-                            Raw denim you probably haven't heard of them jean shorts Austin.
-                            Nesciunt tofu stumptown aliqua, retro synth master cleanse.
-                            Mustache cliche tempor, williamsburg carles vegan helvetica.
-                            Reprehenderit butcher retro keffiyeh dreamcatcher synth.
-                            Cosby sweater eu banh mi, qui irure terry richardson ex squid.
-                            Aliquip placeat salvia cillum iphone.
-                            Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <%--map google--%>
         <div class="col-lg-6">
@@ -206,6 +210,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+  </div>
 </div>
