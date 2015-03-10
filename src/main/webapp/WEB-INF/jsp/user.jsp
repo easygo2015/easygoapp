@@ -1,28 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@taglib prefix="sec"
-          uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 <%@page session="true" %>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-  <meta charset="UTF-8">
-  <title>EasyGo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <!-- CSS
-  ================================================== -->
-  <link rel="stylesheet" href="/assets/css/bootstrap.css">
-  <![endif]-->
-</head>
-<head>
-  <title></title>
-</head>
-<body>
-<div class="container">
-  <h1>Моя страница</h1>
 
+  <h1>Моя страница</h1>
   <div class="row">
     <div class="col-lg-12">
       <div class="well bs-component">
@@ -96,6 +78,3 @@
       </div>
     </div>
   </div>
-</div>
-</body>
-</html>

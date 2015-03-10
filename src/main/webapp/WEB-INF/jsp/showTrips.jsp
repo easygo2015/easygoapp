@@ -3,18 +3,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
-<!DOCTYPE html>
-<html>
-<head lang="en">
-  <meta charset="UTF-8">
-  <title>EasyGo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <!-- CSS
-  ================================================== -->
-  <link rel="stylesheet" href="/assets/css/bootstrap.css">
-</head>
-<body>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -101,5 +90,3 @@
     </div>
   </div>
 </c:if>
-</body>
-</html>

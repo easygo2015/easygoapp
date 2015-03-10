@@ -71,20 +71,20 @@
 
                     <%--=========================================================--%>
                     <%--Форма для добавления точки на карту--%>
-                    <%--<form id="add-point" action="" method="post">--%>
-                        <%--<fieldset>--%>
-                            <%--<legend>Добавить точку на карту</legend>--%>
-                            <%--<div class="input">--%>
-                                <%--<label for="name">Название</label>--%>
-                                <%--<input type="text" name="name" id="name" value="">--%>
-                            <%--</div>--%>
-                            <%--<div class="input">--%>
-                                <%--<label for="address">Адрес</label>--%>
-                                <%--<input type="text" name="address" id="address" value="">--%>
-                            <%--</div>--%>
-                            <%--<button type="submit">Добавить точку</button>--%>
-                        <%--</fieldset>--%>
-                    <%--</form>--%>
+                    <form id="add-point" action="" method="post">
+                        <fieldset>
+                            <legend>Добавить точку на карту</legend>
+                            <div class="input">
+                                <label for="name">Название</label>
+                                <input type="text" name="name" id="name" value="">
+                            </div>
+                            <div class="input">
+                                <label for="address">Адрес</label>
+                                <input type="text" name="address" id="address" value="">
+                            </div>
+                            <button type="submit">Добавить точку</button>
+                        </fieldset>
+                    </form>
                 <%--<script>--%>
                     <%--$("#add-point").submit(function(){--%>
                         <%--geoEncode();--%>
