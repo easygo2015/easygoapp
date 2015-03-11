@@ -16,6 +16,77 @@
 <link rel="stylesheet" href="${css}custom.css"/>
 
 
+<%----%>
+<script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
+
+
+<script>
+
+    <%----%>
+    var map;
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
+        var mapOptions = {
+            zoom: 10,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    $(function () {
+        $('#datetimepicker1').datetimepicker(
+                {
+                    language: 'ru',
+                    defaultDate: new Date(),
+                    minDate: new Date()
+                }
+        );
+    });
+
+    $(function () {
+        $('#datetimepicker2').datetimepicker(
+                {
+                    language: 'ru',
+                    defaultDate: new Date(),
+                    minDate: new Date()
+                }
+        );
+    });
+
+    $(function(){
+        var x = [
+            <c:forEach var="point" items="${points}" varStatus="status">
+            {lat: "${point.latitude}", lng: "${point.longitude}", des:"${point.description}"},
+            </c:forEach>
+        ];
+
+        function setMarkers(map, locations) {
+            for (var i = 0; i < locations.length; i++) {
+                var pleace = locations[i];
+                var latt = pleace.lat;
+                var long = pleace.lng;
+                var dess = pleace.des;
+                        var myLatLng = new google.maps.LatLng(latt, long);
+                        var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: dess
+                        });
+            }
+        }
+        google.maps.event.addDomListener(window, 'load', function(){setMarkers(map, x)});
+    });
+
+</script>
+
+
+
+<%----%>
+
+
 <div class="bs-docs-section">
 
     <div class="row">
@@ -33,7 +104,14 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <%--<h2>Map</h2>--%>
+
+
+
+
                         <div id="map-canvas" style="height:400px; width:100%"></div>
+                            <div id="map"></div>
+                            <div id="map1"></div>
+                            <div id="map2"></div>
                     </div>
                 </div>
             </div>
@@ -59,17 +137,6 @@
                                         </span>
                                 </div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker1').datetimepicker(
-                                            {
-                                                language: 'ru',
-                                                defaultDate: new Date(),
-                                                minDate: new Date()
-                                            }
-                                    );
-                                });
-                            </script>
 
                             <div class="form-group">
                                 <h4>До:</h4>
@@ -80,17 +147,6 @@
                                     </span>
                                 </div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker2').datetimepicker(
-                                            {
-                                                language: 'ru',
-                                                defaultDate: new Date(),
-                                                minDate: new Date()
-                                            }
-                                    );
-                                });
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -122,11 +178,11 @@
                                     <input type="checkbox" name="passengerNodePoints[${status.index}].id"
                                            value="${point.id}"/>
                                     <c:out value="${point.description}"/><br>
-                                    <c:set value="${point.description}" var = "descrypt"></c:set>
+                                    <%--<c:set value="${point.description}" var = "descrypt"></c:set>--%>
                                     <%--<c:out value="${point.latitude}"/><br>--%>
-                                    <c:set value="${point.latitude}" var = "latSpan"></c:set>
+                                    <%--<c:set value="${point.latitude}" var = "latSpan"></c:set>--%>
                                     <%--<c:out value="${point.longitude}"/><br>--%>
-                                    <c:set value="${point.longitude}" var = "lngSpan"></c:set>
+                                    <%--<c:set value="${point.longitude}" var = "lngSpan"></c:set>--%>
                                 </c:if>
                             </c:forEach>
                         </div>
@@ -139,7 +195,6 @@
 
     <%--Таблица для вывода--%>
     <div class="bs-docs-section">
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
@@ -194,45 +249,3 @@
         </div>
     </div>
 
-
-<%--Script for map--%>
-<script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
-
-<script>
-
-    var map;
-    function initialize() {
-        var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
-        var mapOptions = {
-            zoom: 10,
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        setMarkers(map, places);
-    }
-
-    var lat = '${latSpan}';
-    var lng = '${lngSpan}';
-    var des = '${descrypt}';
-    var places = [
-        [des, lat, lng ],
-        ['Ул. Димитрова', 48.509504, 34.589525],
-        ['Пр. Пелина', 48.522354, 34.605061],
-        ['Ул. Сыровца', 48.516299, 34.606681],
-        ['Площадь Ленина', 48.516057, 34.61226]
-    ];
-
-    function setMarkers(map, locations) {
-        for (var i = 0; i < locations.length; i++) {
-            var beach = locations[i];
-            var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: beach[0]
-            });
-        }
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-</script>
