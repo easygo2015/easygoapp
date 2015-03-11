@@ -26,7 +26,8 @@ $(document).ready(function () {
         $('#changeContent').addClass(animationFadeInDown).one(animationEnd, function(){
             $(this).removeClass(animationFadeInDown);
         });
-        event.preventDefault();
+        contentTriger=false;
+        //event.preventDefault();
     });
     $('#cancel').on('click', function(event) {
         $('#changeContent').addClass(animationFadeOutUp).one(animationEnd, function() {

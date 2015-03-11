@@ -88,17 +88,27 @@
               <a class="btn btn-danger" href="/user/editProfile/deleteProfile">Удалить</a>
               <a class="btn btn-success" href="#" id="continue">Остаться</a>
             </div>
-            <div id="changeContent" class="well bg-success displayNone">
-                <sf:form role="form" method="post" modelAttribute="currentPassword" action="/changePassword">
+
+
+              <c:choose>
+                  <c:when test="${empty message}">
+                      <c:set var="show" value="displayNone"/>
+                  </c:when>
+                  <c:otherwise>
+                      <c:set var="show" value=""/>
+                  </c:otherwise>
+              </c:choose>
+            <div id="changeContent" class="well bg-success ${show}">
+                <sf:form role="form" method="post" modelAttribute="modelMap" action="/user/editProfile/changePassword">
                     <fieldset>
-                    <input type="password" id="compareCurrent" value="${user.password}" type="hidden">
+                    <%--<input type="password" id="compareCurrent" value="${user.password}" type="hidden">--%>
                     <div class="form-group form-group-sm" id="blockoldpass">
                         <label for="currentPassword"><small>Текущий пароль:</small></label>
                         <input type="password" class="form-control input-sm" id="currentPassword" placeholder="Введите текущий пароль">
                     </div>
                     <div class="form-group form-group-sm" id="blockpassword">
                         <label for="password"><small>Новый пароль:</small></label>
-                        <sf:input path="currentPassword" type="password" class="form-control input-sm" id="password" placeholder="Введите новый пароль"/>
+                        <%--<sf:input path="modelMap['newPassword']" type="password" class="form-control input-sm" id="password" placeholder="Введите новый пароль"/>--%>
                     </div>
                     <div class="form-group form-group-sm" id="blockcompare">
                         <label for="compas"><small>Подтверждение:</small></label>
