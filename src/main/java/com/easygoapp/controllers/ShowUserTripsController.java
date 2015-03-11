@@ -43,10 +43,10 @@ public class ShowUserTripsController {
         return "showTrips";
     }
 
-    @RequestMapping(value = "/user/deleteTrip**", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
     public String deleteTrip(@RequestParam("id") long id) {
         tripService.delete(id);
-        return "index";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/declineTrip", method = RequestMethod.GET)
