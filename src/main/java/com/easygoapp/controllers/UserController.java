@@ -26,7 +26,6 @@ public class UserController {
         User user = userService.getByLogin(authentication.getName());
         modelAndView.setViewName("editProfile");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("oldPassword","");
         return modelAndView;
     }
 
@@ -51,6 +50,13 @@ public class UserController {
         userService.delete(user.getId());
         SecurityContextHolder.clearContext();
         modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/changePassword", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public ModelAndView changePassword(ModelAndView modelAndView) {
+        modelAndView.addObject("currentPassword","");
+        //modelAndView.setViewName("editProfile");
         return modelAndView;
     }
 }
