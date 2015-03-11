@@ -10,9 +10,11 @@
 <script src="${js}bootstrap.js"></script>
 <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="${js}validateTrip.js"></script>
-<link rel="stylesheet" href="${css}bootstrap.css">
-<link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
-<link rel="stylesheet" href="${css}custom.css"/>
+<%--<script type="text/javascript" src="${js}validateTrip.js"></script>--%>
+
+<link rel="stylesheet" type="text/css" href="${css}bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${css}bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="${css}custom.css"/>
 
 
 <div class="bs-docs-section">
@@ -45,11 +47,11 @@
             <div class="bs-component">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label class="col-lg-10 control-label ">Выберите количество мест:</label>
+                        <div class="form-group" id="carCapacity">
+                            <label class="col-lg-10 control-label  ">Выберите количество мест:</label>
                             <form:select path="carCapacity" items="${list}"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="cost">
                             <label class="col-lg-10 control-label ">Укажите стоимость проезда:</label>
                             <form:select path="carCapacity" items="${list}"/>
                         </div>
@@ -57,7 +59,7 @@
 
                         <p>Установите дату и время старта поездки:</p>
 
-                        <div class="form-group">
+                        <div class="form-group" id="timePicker">
                             <!-- Элемент HTML с id равным datetimepicker1 -->
                             <div class="input-group date" id="datetimepicker1">
                                 <input type="text" class="form-control" name="startDate"/>
@@ -89,7 +91,7 @@
                 Установите контрольные точки!<br/>
                 Левый берег:
                 <hr/>
-                <div class="h5">
+                <div class="h5" id="leftCoast">
                     <c:forEach var="point" items="${points}" varStatus="status">
                         <c:if test="${point.isLeft()}">
                             <input type="checkbox" name="passengerNodePoints[${status.index}].id"
@@ -105,7 +107,7 @@
                 Установите контрольные точки!<br/>
                 Правый берег:
                 <hr/>
-                <div class="h5">
+                <div class="h5" id="rightCoast">
                     <c:forEach var="point" items="${points}" varStatus="status">
                         <c:if test="${!point.isLeft()}">
                             <input type="checkbox" name="passengerNodePoints[${status.index}].id"
@@ -115,9 +117,11 @@
                     </c:forEach>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info btn-lg btn-block">Сохранить</button><br>
+            <button type="submit" class="btn btn-info btn-lg btn-block" id="saveTrip">Сохранить</button>
+            <br>
         </div>
         </form:form>
+        <%--<a class="btn btn-large btn-success" id="startdemotour" onclick="introJs().start();" href="javascript:void(0);">Show me how</a>--%>
     </div>
 </div>
 

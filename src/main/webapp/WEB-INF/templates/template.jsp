@@ -15,6 +15,7 @@
         <![endif]-->
         <script src="/assets/js/jquery-2.1.3.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/autoBreadcrumbs.js"></script>
         <!-- CSS  ================================================== -->
         <link rel="stylesheet" href="/assets/css/bootstrap.css">
     </head>
