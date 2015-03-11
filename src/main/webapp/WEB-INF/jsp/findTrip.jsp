@@ -2,12 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--<title>Поиск поездки</title>--%>
+
 <c:set var="js" value="/assets/js/"/>
 <c:set var="css" value="/assets/css/"/>
-<%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--%>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <script type="text/javascript" src="${js}jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="${js}moment-with-locales.min.js"></script>
 <script src="${js}bootstrap.js"></script>
@@ -16,9 +14,7 @@
 <link rel="stylesheet" href="${css}bootstrap.css">
 <link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" href="${css}custom.css"/>
-<%--</head>--%>
-<%--<body>--%>
-<%--<div class="container-fluid">--%>
+
 
 <div class="bs-docs-section">
 
@@ -37,86 +33,6 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <%--<h2>Map</h2>--%>
-                        <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
-                        <%--<script>--%>
-                            <%--var map;--%>
-                            <%--function initialize() {--%>
-                                <%--var mapOptions = {--%>
-                                    <%--zoom: 8,--%>
-                                    <%--center: new google.maps.LatLng(48.466169, 35.014089),--%>
-                                    <%--mapTypeId: google.maps.MapTypeId.ROADMAP--%>
-                                <%--};--%>
-                                <%--map = new google.maps.Map(document.getElementById('map-canvas'),--%>
-                                        <%--mapOptions);--%>
-                            <%--}--%>
-                            <%--google.maps.event.addDomListener(window, 'load', initialize);--%>
-                        <%--</script>--%>
-
-                            <script>
-                                var map;
-                                function initialize() {
-                                    var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
-                                    var mapOptions = {
-                                        zoom: 10,
-                                        center: myLatlng,
-                                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                                    };
-                                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-//                                    var marker = new google.maps.Marker({
-//                                        position: map.getCenter(),
-//                                        map: map,
-//                                        title: 'Click to zoom'
-//                                    });
-//                                    google.maps.event.addListener(marker, 'click', function() {
-//                                        map.setZoom(15);
-//                                        map.setCenter(marker.getPosition());
-//                                    });
-
-                                    setMarkers(map, places);
-
-
-                                }
-
-//                                var places = [
-//                                    ['Комсомольский проспект', 48.51605, 34.57915],
-//                                    ['Ул. Димитрова', 48.509504, 34.589525],
-//                                    ['Пр. Пелина', 48.522354, 34.605061],
-//                                    ['Ул. Сыровца', 48.516299, 34.606681],
-//                                    ['Площадь Ленина', 48.516057, 34.61226]
-//                                ];
-
-                                var sss = '${latSpans}';
-                                var ddd = '${latSpans}';
-
-                                var places = [
-                                    ['Комсомольский проспект', sss, ddd ],
-                                    ['Ул. Димитрова', 48.509504, 34.589525],
-                                    ['Пр. Пелина', 48.522354, 34.605061],
-                                    ['Ул. Сыровца', 48.516299, 34.606681],
-                                    ['Площадь Ленина', 48.516057, 34.61226]
-                                ];
-
-                                function setMarkers(map, locations){
-                                    for (var i = 0; i < locations.length; i++) {
-                                        var beach = locations[i];
-                                        var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
-                                        var marker = new google.maps.Marker({
-                                            position: myLatLng,
-                                            map: map,
-                                            title: beach[0]
-                                        });
-
-//                                        google.maps.event.addListener(marker, 'click', function() {
-//                                            map.setZoom(15);
-//                                            map.setCenter(marker.getPosition());
-//                                        });
-
-                                    }
-                                }
-                                google.maps.event.addDomListener(window, 'load', initialize);
-                            </script>
-
                         <div id="map-canvas" style="height:400px; width:100%"></div>
                     </div>
                 </div>
@@ -178,7 +94,6 @@
                         </div>
                     </div>
                 </div>
-
                 </div>
                 <div class="col-lg-4">
                     <div class="bs-component">
@@ -207,19 +122,19 @@
                                     <input type="checkbox" name="passengerNodePoints[${status.index}].id"
                                            value="${point.id}"/>
                                     <c:out value="${point.description}"/><br>
-                                    <c:out value="${point.latitude}"/><br>
-                                    <c:set value="${point.latitude}" var = "latSpans"></c:set>
-                                    <c:out value="${point.longitude}"/><br>
-                                    <c:set value="${point.longitude}" var = "lngSpans"></c:set>
+                                    <c:set value="${point.description}" var = "descrypt"></c:set>
+                                    <%--<c:out value="${point.latitude}"/><br>--%>
+                                    <c:set value="${point.latitude}" var = "latSpan"></c:set>
+                                    <%--<c:out value="${point.longitude}"/><br>--%>
+                                    <c:set value="${point.longitude}" var = "lngSpan"></c:set>
                                 </c:if>
                             </c:forEach>
                         </div>
                     </div>
                 </div>
-
-            </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Поиск</button>
-    </form:form>
+        </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Поиск</button>
+            </form:form>
 </div>
 
     <%--Таблица для вывода--%>
@@ -278,3 +193,46 @@
             </div>
         </div>
     </div>
+
+
+<%--Script for map--%>
+<script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
+
+<script>
+
+    var map;
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
+        var mapOptions = {
+            zoom: 10,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        setMarkers(map, places);
+    }
+
+    var lat = '${latSpan}';
+    var lng = '${lngSpan}';
+    var des = '${descrypt}';
+    var places = [
+        [des, lat, lng ],
+        ['Ул. Димитрова', 48.509504, 34.589525],
+        ['Пр. Пелина', 48.522354, 34.605061],
+        ['Ул. Сыровца', 48.516299, 34.606681],
+        ['Площадь Ленина', 48.516057, 34.61226]
+    ];
+
+    function setMarkers(map, locations) {
+        for (var i = 0; i < locations.length; i++) {
+            var beach = locations[i];
+            var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: beach[0]
+            });
+        }
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
