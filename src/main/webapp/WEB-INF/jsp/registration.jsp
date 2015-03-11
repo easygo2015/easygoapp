@@ -116,7 +116,7 @@
           <hr/>
 
           <fieldset>
-            <legend>Security</legend>
+            <legend>Пароль</legend>
             <div class="form-group" id="blockpassword">
               <label for="password" class="col-lg-2 control-label">Пароль:</label>
 
@@ -139,7 +139,7 @@
 
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-              <button type="submit" id="send" class="btn btn-primary pull-right">Submit</button>
+              <button type="submit" id="send" class="btn btn-primary pull-right">Зарегестрироваться</button>
             </div>
           </div>
         </form:form>

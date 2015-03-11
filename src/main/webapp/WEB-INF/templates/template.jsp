@@ -24,7 +24,7 @@
 <div class="container">
   <%--header--%>
   <t:insertAttribute name="header"/>
-  <script type="text/javascript">breadcrumbs()</script>
+  <%--<script type="text/javascript">breadcrumbs()</script>--%>
   <%--body--%>
   <t:insertAttribute name="body"/>
   <%--footer--%>
