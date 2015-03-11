@@ -1,124 +1,64 @@
-insert into pnp (id, latitude, longitude, description, isleft)
-values (1, 48.597634, 34.551059, 'Ул. Карла Маркса, 11-й мк. район', 1);
+п»їinsert into pnp (id, latitude, longitude, description, isleft)
+values (1, 48.597634, 34.551059, 'РЈР». РљР°СЂР»Р° РњР°СЂРєСЃР°, 11-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (2, 48.592752, 34.551660, 'Пр. 50-летия СССР, 10-й мк. район', 1);
+values (2, 48.592752, 34.551660, 'РџСЂ. 50-Р»РµС‚РёСЏ РЎРЎРЎР , 10-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (3, 48.596779, 34.556502, 'Пр. Победы, 10-й и 11-й мк. район', 1);
+values (3, 48.596779, 34.556502, 'РџСЂ. РџРѕР±РµРґС‹, 10-Р№ Рё 11-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (4, 48.591997, 34.557575, 'Пр. Маршала Жукова, 10-й и 9-й мк. район', 1);
+values (4, 48.592555, 34.561847, 'РљРёРЅРѕС‚РµР°С‚СЂ РњРёСЂ, 9-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (5, 48.592555, 34.561847, 'Кинотеатр Мир, 9-й мк. район', 1);
+values (5, 48.597481, 34.568520, 'РќР°С€Рµ РґРµР»Рѕ, 1-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (6, 48.587861, 34.561775, 'Бульвар Освободителей, 9-й мк. район', 1);
+values (6, 48.596602, 34.576498, 'РЈР». РҐР°СЂСЊРєРѕРІСЃРєР°СЏ, 1-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (7, 48.597481, 34.568520, 'Наше дело, 1-й мк. район', 1);
+values (7, 48.599868, 34.571333, 'РџРѕР»РёРєР»РёРЅРёРєР° в„– 1, 2-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (8, 48.596602, 34.576498, 'Ул. Харьковская, 1-й мк. район', 1);
+values (8, 48.607253, 34.568464, 'Р СѓСЃР°Р»РєР°, Р±СѓР»СЊРІР°СЂ Р“РµСЂРѕРµРІ, 3-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (9, 48.599868, 34.571333, 'Поликлиника № 1, 2-й мк. район', 1);
+values (9, 48.605518, 34.560214, 'Р‘СѓР»СЊРІР°СЂ Р“РµСЂРѕРµРІ, 4-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (10, 48.605689, 34.574344, 'пр. Дружбы народов 3-й мк. район', 1);
+values (10, 48.607008, 34.562875, 'Р‘СѓР»СЊРІР°СЂ Р“РµСЂРѕРµРІ, 5-Р№ РјРє. СЂР°Р№РѕРЅ', 1);
+
+-- РџСЂР°РІС‹Р№ Р±РµСЂРµРі 
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (11, 48.607253, 34.568464, 'Русалка, бульвар Героев, 3-й мк. район', 1);
+values (11, 48.516050, 34.579150, 'РљРѕРјСЃРѕРјРѕР»СЊСЃРєРёР№ РїСЂРѕСЃРїРµРєС‚', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (12, 48.607253, 34.568464, 'Бульвар Героев, 2-й мк. район', 1);
+values (12, 48.509504, 34.589525, 'РЈР». Р”РёРјРёС‚СЂРѕРІР°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (13, 48.601304, 34.563384, 'Ул. Металлургов, 2-й мк. район', 1);
+values (13, 48.522354, 34.605061, 'РџСЂ. РџРµР»РёРЅР°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (14, 48.605518, 34.560214, 'Бульвар Героев, 4-й мк. район', 1);
+values (14, 48.516299, 34.606681, 'РЈР». РЎС‹СЂРѕРІС†Р°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (15, 48.607008, 34.562875, 'Бульвар Героев, 5-й мк. район', 1);
+values (15, 48.516057, 34.612260, 'РџР»РѕС‰Р°РґСЊ Р›РµРЅРёРЅР°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (16, 48.609947, 34.560541, 'Ул. Интернационалистов, 4-5 мк. район', 1);
+values (16, 48.510260, 34.610983, 'Р С‹РЅРѕРє, СѓР». Р›РµРЅРёРЅР°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (17, 48.601304, 34.563384, 'Ул. Металлургов, 4-й мк. район', 1);
+values (17, 48.510454, 34.600900, 'РџСЂ. РђРЅРѕС€РєРёРЅР°', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (18, 48.605756, 34.574258, 'Пр. Дружбы народов 5-й мк. район', 1);
+values (18, 48.497386, 34.610794, 'РџСЂ. Р®Р±РёР»РµР№РЅС‹Р№', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (19, 48.612779, 34.556362, 'Бульвар Независимости, 4-й мк. район', 1);
-
--- Правый берег 
+values (19, 48.478040, 34.665295, 'РїСЂ. РљРѕРЅСЃС‚РёС‚СѓС†РёРё', 0);
 
 insert into pnp (id, latitude, longitude, description, isleft)
-values (20, 48.516050, 34.579150, 'Комсомольский проспект', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (21, 48.509504, 34.589525, 'Ул. Димитрова', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (22, 48.522354, 34.605061, 'Пр. Пелина', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (23, 48.516299, 34.606681, 'Ул. Сыровца', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (24, 48.516057, 34.612260, 'Площадь Ленина', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (25, 48.523014, 34.613483, 'ДМК', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (26, 48.518717, 34.613113, 'Территориальное медицинское объединение № 3(больница вагонников)', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (27, 48.510260, 34.610983, 'Рынок, ул. Ленина', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (28, 48.510454, 34.600900, '9-я больница, пр. Аношкина', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (29, 48.503411, 34.625525, 'Ул. Алтайская', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (30, 48.497386, 34.610794, 'Пр. Юбилейный', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (31, 48.497843, 34.604518, 'жд. Вокзал', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (32, 48.481443, 34.655719, 'Баглей, ул. Днепропетровская', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (33, 48.478040, 34.665295, 'пр. Конституции', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (34, 48.502157, 34.619061, 'ул. Беседова', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (35, 48.511673, 34.581839, 'ул. Скалика', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (36, 48.536764, 34.571143, 'ул. Днепростроевская', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (37, 48.533147, 34.564555, 'ул. Энергетиков', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (38, 48.529957, 34.567484, 'ул. Петровского', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (39, 48.529957, 34.567484, 'ул. Криворожская', 0);
-
-insert into pnp (id, latitude, longitude, description, isleft)
-values (40, 48.519177, 34.537947, 'ул. Романковская', 0);
+values (20, 48.536764, 34.571143, 'СѓР». Р”РЅРµРїСЂРѕСЃС‚СЂРѕРµРІСЃРєР°СЏ', 0);
 
 
 

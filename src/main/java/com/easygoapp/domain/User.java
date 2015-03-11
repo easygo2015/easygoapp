@@ -5,14 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -26,7 +19,7 @@ import java.util.List;
 @Table(name = "USER")
 public class User extends AbstractPersistable<Long> {
 
-    @NotNull
+
     @Size(min = 2, message = "Длина имени должны содержать как минимум 2 символа")
     @Column(name = "name")
     private String name;
@@ -45,7 +38,7 @@ public class User extends AbstractPersistable<Long> {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull
+
     @Size(min = 6, message = "Длина номера телефона должна содержать как минимум 6 символов")
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -68,10 +61,11 @@ public class User extends AbstractPersistable<Long> {
 
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
+
     //Security
-    @OneToMany(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "login", referencedColumnName = "login")
-    private List<UserRole> userRole;
+    private List<UserRole> userRoles;
 
     public User() {
     }
@@ -88,6 +82,12 @@ public class User extends AbstractPersistable<Long> {
 
     public void setTripsWhereUserDriver(List<Trip> tripsWhereUserDriver) {
         this.tripsWhereUserDriver = tripsWhereUserDriver;
+    }
+
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
     }
 
     public String getCar() {
@@ -157,11 +157,11 @@ public class User extends AbstractPersistable<Long> {
     }
 
     public List<UserRole> getUserRoles() {
-        return userRole;
+        return userRoles;
     }
 
-    public void setUserRole(List<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override

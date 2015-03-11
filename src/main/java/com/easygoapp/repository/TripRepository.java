@@ -1,6 +1,7 @@
 package com.easygoapp.repository;
 
 import com.easygoapp.domain.Trip;
+import com.easygoapp.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,11 @@ import java.util.List;
 
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Long> {
-    List<Trip> findByStartTimeBetween(Timestamp start, Timestamp end);
+
+	List<Trip> findByCarCapacityGreaterThanAndStartTimeBetween(Integer noll, Timestamp start, Timestamp end);
+
+    List<Trip> findByDriverAndStartTimeGreaterThan(User user, Timestamp time);
+
+    List<Trip> findBycompanionsAndStartTimeGreaterThan(User user, Timestamp stamp);
+
 }

@@ -2,14 +2,13 @@ package com.easygoapp.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Collection;
+import javax.validation.constraints.Pattern;
+
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "PNP")
-public class PassengerNodePoint extends AbstractPersistable<Long> {
+public class PassengerNodePoint implements Persistable<Long> {
 
     @NotNull
     @Column(name = "latitude", nullable = false)
@@ -28,26 +27,39 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
     private Double longitude;
 
     @NotNull
-    @Min(5)
     @Column(name = "description")
     private String description;
 
     @NotNull
     @Column(name = "isleft", nullable = false)
-    private boolean isLeft;
+    private boolean left;
 
     @ManyToMany(mappedBy = "passengerNodePoints")
     private List<Trip> trips;
 
+    @Id @GeneratedValue private Long id;
+
     public PassengerNodePoint() {
     }
 
-    public PassengerNodePoint(boolean isLeft, double latitude, double longitude) {
-        this.isLeft = isLeft;
+    public PassengerNodePoint(boolean left, double latitude, double longitude) {
+        this.left = left;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return getId() == null;
+    }
 
     public List<Trip> getTrips() {
         return trips;
@@ -66,11 +78,11 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
     }
 
     public boolean isLeft() {
-        return isLeft;
+        return left;
     }
 
     public void setLeft(boolean isLeft) {
-        this.isLeft = isLeft;
+        this.left = isLeft;
     }
 
     public Double getLatitude() {
@@ -92,7 +104,7 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
     @Override
     public String toString() {
         return "PNP{" +
-                "isLeft=" + isLeft +
+                "left=" + left +
                 ", description='" + description + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
@@ -118,7 +130,7 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
                 .append(this.latitude, rhs.latitude)
                 .append(this.longitude, rhs.longitude)
                 .append(this.description, rhs.description)
-                .append(this.isLeft, rhs.isLeft)
+                .append(this.left, rhs.left)
                 .append(this.trips, rhs.trips)
                 .isEquals();
     }
@@ -130,7 +142,7 @@ public class PassengerNodePoint extends AbstractPersistable<Long> {
                 .append(latitude)
                 .append(longitude)
                 .append(description)
-                .append(isLeft)
+                .append(left)
                 .append(trips)
                 .toHashCode();
     }

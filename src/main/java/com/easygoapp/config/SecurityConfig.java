@@ -16,14 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-/**
- * Created by Kir Kolesnikov on 04.03.2015.
- */
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(securedEnabled = true)
 @ComponentScan("com.easygoapp.service")
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("customUserDetailsService")
@@ -37,11 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     AuthenticationSuccessHandler successHandler;
 
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(customUserDetailService)
-                .passwordEncoder(passwordEncoder());
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .userDetailsService(customUserDetailService)
+//                .passwordEncoder(passwordEncoder());
+//    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -51,19 +52,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .disable()
                         // requests rules
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
+                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+                .and().formLogin();
 
         http.formLogin()
                 // login form page
-                .loginPage("/login")
-
+                .loginPage("/")
                 .loginProcessingUrl("/j_spring_security_check")
                         // URL login not success
-//                .defaultSuccessUrl("/message")
                 .successHandler(successHandler)
-                .failureUrl("/login?error")
+                .failureUrl("/403")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                         // add permissions to login page to all
@@ -73,16 +73,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 // add permissions to logout to all
                 .permitAll()
                         // logout URL
-                .logoutUrl("/logout")
+                .logoutUrl("/j_spring_security_logout")
                         // logout successful URL
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/")
                         // invalidation of current session
                 .invalidateHttpSession(true);
-
-        http.authorizeRequests()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/user/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-                .and().formLogin();
     }
 
     @Bean
@@ -94,13 +89,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationSuccessHandler successHandler(){
+    public AuthenticationSuccessHandler successHandler() {
         return new CustomSuccessHandler();
     }
-
 }

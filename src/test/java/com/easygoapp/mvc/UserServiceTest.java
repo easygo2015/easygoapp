@@ -56,7 +56,7 @@ public class UserServiceTest {
         userRole.setRole("ROLE_USER");
         List<UserRole> userRoles = new ArrayList<UserRole>();
         userRoles.add(userRole);
-        user.setUserRole(userRoles);
+        user.setUserRoles(userRoles);
         User saved = userService.save(user);
         userService.findOne(saved.getId());
 

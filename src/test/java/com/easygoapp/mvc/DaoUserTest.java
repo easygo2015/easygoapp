@@ -2,6 +2,7 @@ package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
+import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
 import org.junit.Test;
@@ -10,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,10 +22,31 @@ import javax.validation.ConstraintViolationException;
 @ContextConfiguration(classes = RootConfig.class)
 public class DaoUserTest {
 
+    Long id;
+
     @Autowired
     private UserService userService;
 
-//    @Before
+    @Test
+    public void masha() {
+        User user = new User();
+        user.setName("Girl");
+        user.setEmail("gi@ad.us");
+        user.setPhoneNumber("78945612");
+        user.setGender(Gender.FEMALE);
+        user.setCar("my car");
+        user.setLogin("girl");
+        user.setPassword("password");
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        List<UserRole> userRoles = new ArrayList<UserRole>();
+        userRoles.add(userRole);
+        user.setUserRoles(userRoles);
+        User saved = userService.save(user);
+        User getSaved = userService.findOne(saved.getId());
+    }
+
+    //    @Before
 //    public void save(){
 //        User user = new User();
 //        user.setPhoneNumber("000-000-00-00");
@@ -32,44 +54,36 @@ public class DaoUserTest {
 //        user.setGender(Gender.MALE);
 //        user.setLogin("Markov");
 //        user.setPassword("1234");
+//        user.setEmail("wer@wer.com");
 //        User user1 = userService.save(user);
 //        id = user1.getId();
 //        System.out.println(id);
 //        System.out.println(user1);
 //    }
-
-//    @After
-//    public void deleteUser(){
-//        System.out.println("deleteUser");
-//        userService.delete(id);
-//    }
-
-//    @Test
-//    public void getUserByLogin(){
-//        System.out.println("getByLogin");
-//        User user = userService.getByLogin("Markov");
-//        System.out.println(user);
-//    }
-//
-//    @Test
-//    public void getUserById(){
-//        System.out.println("getById");
-//        User user = userService.findOne(1l);
-//        System.out.println(user);
-//    }
-
-    @Test(expected = ConstraintViolationException.class)
-    public void SaveWithWrongLowShortPassword(){
+    @Test
+    public void saveUser() {
         User user = new User();
-        user.setName("Stas");
         user.setPhoneNumber("000-000-00-00");
         user.setCar("lexus");
         user.setGender(Gender.MALE);
-        user.setLogin("Markovaaa");
-        user.setPassword("1234");
-        user.setEmail("qadsadsadsad");
-        System.out.println(userService.save(user));
+        user.setLogin("Markov");
+        user.setPassword("123456");
+        user.setName("Stas");
+        user.setEmail("wer@wer.com");
+        userService.save(user);
     }
 
+    @Test
+    public void getUserByLogin() {
+        System.out.println("getByLogin");
+        User user = userService.getByLogin("Markov");
+        System.out.println(user);
+    }
 
+    @Test
+    public void getUserById() {
+        System.out.println("getById");
+        User user = userService.findOne(1l);
+        System.out.println(user);
+    }
 }

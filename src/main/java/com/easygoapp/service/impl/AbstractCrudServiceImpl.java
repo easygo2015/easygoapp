@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * Created by Kir Kolesnikov on 03.03.2015.
  */
-public abstract class AbstractCrudServiceImpl<T extends Persistable<PK>, PK extends Serializable> implements AbstractCrudService<T, PK> {
+public abstract class AbstractCrudServiceImpl<T extends Persistable<PK>, PK extends Serializable>
+        implements AbstractCrudService<T, PK> {
 
     private JpaRepository<T, PK> repository;
 
@@ -22,14 +23,17 @@ public abstract class AbstractCrudServiceImpl<T extends Persistable<PK>, PK exte
     public T findOne(PK id) {
         return repository.findOne(id);
     }
+
     @Override
     public T save(T entity) {
         return repository.save(entity);
     }
+
     @Override
     public List<T> findAll() {
         return repository.findAll();
     }
+
     @Override
     public void delete(PK id) {
         repository.delete(id);
