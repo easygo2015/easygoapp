@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -31,9 +34,23 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     private PassengerNodePointRepository passengerNodePointRepository;
 
 	@Override
-	public List<Trip> getBetweenStartAndEnd(Timestamp start, Timestamp end) {
-		List<Trip> trips = tripRepository.findByCarCapacityGreaterThanAndStartTimeBetween(0,start, end);
-		for (Trip trip : trips) {
+	public List<Trip> getBetweenStartAndEnd(Long id, String start, String end) throws ParseException {
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		Date date = dateFormat.parse(start);
+		long time = date.getTime();
+		Timestamp startTrip = new Timestamp(time);
+		date = dateFormat.parse(end);
+		time = date.getTime();
+		Timestamp endTrip = new Timestamp(time);
+		List<Trip> trips = tripRepository.findByCarCapacityGreaterThanAndStartTimeBetween(0, startTrip,
+																						  endTrip);
+
+		Iterator iterator = trips.iterator();
+		while (iterator.hasNext()){
+			Trip trip = (Trip) iterator.next();
+			if(id.equals(trip.getDriver().getId())) {
+				iterator.remove();
+			}
 			trip.getPassengerNodePoints().size();
 			trip.getCompanions().size();
 		}
@@ -88,7 +105,8 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Transactional
     @Override
     public void removeCompanionFromTrip(Long companionId, Long tripId) {
-        Trip trip = tripRepository.findOne(tripId);
+        Trip trip = findOneEager(tripId);
+		trip.getCompanions().size();
         List<User> users = trip.getCompanions();
         Iterator iterator = users.iterator();
         while (iterator.hasNext()) {
@@ -97,39 +115,20 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
                 iterator.remove();
             }
         }
+		trip.setCarCapacity(trip.getCarCapacity()+1);
         tripRepository.save(trip);
     }
 
     @Override
     @Transactional
     public void addPassenger(Long tripId, Long userId) {
-        Trip currentTrip = tripRepository.findOne(tripId);
+        Trip currentTrip = findOneEager(tripId);
         User passenger = userRepository.getOne(userId);
-        int capacity = currentTrip.getCarCapacity();
         List<User> companions = currentTrip.getCompanions();
-        if (capacity > 0){
             companions.add(passenger);
-            capacity--;
+            currentTrip.setCarCapacity(currentTrip.getCarCapacity() - 1);
             tripRepository.save(currentTrip);
             //TODO driver notification
-        }
-    }
-
-    @Override
-    @Transactional
-    public boolean removePassenger(Long tripId, Long userId) {
-        Trip currentTrip = tripRepository.findOne(tripId);
-        User passenger = userRepository.findOne(userId);
-        List<User> companions = currentTrip.getCompanions();
-        int capacity = currentTrip.getCarCapacity();
-        if (companions.size() > 1 && companions.contains(passenger)){
-            companions.remove(passenger);
-            capacity++;
-            tripRepository.save(currentTrip);
-            //TODO driver notification
-            return true;
-        }
-        return false;
     }
 
     @Override

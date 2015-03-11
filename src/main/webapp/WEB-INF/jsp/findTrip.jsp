@@ -83,7 +83,7 @@
               <div class="h3">Левый берег:</div>
               <div class="h5">
                 <c:forEach var="point" items="${points}" varStatus="status">
-                  <c:if test="${point.left()}">
+                  <c:if test="${point.isLeft()}">
                     <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
                     <c:out value="${point.description}"/><br>
                   </c:if>
@@ -94,7 +94,7 @@
               <div class="h3">Правый берег:</div>
               <div class="h5">
                 <c:forEach var="point" items="${points}" varStatus="status">
-                  <c:if test="${!point.left()}">
+                  <c:if test="${!point.isLeft()}">
                     <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
                     <c:out value="${point.description}"/><br>
                   </c:if>

@@ -133,12 +133,12 @@ public class TripServiceTest {
         assertEquals(3, trip.getCompanions().size());
     }
 
-    @Test
-    public void testRemovePassenger(){
-        tripService.removePassenger(trip_id, passenger1_id);
-        Trip trip = tripService.findOneEager(trip_id);
-        assertEquals(1, trip.getCompanions().size());
-    }
+//    @Test
+//    public void testRemovePassenger(){
+//        tripService.removePassenger(trip_id, passenger1_id);
+//        Trip trip = tripService.findOneEager(trip_id);
+//        assertEquals(1, trip.getCompanions().size());
+//    }
 
     @Test
     public void testAddPassengerNodePoint(){
@@ -202,14 +202,14 @@ public class TripServiceTest {
         assertTrue(trip.getPassengerNodePoints().size() == points.size());
     }
 
-    @Test
-    public void testGetBetweenStartAndEnd(){
-        Timestamp startDate = new Timestamp(System.currentTimeMillis()-10000000);
-        Timestamp endDate = new Timestamp(System.currentTimeMillis());
-        List<Trip> trips = tripService.getBetweenStartAndEnd(startDate,endDate);
-        assertTrue(trips.size()>0);
-
-    }
+//    @Test
+//    public void testGetBetweenStartAndEnd(){
+//        Timestamp startDate = new Timestamp(System.currentTimeMillis()-10000000);
+//        Timestamp endDate = new Timestamp(System.currentTimeMillis());
+//        List<Trip> trips = tripService.getBetweenStartAndEnd(startDate,endDate);
+//        assertTrue(trips.size()>0);
+//
+//    }
 
     @After
     public void finalizeForTest(){
