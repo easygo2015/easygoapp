@@ -102,7 +102,7 @@
   </div>
 </c:if>
 <a href="/user">
-  <button type="button" class="btn btn-default btn-sm">Вернуться на страницу пользователя</button>
+  <button type="button" class="btn btn-primary btn-lg">Вернуться на страницу пользователя</button>
 </a>
 </body>
 </html>

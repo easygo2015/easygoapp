@@ -98,14 +98,4 @@ public class AdminController {
         modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
-
-    @RequestMapping(value = "/pointsList/delete", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView deletePoint(ModelAndView modelAndView, HttpServletRequest request){
-        Long id = Long.parseLong(request.getParameter("id"));
-        passengerNodePointService.delete(id);
-        modelAndView.setViewName("redirect:/admin");
-        return modelAndView;
-    }
-
-
 }

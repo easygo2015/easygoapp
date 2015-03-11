@@ -96,6 +96,9 @@
       </div>
     </div>
   </div>
+    <a href="<c:url value="/j_spring_security_logout" />" >
+        <button type="button" class="btn btn-primary btn-lg">Logout</button>
+    </a>
 </div>
 </body>
 </html>
