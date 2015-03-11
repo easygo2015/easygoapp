@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+  <c:set var="js" value="/assets/js/"/>
   <meta charset="UTF-8">
   <title>EasyGo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +15,9 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <%--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>--%>
-  <script src="/assets/js/jquery-2.1.3.min.js"></script>
-  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="${js}jquery-2.1.3.min.js"></script>
+  <script src="${js}bootstrap.min.js"></script>
+  <script type="text/javascript" src="${js}autoBreadcrumbs.js"></script>
   <!-- CSS  ================================================== -->
   <link rel="stylesheet" href="/assets/css/bootstrap.css">
 </head>
@@ -24,6 +26,7 @@
 <div class="container">
   <%--header--%>
   <t:insertAttribute name="header"/>
+  <script type="text/javascript">breadcrumbs()</script>
   <%--body--%>
   <t:insertAttribute name="body"/>
   <%--footer--%>
