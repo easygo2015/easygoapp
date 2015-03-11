@@ -191,7 +191,37 @@
                     </table>
                 </div>
             </div>
-        </div>
+            <div class="col-lg-7 col-md-7"></div>
+          </div>
+          <div class="h4">Выберите пункты маршрута, наиболее совпадающие с Вашими местом посадки и пунктом назначения:
+          </div>
+          <div class="row">
+            <div class="col-lg-7 col-md-7">
+              <div class="h3">Левый берег:</div>
+              <div class="h5">
+                <c:forEach var="point" items="${points}" varStatus="status">
+                  <c:if test="${point.left()}">
+                    <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
+                    <c:out value="${point.description}"/><br>
+                  </c:if>
+                </c:forEach>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-5">
+              <div class="h3">Правый берег:</div>
+              <div class="h5">
+                <c:forEach var="point" items="${points}" varStatus="status">
+                  <c:if test="${!point.left()}">
+                    <input type="checkbox" name="passengerNodePoints[${status.index}].id" value="${point.id}"/>
+                    <c:out value="${point.description}"/><br>
+                  </c:if>
+                </c:forEach>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-info btn-md">Поиск</button>
+        </fieldset>
+      </form:form>
     </div>
 
 

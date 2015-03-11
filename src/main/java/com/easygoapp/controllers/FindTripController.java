@@ -60,19 +60,12 @@ public class FindTripController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String showResult(@ModelAttribute FindTripObject dto, Model model) throws ParseException {
-        // User user = userService.getByLogin("Markov");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User driver = userService.getByLogin(authentication.getName());
 
         //-----------------------GETTING DATES-------------------------------
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        String dateFromDto = dto.getStartTime();
-        Date date = dateFormat.parse(dateFromDto);
-        long time = date.getTime();
-        Timestamp start = new Timestamp(time);
-        dateFromDto = dto.getEndTime();
-        date = dateFormat.parse(dateFromDto);
-        time = date.getTime();
-        Timestamp end = new Timestamp(time);
-        List<Trip> trips = tripService.getBetweenStartAndEnd(start, end);
+
+        List<Trip> trips = tripService.getBetweenStartAndEnd(driver.getId(), dto.getStartTime(), dto.getEndTime());
 
         //-----------------------SAVE NEEDED POINTS-------------------------------
         List<PassengerNodePoint> usersPoints;
@@ -95,22 +88,9 @@ public class FindTripController {
 
     @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
     public String saveTrip(@RequestParam("id") long id) {
-        Trip trip = tripService.findOne(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
-        trip.getCompanions().add(user);
-        int capacity = trip.getCarCapacity();
-        capacity = capacity - 1;
-        trip.setCarCapacity(capacity);
-        tripService.save(trip);
+        tripService.addPassenger(id, user.getId());
         return "redirect:/user";
-    }
-
-    @RequestMapping(value = "/user/declineTrip", method = RequestMethod.GET)
-    public String declineTrip(@RequestParam("id") long id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = userService.getByLogin(authentication.getName());
-        tripService.removeCompanionFromTrip(currentUser.getId(), id);
-        return "user";
     }
 }

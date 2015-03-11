@@ -36,7 +36,6 @@ public class ShowUserTripsController {
     public String showTrips(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
-//        User user = userService.findOne(4l);
         List<Trip> tripsDriver = tripService.findAllFutureTripsForDriver(user);
         List<Trip> tripsPassenger = tripService.findAllFutureTripsForPassenger(user);
         model.addAttribute("tripsDriver", tripsDriver);
@@ -44,20 +43,17 @@ public class ShowUserTripsController {
         return "showTrips";
     }
 
-    @RequestMapping(value = "/user/deleteTrip**", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
     public String deleteTrip(@RequestParam("id") long id) {
         tripService.delete(id);
-        return "index";
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/declineTrip", method = RequestMethod.GET)
     public String declineTrip(@RequestParam("id") long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
-//        User user = userService.findOne(4l);
-        Trip trip = tripService.findOne(id);
-        trip.getCompanions().remove(user);
-        tripService.save(trip);
-        return "index";
+		tripService.removeCompanionFromTrip(user.getId(), id);
+        return "redirect:/user";
     }
 }
