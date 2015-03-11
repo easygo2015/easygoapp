@@ -26,6 +26,10 @@
         <put-attribute name="body" value="/WEB-INF/jsp/createTrip.jsp"/>
     </definition>
 
+    <definition name="registration" extends="base">
+        <put-attribute name="body" value="/WEB-INF/jsp/registration.jsp"/>
+    </definition>
+
     <definition name="userInfo" extends="base">
         <put-attribute name="body" value="/WEB-INF/jsp/userInfo.jsp"/>
     </definition>
@@ -37,10 +41,6 @@
 
     <definition name="editProfile" extends="base">
         <put-attribute name="body" value="/WEB-INF/jsp/editProfile.jsp"/>
-    </definition>
-
-    <definition name="editUser" extends="base">
-        <put-attribute name="body" value="/WEB-INF/jsp/editUser.jsp"/>
     </definition>
 
   <definition name="showTrips" extends="base">

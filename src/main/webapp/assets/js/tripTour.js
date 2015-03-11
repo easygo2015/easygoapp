@@ -1,8 +1,5 @@
-$(function(){
-    var introguide = introJs();
-//    var startbtn   = $('#startdemotour');
 
-    introguide.setOptions({
+var tour = new Tour({
         steps: [
             {
                 element: '#carCapacity',
@@ -37,7 +34,9 @@ $(function(){
         ]
     });
 
-    introguide.start();
+// Initialize the tour
+tour.init();
 
+// Start the tour
+tour.start();
 
-});

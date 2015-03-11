@@ -10,11 +10,12 @@
 <script src="${js}bootstrap.js"></script>
 <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="${js}validateTrip.js"></script>
-<%--<script type="text/javascript" src="${js}validateTrip.js"></script>--%>
+<script type="text/javascript" src="${js}bootstrap-tour.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${css}bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${css}bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" type="text/css" href="${css}custom.css"/>
+<link rel="stylesheet" type="text/css" href="${css}bootstrap-tour.min.css"/>
 
 
 <div class="bs-docs-section">
@@ -52,8 +53,8 @@
                             <form:select path="carCapacity" items="${list}"/>
                         </div>
                         <div class="form-group" id="cost">
-                            <label class="col-lg-10 control-label ">Укажите стоимость проезда:</label>
-                            <form:select path="carCapacity" items="${list}"/>
+                            <label class="col-lg-10 control-label ">Укажите стоимость проезда, грн.:</label>
+                            <form:select path="price" items="${list}"/>
                         </div>
                         <hr/>
 

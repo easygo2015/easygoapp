@@ -7,7 +7,7 @@
     <div class="col-lg-11">
       <div class="bs-component">
         <div class="well">
-          footer!
+            © Stanislav Markov All rights reserved. 2015
         </div>
       </div>
     </div>
