@@ -12,9 +12,11 @@
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <div> Admin's area</div>
-              <a class="navbar-brand active" href="/main">EasyGo <span class="sr-only">(current)</span></a>
+              <a class="navbar-brand navbar-right" href="/">EasyGoAdmin <span class="sr-only">(current)</span></a>
             </div>
+            <a class="pull-right" href="<c:url value="/j_spring_security_logout" />">
+              <button type="button" class="navbar-brand navbar-right">Logout</button>
+            </a>
           </div>
         </nav>
       </div>

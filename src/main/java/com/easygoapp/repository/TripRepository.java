@@ -15,10 +15,9 @@ import java.util.List;
 @Repository
 public interface TripRepository extends JpaRepository<Trip, Long> {
 
-	List<Trip> findByCarCapacityGreaterThanAndStartTimeBetween(Integer noll, Timestamp start, Timestamp end);
+    List<Trip> findByCarCapacityGreaterThanAndStartTimeBetween(Integer noll, Timestamp start, Timestamp end);
 
     List<Trip> findByDriverAndStartTimeGreaterThan(User user, Timestamp time);
 
     List<Trip> findBycompanionsAndStartTimeGreaterThan(User user, Timestamp stamp);
-
 }

@@ -28,16 +28,18 @@
 
         <div class="form-group" id="enterlatitude">
           <label class="control-label col-sm-2" for="latitude">Широта</label>
+
           <div class="col-sm-10">
             <sf:input path="latitude" id="latitude" class="form-control" value=""
                       placeholder="Введите"/>
             <span id="latitudeError"
-          class="center-block hidden text-danger">Широта должна быть числом 12.345678</span>
+                  class="center-block hidden text-danger">Широта должна быть числом 12.345678</span>
           </div>
         </div>
 
         <div class="form-group" id="enterlongitude">
           <label class="control-label col-sm-2" for="longitude">Долгота</label>
+
           <div class="col-sm-10">
             <sf:input path="longitude" id="longitude" class="form-control" value=""
                       placeholder="Введите"/>

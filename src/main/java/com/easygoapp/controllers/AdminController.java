@@ -9,15 +9,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -53,7 +50,7 @@ public class AdminController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView saveUserChanges(ModelAndView modelAndView, @ModelAttribute("user") User user,
-                                        BindingResult result) {
+            BindingResult result) {
         User modifiedUser = userService.getByLogin(user.getLogin());
         modifiedUser.setName(user.getName());
         modifiedUser.setEmail(user.getEmail());
@@ -74,7 +71,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/pointsList", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView getPointsList(ModelAndView modelAndView){
+    public ModelAndView getPointsList(ModelAndView modelAndView) {
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
         points.size();
         modelAndView.addObject("points", points);
@@ -83,7 +80,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addPoint", method = RequestMethod.GET)
-    public ModelAndView customPoint(ModelAndView modelAndView){
+    public ModelAndView customPoint(ModelAndView modelAndView) {
         PassengerNodePoint point = new PassengerNodePoint();
         modelAndView.addObject("point", point);
         modelAndView.setViewName("addNewPNP");
@@ -93,7 +90,7 @@ public class AdminController {
 
     @RequestMapping(value = "/addPoint", method = RequestMethod.POST)
     public ModelAndView addNewPoint(ModelAndView modelAndView, @ModelAttribute("point") PassengerNodePoint point,
-                                    BindingResult result, HttpServletRequest request){
+            BindingResult result, HttpServletRequest request) {
         passengerNodePointService.save(point);
         modelAndView.setViewName("redirect:/admin");
         return modelAndView;

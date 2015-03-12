@@ -53,7 +53,7 @@ public class ShowUserTripsController {
     public String declineTrip(@RequestParam("id") long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
-		tripService.removeCompanionFromTrip(user.getId(), id);
+        tripService.removeCompanionFromTrip(user.getId(), id);
         return "redirect:/user";
     }
 }

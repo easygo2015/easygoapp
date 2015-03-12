@@ -20,16 +20,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Admin on 04.03.15.
@@ -39,6 +33,7 @@ import static org.junit.Assert.assertTrue;
 @WebAppConfiguration
 @ContextConfiguration(classes = RootConfig.class)
 public class TripServiceTest {
+
     @Autowired
     private TripService tripService;
 
@@ -52,7 +47,7 @@ public class TripServiceTest {
             passengerNodePoint1_id, passengerNodePoint2_id;
 
     @Before
-    public void initForTest(){
+    public void initForTest() {
         //get driver
         User driver = new User();
         driver.setName("Luke Driver");
@@ -127,7 +122,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testAddPassenger(){
+    public void testAddPassenger() {
         tripService.addPassenger(trip_id, passenger2_id);
         Trip trip = tripService.findOneEager(trip_id);
         assertEquals(3, trip.getCompanions().size());
@@ -141,22 +136,21 @@ public class TripServiceTest {
 //    }
 
     @Test
-    public void testAddPassengerNodePoint(){
+    public void testAddPassengerNodePoint() {
         tripService.addPassengerNodePoint(trip_id, passengerNodePoint2_id);
         Trip tripAfter = tripService.findOneEager(trip_id);
         assertEquals(2, tripAfter.getPassengerNodePoints().size());
-
     }
 
     @Test
-    public void testRemovePassengerNodePoint(){
+    public void testRemovePassengerNodePoint() {
         tripService.removePassengerNodePoint(trip_id, passengerNodePoint2_id);
         Trip tripAfter = tripService.findOneEager(trip_id);
         assertEquals(1, tripAfter.getPassengerNodePoints().size());
     }
 
     @Test
-    public void testModifyTrip(){
+    public void testModifyTrip() {
         Trip modifiedTrip;
         int wantedCapacity;
         int realCapacity;
@@ -185,7 +179,7 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testCancelTrip(){
+    public void testCancelTrip() {
         Trip trip = tripService.findOneEager(trip_id);
         tripService.cancelTrip(trip);
         List<Trip> trips = tripService.findAll();
@@ -193,11 +187,11 @@ public class TripServiceTest {
     }
 
     @Test
-    public void testSetPassengerNodePointsList(){
+    public void testSetPassengerNodePointsList() {
         List<PassengerNodePoint> points = new ArrayList<PassengerNodePoint>();
         points.add(passengerNodePointService.findOne(1l));
         points.add(passengerNodePointService.findOne(40l));
-        tripService.setPassengerNodePointsList(trip_id,points);
+        tripService.setPassengerNodePointsList(trip_id, points);
         Trip trip = tripService.findOneEager(trip_id);
         assertTrue(trip.getPassengerNodePoints().size() == points.size());
     }
@@ -212,11 +206,10 @@ public class TripServiceTest {
 //    }
 
     @After
-    public void finalizeForTest(){
+    public void finalizeForTest() {
         tripService.delete(trip_id);
         userService.delete(driver_id);
         userService.delete(passenger1_id);
         userService.delete(passenger2_id);
     }
-
 }

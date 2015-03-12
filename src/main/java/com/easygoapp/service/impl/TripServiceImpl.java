@@ -26,6 +26,7 @@ import java.util.Objects;
 @Transactional(readOnly = true)
 @Service
 public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> implements TripService {
+
     @Autowired
     private TripRepository tripRepository;
     @Autowired
@@ -33,29 +34,29 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Autowired
     private PassengerNodePointRepository passengerNodePointRepository;
 
-	@Override
-	public List<Trip> getBetweenStartAndEnd(Long id, String start, String end) throws ParseException {
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-		Date date = dateFormat.parse(start);
-		long time = date.getTime();
-		Timestamp startTrip = new Timestamp(time);
-		date = dateFormat.parse(end);
-		time = date.getTime();
-		Timestamp endTrip = new Timestamp(time);
-		List<Trip> trips = tripRepository.findByCarCapacityGreaterThanAndStartTimeBetween(0, startTrip,
-																						  endTrip);
+    @Override
+    public List<Trip> getBetweenStartAndEnd(Long id, String start, String end) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date date = dateFormat.parse(start);
+        long time = date.getTime();
+        Timestamp startTrip = new Timestamp(time);
+        date = dateFormat.parse(end);
+        time = date.getTime();
+        Timestamp endTrip = new Timestamp(time);
+        List<Trip> trips = tripRepository.findByCarCapacityGreaterThanAndStartTimeBetween(0, startTrip,
+                endTrip);
 
-		Iterator iterator = trips.iterator();
-		while (iterator.hasNext()){
-			Trip trip = (Trip) iterator.next();
-			if(id.equals(trip.getDriver().getId())) {
-				iterator.remove();
-			}
-			trip.getPassengerNodePoints().size();
-			trip.getCompanions().size();
-		}
-		return trips;
-	}
+        Iterator iterator = trips.iterator();
+        while (iterator.hasNext()) {
+            Trip trip = (Trip) iterator.next();
+            if (id.equals(trip.getDriver().getId())) {
+                iterator.remove();
+            }
+            trip.getPassengerNodePoints().size();
+            trip.getCompanions().size();
+        }
+        return trips;
+    }
 
     @Autowired
     public void setTripRepository(TripRepository tripRepository) {
@@ -64,7 +65,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     }
 
     @Override
-    public Trip findOneEager(Long id){
+    public Trip findOneEager(Long id) {
         Trip trip = super.findOne(id);
         trip.getCompanions().size();
         trip.getPassengerNodePoints().size();
@@ -106,7 +107,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Override
     public void removeCompanionFromTrip(Long companionId, Long tripId) {
         Trip trip = findOneEager(tripId);
-		trip.getCompanions().size();
+        trip.getCompanions().size();
         List<User> users = trip.getCompanions();
         Iterator iterator = users.iterator();
         while (iterator.hasNext()) {
@@ -115,7 +116,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
                 iterator.remove();
             }
         }
-		trip.setCarCapacity(trip.getCarCapacity()+1);
+        trip.setCarCapacity(trip.getCarCapacity() + 1);
         tripRepository.save(trip);
     }
 
@@ -125,10 +126,10 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         Trip currentTrip = findOneEager(tripId);
         User passenger = userRepository.getOne(userId);
         List<User> companions = currentTrip.getCompanions();
-            companions.add(passenger);
-            currentTrip.setCarCapacity(currentTrip.getCarCapacity() - 1);
-            tripRepository.save(currentTrip);
-            //TODO driver notification
+        companions.add(passenger);
+        currentTrip.setCarCapacity(currentTrip.getCarCapacity() - 1);
+        tripRepository.save(currentTrip);
+        //TODO driver notification
     }
 
     @Override
@@ -150,7 +151,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         passengerNodePoints.remove(passengerNodePoint);
         tripRepository.save(currentTrip);
         for (User passenger : currentTrip.getCompanions()) {
-               //TODO passengers notification
+            //TODO passengers notification
         }
     }
 
@@ -169,21 +170,20 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         Trip originalTrip = tripRepository.findOne(trip.getId());
         Trip modifiedTrip;
         List<User> companions = originalTrip.getCompanions();
-        if (trip.getCarCapacity() > originalTrip.getCarCapacity()){
+        if (trip.getCarCapacity() > originalTrip.getCarCapacity()) {
             modifiedTrip = tripRepository.save(trip);
             //TODO passengers notification
             return modifiedTrip;
-        }else{
+        } else {
             return originalTrip;
         }
-
     }
 
     @Override
     @Transactional
     public void cancelTrip(Trip trip) {
         List<User> companions = trip.getCompanions();
-        if (companions.size() > 1){
+        if (companions.size() > 1) {
             for (User companion : companions) {
                 //TODO passengers notification
             }

@@ -9,24 +9,24 @@ function breadcrumbs() {
     var output = "<div class=topnav><a href=/>home</a> » ";
 
     sURL = location.href;
-    sURL = sURL.slice(8,sURL.length);
+    sURL = sURL.slice(8, sURL.length);
     chunkStart = sURL.indexOf("/");
-    sURL = sURL.slice(chunkStart+1,sURL.length)
+    sURL = sURL.slice(chunkStart + 1, sURL.length)
 
-    while(!stop){
+    while (!stop) {
         chunkStart = sURL.indexOf("/");
-        if (chunkStart != -1){
-            bits[x] = sURL.slice(0,chunkStart)
-            sURL = sURL.slice(chunkStart+1,sURL.length);
+        if (chunkStart != -1) {
+            bits[x] = sURL.slice(0, chunkStart)
+            sURL = sURL.slice(chunkStart + 1, sURL.length);
         } else {
             stop = 1;
         }
         x++;
     }
 
-    for(var i in bits){
+    for (var i in bits) {
         output += "<a href=\"";
-        for(y=1;y<x-i;y++){
+        for (y = 1; y < x - i; y++) {
             output += "../";
         }
         output += bits[i] + "/\">" + bits[i] + "</a> » ";

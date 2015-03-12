@@ -9,20 +9,22 @@
 <div class="bs-docs-section clearfix">
   <div class="row">
     <div class="col-lg-12">
-
       <div class="bs-component">
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <div class="col-md-4">
+              <div class="col-md-4" style="margin-top:5%; vertical-align: middle">
                 <a href="/">
                   <img class="left-container" src="/assets/img/logo4.png">
                 </a>
               </div>
+              <div class="col-md-4" style="margin-left: 5%; margin-top: 2%; vertical-align: middle">
+                <img class="content" src="/assets/img/banner_header.png">
+              </div>
             </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
+            <div class="navbar-right" id="navbar" style="margin-right:3%">
+              <ul class="nav navbar-btn navbar-right">
                 <%--<li class="dropdown">--%>
                 <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Меню--%>
                 <%--<span class="caret"></span></a>--%>
@@ -37,8 +39,21 @@
                 <%--</ul>--%>
                 <%--</li>--%>
 
-                  <li><a href="/registration"><img src="/assets/img/button_rega-02.png"></a></li>
-                  <li><a href="#"><img src="/assets/img/button_contact.png"></a></li>
+                <li>
+                  <a>
+                    <button type="button" class="btn btn-info btn-block" aria-label="Right Align">
+                      <span class="glyphicon glyphicon-road" aria-hidden="true"></span> Регистрация
+                    </button>
+                  </a>
+                  <a>
+                    <button type="button" class="btn btn-info btn-block" aria-label="Right Align">
+                      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Контакты
+                    </button>
+                  </a>
+                  <%--<a  href="/registration"><img src="/assets/img/button_rega-02.png" height="50"></a>--%>
+                  <%--<a  href="#"><img src="/assets/img/button_contact.png" height="50"></a>--%>
+                </li>
+
 
               </ul>
             </div>

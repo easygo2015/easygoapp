@@ -4,6 +4,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 
 <c:url value="/assets/img/" var="images"/>
+<c:url value="/assets/js/" var="js"/>
+<c:url value="/assets/js/" var="css"/>
 
 <!-- Slider -->
 <div class="row">
@@ -60,48 +62,64 @@
     </div>
   </div>
 
-  <div class="col-lg-4">
-    <div class="bs-component">
-      <div class="panel panel-info">
-        <div class="panel-heading">Log In</div>
-        <div class="panel-body">
-          <%--<div class="well bs-component">--%>
 
-          <c:url value="/j_spring_security_check" var="loginUrl"/>
+  <sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
+    <div class="col-lg-4">
+      <div class="bs-component">
+        <div class="panel panel-info">
+          <div class="panel-heading">Log In</div>
+          <div class="panel-body">
+              <%--<div class="well bs-component">--%>
 
-          <sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
+            <c:url value="/j_spring_security_check" var="loginUrl"/>
+
+
             <form class="form-horizontal" action="${loginUrl}" method="post">
               <fieldset>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <input type="text" class="form-control" id="inputEmail1"
-                           name="j_username" placeholder="Login">
+                           name="j_username" placeholder="Логин">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
                     <input type="password" class="form-control" id="inputEmail"
                            name="j_password"
-                           placeholder="Password">
+                           placeholder="Пароль">
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-12">
-                      <a class="btn btn-info" href="/registration">Регистрация</a>
-                      <button type="submit" class="btn btn-info">Вход</button>
+                    <button type="submit" class="btn btn-info btn-block">Вход</button>
+                    <a class="btn btn-info btn-block" href="/registration">Регистрация</a>
                   </div>
                 </div>
               </fieldset>
             </form>
-          </sec:authorize>
-
-
-          <hr/>
-          <%--</div>--%>
+              <%--</div>--%>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </sec:authorize>
+  <sec:authorize access="isAuthenticated()">
+    <div class="col-lg-4">
+      <div class="bs-component">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Panel info</h3>
+          </div>
+          <div class="panel-body" align="center">
+            Вы вошли как <sec:authentication property="principal.username"/><br><br>
+            <a href="<c:url value="/j_spring_security_logout" />">
+              <button type="button" class="btn btn-primary btn-lg">Выйти</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sec:authorize>
 </div>
 
 <!--content-->
@@ -176,5 +194,6 @@
   </div>
 </div>
 </div>
+
 
 

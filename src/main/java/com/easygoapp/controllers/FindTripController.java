@@ -17,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,8 +56,8 @@ public class FindTripController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String showResult(@ModelAttribute FindTripObject dto, Model model) throws ParseException {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User driver = userService.getByLogin(authentication.getName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User driver = userService.getByLogin(authentication.getName());
 
         //-----------------------GETTING DATES-------------------------------
 

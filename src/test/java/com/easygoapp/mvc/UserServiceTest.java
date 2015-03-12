@@ -5,9 +5,6 @@ import com.easygoapp.domain.User;
 import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
-import junit.framework.Assert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by Admin on 04.03.15.
  */
@@ -29,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 @ContextConfiguration(classes = RootConfig.class)
 public class UserServiceTest {
+
     @Autowired
     private UserService userService;
 
@@ -44,7 +40,7 @@ public class UserServiceTest {
 //    }
 
     @Test
-    public void testSave(){
+    public void testSave() {
         User user = new User();
         user.setName("John Doe");
         user.setEmail("john@doe.us");
@@ -59,7 +55,6 @@ public class UserServiceTest {
         user.setUserRoles(userRoles);
         User saved = userService.save(user);
         userService.findOne(saved.getId());
-
     }
 
 //    @After
