@@ -8,6 +8,8 @@ import com.easygoapp.repository.TripRepository;
 import com.easygoapp.repository.UserRepository;
 import com.easygoapp.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Created by Станислав on 28.02.2015.
@@ -34,6 +39,9 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Autowired
     private PassengerNodePointRepository passengerNodePointRepository;
 
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+
     @Override
     public List<Trip> getBetweenStartAndEnd(Long id, String start, String end) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -48,12 +56,21 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
         Iterator iterator = trips.iterator();
         while (iterator.hasNext()) {
+			boolean flag = false;
             Trip trip = (Trip) iterator.next();
-            if (id.equals(trip.getDriver().getId())) {
-                iterator.remove();
-            }
-            trip.getPassengerNodePoints().size();
-            trip.getCompanions().size();
+			if (id.equals(trip.getDriver().getId())) {
+				iterator.remove();
+			}
+			trip.getPassengerNodePoints().size();
+			trip.getCompanions().size();
+			for (User user: trip.getCompanions()){
+				if (user.getId().equals(id)){
+					flag = true;
+				}
+			}
+			if (flag){
+				iterator.remove();
+			}
         }
         return trips;
     }
@@ -181,13 +198,35 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Override
     @Transactional
-    public void cancelTrip(Trip trip) {
+    public void cancelTrip(Long id) throws MessagingException {
+		Trip trip = findOneEager(id);
         List<User> companions = trip.getCompanions();
-        if (companions.size() > 1) {
+        if (companions.size() > 0) {
             for (User companion : companions) {
-                //TODO passengers notification
+				sendMessage(companion, trip);
             }
         }
         tripRepository.delete(trip);
     }
+
+	private void sendMessage(User companion, Trip trip) throws MessagingException {
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessageHelper mailMsg = new MimeMessageHelper(mimeMessage);
+		mailMsg.setFrom("easygodndz@gmail.com");
+		mailMsg.setTo(companion.getEmail());
+		mailMsg.setSubject("Водитель отменил поездку");
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Добрый день уважаемый ");
+		stringBuilder.append(companion.getName());
+		stringBuilder.append(". Мы очень рады, что Вы являетесь пользователем нашего");
+		stringBuilder.append(" проекта Easygo Днепродзержинск.\n");
+		stringBuilder.append("Извещаем Вас о том, что водитель отменил поездку: ");
+		stringBuilder.append(trip.getStartTime());
+		stringBuilder.append("\nПриносим извинения за доставленные неудобства. Чтобы перейти к поиску новой поездки,");
+		stringBuilder.append("пройдите по следующей ссылке: http://localhost:8080/");
+		stringBuilder.append("\n\n\nС уважением, администрация Easygo Днепродзержинск");
+		stringBuilder.append("\nБудем рады Вашим пожеланиям и отзывам о нашем проекте. Напишите нам easygodndz@gmail.com");
+		mailMsg.setText(stringBuilder.toString());
+		mailSender.send(mimeMessage);
+	}
 }

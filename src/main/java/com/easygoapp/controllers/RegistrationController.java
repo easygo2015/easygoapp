@@ -44,11 +44,6 @@ public class RegistrationController {
             String str = user.getCar().substring(4);
             user.setCar(str);
         }
-        UserRole userRole = new UserRole();
-        userRole.setRole("ROLE_USER");
-        List<UserRole> userRoles = new ArrayList<UserRole>();
-        userRoles.add(userRole);
-        user.setUserRoles(userRoles);
         userService.save(user);
         if (user.getCar() == null) {
             user.setCar("");

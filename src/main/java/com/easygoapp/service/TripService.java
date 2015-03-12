@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 /**
  * Created by Станислав on 28.02.2015.
  */
@@ -34,5 +36,5 @@ public interface TripService extends AbstractCrudService<Trip, Long> {
 
     Trip modifyTrip(Trip trip);
 
-    void cancelTrip(Trip trip);
+    void cancelTrip(Long id) throws MessagingException;
 }

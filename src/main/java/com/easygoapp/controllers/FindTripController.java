@@ -57,11 +57,11 @@ public class FindTripController {
     @RequestMapping(method = RequestMethod.POST)
     public String showResult(@ModelAttribute FindTripObject dto, Model model) throws ParseException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User driver = userService.getByLogin(authentication.getName());
+        User user = userService.getByLogin(authentication.getName());
 
         //-----------------------GETTING DATES-------------------------------
 
-        List<Trip> trips = tripService.getBetweenStartAndEnd(driver.getId(), dto.getStartTime(), dto.getEndTime());
+        List<Trip> trips = tripService.getBetweenStartAndEnd(user.getId(), dto.getStartTime(), dto.getEndTime());
 
         //-----------------------SAVE NEEDED POINTS-------------------------------
         List<PassengerNodePoint> usersPoints;

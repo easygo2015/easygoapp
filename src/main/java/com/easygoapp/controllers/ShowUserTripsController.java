@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 /**
  * Created by Markov on 08.03.2015.
  */
@@ -44,8 +46,8 @@ public class ShowUserTripsController {
     }
 
     @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
-    public String deleteTrip(@RequestParam("id") long id) {
-        tripService.delete(id);
+    public String deleteTrip(@RequestParam("id") long id) throws MessagingException {
+        tripService.cancelTrip(id);
         return "redirect:/user";
     }
 

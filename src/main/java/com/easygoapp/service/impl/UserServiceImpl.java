@@ -1,11 +1,15 @@
 package com.easygoapp.service.impl;
 
 import com.easygoapp.domain.User;
+import com.easygoapp.domain.UserRole;
 import com.easygoapp.repository.UserRepository;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Станислав on 28.02.2015.
@@ -25,15 +29,20 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    @Override
-    public User save(User user) {
-        if (user.isNew()) {
-            String cryptedPassword = encoder.encode(user.getPassword());
-            user.setPassword(cryptedPassword);
-        }
-        userRepository.save(user);
-        return user;
-    }
+	@Override
+	public User save(User user) {
+		if (user.isNew()) {
+			String cryptedPassword = encoder.encode(user.getPassword());
+			user.setPassword(cryptedPassword);
+		}
+		UserRole userRole = new UserRole();
+		userRole.setRole("ROLE_USER");
+		List<UserRole> userRoles = new ArrayList<UserRole>();
+		userRoles.add(userRole);
+		user.setUserRoles(userRoles);
+		userRepository.save(user);
+		return user;
+	}
 
     @Override
     public User getByLogin(String login) {
