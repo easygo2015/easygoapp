@@ -2,6 +2,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true" %>
+<link rel="stylesheet" href="/assets/css/style.css">
+
 
 <h1>Моя страница</h1>
 
@@ -10,20 +12,18 @@
     <div class="well bs-component">
       <div class="row">
         <div class="col-lg-6">
-          <p class="bg-info"><span class="glyphicon glyphicon-user"></span>&nbsp&nbsp${user.login}</p>
           <table class="table">
-            <thead>
-            <tr>
-              <th></th>
-              <th></th>
-            </tr>
-            </thead>
+
             <tbody>
-            <tr class="success">
+            <tr class="whiteBackground">
+                <td>Логин:</td>
+                <td>${user.login}</td>
+            </tr>
+            <tr class="whiteBackground">
               <td>Имя:</td>
               <td>${user.name}</td>
             </tr>
-            <tr class="active">
+            <tr class="whiteBackground">
               <td>Пол:</td>
               <td>
                 <c:choose>
@@ -36,15 +36,15 @@
                 </c:choose>
               </td>
             </tr>
-            <tr class="info">
+            <tr class="whiteBackground">
               <td>E-mail:</td>
               <td>${user.email}</td>
             </tr>
-            <tr class="warning">
+            <tr class="whiteBackground">
               <td>Телефон:</td>
               <td>${user.phoneNumber}</td>
             </tr>
-            <tr class="success">
+            <tr class="whiteBackground">
               <td>Машина:</td>
               <td>
                 <c:choose>
@@ -61,26 +61,23 @@
           </table>
         </div>
         <div class="col-lg-6">
-          <div class="btn-group-vertical btn-block center-block">
-            <a class="btn btn-primary" href="/user/showTrips">Мои поездки</a>
-            <a class="btn btn-success" href="/user/findTrip">Найти поездку</a>
-            <c:choose>
-              <c:when test="${empty user.car}">
-              </c:when>
-              <c:otherwise>
-                <a class="btn btn-info" href="/user/createTrip">Создать поездку</a>
-              </c:otherwise>
-            </c:choose>
-            <a class="btn btn-warning" href="/user/editProfile">Редактировать профиль</a>
-          </div>
+            <div class="list-group">
+                <p class="list-group-item list-group-item-info">
+                    Меню
+                </p>
+                <a href="/user/showTrips" class="list-group-item">Мои поездки</a>
+                <a href="/user/findTrips" class="list-group-item">Найти поездку</a>
+                <c:choose>
+                    <c:when test="${empty user.car}">
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/user/createTrip" class="list-group-item">Создать поездку</a>
+                    </c:otherwise>
+                </c:choose>
+                <a href="/user/editProfile" class="list-group-item">Редактировать профиль</a>
+            </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<a href="<c:url value="/j_spring_security_logout" />">
-  <button type="button" class="btn btn-primary btn-lg">Logout</button>
-</a>
-</div>
-</body>
-</html>
