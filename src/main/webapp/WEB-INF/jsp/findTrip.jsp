@@ -24,10 +24,13 @@
 
     <%----%>
     var map;
+    var markers = [];
+    var x = [];
+
     function initialize() {
-        var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
+        var myLatlng = new google.maps.LatLng(48.516057, 34.61226);
         var mapOptions = {
-            zoom: 10,
+            zoom: 11,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -57,7 +60,7 @@
     });
 
     $(function(){
-        var x = [
+        x = [
             <c:forEach var="point" items="${points}" varStatus="status">
             {lat: "${point.latitude}", lng: "${point.longitude}", des:"${point.description}"},
             </c:forEach>
@@ -75,9 +78,60 @@
                             map: map,
                             title: dess
                         });
+                markers.push(marker);
             }
         }
+
+
         google.maps.event.addDomListener(window, 'load', function(){setMarkers(map, x)});
+    });
+
+//    Прячет все маркеры на карте
+    $(function(){
+        // Sets the map on all markers in the array.
+        function setAllMap(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        $('#hidemarkers').on('click', function(){
+                    alert("Вы нажали на КНОПКУ");
+                    // Removes the markers from the map, but keeps them in the array.
+                    setAllMap(null);
+                }
+        )
+    });
+
+//    Добавление маркера по нажатию на чекбокс
+
+    $(document).ready(function(){
+        $("input[type='checkbox']").change(function(){
+            var $this = $(this);
+            if($this.is(':checked')){
+                var marker;
+                alert("checkbox ON " + $this.val());
+                for (var i = 0; i <= x.length; i++) {
+                    var element = $this.val() - 1;
+                    if (element == i){
+                        var pleace = x[i];
+                        var latt = pleace.lat;
+                        var long = pleace.lng;
+                        var dess = pleace.des;
+                        var myLatLng = new google.maps.LatLng(latt, long);
+                        marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: dess
+                        });
+                    }
+                }
+            }else{
+                alert("checkbox OFF");
+
+            }
+
+        });
     });
 
 </script>
@@ -104,12 +158,10 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <%--<h2>Map</h2>--%>
-
-
-
-
                         <div id="map-canvas" style="height:400px; width:100%"></div>
-                            <div id="map"></div>
+                            <div id="map">
+                                <input id="hidemarkers" type=button value="Hide Markers">
+                            </div>
                             <div id="map1"></div>
                             <div id="map2"></div>
                     </div>
@@ -122,7 +174,7 @@
     <div class="row">
         <div class="col-lg-4">
             <%--Forms--%>
-            <form:form method="post" modelAttribute="dto">
+            <form:form id="formfind" method="post" modelAttribute="dto">
                 <div class="bs-component">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -178,11 +230,6 @@
                                     <input type="checkbox" name="passengerNodePoints[${status.index}].id"
                                            value="${point.id}"/>
                                     <c:out value="${point.description}"/><br>
-                                    <%--<c:set value="${point.description}" var = "descrypt"></c:set>--%>
-                                    <%--<c:out value="${point.latitude}"/><br>--%>
-                                    <%--<c:set value="${point.latitude}" var = "latSpan"></c:set>--%>
-                                    <%--<c:out value="${point.longitude}"/><br>--%>
-                                    <%--<c:set value="${point.longitude}" var = "lngSpan"></c:set>--%>
                                 </c:if>
                             </c:forEach>
                         </div>
