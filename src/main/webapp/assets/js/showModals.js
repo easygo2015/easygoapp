@@ -1,6 +1,8 @@
 $(document).ready(function () {
     var animationFadeInDown = 'animated fadeInDown';
     var animationFadeOutUp = 'animated fadeOutUp';
+    var animationFadeIn = 'animated fadeIn';
+    var animationFadeOut = 'animated fadeOut';
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
     $('#deleteProfile').on('click', function (event) {
         $('#deleteContent').toggleClass('displayNone', false);
@@ -16,18 +18,13 @@ $(document).ready(function () {
         });
         event.preventDefault();
     });
-    $('#continue').on('mouseover', function (event) {
-        $(this).addClass('animated bounce').one(animationEnd, function () {
-            $(this).removeClass('animated bounce');
-        });
-    });
     $('#changePassword').on('click', function (event) {
         $('#changeContent').toggleClass('displayNone', false);
         $('#changeContent').addClass(animationFadeInDown).one(animationEnd, function () {
             $(this).removeClass(animationFadeInDown);
         });
         contentTriger = false;
-        //event.preventDefault();
+        event.preventDefault();
     });
     $('#cancel').on('click', function (event) {
         $('#changeContent').addClass(animationFadeOutUp).one(animationEnd, function () {
@@ -36,5 +33,15 @@ $(document).ready(function () {
         });
         event.preventDefault();
     });
+    var message = $('#message');
+    if(!message.hasClass("displayNone")){
+        message.addClass(animationFadeInDown).one(animationEnd, function(){
+            $(this).removeClass(animationFadeIn);
+            $(this).addClass(animationFadeOut).one(animationEnd, function(){
+                $(this).removeClass(animationFadeOut);
+            });
+            $(this).addClass("displayNone");
+        });
+    }
 
 });
