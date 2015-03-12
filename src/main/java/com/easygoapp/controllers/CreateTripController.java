@@ -60,8 +60,6 @@ public class CreateTripController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
     public String saveTrip(@ModelAttribute Trip trip, String startDate, Model model) throws ParseException {
-//        //here must be current user from session
-//        User driver = userService.getByLogin("Markov");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User driver = userService.getByLogin(authentication.getName());
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -70,9 +68,6 @@ public class CreateTripController {
         Timestamp start = new Timestamp(time);
         trip.setStartTime(start);
         trip.setDriver(driver);
-        List<User> companions = new ArrayList<>();
-        companions.add(driver);
-        trip.setCompanions(companions);
         List<PassengerNodePoint> points = trip.getPassengerNodePoints();
         Iterator iterator = points.iterator();
         while (iterator.hasNext()) {

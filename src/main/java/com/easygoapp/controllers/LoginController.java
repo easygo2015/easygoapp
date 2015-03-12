@@ -42,8 +42,6 @@ public class LoginController {
     @RequestMapping(value = "/user**", method = RequestMethod.GET)
     public ModelAndView dbaPage() {
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Hello World");
-        model.addObject("message", "This is protected page - USER Page!");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getByLogin(authentication.getName());
         model.addObject("user", currentUser);
