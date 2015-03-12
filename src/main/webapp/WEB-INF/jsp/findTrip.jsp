@@ -81,8 +81,6 @@
                 markers.push(marker);
             }
         }
-
-
         google.maps.event.addDomListener(window, 'load', function(){setMarkers(map, x)});
     });
 
