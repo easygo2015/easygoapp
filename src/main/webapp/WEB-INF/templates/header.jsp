@@ -12,22 +12,21 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-left">
-                        <div class="col-lg-4 col-xs-6" style="margin-top:5%; vertical-align: middle">
+                        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-6" style="margin-top:5%; vertical-align: middle">
                             <a href="/">
                                 <img class="content img-responsive" src="/assets/img/logo4.png">
                             </a>
                         </div>
-                        <div class="col-lg-6 col-xs-6" style="margin-left: 5%; margin-top: 2%">
+                        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-8" style="margin-left: 5%; margin-top: 2%">
                             <img class="content img-responsive" src="/assets/img/banner_header.png">
                         </div>
                     </div>
-
                     <div class="bs-component">
-                        <div class="navbar-right col-lg-2 col-xs-12" id="navbar" style="margin-right:3%">
+                        <div class="navbar-right col-lg-2 col-md-4 col-sm-8 col-xs-12" id="navbar" style="margin-right:3%">
                             <ul class="nav navbar-btn">
                                 <li>
                                     <sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
-                                        <a>
+                                        <a href="/registration">
                                             <button type="button" class="btn btn-info btn-block"
                                                     aria-label="Right Align">
                                                 <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
@@ -45,10 +44,10 @@
                                             </a>
                                         </a>
                                     </sec:authorize>
-                                    <a>
+                                    <a href="/about">
                                         <button type="button" class="btn btn-info btn-block" aria-label="Right Align">
-                                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                            Контакты
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            О проекте
                                         </button>
                                     </a>
                                 </li>

@@ -150,4 +150,4 @@
 </div>
 
 
-<script src="assets/js/validate.js"></script>
+<script src="/assets/js/validate.js"></script>
