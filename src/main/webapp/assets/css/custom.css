@@ -1,0 +1,12 @@
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 150%;
+}
+#hidden{
+    display: none;
+}
+
+#visible {
+    display: block;
+}
