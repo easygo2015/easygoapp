@@ -28,7 +28,8 @@
     var x = [];
 
     function initialize() {
-        var myLatlng = new google.maps.LatLng(48.516057, 34.61226);
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var myLatlng = new google.maps.LatLng(48.536764, 34.571143);
         var mapOptions = {
             zoom: 11,
             center: myLatlng,
@@ -36,9 +37,9 @@
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
-
     google.maps.event.addDomListener(window, 'load', initialize);
 
+//    для календаря
     $(function () {
         $('#datetimepicker1').datetimepicker(
                 {
@@ -58,6 +59,8 @@
                 }
         );
     });
+
+//    получение и отображение все точек из объекта
 
     $(function(){
         x = [
@@ -94,7 +97,7 @@
         }
 
         $('#hidemarkers').on('click', function(){
-                    alert("Вы нажали на КНОПКУ");
+//                    alert("Вы нажали на КНОПКУ");
                     // Removes the markers from the map, but keeps them in the array.
                     setAllMap(null);
                 }
@@ -104,40 +107,39 @@
 //    Добавление маркера по нажатию на чекбокс
 
     $(document).ready(function(){
+
         $("input[type='checkbox']").change(function(){
             var $this = $(this);
+            var element = $this.val() - 1;
+            var marker;
             if($this.is(':checked')){
-                var marker;
-                alert("checkbox ON " + $this.val());
-                for (var i = 0; i <= x.length; i++) {
-                    var element = $this.val() - 1;
+                for (var i = 0; i <= markers.length; i++) {
                     if (element == i){
-                        var pleace = x[i];
-                        var latt = pleace.lat;
-                        var long = pleace.lng;
-                        var dess = pleace.des;
-                        var myLatLng = new google.maps.LatLng(latt, long);
-                        marker = new google.maps.Marker({
-                            position: myLatLng,
-                            map: map,
-                            title: dess
-                        });
+                        markers[i].setMap(map);
+
                     }
                 }
             }else{
-                alert("checkbox OFF");
-
+                for (var i = 0; i <= markers.length; i++) {
+                    if (element == i){
+                        markers[i].setMap(null);
+                    }
+                }
             }
-
         });
     });
+
+
+
+
+
+
 
 </script>
 
 
 
 <%----%>
-
 
 <div class="bs-docs-section">
 
@@ -206,10 +208,10 @@
                         Выберите подходящий Вам маршрут!<br/>
                         Левый берег:
                         <hr/>
-                        <div class="h5">
+                        <div class="h5" id="start">
                             <c:forEach var="point" items="${points}" varStatus="status">
                                 <c:if test="${point.isLeft()}">
-                                    <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                                    <input type="checkbox"  name="passengerNodePoints[${status.index}].id"
                                            value="${point.id}"/>
                                     <c:out value="${point.description}"/><br>
                                 </c:if>
@@ -222,10 +224,10 @@
                         Выберите подходящий Вам маршрут!<br/>
                         Правый берег:
                         <hr/>
-                        <div class="h5">
+                        <div class="h5" id="end">
                             <c:forEach var="point" items="${points}" varStatus="status">
                                 <c:if test="${!point.isLeft()}">
-                                    <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                                    <input type="checkbox"  name="passengerNodePoints[${status.index}].id"
                                            value="${point.id}"/>
                                     <c:out value="${point.description}"/><br>
                                 </c:if>
@@ -238,8 +240,8 @@
             </form:form>
 </div>
 
-    <%--Таблица для вывода--%>
-    <div class="bs-docs-section">
+<%--Таблица для вывода--%>
+<div class="bs-docs-section">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
