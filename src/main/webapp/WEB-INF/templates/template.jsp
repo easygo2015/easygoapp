@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="max-width: 1480px">
     <%--header--%>
     <t:insertAttribute name="header"/>
     <%--<script type="text/javascript">breadcrumbs()</script>--%>

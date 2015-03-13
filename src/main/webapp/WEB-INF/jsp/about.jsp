@@ -55,7 +55,7 @@
                                 <button type="button" class="btn btn-primary btn-md">Вернуться на главную</button>
                             </a>
                             <a href="/registration">
-                                <button type="button" class="btn btn-primary btn-md">Зарегестрироваться прямо сейчас</button>
+                                <button type="button" class="btn btn-primary btn-md">Зарегистрироваться прямо сейчас</button>
                             </a>
                         </div>
                         <div class="col-lg-6 col-xs-12">
