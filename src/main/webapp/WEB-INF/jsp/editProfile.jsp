@@ -11,6 +11,7 @@
 <c:set var="css" value="/assets/css/"/>
 <script src="${js}validate.js"></script>
 <script src="${js}showModals.js"></script>
+<script src="${js}validatePassword.js"></script>
 <link rel="stylesheet" href="${css}animate.css">
 <link rel="stylesheet" href="${css}style.css">
 <h1>Редактировать профиль</h1>
@@ -18,7 +19,7 @@
         <div class="well bs-component">
             <div class="row">
                 <div class="col-lg-7">
-                    <sf:form class="form-horizontal" method="post" modelAttribute="user" role="form">
+                    <sf:form class="form-horizontal" method="post" modelAttribute="user" role="form" id="form">
                         <fieldset>
                             <sf:input path="password" type="hidden"/>
                             <sf:input path="login" type="hidden"/>
@@ -65,7 +66,7 @@
                         </fieldset>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" id="send" class="btn btn-info pull-right">Сохранить</button>
+                                <button type="submit" id="sendChanges" class="btn btn-info pull-right">Сохранить</button>
                             </div>
                         </div>
                     </sf:form>
@@ -93,35 +94,48 @@
                             <p class="panel-title">Смена пароля</p>
                         </div>
                         <div class="panel-body">
-                            <sf:form role="form" method="post" modelAttribute="pass" action="/user/editProfile/changePassword">
+                            <sf:form id="passForm" role="form" method="post" modelAttribute="pass" action="/user/editProfile/changePassword">
                                 <fieldset>
-                                    <div class="form-group form-group-sm" id="blockoldpass">
+                                    <div class="form-group form-group-sm" id="currentPasswordBlock" >
                                         <label for="currentPassword"><small>Текущий пароль:</small></label>
-                                        <sf:input path="currentPassword" type="password" class="form-control input-sm" id="currentPassword" placeholder="Введите текущий пароль"/>
+                                        <sf:input path="currentPassword" id="currentPassword" type="password" class="form-control input-sm" placeholder="Введите текущий пароль"/>
+                                        <span id="currentPassError" class="center-block hidden text-danger"> пароль слишком короткий, минимум 3 символа </span>
                                     </div>
-                                    <div class="form-group form-group-sm" id="blockpassword">
-                                        <label for="password"><small>Новый пароль:</small></label>
-                                            <sf:input path="newPassword" type="password" class="form-control input-sm" id="password" placeholder="Введите новый пароль"/>
+                                    <div class="form-group form-group-sm" id="newPasswordBlock">
+                                        <label for="newPassword"><small>Новый пароль:</small></label>
+                                        <sf:input path="newPassword" id="newPassword" type="password" class="form-control input-sm"  placeholder="Введите новый пароль"/>
+                                        <span id="passwordError" class="center-block hidden text-danger"> пароль слишком короткий, минимум 3 символа </span>
                                     </div>
-                                    <div class="form-group form-group-sm" id="blockcompare">
-                                        <label for="compas"><small>Подтверждение:</small></label>
-                                        <input type="password" class="form-control input-sm" id="compas" placeholder="Подтвердите новый пароль">
+                                    <div class="form-group form-group-sm" id="repeatPasswordBlock">
+                                        <label for="repeatPassword"><small>Подтверждение:</small></label>
+                                        <input type="password" class="form-control input-sm" name="compas" id="repeatPassword" placeholder="Подтвердите новый пароль">
+                                        <span id="comError" class="center-block hidden text-danger"> пароль не совпадает </span>
                                     </div>
                                     <div class="form-group form-group-sm pull-right">
                                         <button type="reset" class="btn btn-sm btn-warning" id="cancel">Отмена</button>
-                                        <button type="submit" class="btn btn-sm btn-info" id="sendPass" onclick="showMessage()">Сохранить</button>
+                                        <button type="submit" class="btn btn-sm btn-info" id="sendPass">Сохранить</button>
                                     </div>
                                 </fieldset>
                             </sf:form>
                         </div>
                     </div>
-                    <c:set var="classDisplay" value="displayNone"></c:set>
-                    <c:if test="${not empty mes}">
-                        <c:set var="classDisplay" value=""></c:set>
-                    </c:if>
-                    <div id="message" class="${classDisplay} alert alert-success" role="alert">
+                    <c:set var="classSuccess" value="displayNone"></c:set>
+                    <c:set var="classFail" value="displayNone"></c:set>
+                    <c:choose>
+                        <c:when test="${mes=='profit'}">
+                            <c:set var="classSuccess" value=""></c:set>
+                        </c:when>
+                        <c:when test="${mes=='fail'}">
+                            <c:set var="classFail" value=""></c:set>
+                        </c:when>
+                    </c:choose>
+                    <div id="successMessage" class="${classSuccess} alert alert-success" role="alert">
                         <p>Password successfully changed!</p>
                     </div>
+                    <div id="errorMessage" class="${classFail} alert alert-danger" role="alert">
+                        <p>You entered wrong current password! Please try again.</p>
+                    </div>
+
                 </div>
             </div>
         </div>

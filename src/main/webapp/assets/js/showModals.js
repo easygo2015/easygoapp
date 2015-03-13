@@ -23,7 +23,6 @@ $(document).ready(function () {
         $('#changeContent').addClass(animationFadeInDown).one(animationEnd, function () {
             $(this).removeClass(animationFadeInDown);
         });
-        contentTriger = false;
         event.preventDefault();
     });
     $('#cancel').on('click', function (event) {
@@ -33,7 +32,17 @@ $(document).ready(function () {
         });
         event.preventDefault();
     });
-    var message = $('#message');
+    var message = $('#successMessage');
+    if(!message.hasClass("displayNone")){
+        message.addClass(animationFadeInDown).one(animationEnd, function(){
+            $(this).removeClass(animationFadeIn);
+            $(this).addClass(animationFadeOut).one(animationEnd, function(){
+                $(this).removeClass(animationFadeOut);
+            });
+            $(this).addClass("displayNone");
+        });
+    }
+    var message = $('#errorMessage');
     if(!message.hasClass("displayNone")){
         message.addClass(animationFadeInDown).one(animationEnd, function(){
             $(this).removeClass(animationFadeIn);

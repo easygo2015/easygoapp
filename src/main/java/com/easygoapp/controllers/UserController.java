@@ -66,15 +66,18 @@ public class UserController {
         User user = userService.getByLogin(authentication.getName());
         String currentPassword = pass.getCurrentPassword();
         String newPassword = pass.getNewPassword();
+        String message = "";
         System.out.println("current password from jsp "+user.getPassword());
         if (encoder.matches(currentPassword, user.getPassword())){
             user.setPassword(encoder.encode(newPassword));
             userService.save(user);
+            message = "profit";
+        }else{
+            message = "fail";
         }
-        System.out.println(newPassword);
         modelAndView.setViewName("editProfile");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("mes","password changed successfully");
+        modelAndView.addObject("mes", message);
         System.out.println(pass.getNewPassword());
         System.out.println(pass.getCurrentPassword());
         System.out.println("post is working");

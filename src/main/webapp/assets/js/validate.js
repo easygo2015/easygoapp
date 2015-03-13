@@ -156,24 +156,6 @@ $(document).ready(function () {
             }
         },
 
-        'current': function () {
-            var name = $('#blockoldpass');
-            var pas = $('#compareCurrent');
-            var ele = $('#currentpassword');//
-            if (ele.val() === "" || (ele.val() != pas.val())) {
-                validate.errors = true;
-                name.removeClass('has-success').addClass('has-error has-feedback');
-                $('.glyphicon').remove();
-                ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-                $('#comError').removeClass('hidden').addClass('show');
-            } else {
-                name.removeClass('has-error').addClass('has-success has-feedback');
-                $('.glyphicon').remove();
-                ele.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
-                $('#comError').removeClass('show').addClass('hidden');
-            }
-        },
-
         'sendIt': function () {
             if (!validate.errors) {
                 $('#form').submit();
@@ -197,6 +179,15 @@ $(document).ready(function () {
         validate.phone();
         validate.password();
         validate.compas();
+        validate.sendIt();
+        return false;
+    });
+
+    $('#sendChanges').click(function () {
+        validate.errors = false;
+        validate.fullName();
+        validate.email();
+        validate.phone();
         validate.sendIt();
         return false;
     });
