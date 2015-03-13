@@ -130,23 +130,24 @@ ENGINE = InnoDB;
 -- Table `easygo_db`.`PASSENGER_LANDING`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `easygo_db`.`PASSENGER_LANDING` (
-  `id` BIGINT(20) NOT NULL,
-  `trip_id` BIGINT(20) NOT NULL,
-  `user_id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `trip_passenger_id` BIGINT(20) NOT NULL,
+  `passenger_id` BIGINT(20) NOT NULL,
   `description` VARCHAR(255) NULL DEFAULT 'нет описания',
   PRIMARY KEY (`id`),
-  INDEX `user_id_idx` (`user_id` ASC),
-  INDEX `trip_id_idx` (`trip_id` ASC),
-  CONSTRAINT `trip_id`
-    FOREIGN KEY (`trip_id`)
+  INDEX `trip_passenger_id` (`passenger_id` ASC),
+  INDEX `passenger_id` (`trip_passenger_id` ASC),
+  UNIQUE INDEX `id_unique` (`id` ASC),
+  CONSTRAINT `trip_passenger_id`
+    FOREIGN KEY (`trip_passenger_id`)
     REFERENCES `easygo_db`.`TRIP` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `user_id`
-    FOREIGN KEY (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `passenger_id`
+    FOREIGN KEY (`passenger_id`)
     REFERENCES `easygo_db`.`USER` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

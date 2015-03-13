@@ -100,6 +100,7 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
+            <div id="errorLeftBank"></div>
         </div>
       </div>
     </div>
@@ -116,9 +117,10 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
+            <div id="errorRightBank"></div>
         </div>
       </div>
-      <button type="submit" class="btn btn-info btn-lg btn-block" id="saveTrip">Сохранить</button>
+      <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">Сохранить</button>
       <br>
     </div>
     </form:form>
