@@ -66,7 +66,7 @@
                     Меню
                 </p>
                 <a href="/user/showTrips" class="list-group-item">Мои поездки</a>
-                <a href="/user/findTrips" class="list-group-item">Найти поездку</a>
+                <a href="/user/findTrip" class="list-group-item">Найти поездку</a>
                 <c:choose>
                     <c:when test="${empty user.car}">
                     </c:when>

@@ -65,7 +65,6 @@
         <tr>
           <th>№</th>
           <th>Время старта поездки</th>
-          <th>Количество свободных мест</th>
           <th>Стоимость проезда</th>
           <th>Маршрут</th>
           <th>Водитель</th>
@@ -75,7 +74,6 @@
           <tr>
             <td><c:out value="${count.index+1}"/></td>
             <td><c:out value="${trip.startTime}"/></td>
-            <td><c:out value="${trip.carCapacity}"/></td>
             <td><c:out value="${trip.price}"/></td>
             <td><c:forEach var="tripPoint" items="${trip.passengerNodePoints}">
               <div><c:out value="${tripPoint.description}"/></div>
