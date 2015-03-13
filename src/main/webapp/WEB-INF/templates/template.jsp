@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+  <c:set var="css" value="/assets/css/"/>
+  <c:set var="js" value="/assets/js/"/>
     <meta charset="UTF-8">
     <%--<title>EasyGo</title>--%>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +19,13 @@
     <script src="/assets/js/bootstrap.js"></script>
     <%--<script src="/assets/js/bootstrap.min.js"></script>--%>
     <script src="/assets/js/autoBreadcrumbs.js"></script>
+    <script src="${js}jquery-2.1.3.min.js"></script>
+    <script src="${js}bootstrap.min.js"></script>
+    <script src="${js}autoBreadcrumbs.js"></script>
     <!-- CSS  ================================================== -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/stickyFooter.css">
+    <link rel="stylesheet" href="${css}bootstrap.css">
+    <link rel="stylesheet" href="${css}stickyFooter.css">
+  <link rel="stylesheet" href="${css}background.css">
 </head>
 
 <body>

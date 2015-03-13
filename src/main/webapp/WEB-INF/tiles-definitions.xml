@@ -67,8 +67,18 @@
         <put-attribute name="footer" value=""/>
     </definition>
 
+  <definition name="error" extends="base">
+    <put-attribute name="header" value=""/>
+    <put-attribute name="body" value="/WEB-INF/jsp/error.jsp"/>
+    <put-attribute name="footer" value=""/>
+  </definition>
+
     <definition name="maps" extends="base">
         <put-attribute name="body" value="/WEB-INF/jsp/maps.jsp"/>
     </definition>
+
+  <definition name="about" extends="base">
+    <put-attribute name="body" value="/WEB-INF/jsp/about.jsp"/>
+  </definition>
 
 </tiles-definitions>
