@@ -154,3 +154,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+insert into user values(1, 'admin', 1, 'admin', 'admin', null, null, 'admin@easygo.com');
+insert into user_role values(1, 'admin', 'ROLE_ADMIN');
