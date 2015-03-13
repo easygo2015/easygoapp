@@ -24,7 +24,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView logged() {
+    public ModelAndView logged() throws Exception {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
         return model;
@@ -32,7 +32,7 @@ public class LoginController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin**", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
+    public ModelAndView adminPage()throws Exception {
         ModelAndView model = new ModelAndView();
         model.setViewName("admin");
         return model;
@@ -40,7 +40,7 @@ public class LoginController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/user**", method = RequestMethod.GET)
-    public ModelAndView dbaPage() {
+    public ModelAndView dbaPage() throws Exception {
         ModelAndView model = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getByLogin(authentication.getName());
@@ -52,14 +52,14 @@ public class LoginController {
 
     //for 403 access denied page
     @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesssDenied() {
+    public ModelAndView accesssDenied() throws Exception {
         ModelAndView model = new ModelAndView();
         model.setViewName("403");
         return model;
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public ModelAndView showPromo(){
+    public ModelAndView showPromo()throws Exception {
         ModelAndView modelAndView = new ModelAndView("about");
         return modelAndView;
     }

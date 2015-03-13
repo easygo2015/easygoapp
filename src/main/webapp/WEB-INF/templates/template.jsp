@@ -20,8 +20,8 @@
     <script src="${js}autoBreadcrumbs.js"></script>
     <!-- CSS  ================================================== -->
     <link rel="stylesheet" href="${css}bootstrap.css">
+    <link rel="stylesheet" href="${css}background.css">
     <link rel="stylesheet" href="${css}stickyFooter.css">
-  <link rel="stylesheet" href="${css}background.css">
 </head>
 
 <body>

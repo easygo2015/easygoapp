@@ -101,7 +101,7 @@
       </div>
     </div>
   </sec:authorize>
-  <sec:authorize access="isAuthenticated()">
+  <sec:authorize access="hasAnyRole('ROLE_USER')">
     <div class="col-lg-4 col-xs-12">
       <div class="bs-component">
         <div class="list-group">
@@ -113,6 +113,18 @@
       </div>
     </div>
   </sec:authorize>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+        <div class="col-lg-4 col-xs-12">
+            <div class="bs-component">
+                <div class="list-group">
+                    <p class="list-group-item list-group-item-info">
+                        Вы вошли как <sec:authentication property="principal.username"/>
+                    </p>
+                    <a href="/admin" class="list-group-item">Вернуться в Admin area</a>
+                </div>
+            </div>
+        </div>
+    </sec:authorize>
 </div>
 
 

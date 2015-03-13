@@ -1,12 +1,13 @@
 #banner {
-  max-width: 150%;
-  margin-left: 2%;
+    max-width: 150%;
+    margin-left: 2%;
+    margin-top: 2%;
 }
 
 #hidden {
-  display: none;
+    display: none;
 }
 
 #visible {
-  display: block;
+    display: block;
 }
