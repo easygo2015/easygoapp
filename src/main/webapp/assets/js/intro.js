@@ -227,7 +227,6 @@
                 fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g,
                         '').replace(/^\s+|\s+$/g, '');
             }
-            ;
         }
         //clean listeners
         if (window.removeEventListener) {
@@ -351,7 +350,6 @@
                     fixParents[i].className = fixParents[i].className.replace(/introjs-fixParent/g,
                             '').replace(/^\s+|\s+$/g, '');
                 }
-                ;
             }
 
             //remove old classes

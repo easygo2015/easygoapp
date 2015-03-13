@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="/assets/css/stickyFooter.css">
 
 
-<footer class="footer">
-  <div class="row">
+
+  <div class="row footer">
     <div class="col-lg-11 col-sx-12">
       <div class="bs-component">
         <div class="well">
@@ -21,4 +21,4 @@
       </div>
     </div>
   </div>
-</footer>
+

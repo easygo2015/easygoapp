@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${js}validateTrip.js"></script>
 <link rel="stylesheet" href="${css}bootstrap.css">
 <link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
-<link rel="stylesheet" href="${css}custom.css"/>
+
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
