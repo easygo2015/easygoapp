@@ -4,8 +4,9 @@ html { background: transparent;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color:#fff;
+  color: transparent;
 }
-body{
+
+body {
   background: transparent;
 }
