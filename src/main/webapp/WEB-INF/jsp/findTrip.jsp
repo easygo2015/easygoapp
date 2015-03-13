@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${js}moment-with-locales.min.js"></script>
 <%--<script src="${js}bootstrap.js"></script>--%>
 <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="${js}validateTrip.js"></script>
+<%--<script type="text/javascript" src="${js}validateTrip.js"></script>--%>
 <%--<link rel="stylesheet" href="${css}bootstrap.css">--%>
 <link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" href="${css}custom.css"/>
@@ -19,7 +19,119 @@
 
 <%----%>
 <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
-<script src="/assets/js/maps.js"></script>
+<%--<script src="/assets/js/maps.js"></script>--%>
+<script>
+    $(document).ready(function () {
+        var map;
+        var markers = [];
+        var x = [];
+
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(48.536764, 34.571143);
+            var mapOptions = {
+                zoom: 11,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        //    для календаря
+        $(function () {
+            $('#datetimepicker1').datetimepicker(
+                    {
+                        language: 'ru',
+                        defaultDate: new Date(),
+                        minDate: new Date()
+                    }
+            );
+        });
+
+        $(function () {
+            $('#datetimepicker2').datetimepicker(
+                    {
+                        language: 'ru',
+                        defaultDate: new Date(),
+                        minDate: new Date()
+                    }
+            );
+        });
+
+        //    получение и отображение все точек из объекта
+
+        $(function () {
+            x = [
+                <c:forEach var="point" items="${points}" varStatus="status">
+                {lat: "${point.latitude}", lng: "${point.longitude}", des: "${point.description}"},
+                </c:forEach>
+            ];
+
+            function setMarkers(map, locations) {
+                for (var i = 0; i < locations.length; i++) {
+                    var pleace = locations[i];
+                    var latt = pleace.lat;
+                    var long = pleace.lng;
+                    var dess = pleace.des;
+                    var myLatLng = new google.maps.LatLng(latt, long);
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        title: dess
+                    });
+                    markers.push(marker);
+                }
+            }
+
+            google.maps.event.addDomListener(window, 'load', function () {
+                setMarkers(map, x)
+            });
+        });
+
+        //    Прячет все маркеры на карте
+        $(function () {
+            // Sets the map on all markers in the array.
+            function setAllMap(map) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(map);
+                }
+            }
+
+            $('#hidemarkers').on('click', function () {
+//                    alert("Вы нажали на КНОПКУ");
+                        // Removes the markers from the map, but keeps them in the array.
+                        setAllMap(null);
+                    }
+            )
+        });
+
+        //    Добавление маркера по нажатию на чекбокс
+
+        $(document).ready(function () {
+
+            $("input[type='checkbox']").change(function () {
+                var $this = $(this);
+                var element = $this.val() - 1;
+                var marker;
+                if ($this.is(':checked')) {
+                    for (var i = 0; i <= markers.length; i++) {
+                        if (element == i) {
+                            markers[i].setMap(map);
+
+                        }
+                    }
+                } else {
+                    for (var i = 0; i <= markers.length; i++) {
+                        if (element == i) {
+                            markers[i].setMap(null);
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+
 <%----%>
 
 <div class="bs-docs-section">

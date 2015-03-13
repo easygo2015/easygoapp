@@ -166,7 +166,7 @@
     <div class="row">
         <div class="col-lg-4">
             <%--form--%>
-            <form:form method="post" modelAttribute="trip">
+            <form:form id="form" method="post" modelAttribute="trip">
             <div class="bs-component">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -209,6 +209,7 @@
                             <c:out value="${point.description}"/><br>
                         </c:if>
                     </c:forEach>
+                    <div id="#errorLeftBank"></div>
                 </div>
             </div>
         </div>
@@ -225,13 +226,13 @@
                             <c:out value="${point.description}"/><br>
                         </c:if>
                     </c:forEach>
+                    <div id="errorRightBank"></div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info btn-lg btn-block" id="saveTrip">Сохранить</button>
+            <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">Сохранить</button>
             <br>
         </div>
         </form:form>
-        <%--<a class="btn btn-large btn-success" id="startdemotour" onclick="introJs().start();" href="javascript:void(0);">Show me how</a>--%>
     </div>
 </div>
 

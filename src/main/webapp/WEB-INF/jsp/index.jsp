@@ -29,19 +29,19 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img class="img-responsive" src="${images}slider-img-1.jpg" alt="slider1">
+                                <img class="img-responsive" src="${images}slider-img-1-1300.jpg" alt="slider1">
 
                             </div>
                             <div class="item">
-                                <img class="img-responsive" src="${images}slider-img-2-rs.jpg" alt="slider2">
+                                <img class="img-responsive" src="${images}slider-img-2-1300.jpg" alt="slider2">
 
                             </div>
                             <div class="item">
-                                <img class="img-responsive" src="${images}slider-img-3.jpg" alt="slider3">
+                                <img class="img-responsive" src="${images}slider-img-3-1300.jpg" alt="slider3">
 
                             </div>
                             <div class="item">
-                                <img class="img-responsive" src="${images}slider-img-4.jpg" alt="slider4">
+                                <img class="img-responsive" src="${images}slider-img-4-1300.jpg" alt="slider4">
 
                                 <div class="carousel-caption">
                                 </div>
@@ -95,30 +95,8 @@
                                 <a class="btn btn-info btn-block" href="/registration">Регистрация</a>
                             </div>
                         </div>
-                        <div class="col-xs-12">
-                            <p>Регистрируясь на сайте</p>
-                        </div>
                     </fieldset>
                 </form>
-                    <%--</div>--%>
-
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <input type="password" class="form-control" id="inputEmail"
-                       name="j_password"
-                       placeholder="Пароль">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <button type="submit" class="btn btn-info btn-block">Вход</button>
-                <a class="btn btn-info btn-block" href="/registration">Регистрация</a>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-          <%--</div>--%>
 
       </div>
     </div>
