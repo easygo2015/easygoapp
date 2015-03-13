@@ -2,9 +2,7 @@ package com.easygoapp.controllers;
 
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
-import com.easygoapp.service.PassengerNodePointService;
-import com.easygoapp.service.TripService;
-import com.easygoapp.service.UserService;
+import com.easygoapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +32,13 @@ public class ShowUserTripsController {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+    @Autowired
+    private ThreadDeleteTrip threadDeleteTrip;
+
+    @Autowired
+    private ThreadDeclineTrip threadDeclineTrip;
+
+
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String showTrips(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -47,7 +52,10 @@ public class ShowUserTripsController {
 
     @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
     public String deleteTrip(@RequestParam("id") long id) throws MessagingException {
-        tripService.cancelTrip(id);
+        //USING THREAD TO DELETE TRIP AND AVOID WAISTING TIME
+        threadDeleteTrip.setId(id);
+        Thread thread = new Thread(threadDeleteTrip);
+        thread.start();
         return "redirect:/user";
     }
 
@@ -55,7 +63,11 @@ public class ShowUserTripsController {
     public String declineTrip(@RequestParam("id") long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
-        tripService.removeCompanionFromTrip(user.getId(), id);
+        //USING THREAD TO DECLINE TRIP AND AVOID WAISTING TIME
+        threadDeclineTrip.setUserId(user.getId());
+        threadDeclineTrip.setTripId(id);
+        Thread thread = new Thread(threadDeclineTrip);
+        thread.start();
         return "redirect:/user";
     }
 }

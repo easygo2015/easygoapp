@@ -206,7 +206,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 				sendMessage(companion, trip);
             }
         }
-        tripRepository.delete(trip);
+        tripRepository.delete(id);
     }
 
 	private void sendMessage(User companion, Trip trip) throws MessagingException {

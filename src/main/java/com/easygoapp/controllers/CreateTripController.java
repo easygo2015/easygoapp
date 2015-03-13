@@ -4,6 +4,7 @@ import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
+import com.easygoapp.service.ThreadCreateTrip;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class CreateTripController {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+    @Autowired
+    private ThreadCreateTrip threadCreateTrip;
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String createTrip(Model model) {
@@ -62,30 +66,12 @@ public class CreateTripController {
     public String saveTrip(@ModelAttribute Trip trip, String startDate, Model model) throws ParseException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User driver = userService.getByLogin(authentication.getName());
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        Date date = dateFormat.parse(startDate);
-        long time = date.getTime();
-        Timestamp start = new Timestamp(time);
-        trip.setStartTime(start);
-        trip.setDriver(driver);
-        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
-        Iterator iterator = points.iterator();
-        while (iterator.hasNext()) {
-            PassengerNodePoint point = (PassengerNodePoint) iterator.next();
-            if (point.getId() == null) {
-                iterator.remove();
-            }
-        }
-        tripService.save(trip);
+        threadCreateTrip.setDriver(driver);
+        threadCreateTrip.setStartDate(startDate);
+        threadCreateTrip.setTrip(trip);
+        Thread thread = new Thread(threadCreateTrip);
+        thread.start();
         model.addAttribute("user", driver);
-        return "user";
-    }
-
-    @RequestMapping(value = "/user/declineTrip", method = RequestMethod.GET)
-    public String declineTrip(@RequestParam("id") long id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = userService.getByLogin(auth.getName());
-        tripService.removeCompanionFromTrip(currentUser.getId(), id);
         return "user";
     }
 }
