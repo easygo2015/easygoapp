@@ -4,7 +4,6 @@ import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
 import com.easygoapp.service.PassengerNodePointService;
-import com.easygoapp.service.ThreadCreateTrip;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -43,9 +41,6 @@ public class CreateTripController {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
-    @Autowired
-    private ThreadCreateTrip threadCreateTrip;
-
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String createTrip(Model model) {
@@ -63,15 +58,24 @@ public class CreateTripController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public String saveTrip(@ModelAttribute Trip trip, String startDate, Model model) throws ParseException {
+    public String saveTrip(@ModelAttribute Trip trip, String startDate) throws ParseException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User driver = userService.getByLogin(authentication.getName());
-        threadCreateTrip.setDriver(driver);
-        threadCreateTrip.setStartDate(startDate);
-        threadCreateTrip.setTrip(trip);
-        Thread thread = new Thread(threadCreateTrip);
-        thread.start();
-        model.addAttribute("user", driver);
-        return "user";
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        Date date = dateFormat.parse(startDate);
+        long time = date.getTime();
+        Timestamp start = new Timestamp(time);
+        trip.setStartTime(start);
+        trip.setDriver(driver);
+        List<PassengerNodePoint> points = trip.getPassengerNodePoints();
+        Iterator iterator = points.iterator();
+        while (iterator.hasNext()) {
+            PassengerNodePoint point = (PassengerNodePoint) iterator.next();
+            if (point.getId() == null) {
+                iterator.remove();
+            }
+        }
+        tripService.save(trip);
+        return "redirect:/user";
     }
 }

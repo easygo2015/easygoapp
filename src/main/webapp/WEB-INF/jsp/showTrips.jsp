@@ -81,6 +81,7 @@
                         <td>
                             <div><c:out value=" Имя: ${trip.driver.name}, номер телефона:"/></div>
                             <div><c:out value=" ${trip.driver.phoneNumber}"/></div>
+                            <div><c:out value=" Машина: ${trip.driver.car}"/></div>
                         </td>
                         <td>
                             <a href="/user/showTrips/declineTrip?id=${trip.id}">
