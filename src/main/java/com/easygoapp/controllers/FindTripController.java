@@ -1,5 +1,6 @@
 package com.easygoapp.controllers;
 
+import com.easygoapp.domain.PassengerLanding;
 import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
@@ -78,15 +79,31 @@ public class FindTripController {
         List<PassengerNodePoint> allPoints = passengerNodePointService.findAll();
         model.addAttribute("dto", dto);
         model.addAttribute("points", allPoints);
-
         return "findTrip";
     }
 
-    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
-    public String saveTrip(@RequestParam("id") long id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.getByLogin(authentication.getName());
-        tripService.addPassenger(id, user.getId());
+//    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
+//    public String saveTrip(@RequestParam("id") long id, Model model) {
+//		model.addAttribute("landing", new PassengerLanding());
+//		model.addAttribute("trip", tripService.findOneEager(id));
+//        return "confirmBooking";
+//    }
+//
+//	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
+//	public String confirmBookingPlace(@ModelAttribute Trip trip, PassengerLanding passengerLanding){
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		User user = userService.getByLogin(authentication.getName());
+//		tripService.addPassenger(trip.getId(), user.getId(), passengerLanding);
+//		return "redirect:/user";
+//	}
+
+	    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
+   		public String saveTrip(@RequestParam("id") long id, Model model) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			User user = userService.getByLogin(authentication.getName());
+			PassengerLanding landing = new PassengerLanding();
+			landing.setDescription("Наше дело");
+			tripService.addPassenger(id, user.getId(), landing);
         return "redirect:/user";
     }
 }

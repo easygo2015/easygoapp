@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Станислав on 28.02.2015.
  */
 @Service
-@Repository
 @Transactional(readOnly = true)
 public class PassengerNodePointServiceImpl extends AbstractCrudServiceImpl<PassengerNodePoint, Long>
         implements PassengerNodePointService {

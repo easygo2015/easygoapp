@@ -1,5 +1,6 @@
 package com.easygoapp.service;
 
+import com.easygoapp.domain.PassengerLanding;
 import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
@@ -26,7 +27,7 @@ public interface TripService extends AbstractCrudService<Trip, Long> {
 
     void removeCompanionFromTrip(Long companionId, Long tripId);
 
-    void addPassenger(Long tripId, Long userId);
+    void addPassenger(Long tripId, Long userId, PassengerLanding landing);
 
     void addPassengerNodePoint(Long tripId, Long passengerNodePointId);
 

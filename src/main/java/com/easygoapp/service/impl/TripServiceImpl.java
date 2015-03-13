@@ -1,8 +1,10 @@
 package com.easygoapp.service.impl;
 
+import com.easygoapp.domain.PassengerLanding;
 import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
+import com.easygoapp.repository.PassengerLandingRepository;
 import com.easygoapp.repository.PassengerNodePointRepository;
 import com.easygoapp.repository.TripRepository;
 import com.easygoapp.repository.UserRepository;
@@ -38,6 +40,8 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     private UserRepository userRepository;
     @Autowired
     private PassengerNodePointRepository passengerNodePointRepository;
+	@Autowired
+	private PassengerLandingRepository passengerLandingRepository;
 
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -86,6 +90,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         Trip trip = super.findOne(id);
         trip.getCompanions().size();
         trip.getPassengerNodePoints().size();
+		trip.getPassengerLanding().size();
         return trip;
     }
 
@@ -104,6 +109,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         for (Trip trip : trips) {
             trip.getCompanions().size();
             trip.getPassengerNodePoints().size();
+			trip.getPassengerLanding().size();
         }
         return trips;
     }
@@ -116,6 +122,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         for (Trip trip : trips) {
             trip.getCompanions().size();
             trip.getPassengerNodePoints().size();
+			trip.getPassengerLanding().size();
         }
         return trips;
     }
@@ -139,14 +146,15 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Override
     @Transactional
-    public void addPassenger(Long tripId, Long userId) {
+    public void addPassenger(Long tripId, Long userId, PassengerLanding landing) {
         Trip currentTrip = findOneEager(tripId);
         User passenger = userRepository.getOne(userId);
-        List<User> companions = currentTrip.getCompanions();
-        companions.add(passenger);
+        currentTrip.getCompanions().add(passenger);
         currentTrip.setCarCapacity(currentTrip.getCarCapacity() - 1);
+		landing.setTrip(currentTrip);
+		landing.setUser(passenger);
+		passengerLandingRepository.save(landing);
         tripRepository.save(currentTrip);
-        //TODO driver notification
     }
 
     @Override
