@@ -57,4 +57,10 @@ public class LoginController {
         model.setViewName("403");
         return model;
     }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public ModelAndView showPromo(){
+        ModelAndView modelAndView = new ModelAndView("about");
+        return modelAndView;
+    }
 }

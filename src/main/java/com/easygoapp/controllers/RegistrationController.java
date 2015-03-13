@@ -6,9 +6,11 @@ import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +22,6 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-
-//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-//    public ModelAndView createUserForm(ModelAndView uiModel) {
-//        User user = new User();
-//        uiModel.addObject("user", user);
-//        uiModel.setViewName("registration");
-//        return uiModel;
-//    }
-
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String showRegistrationPage(Model model) {
         User user = new User();
@@ -37,7 +30,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user) throws Exception{
         if (user.getCar().equals("on,")) {
             user.setCar(null);
         } else {
@@ -50,4 +43,5 @@ public class RegistrationController {
         }
         return "userInfo";
     }
+
 }

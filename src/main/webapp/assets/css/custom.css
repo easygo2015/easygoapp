@@ -1,12 +1,12 @@
-.img-responsive {
-    display: block;
-    height: auto;
-    max-width: 150%;
+#banner {
+  max-width: 150%;
+  margin-left: 2%;
 }
-#hidden{
-    display: none;
+
+#hidden {
+  display: none;
 }
 
 #visible {
-    display: block;
+  display: block;
 }
