@@ -7,6 +7,8 @@
 <c:url value="/assets/js/" var="js"/>
 <c:url value="/assets/js/" var="css"/>
 
+<title>EasyGo</title>
+
 <!-- Slider -->
 
 <div class="row">
@@ -14,7 +16,6 @@
         <div class="bs-component">
             <div class="panel panel-default">
                 <div class="panel-body">
-
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                         <!-- Indicators -->
@@ -139,7 +140,7 @@
                     <p>
                         Вы наверняка знаете, какие «прекрасные» очереди необходимо простоять на маршрутку, чтобы уехать
                         на правый
-                        берег в утреннее время.
+                        берег в утреннее время.<br>
                         Главная задача нашего сервиса – облегчить жизнь:
                         Тому, кто добирается утром на работу на маршрутках.
                         Больше Вам не нужно будет вставать на час раньше, чтобы простоять «Великую» очередь на маршрутку
@@ -149,7 +150,7 @@
                     </p>
 
                     <h3>Что мы предлагаем?</h3>
-                    <h4>Зарегистрировавшись на нашем сайте. Вы сможете:</h4>
+                    <h4>Зарегистрировавшись на нашем сайте, Вы сможете:</h4>
 
                     <p>
                         Находить поездки в нужное для Вас время. Также Вы сможете указывать наиболее популярные места
@@ -172,34 +173,8 @@
             </div>
         </div>
     </div>
+</div>
 
-    <%--&lt;%&ndash;map google&ndash;%&gt;
-    <div class="col-lg-6 col-xs-12">
-      <div class="bs-component">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h2>Карта</h2>
-            <script
-                src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
-            <script>
-              var map;
-              function initialize() {
-                var mapOptions = {
-                  zoom: 8,
-                  center: new google.maps.LatLng(48.523117, 34.613683)
-                };
-                map = new google.maps.Map(document.getElementById('map-canvas'),
-                    mapOptions);
-              }
-              google.maps.event.addDomListener(window, 'load', initialize);
-            </script>
-            <div class="img-responsive" id="map-canvas" style="height:350px; width:620px"></div>
-          </div>
-        </div>
-      </div>
-    </div>--%>
-</div>
-</div>
 
 
 

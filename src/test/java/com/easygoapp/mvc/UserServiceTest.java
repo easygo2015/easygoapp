@@ -5,6 +5,7 @@ import com.easygoapp.domain.User;
 import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Admin on 04.03.15.
- */
+
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -39,27 +38,27 @@ public class UserServiceTest {
 //        userService.save(user);
 //    }
 
-    @Test
-    public void testSave() {
-        User user = new User();
-        user.setName("John Doe");
-        user.setEmail("john@doe.us");
-        user.setPhoneNumber("1234567");
-        user.setGender(Gender.MALE);
-        user.setLogin("john123");
-        user.setPassword("password");
-        UserRole userRole = new UserRole();
-        userRole.setRole("ROLE_USER");
-        List<UserRole> userRoles = new ArrayList<UserRole>();
-        userRoles.add(userRole);
-        user.setUserRoles(userRoles);
-        User saved = userService.save(user);
-        userService.findOne(saved.getId());
-    }
-
-//    @After
-//    public void finalizeForTest(){
-//        User user = userService.getByLogin("john123");
-//        userService.delete(user.getId());
+//    @Test
+//    public void testSave() {
+//        User user = new User();
+//        user.setName("John");
+//        user.setEmail("john@doe.us");
+//        user.setPhoneNumber("1234567");
+//        user.setGender(Gender.MALE);
+//        user.setLogin("admin");
+//        user.setPassword("admin");
+//        UserRole userRole = new UserRole();
+//        userRole.setRole("ROLE_ADMIN");
+//        List<UserRole> userRoles = new ArrayList<UserRole>();
+//        userRoles.add(userRole);
+//        user.setUserRoles(userRoles);
+//        User saved = userService.save(user);
+//        userService.findOne(saved.getId());
 //    }
+
+    @Test
+    public void finalizeForTest(){
+        User user = userService.getByLogin("boom1");
+        userService.delete(user.getId());
+    }
 }

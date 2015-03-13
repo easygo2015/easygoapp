@@ -13,6 +13,8 @@
 <script src="${js}showModals.js"></script>
 <link rel="stylesheet" href="${css}animate.css">
 <link rel="stylesheet" href="${css}style.css">
+<title>Редактировать профиль</title>
+
 <h1>Редактировать профиль</h1>
 
         <div class="well bs-component">
