@@ -33,8 +33,8 @@ import java.util.Objects;
 @Service
 public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> implements TripService {
 
-    @Autowired
     private TripRepository tripRepository;
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -126,6 +126,19 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         return trips;
     }
 
+    @Override
+    public List<Trip> findAllLastTripsForDriver(User user) {
+        long time = new Date().getTime();
+        Timestamp stamp = new Timestamp(time);
+        List<Trip> trips = tripRepository.findByDriverAndStartTimeLessThan(user, stamp);
+        for (Trip trip : trips) {
+            trip.getCompanions().size();
+            trip.getPassengerNodePoints().size();
+            trip.getPassengerLanding().size();
+        }
+        return trips;
+    }
+
     @Transactional
     @Override
     public void removeCompanionFromTrip(Long companionId, Long tripId) {
@@ -187,6 +200,11 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
         tripRepository.save(currentTrip);
     }
 
+    @Transactional
+    @Override
+    public void delete(Long id) throws MessagingException {
+        tripRepository.delete(id);
+    }
 
     @Override
     @Transactional

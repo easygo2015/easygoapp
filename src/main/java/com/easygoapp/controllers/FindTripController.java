@@ -99,14 +99,4 @@ public class FindTripController {
         tripService.addPassenger(tripId, user.getId(), passengerLanding);
         return "redirect:/user";
     }
-
-//	    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
-//   		public String saveTrip(@RequestParam("id") long id, Model model) {
-//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//			User user = userService.getByLogin(authentication.getName());
-//			PassengerLanding landing = new PassengerLanding();
-//			landing.setDescription("Наше дело");
-//			tripService.addPassenger(id, user.getId(), landing);
-//        return "redirect:/user";
-//    }
 }

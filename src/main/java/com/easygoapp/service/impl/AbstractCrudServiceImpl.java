@@ -4,6 +4,7 @@ import com.easygoapp.service.AbstractCrudService;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.mail.MessagingException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public abstract class AbstractCrudServiceImpl<T extends Persistable<PK>, PK exte
     }
 
     @Override
-    public void delete(PK id) {
+    public void delete(PK id) throws MessagingException {
         repository.delete(id);
     }
 }

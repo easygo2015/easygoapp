@@ -205,11 +205,11 @@ public class TripServiceTest {
 //
 //    }
 
-    @After
-    public void finalizeForTest() {
-        tripService.delete(trip_id);
-        userService.delete(driver_id);
-        userService.delete(passenger1_id);
-        userService.delete(passenger2_id);
-    }
+//    @After
+//    public void finalizeForTest() {
+//        tripService.delete(trip_id);
+//        userService.delete(driver_id);
+//        userService.delete(passenger1_id);
+//        userService.delete(passenger2_id);
+//    }
 }

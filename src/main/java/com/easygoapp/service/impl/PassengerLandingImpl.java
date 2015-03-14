@@ -12,8 +12,6 @@ import javax.transaction.Transactional;
 @Service
 public class PassengerLandingImpl extends AbstractCrudServiceImpl<PassengerLanding, Long> implements
                                                                                           PassengerLandingService {
-
-    @Autowired
     private PassengerLandingRepository passengerLandingRepository;
 
     @Autowired

@@ -2,6 +2,7 @@ package com.easygoapp.service;
 
 import org.springframework.data.domain.Persistable;
 
+import javax.mail.MessagingException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface AbstractCrudService<T extends Persistable<PK>, PK extends Seria
 
     public List<T> findAll();
 
-    public void delete(PK id);
+    public void delete(PK id) throws MessagingException;
 }
