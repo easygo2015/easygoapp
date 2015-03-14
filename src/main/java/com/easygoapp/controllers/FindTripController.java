@@ -39,6 +39,8 @@ public class FindTripController {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+    private Long tripId;
+
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String findTrip(Model model) {
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
@@ -82,28 +84,29 @@ public class FindTripController {
         return "findTrip";
     }
 
-//    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
-//    public String saveTrip(@RequestParam("id") long id, Model model) {
-//		model.addAttribute("landing", new PassengerLanding());
-//		model.addAttribute("trip", tripService.findOneEager(id));
-//        return "confirmBooking";
-//    }
-//
-//	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
-//	public String confirmBookingPlace(@ModelAttribute Trip trip, PassengerLanding passengerLanding){
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		User user = userService.getByLogin(authentication.getName());
-//		tripService.addPassenger(trip.getId(), user.getId(), passengerLanding);
-//		return "redirect:/user";
-//	}
-
-	    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
-   		public String saveTrip(@RequestParam("id") long id, Model model) {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.getByLogin(authentication.getName());
-			PassengerLanding landing = new PassengerLanding();
-			landing.setDescription("Наше дело");
-			tripService.addPassenger(id, user.getId(), landing);
-        return "redirect:/user";
+    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
+    public String saveTrip(@RequestParam("id") long id, Model model) {
+		model.addAttribute("landing", new PassengerLanding());
+		model.addAttribute("trip", tripService.findOneEager(id));
+        tripId = id;
+        return "confirmBooking";
     }
+
+	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
+	public String confirmBookingPlace(@ModelAttribute PassengerLanding passengerLanding){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getByLogin(authentication.getName());
+        tripService.addPassenger(tripId, user.getId(), passengerLanding);
+		return "redirect:/user";
+	}
+
+//	    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
+//   		public String saveTrip(@RequestParam("id") long id, Model model) {
+//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//			User user = userService.getByLogin(authentication.getName());
+//			PassengerLanding landing = new PassengerLanding();
+//			landing.setDescription("Наше дело");
+//			tripService.addPassenger(id, user.getId(), landing);
+//        return "redirect:/user";
+//    }
 }
