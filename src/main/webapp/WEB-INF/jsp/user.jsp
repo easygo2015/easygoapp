@@ -14,7 +14,6 @@
       <div class="row">
         <div class="col-lg-6">
           <table class="table">
-
             <tbody>
             <tr class="whiteBackground">
               <td>Логин:</td>

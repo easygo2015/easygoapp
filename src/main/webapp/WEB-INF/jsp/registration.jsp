@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <title>Регитрация</title>
 
 <div class="bs-docs-section">
@@ -109,8 +110,8 @@
 
               <div class="col-lg-10">
                 <form:input path="phoneNumber" type="text" class="form-control" name="phone" id="phone"
-                            placeholder="Пример: 8 050 333 22 11"/>
-                <span id="phoneError" class="center-block hidden text-danger"> пример: 8 050 333 22 11</span>
+                            placeholder="Пример: 050 333 22 11"/>
+                <span id="phoneError" class="center-block hidden text-danger"> пример: 050 333 22 11</span>
               </div>
             </div>
           </fieldset>
@@ -153,3 +154,9 @@
 
 
 <script src="/assets/js/validate.js"></script>
+<script src="/assets/js/jquery.maskedinput.js"></script>
+<script>
+    jQuery(function($){
+        $("#phone").mask("(999) 999-9999");
+    });
+</script>

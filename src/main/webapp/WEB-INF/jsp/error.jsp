@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <div class="jumbotron col-lg-12 col-xs-12" align="center">
-  <img src="/assets/img/dialog_error.png" class="img-responsive">
+  <img style="height: 300px" src="/assets/img/dialog_error.png" class="img-responsive">
 
   <p>${requestScope.message}</p>
 

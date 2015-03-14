@@ -23,3 +23,10 @@
   -ms-animation-duration: 200ms;
   -o-animation-duration: 200ms;
 }
+
+#confirmError {
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -ms-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+}
