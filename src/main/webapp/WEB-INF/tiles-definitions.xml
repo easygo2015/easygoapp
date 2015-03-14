@@ -80,7 +80,7 @@
   </definition>
 
   <definition name="confirmBooking" extends="base">
-      <put-attribute name="body" value="/WEB-INF/jsp/confirmBooking.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/jsp/confirmBooking.jsp"/>
   </definition>
 
 </tiles-definitions>
