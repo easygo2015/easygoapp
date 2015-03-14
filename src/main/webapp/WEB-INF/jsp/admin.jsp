@@ -18,6 +18,7 @@
   <script src="${js}validate.js"></script>
   <script src="${js}showModals.js"></script>
   <link rel="stylesheet" href="/assets/css/custom.css">
+  <link rel="stylesheet" href="/assets/css/adminStyle.css">
 </head>
 <body>
 
@@ -25,14 +26,11 @@
   <div class="bs-component">
     <h1 align="center">ADMIN'S ROOM</h1>
 
-    <div class="row">
-      <a class="col-lg-1"/>
-      <a class="btn btn-primary  col-lg-4 col-xs-12" href="/admin/usersList">Manage users</a>
-      <a class="col-lg-1"/>
-      <a class="btn btn-primary  col-lg-4 col-xs-12" href="/admin/pointsList">Manage points</a>
-    </div>
-
-    <div id="visible">
+    <div class="row space">
+      <a class="col-lg-2"/>
+      <a class="btn btn-primary  col-lg-3 col-xs-12" href="/admin/usersList">Manage users</a>
+      <a class="col-lg-2"/>
+      <a class="btn btn-primary  col-lg-3 col-xs-12" href="/admin/pointsList">Manage points</a>
     </div>
 
     <div class="row">
@@ -47,7 +45,7 @@
               <th>Login</th>
               <th>Car</th>
               <th>Phone</th>
-              <th>Email</th>
+              <th colspan="3">Email</th>
             </tr>
             </thead>
             <c:forEach var="user" items="${requestScope.usersList}">

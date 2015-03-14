@@ -26,7 +26,7 @@ $(document).ready(function () {
                 longitude.removeClass('has-success').addClass('has-error has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
-                $('#latitudeError').removeClass('hidden').addClass('show');
+                $('#longitudeError').removeClass('hidden').addClass('show');
             } else {
                 longitude.removeClass('has-error').addClass('has-success has-feedback');
                 $('.glyphicon').remove();
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 ele.after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
                 $('#descriptionError').removeClass('hidden').addClass('show');
             } else {
-                name.removeClass('has-error').addClass('has-success has-feedback');
+                description.removeClass('has-error').addClass('has-success has-feedback');
                 $('.glyphicon').remove();
                 ele.after('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
                 $('#descriptionError').removeClass('show').addClass('hidden');
@@ -81,6 +81,6 @@ $(document).ready(function () {
 
     $('#latitude').change(validate.latitude);
     $('#longitude').change(validate.longitude);
-    $('input[name="isleft"]').change(validate.gender);
+    $('input[name="isleft"]').change(validate.left);
     $('#description').change(validate.description);
 });

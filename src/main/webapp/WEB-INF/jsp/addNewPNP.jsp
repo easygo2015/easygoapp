@@ -58,10 +58,12 @@
 
 </script>
 
-
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well bs-component">
 <div class="row">
   <div class="col-lg-6">
-    <sf:form class="form-horizontal" method="post" modelAttribute="point" role="form">
+    <sf:form class="form-horizontal" method="post" modelAttribute="point" role="form" id="form">
       <fieldset>
         <div class="form-group" id="enterlatitude">
           <label class="control-label col-sm-2" for="latitude">Широта</label>
@@ -76,8 +78,8 @@
           <label class="control-label col-sm-2" for="longitude">Долгота</label>
 
           <div class="col-sm-10">
-            <sf:input path="longitude" id="longitude" class="form-control" value="" placeholder="Введите"/>
-            <span id="latitudeError" class="center-block hidden text-danger">Долгота должна быть числом 12.345678</span>
+            <sf:input path="longitude" id="longitude" class="form-control" placeholder="Введите"/>
+            <span id="longitudeError" class="center-block hidden text-danger">Долгота должна быть числом 12.345678</span>
           </div>
         </div>
 
@@ -94,16 +96,17 @@
           <label class="control-label col-sm-2" for="description">Описание точки</label>
 
           <div class="col-sm-10">
-            <sf:input path="description" id="description" class="form-control" value=""
+            <sf:input path="description" id="description" class="form-control"
                       placeholder="Введите описание точки"/>
             <span id="descriptionError" class="center-block hidden text-danger">Должно быть не менее 5 символов</span>
           </div>
         </div>
       </fieldset>
 
-      <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-          <button type="submit" id="send" class="btn btn-primary pull-right">Сохранить</button>
+      <div class="form-group pull-right">
+        <div class="col-sm-12">
+          <a class="btn btn-warning" href="/admin/usersList">Отмена</a>
+          <button type="submit" id="send" class="btn btn-primary">Сохранить</button>
         </div>
       </div>
     </sf:form>
@@ -112,7 +115,9 @@
   <div class="col-lg-6">
     <div id="map-canvas" style="height:400px; width:100%"></div>
   </div>
-
+  </div>
 </div>
+    </div>
+  </div>
 
 
