@@ -286,8 +286,11 @@
           </c:forEach>
           </tbody>
         </table>
+        <c:if test="${dto.trips.isEmpty()}">
+          <div><c:out value="К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами."/></div>
+        </c:if>
       </div>
     </div>
-  </div>
+  </div><a href="/user"><button type="button" class="btn btn-info" >Вернутся на мою страницу</button></a><hr>
 </div>
 

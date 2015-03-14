@@ -209,7 +209,7 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
-          <div id="#errorLeftBank"></div>
+          <div id="errorLeftBank"></div>
         </div>
       </div>
     </div>
@@ -236,6 +236,7 @@
     </div>
     </form:form>
   </div>
-  <%--<a class="btn btn-large btn-success" id="startdemotour" onclick="introJs().start();" href="javascript:void(0);">Show me how</a>--%>
+  <a href="/user"><button type="button" class="btn btn-info" >Вернутся на мою страницу</button></a>
+  <hr>
 </div>
 

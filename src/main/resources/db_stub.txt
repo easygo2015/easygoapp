@@ -137,5 +137,87 @@ insert into user_role values(24, 'luda', 'ROLE_USER');
 insert into user values(25, 'Дарья', 0, 'darya', '111111', null, '0631281785', 'darya@i.ua');
 insert into user_role values(25, 'darya', 'ROLE_USER');
 
+insert into trip values(1, '15-03-17 09:00', 2, 1, 6);
+
+insert into trip_points values(1, 3);
+insert into trip_points values(1, 4);
+insert into trip_points values(1, 14);
+insert into trip_points values(1, 15);
+
+insert into trip_user values(3, 1);
+insert into trip_user values(4, 1);
+insert into trip_user values(5, 1);
+
+insert into passenger_landing values(1, 1, 3, 'Кинотеатр Мир, 9-й мк. район');
+insert into passenger_landing values(2, 1, 4, 'Кинотеатр Мир, 9-й мк. район');
+insert into passenger_landing values(3, 1, 5, 'Пр. Победы, 10-й и 11-й мк. район, остановка ПриватБанк');
+
+insert into trip values(2, '15-03-17 11:10', 6, 1, 7);
+
+insert into trip_points values(2, 3);
+insert into trip_points values(2, 4);
+insert into trip_points values(2, 14);
+insert into trip_points values(2, 18);
+
+insert into trip_user values(7, 2);
+insert into trip_user values(8, 2);
+insert into trip_user values(9, 2);
+
+insert into passenger_landing values(4, 2, 7, 'Кинотеатр Мир, 9-й мк. район');
+insert into passenger_landing values(5, 2, 8, 'Кинотеатр Мир, 9-й мк. район');
+insert into passenger_landing values(6, 2, 9, 'Пр. Победы, 10-й и 11-й мк. район, магазин Пчелка');
+
+insert into trip values(3, '15-03-17 12:00', 10, 1, 6);
+
+insert into trip_points values(3, 5);
+insert into trip_points values(3, 6);
+insert into trip_points values(3, 14);
+insert into trip_points values(3, 18);
+
+insert into trip_user values(11, 3);
+insert into trip_user values(12, 3);
+insert into trip_user values(13, 3);
+
+insert into passenger_landing values(7, 3, 11, 'Наше дело, 1-й мк. район');
+insert into passenger_landing values(8, 3, 12, 'Наше дело, 1-й мк. район');
+insert into passenger_landing values(9, 3, 13, 'Ул. Харьковская, 1-й мк. район, перед поворотом на пьяный мост');
+
+insert into trip values(4, '15-03-17 13:40', 14, 3, 5);
+
+insert into trip_points values(4, 5);
+insert into trip_points values(4, 6);
+insert into trip_points values(4, 14);
+insert into trip_points values(4, 18);
+
+insert into trip values(5, '15-03-18 14:00', 14, 2, 5);
+
+insert into trip_points values(5, 5);
+insert into trip_points values(5, 6);
+insert into trip_points values(5, 14);
+insert into trip_points values(5, 18);
+
+insert into trip values(6, '15-03-18 08:00', 18, 4, 6);
+
+insert into trip_points values(6, 5);
+insert into trip_points values(6, 6);
+insert into trip_points values(6, 14);
+insert into trip_points values(6, 18);
+
+insert into trip values(7, '15-03-19 08:00', 18, 4, 6);
+
+insert into trip_points values(7, 5);
+insert into trip_points values(7, 6);
+insert into trip_points values(7, 14);
+insert into trip_points values(7, 18);
+
+insert into trip values(8, '15-03-17 08:10', 22, 3, 5);
+
+insert into trip_points values(8, 5);
+insert into trip_points values(8, 6);
+insert into trip_points values(8, 14);
+insert into trip_points values(8, 18);
+
+
+
 
 
