@@ -121,12 +121,12 @@ public class TripServiceTest {
         trip_id = trip.getId();
     }
 
-    @Test
-    public void testAddPassenger() {
-        tripService.addPassenger(trip_id, passenger2_id);
-        Trip trip = tripService.findOneEager(trip_id);
-        assertEquals(3, trip.getCompanions().size());
-    }
+//    @Test
+//    public void testAddPassenger() {
+//        tripService.addPassenger(trip_id, passenger2_id);
+//        Trip trip = tripService.findOneEager(trip_id);
+//        assertEquals(3, trip.getCompanions().size());
+//    }
 
 //    @Test
 //    public void testRemovePassenger(){

@@ -3,7 +3,7 @@ $(document).ready(function () {
         'latitude': function () {
             var latitude = $('#enterlatitude');
             var ele = $('#latitude');
-            var isCoordinate = /-?\d{1,3}\.\d+/
+            var isCoordinate = /-?\d{1,3}\.\d+/;
             if (!ele.val().match(isCoordinate)) {
                 validate.errors = true;
                 latitude.removeClass('has-success').addClass('has-error has-feedback');
@@ -20,7 +20,7 @@ $(document).ready(function () {
         'longitude': function () {
             var longitude = $('#enterlongitude');
             var ele = $('#longitude');
-            var isCoordinate = /-?\d{1,3}\.\d+/
+            var isCoordinate = /-?\d{1,3}\.\d+/;
             if (!ele.val().match(isCoordinate)) {
                 validate.errors = true;
                 longitude.removeClass('has-success').addClass('has-error has-feedback');

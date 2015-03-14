@@ -62,6 +62,9 @@ public class User extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy = "companions")
     private List<Trip> trips;
 
+	@OneToOne(mappedBy = "passenger")
+	private PassengerLanding passengerLanding;
+
     //Security
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "login", referencedColumnName = "login")
@@ -84,8 +87,19 @@ public class User extends AbstractPersistable<Long> {
         this.tripsWhereUserDriver = tripsWhereUserDriver;
     }
 
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
 
-    @Override
+	public PassengerLanding getPassengerLanding() {
+		return passengerLanding;
+	}
+
+	public void setPassengerLanding(PassengerLanding passengerLanding) {
+		this.passengerLanding = passengerLanding;
+	}
+
+	@Override
     public void setId(Long id) {
         super.setId(id);
     }

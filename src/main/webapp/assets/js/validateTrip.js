@@ -1,8 +1,7 @@
-"use strict";
 
 function checkTrip() {
     var flag = true;
-    var leftBank = $('#checkLeftBank :checkbox:checked').length > 0;
+    var leftBank = $('#leftCoast :checkbox:checked').length > 0;
     if (!leftBank) {
         flag = false;
         $("#errorLeftBank").html("Выберите как минимум одну точку маршрута");
@@ -10,7 +9,7 @@ function checkTrip() {
         $("#errorLeftBank").html("");
     }
 
-    var rightBank = $('#checkRightBank :checkbox:checked').length > 0;
+    var rightBank = $('#rightCoast :checkbox:checked').length > 0;
     if (!rightBank) {
         flag = false;
         $("#errorRightBank").html("Выберите как минимум одну точку маршрута");
@@ -18,8 +17,4 @@ function checkTrip() {
         $("#errorRightBank").html("");
     }
     return flag;
-}
-
-function saveInCurrentTrip() {
-    alert($("count").value = "check");
 }

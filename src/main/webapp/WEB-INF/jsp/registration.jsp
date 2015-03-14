@@ -25,7 +25,7 @@
                 <form:input type="text" path="login" class="form-control" id="enterlogin"
                             placeholder="Введите логин"/>
                 <span id="loginError" class="center-block hidden text-danger">минимум 3 символа</span>
-                <span id="loginError2" class="center-block hidden text-danger">такой логин уже зарегестрирован</span>
+                <span id="loginError2" class="center-block hidden text-danger">такой логин уже зарегистрирован</span>
               </div>
             </div>
 
@@ -139,7 +139,7 @@
 
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-              <button type="submit" id="send" class="btn btn-primary pull-right">Зарегестрироваться</button>
+              <button type="submit" id="send" class="btn btn-primary pull-right">Зарегистрироваться</button>
             </div>
           </div>
         </form:form>

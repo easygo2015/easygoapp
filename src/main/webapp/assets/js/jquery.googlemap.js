@@ -32,12 +32,12 @@ $(function () {
             $(this).data('googleMap', map);
             $(this).data('googleLang', params.langage);
             $(this).data('googleDebug', params.debug);
-            $(this).data('googleMarker', new Array());
+            $(this).data('googleMarker', []);
             $(this).data('googleBound', new google.maps.LatLngBounds());
         });
 
         return this;
-    }
+    };
 
     $.fn.addMarker = function (params) {
         params = $.extend({
@@ -219,7 +219,7 @@ $(function () {
         });
 
         return this;
-    }
+    };
 
     $.fn.removeMarker = function (id) {
         this.each(function () {
@@ -246,7 +246,7 @@ $(function () {
                 return false;
             }
         });
-    }
+    };
 
     $.fn.addWay = function (params) {
         params = $.extend({

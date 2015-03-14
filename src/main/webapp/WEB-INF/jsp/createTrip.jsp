@@ -41,51 +41,11 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-4">
-      <%--form--%>
+  <div class="row container-fluid ">
+    <%--<div class="col-lg-4">--%>
       <form:form method="post" modelAttribute="trip">
-      <div class="bs-component">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="form-group" id="carCapacity">
-              <label class="col-lg-10 control-label  ">Выберите количество мест:</label>
-              <form:select path="carCapacity" items="${list}"/>
-            </div>
-            <div class="form-group" id="cost">
-              <label class="col-lg-10 control-label ">Укажите стоимость проезда, грн.:</label>
-              <form:select path="price" items="${list}"/>
-            </div>
-            <hr/>
 
-            <p>Установите дату и время старта поездки:</p>
-
-            <div class="form-group" id="timePicker">
-              <!-- Элемент HTML с id равным datetimepicker1 -->
-              <div class="input-group date" id="datetimepicker1">
-                <input type="text" class="form-control" name="startDate"/>
-                                        <span class="input-group-addon">
-                                          <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-              </div>
-            </div>
-
-            <!-- Инициализация виджета "Bootstrap datetimepicker" -->
-            <script type="text/javascript">
-              $(function () {
-                //Идентификатор элемента HTML (например: #datetimepicker1), для которого необходимо инициализировать виджет "Bootstrap datetimepicker"
-                $('#datetimepicker1').datetimepicker(
-                    {
-                      language: 'ru',
-                      minDate: new Date()
-                    }
-                );
-              });
-            </script>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%--</div>--%>
 
     <div class="col-lg-4">
       <div class="bs-component">
@@ -100,6 +60,7 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
+            <div id="errorLeftBank"></div>
         </div>
       </div>
     </div>
@@ -116,11 +77,56 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
+            <div id="errorRightBank"></div>
         </div>
       </div>
-      <button type="submit" class="btn btn-info btn-lg btn-block" id="saveTrip">Сохранить</button>
+      <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">Сохранить</button>
       <br>
     </div>
+
+        <div class="bs-component">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group" id="carCapacity">
+                <label class="col-lg-10 control-label  ">Выберите количество мест:</label>
+                <form:select path="carCapacity" items="${list}"/>
+              </div>
+              <div class="form-group" id="cost">
+                <label class="col-lg-10 control-label ">Укажите стоимость проезда, грн.:</label>
+                <form:select path="price" items="${list}"/>
+              </div>
+              <hr/>
+
+              <p>Установите дату и время старта поездки:</p>
+
+              <div class="form-group" id="timePicker">
+                <!-- Элемент HTML с id равным datetimepicker1 -->
+                <div class="input-group date" id="datetimepicker1">
+                  <input type="text" class="form-control" name="startDate"/>
+                                        <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                </div>
+              </div>
+
+              <!-- Инициализация виджета "Bootstrap datetimepicker" -->
+              <script type="text/javascript">
+                $(document).ready(function () {
+                  $(function () {
+                    //Идентификатор элемента HTML (например: #datetimepicker1), для которого необходимо инициализировать виджет "Bootstrap datetimepicker"
+                    $('#datetimepicker1').datetimepicker(
+                        {
+                          language: 'ru',
+                          minDate: new Date()
+                        }
+                    );
+                  });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+
     </form:form>
     <%--<a class="btn btn-large btn-success" id="startdemotour" onclick="introJs().start();" href="javascript:void(0);">Show me how</a>--%>
   </div>
@@ -131,7 +137,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
 
 <script>
-
   var map;
   function initialize() {
     var myLatlng = new google.maps.LatLng(48.466169, 35.014089);
@@ -143,7 +148,6 @@
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     setMarkers(map, places);
   }
-
   var lat = '${latSpan}';
   var lng = '${lngSpan}';
   var des = '${descrypt}';
@@ -154,7 +158,6 @@
     ['Ул. Сыровца', 48.516299, 34.606681],
     ['Площадь Ленина', 48.516057, 34.61226]
   ];
-
   function setMarkers(map, locations) {
     for (var i = 0; i < locations.length; i++) {
       var beach = locations[i];

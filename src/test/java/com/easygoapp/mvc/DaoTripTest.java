@@ -1,8 +1,11 @@
 package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
+import com.easygoapp.domain.PassengerLanding;
+import com.easygoapp.domain.PassengerNodePoint;
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
+import com.easygoapp.service.PassengerLandingService;
 import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
@@ -34,6 +37,9 @@ public class DaoTripTest {
     @Autowired
     private PassengerNodePointService passengerNodePointService;
 
+	@Autowired
+	private PassengerLandingService passengerLandingService;
+
 //    @Before
 //    public void saveUser(){
 //        User user = new User();
@@ -55,23 +61,23 @@ public class DaoTripTest {
 //        System.out.println(saved);
 //    }
 
-    @Test
-    public void saveTripWithRatio() {
-        Trip trip = new Trip();
-        trip.setCarCapacity(3);
-        User driver = userService.findOne(1l);
-        System.out.println(driver);
-        trip.setDriver(driver);
-        trip.setPrice(5d);
-        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
-
-        List<User> companions = new ArrayList<>();
-        //User user2 = userService.findOne(2l);
-        companions.add(driver);
-        // companions.add(user2);
-        trip.setCompanions(companions);
-        tripService.save(trip);
-    }
+//    @Test
+//    public void saveTripWithRatio() {
+//        Trip trip = new Trip();
+//        trip.setCarCapacity(3);
+//        User driver = userService.findOne(1l);
+//        System.out.println(driver);
+//        trip.setDriver(driver);
+//        trip.setPrice(5d);
+//        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
+//
+//        List<User> companions = new ArrayList<>();
+//        //User user2 = userService.findOne(2l);
+//        companions.add(driver);
+//        // companions.add(user2);
+//        trip.setCompanions(companions);
+//        tripService.save(trip);
+//    }
 
 //    @Test
 //    public void getAllTrips() throws ParseException {
@@ -113,17 +119,14 @@ public class DaoTripTest {
 
 //    @Test
 //    public void saveWithPnp(){
-//
 //        Trip trip = new Trip();
 //        trip.setCarCapacity(3);
 //        User driver = userService.findOne(1l);
-//        System.out.println(driver);
 //        trip.setDriver(driver);
 //        trip.setPrice(5d);
 //        trip.setStartTime(new Timestamp(System.currentTimeMillis()));
 //        List<PassengerNodePoint> points = new ArrayList<>();
 //        PassengerNodePoint point = passengerNodePointService.findOne(1l);
-//        System.out.println(point);
 //        points.add(point);
 //        trip.setPassengerNodePoints(points);
 //        tripService.save(trip);
@@ -131,18 +134,20 @@ public class DaoTripTest {
 
 //    @Test
 //    public void saveNewPassenger(){
-//        Trip trip = tripService.findOne(1l);
-//        List<User> companions = trip.getCompanions();
-//        User user3 = new User();
-//        user3.setPhoneNumber("000-000-00-00");
-//        user3.setCar("lexus");
-//        user3.setGender(Gender.MALE);
-//        user3.setLogin("Markovasd");
-//        user3.setEmail("markasdov@gmail.com");
-//        user3.setPassword("1234");
-//        User savedUser = userService.save(user3);
-//        companions.add(savedUser);
-//        trip.setCompanions(companions);
+//        Trip trip = tripService.findOneEager(1l);
+//        User passenger = userService.findOne(2l);
+//        trip.getCompanions().add(passenger);
+//		PassengerLanding landing = new PassengerLanding();
+//		landing.setTrip(trip);
+//		landing.setUser(passenger);
+//		landing.setDescription("Остановка");
+//		passengerLandingService.save(landing);
 //        tripService.save(trip);
 //    }
+
+//	@Test
+//	public void showTripInfo(){
+//		Trip trip = tripService.findOneEager(1l);
+//		System.out.println(trip);
+//	}
 }

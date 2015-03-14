@@ -7,21 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
 @RequestMapping("/user/editProfile")
 public class UserController {
 
+    public static final String cookieName = "SPRING_SECURITY_REMEMBER_ME_COOKIE";
+
     @Autowired
     private UserService userService;
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
+    @Autowired
+    SecurityContextLogoutHandler logoutHandler;
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public ModelAndView editProfile(ModelAndView modelAndView) {
@@ -49,12 +62,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteProfile", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView deleteUser(ModelAndView modelAndView) {
+    public ModelAndView deleteUser(ModelAndView modelAndView, HttpServletRequest request,
+                                   HttpServletResponse response) throws ServletException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         userService.delete(user.getId());
-        SecurityContextHolder.clearContext();
-        modelAndView.setViewName("index");
+
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        cookie.setPath(StringUtils.hasLength(request.getContextPath()) ? request.getContextPath() : "/");
+        response.addCookie(cookie);
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        logoutHandler.logout(request, response, authentication);
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
