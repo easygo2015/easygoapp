@@ -35,7 +35,7 @@ public class AdminController {
     public ModelAndView getUsersList(ModelAndView modelAndView) {
         List<User> allUsers = userService.findAll();
         modelAndView.addObject("usersList", allUsers);
-        modelAndView.setViewName("redirect:/admin");
+        modelAndView.setViewName("admin");
         return modelAndView;
     }
 

@@ -17,8 +17,6 @@
   <c:set var="js" value="/assets/js/"/>
   <script src="${js}validate.js"></script>
   <script src="${js}showModals.js"></script>
-  <script type="text/javascript">
-  </script>
   <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
 <body>
@@ -37,7 +35,7 @@
     <div id="visible">
     </div>
 
-    <div <%--id="hidden"--%> class="row">
+    <div class="row">
       <div class="col-lg-12">
         <div class="bs-component">
           <table class="table table-striped table-hover">
