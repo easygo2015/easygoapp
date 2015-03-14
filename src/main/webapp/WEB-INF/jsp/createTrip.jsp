@@ -104,6 +104,7 @@
 //                    alert("Вы нажали на КНОПКУ");
           // Removes the markers from the map, but keeps them in the array.
           setAllMap(null);
+                $("input:checkbox:checked").removeAttr('checked');
         }
     )
   });
@@ -119,6 +120,7 @@
       if ($this.is(':checked')) {
         for (var i = 0; i <= markers.length; i++) {
           if (element == i) {
+            markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
             markers[i].setMap(map);
 
           }
@@ -155,7 +157,8 @@
           <div class="panel-body">
             <div id="map-canvas" style="height:400px; width:100%"></div>
             <div id="map">
-              <input id="hidemarkers" type=button value="Hide Markers">
+                <br/>
+                <input id="hidemarkers" class="btn btn-primary btn-lg btn-block" type=button value="Убрать маркеры">
             </div>
           </div>
         </div>
@@ -209,7 +212,7 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
-          <div id="#errorLeftBank"></div>
+          <div id="errorLeftBank" class="label label-warning"></div>
         </div>
       </div>
     </div>
@@ -226,7 +229,7 @@
               <c:out value="${point.description}"/><br>
             </c:if>
           </c:forEach>
-          <div id="errorRightBank"></div>
+          <div id="errorRightBank" class="label label-warning"></div>
         </div>
       </div>
       <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">

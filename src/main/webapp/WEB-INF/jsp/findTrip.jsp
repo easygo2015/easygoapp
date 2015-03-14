@@ -102,6 +102,7 @@
 //                    alert("Вы нажали на КНОПКУ");
             // Removes the markers from the map, but keeps them in the array.
             setAllMap(null);
+                  $("input:checkbox:checked").removeAttr('checked');
           }
       )
     });
@@ -117,6 +118,7 @@
         if ($this.is(':checked')) {
           for (var i = 0; i <= markers.length; i++) {
             if (element == i) {
+                markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
               markers[i].setMap(map);
 
             }
@@ -154,10 +156,9 @@
             <%--<h2>Map</h2>--%>
             <div id="map-canvas" style="height:400px; width:100%"></div>
             <div id="map">
-              <input id="hidemarkers" type=button value="Hide Markers">
+                <br/>
+              <input id="hidemarkers" class="btn btn-primary btn-lg btn-block" type=button value="Убрать маркеры">
             </div>
-            <div id="map1"></div>
-            <div id="map2"></div>
           </div>
         </div>
       </div>
