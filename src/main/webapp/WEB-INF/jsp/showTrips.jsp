@@ -3,6 +3,9 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
+
+<title>Мои Поездки</title>
+
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="h1" align="center">Мои поездки</div>

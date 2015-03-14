@@ -5,6 +5,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 <title>Error 403</title>
 
+<title>Error 403</title>
+
 <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6">
   <div>
     <img class="img-rounded" src="/assets/img/failed.jpg">

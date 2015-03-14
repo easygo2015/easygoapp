@@ -2,6 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<title>Регитрация</title>
+
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
