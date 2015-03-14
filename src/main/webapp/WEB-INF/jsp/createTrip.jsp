@@ -185,9 +185,9 @@
 
             <p>Установите дату и время старта поездки:</p>
 
-            <div class="form-group" id="timePicker">
+             <div class="form-group" id="timePicker">
               <!-- Элемент HTML с id равным datetimepicker1 -->
-              <div class="input-group date" id="datetimepicker1">
+               <div class="input-group date" id="datetimepicker1">
                 <input type="text" class="form-control" name="startDate"/>
                                         <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"></span>
@@ -198,6 +198,12 @@
         </div>
       </div>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <div class="col-lg-4">
       <div class="bs-component">
