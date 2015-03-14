@@ -8,7 +8,10 @@ import com.easygoapp.repository.PassengerLandingRepository;
 import com.easygoapp.repository.PassengerNodePointRepository;
 import com.easygoapp.repository.TripRepository;
 import com.easygoapp.repository.UserRepository;
+import com.easygoapp.service.PassengerLandingService;
+import com.easygoapp.service.PassengerNodePointService;
 import com.easygoapp.service.TripService;
+import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -36,11 +39,13 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     private TripRepository tripRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
     @Autowired
-    private PassengerNodePointRepository passengerNodePointRepository;
+    private PassengerNodePointService passengerNodePointService;
+
     @Autowired
-    private PassengerLandingRepository passengerLandingRepository;
+    private PassengerLandingService passengerLandingService;
 
     @Autowired
     private JavaMailSenderImpl mailSender;
@@ -141,9 +146,9 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
 
     @Transactional
     @Override
-    public void removeCompanionFromTrip(Long companionId, Long tripId) {
+    public void removeCompanionFromTrip(Long companionId, Long tripId) throws MessagingException {
         Trip trip = findOneEager(tripId);
-        trip.getCompanions().size();
+        User passenger = userService.findOne(companionId);
         List<User> users = trip.getCompanions();
         Iterator iterator = users.iterator();
         while (iterator.hasNext()) {
@@ -153,6 +158,14 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
             }
         }
         trip.setCarCapacity(trip.getCarCapacity() + 1);
+        Iterator iterator1 = trip.getPassengerLanding().iterator();
+        while (iterator1.hasNext()){
+            PassengerLanding landing = (PassengerLanding) iterator1.next();
+            if (Objects.equals(landing.getUser().getId(), companionId)){
+                passengerLandingService.delete(landing.getId());
+                iterator1.remove();
+            }
+        }
         tripRepository.save(trip);
     }
 
@@ -160,12 +173,12 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Transactional
     public void addPassenger(Long tripId, Long userId, PassengerLanding landing) {
         Trip currentTrip = findOneEager(tripId);
-        User passenger = userRepository.getOne(userId);
+        User passenger = userService.findOne(userId);
         currentTrip.getCompanions().add(passenger);
         currentTrip.setCarCapacity(currentTrip.getCarCapacity() - 1);
         landing.setTrip(currentTrip);
         landing.setUser(passenger);
-        passengerLandingRepository.save(landing);
+        passengerLandingService.save(landing);
         tripRepository.save(currentTrip);
     }
 
@@ -173,7 +186,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Transactional
     public void addPassengerNodePoint(Long tripId, Long passengerNodePointId) {
         Trip currentTrip = tripRepository.findOne(tripId);
-        PassengerNodePoint passengerNodePoint = passengerNodePointRepository.findOne(passengerNodePointId);
+        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePointId);
         List<PassengerNodePoint> passengerNodePoints = currentTrip.getPassengerNodePoints();
         passengerNodePoints.add(passengerNodePoint);
         tripRepository.save(currentTrip);
@@ -183,7 +196,7 @@ public class TripServiceImpl extends AbstractCrudServiceImpl<Trip, Long> impleme
     @Transactional
     public void removePassengerNodePoint(Long tripId, Long passengerNodePointId) {
         Trip currentTrip = tripRepository.findOne(tripId);
-        PassengerNodePoint passengerNodePoint = passengerNodePointRepository.getOne(passengerNodePointId);
+        PassengerNodePoint passengerNodePoint = passengerNodePointService.findOne(passengerNodePointId);
         List<PassengerNodePoint> passengerNodePoints = currentTrip.getPassengerNodePoints();
         passengerNodePoints.remove(passengerNodePoint);
         tripRepository.save(currentTrip);

@@ -1,6 +1,8 @@
 package com.easygoapp.service.impl;
 
 import com.easygoapp.domain.PassengerLanding;
+import com.easygoapp.domain.Trip;
+import com.easygoapp.domain.User;
 import com.easygoapp.repository.PassengerLandingRepository;
 import com.easygoapp.service.PassengerLandingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +20,10 @@ public class PassengerLandingImpl extends AbstractCrudServiceImpl<PassengerLandi
     public void setPassengerLandingRepository(PassengerLandingRepository passengerLandingRepository) {
         this.passengerLandingRepository = passengerLandingRepository;
         super.setRepository(passengerLandingRepository);
+    }
+
+    @Override
+    public PassengerLanding findByTripAndPassenger(Trip trip, User user) {
+        return passengerLandingRepository.findByTripAndPassenger(trip, user);
     }
 }

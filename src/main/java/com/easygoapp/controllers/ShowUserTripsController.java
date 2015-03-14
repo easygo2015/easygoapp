@@ -51,7 +51,7 @@ public class ShowUserTripsController {
     }
 
     @RequestMapping(value = "/declineTrip", method = RequestMethod.GET)
-    public String declineTrip(@RequestParam("id") long id) {
+    public String declineTrip(@RequestParam("id") long id) throws MessagingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         tripService.removeCompanionFromTrip(user.getId(), id);

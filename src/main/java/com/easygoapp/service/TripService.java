@@ -26,7 +26,7 @@ public interface TripService extends AbstractCrudService<Trip, Long> {
 
     List<Trip> findAllLastTripsForDriver(User user);
 
-    void removeCompanionFromTrip(Long companionId, Long tripId);
+    void removeCompanionFromTrip(Long companionId, Long tripId) throws MessagingException;
 
     void addPassenger(Long tripId, Long userId, PassengerLanding landing);
 
