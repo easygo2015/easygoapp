@@ -33,20 +33,20 @@ $(document).ready(function () {
         event.preventDefault();
     });
     var message = $('#successMessage');
-    if(!message.hasClass("displayNone")){
-        message.addClass(animationFadeInDown).one(animationEnd, function(){
+    if (!message.hasClass("displayNone")) {
+        message.addClass(animationFadeInDown).one(animationEnd, function () {
             $(this).removeClass(animationFadeIn);
-            $(this).addClass(animationFadeOut).one(animationEnd, function(){
+            $(this).addClass(animationFadeOut).one(animationEnd, function () {
                 $(this).removeClass(animationFadeOut);
             });
             $(this).addClass("displayNone");
         });
     }
     var message = $('#errorMessage');
-    if(!message.hasClass("displayNone")){
-        message.addClass(animationFadeInDown).one(animationEnd, function(){
+    if (!message.hasClass("displayNone")) {
+        message.addClass(animationFadeInDown).one(animationEnd, function () {
             $(this).removeClass(animationFadeIn);
-            $(this).addClass(animationFadeOut).one(animationEnd, function(){
+            $(this).addClass(animationFadeOut).one(animationEnd, function () {
                 $(this).removeClass(animationFadeOut);
             });
             $(this).addClass("displayNone");

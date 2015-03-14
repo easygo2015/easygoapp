@@ -2,7 +2,6 @@ package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
-import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
 import com.easygoapp.type.Gender;
 import org.junit.Test;
@@ -12,9 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,25 +68,25 @@ public class DaoUserTest {
 //        user.setEmail("wer@wer.com");
 //        userService.save(user);
 
-		User user2 = new User();
-		user2.setPhoneNumber("000-000-00-00");
-		user2.setCar("lexus");
-		user2.setGender(Gender.MALE);
-		user2.setLogin("Mar1kov");
-		user2.setPassword("123456");
-		user2.setName("Stas1");
-		user2.setEmail("we1r@wer.com");
-		userService.save(user2);
+        User user2 = new User();
+        user2.setPhoneNumber("000-000-00-00");
+        user2.setCar("lexus");
+        user2.setGender(Gender.MALE);
+        user2.setLogin("Mar1kov");
+        user2.setPassword("123456");
+        user2.setName("Stas1");
+        user2.setEmail("we1r@wer.com");
+        userService.save(user2);
 
-		User user3 = new User();
-		user3.setPhoneNumber("000-000-00-00");
-		user3.setCar("lexus");
-		user3.setGender(Gender.MALE);
-		user3.setLogin("Mark23ov");
-		user3.setPassword("123456");
-		user3.setName("St22as");
-		user3.setEmail("1wer@wer.com");
-		userService.save(user3);
+        User user3 = new User();
+        user3.setPhoneNumber("000-000-00-00");
+        user3.setCar("lexus");
+        user3.setGender(Gender.MALE);
+        user3.setLogin("Mark23ov");
+        user3.setPassword("123456");
+        user3.setName("St22as");
+        user3.setEmail("1wer@wer.com");
+        userService.save(user3);
     }
 
 //    @Test

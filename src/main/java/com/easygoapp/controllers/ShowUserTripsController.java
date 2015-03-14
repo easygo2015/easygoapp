@@ -2,7 +2,9 @@ package com.easygoapp.controllers;
 
 import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
-import com.easygoapp.service.*;
+import com.easygoapp.service.PassengerNodePointService;
+import com.easygoapp.service.TripService;
+import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 import javax.mail.MessagingException;
+import java.util.List;
 
 /**
  * Created by Markov on 08.03.2015.

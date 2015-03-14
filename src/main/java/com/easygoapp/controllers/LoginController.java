@@ -32,7 +32,7 @@ public class LoginController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin**", method = RequestMethod.GET)
-    public ModelAndView adminPage()throws Exception {
+    public ModelAndView adminPage() throws Exception {
         ModelAndView model = new ModelAndView();
         model.setViewName("admin");
         return model;
@@ -59,7 +59,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public ModelAndView showPromo()throws Exception {
+    public ModelAndView showPromo() throws Exception {
         ModelAndView modelAndView = new ModelAndView("about");
         return modelAndView;
     }

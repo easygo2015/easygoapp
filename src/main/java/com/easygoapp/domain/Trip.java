@@ -24,8 +24,8 @@ public class Trip implements Persistable<Long> {
     @ManyToOne
     private User driver;
 
-	@OneToMany(mappedBy = "trip")
-	private List<PassengerLanding> passengerLanding;
+    @OneToMany(mappedBy = "trip")
+    private List<PassengerLanding> passengerLanding;
 
     @NotNull
     @Column(name = "car_capacity", nullable = false)
@@ -61,15 +61,15 @@ public class Trip implements Persistable<Long> {
     }
 
 
-	public List<PassengerLanding> getPassengerLanding() {
-		return passengerLanding;
-	}
+    public List<PassengerLanding> getPassengerLanding() {
+        return passengerLanding;
+    }
 
-	public void setPassengerLanding(List<PassengerLanding> passengerLanding) {
-		this.passengerLanding = passengerLanding;
-	}
+    public void setPassengerLanding(List<PassengerLanding> passengerLanding) {
+        this.passengerLanding = passengerLanding;
+    }
 
-	public List<PassengerNodePoint> getPassengerNodePoints() {
+    public List<PassengerNodePoint> getPassengerNodePoints() {
         return passengerNodePoints;
     }
 

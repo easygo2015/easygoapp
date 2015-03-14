@@ -11,7 +11,10 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -43,13 +46,13 @@ public class UserController {
         modelAndView.setViewName("editProfile");
         modelAndView.addObject("user", user);
         PasswordObject pass = new PasswordObject();
-        modelAndView.addObject("pass",pass);
+        modelAndView.addObject("pass", pass);
         return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView saveUserChanges(ModelAndView modelAndView, @ModelAttribute("user") User user,
-                                        BindingResult result) {
+            BindingResult result) {
         User modifiedUser = userService.getByLogin(user.getLogin());
         modifiedUser.setName(user.getName());
         modifiedUser.setEmail(user.getEmail());
@@ -63,7 +66,7 @@ public class UserController {
 
     @RequestMapping(value = "/deleteProfile", method = {RequestMethod.GET, RequestMethod.HEAD})
     public ModelAndView deleteUser(ModelAndView modelAndView, HttpServletRequest request,
-                                   HttpServletResponse response) throws ServletException {
+            HttpServletResponse response) throws ServletException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         userService.delete(user.getId());
@@ -85,18 +88,18 @@ public class UserController {
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView savePassword(ModelAndView modelAndView, @ModelAttribute("pass") PasswordObject pass,
-                                     BindingResult result) {
+            BindingResult result) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         String currentPassword = pass.getCurrentPassword();
         String newPassword = pass.getNewPassword();
         String message = "";
-        System.out.println("current password from jsp "+user.getPassword());
-        if (encoder.matches(currentPassword, user.getPassword())){
+        System.out.println("current password from jsp " + user.getPassword());
+        if (encoder.matches(currentPassword, user.getPassword())) {
             user.setPassword(encoder.encode(newPassword));
             userService.save(user);
             message = "profit";
-        }else{
+        } else {
             message = "fail";
         }
         modelAndView.setViewName("editProfile");
@@ -107,6 +110,4 @@ public class UserController {
         System.out.println("post is working");
         return modelAndView;
     }
-
-
 }

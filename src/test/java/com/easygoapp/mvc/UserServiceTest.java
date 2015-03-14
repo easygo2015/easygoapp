@@ -2,10 +2,7 @@ package com.easygoapp.mvc;
 
 import com.easygoapp.config.RootConfig;
 import com.easygoapp.domain.User;
-import com.easygoapp.domain.UserRole;
 import com.easygoapp.service.UserService;
-import com.easygoapp.type.Gender;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @DirtiesContext
@@ -57,7 +51,7 @@ public class UserServiceTest {
 //    }
 
     @Test
-    public void finalizeForTest(){
+    public void finalizeForTest() {
         User user = userService.getByLogin("boom1");
         userService.delete(user.getId());
     }

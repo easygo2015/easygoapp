@@ -17,7 +17,6 @@ public class PasswordObject {
     }
 
 
-
     public String getCurrentPassword() {
         return currentPassword;
     }

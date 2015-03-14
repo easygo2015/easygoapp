@@ -29,20 +29,20 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
     @Autowired
     BCryptPasswordEncoder encoder;
 
-	@Override
-	public User save(User user) {
-		if (user.isNew()) {
-			String cryptedPassword = encoder.encode(user.getPassword());
-			user.setPassword(cryptedPassword);
-		}
-		UserRole userRole = new UserRole();
-		userRole.setRole("ROLE_USER");
-		List<UserRole> userRoles = new ArrayList<UserRole>();
-		userRoles.add(userRole);
-		user.setUserRoles(userRoles);
-		userRepository.save(user);
-		return user;
-	}
+    @Override
+    public User save(User user) {
+        if (user.isNew()) {
+            String cryptedPassword = encoder.encode(user.getPassword());
+            user.setPassword(cryptedPassword);
+        }
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        List<UserRole> userRoles = new ArrayList<UserRole>();
+        userRoles.add(userRole);
+        user.setUserRoles(userRoles);
+        userRepository.save(user);
+        return user;
+    }
 
     @Override
     public User getByLogin(String login) {

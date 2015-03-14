@@ -100,5 +100,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public SecurityContextLogoutHandler logoutHandler(){return new SecurityContextLogoutHandler();}
+    public SecurityContextLogoutHandler logoutHandler() {return new SecurityContextLogoutHandler();}
 }

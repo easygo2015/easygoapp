@@ -86,19 +86,19 @@ public class FindTripController {
 
     @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
     public String saveTrip(@RequestParam("id") long id, Model model) {
-		model.addAttribute("landing", new PassengerLanding());
-		model.addAttribute("trip", tripService.findOneEager(id));
+        model.addAttribute("landing", new PassengerLanding());
+        model.addAttribute("trip", tripService.findOneEager(id));
         tripId = id;
         return "confirmBooking";
     }
 
-	@RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
-	public String confirmBookingPlace(@ModelAttribute PassengerLanding passengerLanding){
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.getByLogin(authentication.getName());
+    @RequestMapping(value = "/confirmBooking", method = RequestMethod.POST)
+    public String confirmBookingPlace(@ModelAttribute PassengerLanding passengerLanding) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByLogin(authentication.getName());
         tripService.addPassenger(tripId, user.getId(), passengerLanding);
-		return "redirect:/user";
-	}
+        return "redirect:/user";
+    }
 
 //	    @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
 //   		public String saveTrip(@RequestParam("id") long id, Model model) {

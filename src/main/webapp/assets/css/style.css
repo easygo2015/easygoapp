@@ -6,20 +6,20 @@
   display: block;
 }
 
-.whiteBackground{
-    background-color: white;
+.whiteBackground {
+  background-color: white;
 }
 
 #deleteContent {
-    -webkit-animation-duration: 200ms;
-    -moz-animation-duration: 200ms;
-    -ms-animation-duration: 200ms;
-    -o-animation-duration: 200ms;
+  -webkit-animation-duration: 200ms;
+  -moz-animation-duration: 200ms;
+  -ms-animation-duration: 200ms;
+  -o-animation-duration: 200ms;
 }
 
 #changeContent {
-    -webkit-animation-duration: 200ms;
-    -moz-animation-duration: 200ms;
-    -ms-animation-duration: 200ms;
-    -o-animation-duration: 200ms;
+  -webkit-animation-duration: 200ms;
+  -moz-animation-duration: 200ms;
+  -ms-animation-duration: 200ms;
+  -o-animation-duration: 200ms;
 }

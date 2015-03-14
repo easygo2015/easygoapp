@@ -15,9 +15,10 @@ $(document).ready(function () {
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
+
     google.maps.event.addDomListener(window, 'load', initialize);
 
-        //получение и отображение все точек из объекта
+    //получение и отображение все точек из объекта
     //$(function() {
     //    x = [
     //        <c:forEach var="point" items="${points}" varStatus="status">
@@ -47,25 +48,23 @@ $(document).ready(function () {
     //    для календаря
     $(function () {
         $('#datetimepicker1').datetimepicker(
-            {
-                language: 'ru',
-                defaultDate: new Date(),
-                minDate: new Date()
-            }
+                {
+                    language: 'ru',
+                    defaultDate: new Date(),
+                    minDate: new Date()
+                }
         );
     });
 
     $(function () {
         $('#datetimepicker2').datetimepicker(
-            {
-                language: 'ru',
-                defaultDate: new Date(),
-                minDate: new Date()
-            }
+                {
+                    language: 'ru',
+                    defaultDate: new Date(),
+                    minDate: new Date()
+                }
         );
     });
-
-
 
 
 });

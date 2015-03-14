@@ -6,10 +6,9 @@ import com.easygoapp.domain.Trip;
 import com.easygoapp.domain.User;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.util.List;
-
-import javax.mail.MessagingException;
 
 /**
  * Created by Станислав on 28.02.2015.
