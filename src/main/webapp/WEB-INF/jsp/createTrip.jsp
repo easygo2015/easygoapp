@@ -199,11 +199,6 @@
       </div>
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
     <div class="col-lg-4">
       <div class="bs-component">
@@ -241,6 +236,11 @@
       <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">
         Сохранить
       </button>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <br>
     </div>
     </form:form>
