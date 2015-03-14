@@ -146,7 +146,6 @@
       <div id="errorMessage" class="${classFail} alert alert-danger" role="alert">
         <p>You entered wrong current password! Please try again.</p>
       </div>
-
     </div>
   </div>
 </div>

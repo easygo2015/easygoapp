@@ -40,28 +40,28 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/edit", method = {RequestMethod.GET, RequestMethod.HEAD})
-    public ModelAndView editProfile(ModelAndView modelAndView, HttpServletRequest request) {
-        Long id = Long.parseLong(request.getParameter("id"));
-        User userToEdit = userService.findOne(id);
-        modelAndView.addObject("user", userToEdit);
-        modelAndView.setViewName("editProfile");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ModelAndView saveUserChanges(ModelAndView modelAndView, @ModelAttribute("user") User user,
-            BindingResult result) {
-        User modifiedUser = userService.getByLogin(user.getLogin());
-        modifiedUser.setName(user.getName());
-        modifiedUser.setEmail(user.getEmail());
-        modifiedUser.setPhoneNumber(user.getPhoneNumber());
-        modifiedUser.setGender(user.getGender());
-        modifiedUser.setCar(user.getCar());
-        userService.save(modifiedUser);
-        modelAndView.setViewName("redirect:/admin");
-        return modelAndView;
-    }
+//    @RequestMapping(value = "/edit", method = {RequestMethod.GET, RequestMethod.HEAD})
+//    public ModelAndView editProfile(ModelAndView modelAndView, HttpServletRequest request) {
+//        Long id = Long.parseLong(request.getParameter("id"));
+//        User userToEdit = userService.findOne(id);
+//        modelAndView.addObject("user", userToEdit);
+//        modelAndView.setViewName("editProfile");
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+//    public ModelAndView saveUserChanges(ModelAndView modelAndView, @ModelAttribute("user") User user,
+//            BindingResult result) {
+//        User modifiedUser = userService.getByLogin(user.getLogin());
+//        modifiedUser.setName(user.getName());
+//        modifiedUser.setEmail(user.getEmail());
+//        modifiedUser.setPhoneNumber(user.getPhoneNumber());
+//        modifiedUser.setGender(user.getGender());
+//        modifiedUser.setCar(user.getCar());
+//        userService.save(modifiedUser);
+//        modelAndView.setViewName("redirect:/admin");
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteUser(ModelAndView modelAndView, HttpServletRequest request) throws MessagingException {
