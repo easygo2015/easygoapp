@@ -20,4 +20,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     List<Trip> findByDriverAndStartTimeGreaterThan(User user, Timestamp time);
 
     List<Trip> findBycompanionsAndStartTimeGreaterThan(User user, Timestamp stamp);
+
+    List<Trip> findByDriverAndStartTimeLessThan(User user, Timestamp time);
 }

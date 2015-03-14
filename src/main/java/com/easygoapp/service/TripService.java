@@ -24,6 +24,8 @@ public interface TripService extends AbstractCrudService<Trip, Long> {
 
     List<Trip> findAllFutureTripsForDriver(User user);
 
+    List<Trip> findAllLastTripsForDriver(User user);
+
     void removeCompanionFromTrip(Long companionId, Long tripId);
 
     void addPassenger(Long tripId, Long userId, PassengerLanding landing);

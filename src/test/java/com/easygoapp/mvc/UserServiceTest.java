@@ -11,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.mail.MessagingException;
+
 
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +53,7 @@ public class UserServiceTest {
 //    }
 
     @Test
-    public void finalizeForTest() {
+    public void finalizeForTest() throws MessagingException {
         User user = userService.getByLogin("boom1");
         userService.delete(user.getId());
     }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteUser(ModelAndView modelAndView, HttpServletRequest request) {
+    public ModelAndView deleteUser(ModelAndView modelAndView, HttpServletRequest request) throws MessagingException {
         Long id = Long.parseLong(request.getParameter("id"));
         userService.delete(id);
         modelAndView.setViewName("redirect:/admin");
