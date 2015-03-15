@@ -3,6 +3,9 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
+
+<c:set var="css" value="/assets/css/"/>
+<link rel="stylesheet" href="${css}createTrip.css">
 <title>Мои Поездки</title>
 <div class="row">
   <div class="col-lg-12 col-md-12">
@@ -15,12 +18,12 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div class="h4">Поездки, где я водитель</div>
-      <table class="table table-bordered table-hover table-striped text-center">
+      <table class="table table-striped text-center bs-component">
         <tr>
           <th class="text-center">№</th>
           <th class="text-center">Время старта поездки</th>
           <th class="text-center">Количество свободных мест</th>
-          <th class="text-center">Стоимость проезда</th>
+          <th class="text-center">Стоимость проезда, грн.</th>
           <th class="text-center">Попутчик/место посадки</th>
           <th class="text-center">Удалить поездку</th>
         </tr>
@@ -61,11 +64,11 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div class="h4">Поездки, где я попутчик</div>
-      <table class="table table-bordered table-hover table-striped text-center">
+      <table class="table table-striped text-center bs-component">
         <tr>
           <th class="text-center">№</th>
           <th class="text-center">Время старта поездки</th>
-          <th class="text-center">Стоимость проезда</th>
+          <th class="text-center">Стоимость проезда, грн.</th>
           <th class="text-center">Маршрут</th>
           <th class="text-center">Водитель</th>
           <th class="text-center">Отказаться от поездки</th>
@@ -87,7 +90,6 @@
             <td>
               <a href="/user/showTrips/declineTrip?id=${trip.id}" onclick="return confirm('Вы уверены, что хотите отказаться от поездки?')">
                 <button type="button" class="btn btn-danger btn-sm">Отказаться
-                  от поездки
                 </button>
               </a>
             </td>
