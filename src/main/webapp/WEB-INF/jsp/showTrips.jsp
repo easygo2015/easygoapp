@@ -3,9 +3,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
-
 <title>Мои Поездки</title>
-
 <div class="row">
   <div class="col-lg-12 col-md-12">
     <div class="h1" align="center">Мои поездки</div>
@@ -42,7 +40,7 @@
             </c:forEach>
             </td>
             <td>
-              <a href="/user/showTrips/deleteTrip?id=${trip.id}">
+              <a href="/user/showTrips/deleteTrip?id=${trip.id}"  onclick="return confirm('Вы уверены, что хотите удалить данную поездку?')">
                 <button type="button" class="btn btn-danger btn-sm">Удалить
                   поездку
                 </button>
@@ -87,7 +85,7 @@
               <div><c:out value=" Машина: ${trip.driver.car}"/></div>
             </td>
             <td>
-              <a href="/user/showTrips/declineTrip?id=${trip.id}">
+              <a href="/user/showTrips/declineTrip?id=${trip.id}" onclick="return confirm('Вы уверены, что хотите отказаться от поездки?')">
                 <button type="button" class="btn btn-danger btn-sm">Отказаться
                   от поездки
                 </button>
@@ -98,9 +96,4 @@
       </table>
     </div>
   </div>
-
 </c:if>
-<a href="/user">
-  <button type="button" class="btn btn-primary btn-lg">Вернуться на страницу пользователя</button>
-</a>
-<hr/>
