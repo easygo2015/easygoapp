@@ -44,12 +44,16 @@ public class CreateTripController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String createTrip(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByLogin(authentication.getName());
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
         points.size();
         List<Integer> listCount20 = new ArrayList<>();
         for (int i = 1; i < 21; i++) {
             listCount20.add(i);
         }
+        model.addAttribute("adress", "createTrip");
+        model.addAttribute("user", user);
         model.addAttribute("list", listCount20);
         model.addAttribute("points", points);
         model.addAttribute("trip", new Trip());

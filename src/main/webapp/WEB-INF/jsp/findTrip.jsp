@@ -22,7 +22,6 @@
     var map;
     var markers = [];
     var x = [];
-
     function initialize() {
       var myLatlng = new google.maps.LatLng(48.536764, 34.571143);
       var mapOptions = {
@@ -33,9 +32,7 @@
       };
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
-
     google.maps.event.addDomListener(window, 'load', initialize);
-
     //    для календаря
     $(function () {
       $('#datetimepicker1').datetimepicker(
@@ -46,7 +43,6 @@
           }
       );
     });
-
     $(function () {
       $('#datetimepicker2').datetimepicker(
           {
@@ -56,16 +52,13 @@
           }
       );
     });
-
     //    получение и отображение все точек из объекта
-
     $(function () {
       x = [
         <c:forEach var="point" items="${points}" varStatus="status">
         {lat: "${point.latitude}", lng: "${point.longitude}", des: "${point.description}"},
         </c:forEach>
       ];
-
       function setMarkers(map, locations) {
         for (var i = 0; i < locations.length; i++) {
           var pleace = locations[i];
@@ -81,19 +74,16 @@
           markers.push(marker);
         }
       }
-
       function setAllMap(map) {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(map);
         }
       }
-
       google.maps.event.addDomListener(window, 'load', function () {
         setMarkers(map, x);
         setAllMap(null);
       });
     });
-
     //    Прячет все маркеры на карте
     $(function () {
       // Sets the map on all markers in the array.
@@ -102,7 +92,6 @@
           markers[i].setMap(map);
         }
       }
-
       $('#hidemarkers').on('click', function () {
 //                    alert("Вы нажали на КНОПКУ");
             // Removes the markers from the map, but keeps them in the array.
@@ -111,11 +100,8 @@
           }
       )
     });
-
     //    Добавление маркера по нажатию на чекбокс
-
     $(document).ready(function () {
-
       $("input[type='checkbox']").change(function () {
         var $this = $(this);
         var element = $this.val() - 1;
@@ -125,7 +111,6 @@
             if (element == i) {
               markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
               markers[i].setMap(map);
-
             }
           }
         } else {
@@ -171,7 +156,7 @@
   <div class="row">
     <div class="col-lg-4">
       <%--Forms--%>
-      <form:form id="formfind" method="post" modelAttribute="dto">
+      <form:form id="formfind" method="post" modelAttribute="dto" action="/user/findTrip#tables">
       <div class="bs-component">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -180,7 +165,7 @@
             <div class="form-group">
               <div class="h4">От:</div>
               <div class="input-group date" id="datetimepicker1">
-                <form:input path="startTime" type="text" class="form-control"/>
+                <form:input path="startTime" readonly="true" type="text" class="form-control"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -191,7 +176,7 @@
               <h4>До:</h4>
 
               <div class="input-group date" id="datetimepicker2">
-                <form:input path="endTime" type="text" class="form-control"/>
+                <form:input path="endTime" type="text" readonly="true" class="form-control"/>
                                     <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -257,7 +242,7 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
-        <h1 id="tables">Расписание поездок</h1>
+      <h1 id="tables">Расписание поездок</h1>
       <br>
 
 
@@ -309,9 +294,6 @@
       </div>
     </div>
   </div>
-  <a href="/user">
-    <button type="button" class="btn btn-info">Вернутся на мою страницу</button>
-  </a>
-  <hr>
+
 </div>
 

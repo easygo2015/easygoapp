@@ -39,6 +39,8 @@ public class ShowUserTripsController {
         User user = userService.getByLogin(authentication.getName());
         List<Trip> tripsDriver = tripService.findAllFutureTripsForDriver(user);
         List<Trip> tripsPassenger = tripService.findAllFutureTripsForPassenger(user);
+        model.addAttribute("adress","showTrips");
+        model.addAttribute("user", user);
         model.addAttribute("tripsDriver", tripsDriver);
         model.addAttribute("tripsPassenger", tripsPassenger);
         return "showTrips";

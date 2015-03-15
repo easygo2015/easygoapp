@@ -79,7 +79,6 @@
         </p>
         <a href="#" id="changePassword" class="list-group-item">Сменить пароль</a>
         <a href="#" id="deleteProfile" class="list-group-item">Удалить профиль</a>
-        <a href="/user" class="list-group-item">На мою страницу</a>
       </div>
       <div id="deleteContent" class="panel panel-info displayNone">
         <div class="panel-heading">

@@ -12,6 +12,7 @@
   <div class="col-lg-12">
     <div class="well bs-component">
       <div class="row">
+        <div class="col-lg-3"></div>
         <div class="col-lg-6">
           <table class="table">
             <tbody>
@@ -59,24 +60,26 @@
             </tr>
             </tbody>
           </table>
+          <a href="/user/editProfile" class="btn btn-info pull-right">Редактировать профиль</a>
         </div>
-        <div class="col-lg-6">
-          <div class="list-group">
-            <p class="list-group-item list-group-item-info">
-              Меню
-            </p>
-            <a href="/user/showTrips" class="list-group-item">Мои поездки</a>
-            <a href="/user/findTrip" class="list-group-item">Найти поездку</a>
-            <c:choose>
-              <c:when test="${empty user.car}">
-              </c:when>
-              <c:otherwise>
-                <a href="/user/createTrip" class="list-group-item">Создать поездку</a>
-              </c:otherwise>
-            </c:choose>
-            <a href="/user/editProfile" class="list-group-item">Редактировать профиль</a>
-          </div>
-        </div>
+        <div class="col-lg-3"></div>
+        <%--<div class="col-lg-6">--%>
+          <%--<div class="list-group">--%>
+            <%--<p class="list-group-item list-group-item-info">--%>
+              <%--Меню--%>
+            <%--</p>--%>
+            <%--<a href="/user/showTrips" class="list-group-item">Мои поездки</a>--%>
+            <%--<a href="/user/findTrip" class="list-group-item">Найти поездку</a>--%>
+            <%--<c:choose>--%>
+              <%--<c:when test="${empty user.car}">--%>
+              <%--</c:when>--%>
+              <%--<c:otherwise>--%>
+                <%--<a href="/user/createTrip" class="list-group-item">Создать поездку</a>--%>
+              <%--</c:otherwise>--%>
+            <%--</c:choose>--%>
+            <%--<a href="/user/editProfile" class="list-group-item">Редактировать профиль</a>--%>
+          <%--</div>--%>
+        <%--</div>--%>
       </div>
     </div>
   </div>

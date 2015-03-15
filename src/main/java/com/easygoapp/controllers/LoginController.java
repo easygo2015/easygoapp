@@ -44,6 +44,7 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userService.getByLogin(authentication.getName());
+        model.addObject("adress", "user");
         model.addObject("user", currentUser);
         model.setViewName("user");
 
@@ -60,7 +61,11 @@ public class LoginController {
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public ModelAndView showPromo() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByLogin(authentication.getName());
         ModelAndView modelAndView = new ModelAndView("about");
+        modelAndView.addObject("adress", "about");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 }

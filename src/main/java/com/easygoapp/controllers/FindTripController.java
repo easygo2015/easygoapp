@@ -43,6 +43,8 @@ public class FindTripController {
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.HEAD})
     public String findTrip(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByLogin(authentication.getName());
         List<PassengerNodePoint> points = passengerNodePointService.findAll();
         points.size();
         FindTripObject dto = new FindTripObject();
@@ -51,6 +53,8 @@ public class FindTripController {
         for (int i = 1; i < 21; i++) {
             listCount20.add(i);
         }
+        model.addAttribute("adress", "findTrip");
+        model.addAttribute("user", user);
         model.addAttribute("list", listCount20);
         model.addAttribute("points", points);
         model.addAttribute("dto", dto);
@@ -86,6 +90,9 @@ public class FindTripController {
 
     @RequestMapping(value = "/saveTrip", method = RequestMethod.GET)
     public String saveTrip(@RequestParam("id") long id, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByLogin(authentication.getName());
+        model.addAttribute("user", user);
         model.addAttribute("landing", new PassengerLanding());
         model.addAttribute("trip", tripService.findOneEager(id));
         tripId = id;
