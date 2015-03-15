@@ -15,7 +15,7 @@
 <title>Редактировать профиль</title>
 
 <h1>Редактировать профиль</h1>
-
+<div class="bs-docs-section">
 <div class="well bs-component">
   <div class="row">
     <div class="col-lg-7">
@@ -148,8 +148,8 @@
     </div>
   </div>
 </div>
-
-
+</div>
+</br>
 
 
 

@@ -4,6 +4,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
 <link rel="stylesheet" href="/assets/css/custom.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <!-- Navbar -->
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -43,16 +46,13 @@
             <c:set var="activeClass" value=""></c:set>
             <nav class="navbar default-navbar">
               <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="/">EasyGo</a>
-                </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                   <ul class="nav navbar-nav">
                     <c:set var="activeUser" value=""/>
                     <c:if test="${adress=='user'}">
                       <c:set var="activeUser" value="active"/>
                     </c:if>
-                    <li class="${activeUser}"><a href="/user">Моя страница</a></li>
+                    <li class="${activeUser}"><a href="/user">Мой профиль</a></li>
                     <c:set var="activeTrips" value=""/>
                     <c:if test="${adress=='showTrips'}">
                       <c:set var="activeTrips" value="active"/>

@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page session="true" %>
 <c:set var="js" value="/assets/js/"/>
 <c:set var="css" value="/assets/css/"/>
@@ -17,7 +18,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="text-center">
-        <p><strong>Время старта поездки:&nbsp<span>${trip.startTime}</span></strong></p>
+        <p><strong>Время старта поездки:&nbsp<fmt:formatDate value="${trip.startTime}" pattern="dd MMMM HH:mm"/></strong></p>
 
         <p><strong>Стоимость проезда составляет:&nbsp${trip.price}&nbspгрн.</strong></p>
 
@@ -52,6 +53,9 @@
             <label for="comment">Оставьте комментарий для ориентиров:</label>
             <textarea class="form-control" rows="3" id="comment"></textarea>
           </div>
+          <div class="alert alert-danger displayNone text-center" id="confirmError" role="alert">
+            Выберите удобное для вас место посадки!
+          </div>
           <div class="form-group pull-right">
             <a class="btn btn-sm btn-warning" href="/user/findTrip">Отмена</a>
             <button type="submit" class="btn btn-sm btn-info" id="confirm">Подтвердить</button>
@@ -64,14 +68,12 @@
   <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-      <div class="alert alert-danger displayNone text-center" id="confirmError" role="alert">
-        Выберите удобное для вас место посадки!
-      </div>
+
     </div>
     <div class="col-lg-3"></div>
   </div>
 </div>
-
+</br>
 
 
 

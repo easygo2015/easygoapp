@@ -1,4 +1,4 @@
-html { background: transparent;
+body { background: transparent;
   background: url('/assets/img/bg.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -7,7 +7,7 @@ html { background: transparent;
   color: transparent;
 }
 
-body {
-  background: transparent;
-}
+/*body {*/
+  /*background: transparent;*/
+/*}*/
 

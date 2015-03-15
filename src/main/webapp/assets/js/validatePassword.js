@@ -75,4 +75,5 @@ $(document).ready(function () {
     $('#newPassword').change(validate.password);
     $('#repeatPassword').change(validate.compare);
     $('#currentPassword').change(validate.current);
+
 });

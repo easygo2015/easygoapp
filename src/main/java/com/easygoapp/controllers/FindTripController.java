@@ -104,6 +104,6 @@ public class FindTripController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         tripService.addPassenger(tripId, user.getId(), passengerLanding);
-        return "redirect:/user";
+        return "redirect:/user/showTrips";
     }
 }

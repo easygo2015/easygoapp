@@ -45,7 +45,7 @@
 
               <div class="col-lg-10">
                 <form:input type="text" path="name" class="form-control" id="fullname"
-                            placeholder="requestScope.message"/>
+                            placeholder="Введите имя"/>
                 <span id="nameError" class="center-block hidden text-danger">минимум 3 символа</span>
               </div>
             </div>
@@ -159,6 +159,7 @@
 
   </div>
 </div>
+</br>
 <script src="/assets/js/validate.js"></script>
 <script src="/assets/js/jquery.maskedinput.js"></script>
 <script>

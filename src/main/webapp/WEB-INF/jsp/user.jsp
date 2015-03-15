@@ -3,11 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true" %>
 
-<title>Моя Страница</title>
+<title>Мой профиль</title>
 <link rel="stylesheet" href="/assets/css/style.css">
 
-<h1>Моя страница</h1>
-
+<h1>Мой профиль</h1>
+<div class="bs-docs-section">
 <div class="row">
   <div class="col-lg-12">
     <div class="well bs-component">
@@ -84,3 +84,5 @@
     </div>
   </div>
 </div>
+</div>
+</br>

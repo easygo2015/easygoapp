@@ -49,7 +49,7 @@ public class ShowUserTripsController {
     @RequestMapping(value = "/deleteTrip", method = RequestMethod.GET)
     public String deleteTrip(@RequestParam("id") long id) throws MessagingException {
         tripService.cancelTrip(id);
-        return "redirect:/user";
+        return "redirect:/user/showTrips";
     }
 
     @RequestMapping(value = "/declineTrip", method = RequestMethod.GET)
@@ -57,6 +57,6 @@ public class ShowUserTripsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByLogin(authentication.getName());
         tripService.removeCompanionFromTrip(user.getId(), id);
-        return "redirect:/user";
+        return "redirect:/user/showTrips";
     }
 }
