@@ -34,6 +34,7 @@
     var mapOptions = {
       zoom: 11,
       center: myLatlng,
+      scrollwheel: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -43,16 +44,6 @@
   //    для календаря
   $(function () {
     $('#datetimepicker1').datetimepicker(
-        {
-          language: 'ru',
-          defaultDate: new Date(),
-          minDate: new Date()
-        }
-    );
-  });
-
-  $(function () {
-    $('#datetimepicker2').datetimepicker(
         {
           language: 'ru',
           defaultDate: new Date(),
@@ -86,10 +77,19 @@
       }
     }
 
+      function setAllMap(map) {
+          for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(map);
+          }
+      }
+
     google.maps.event.addDomListener(window, 'load', function () {
-      setMarkers(map, x)
+      setMarkers(map, x);
+      setAllMap(null);
     });
   });
+
+
 
   //    Прячет все маркеры на карте
   $(function () {
@@ -101,10 +101,11 @@
     }
 
     $('#hidemarkers').on('click', function () {
-//                    alert("Вы нажали на КНОПКУ");
           // Removes the markers from the map, but keeps them in the array.
           setAllMap(null);
-                $("input:checkbox:checked").removeAttr('checked');
+          $("input:checkbox:checked").removeAttr('checked');
+          $('#capacity').val(1);
+          $('#cena').val(1);
         }
     )
   });
@@ -122,7 +123,6 @@
           if (element == i) {
             markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
             markers[i].setMap(map);
-
           }
         }
       } else {
@@ -157,8 +157,6 @@
           <div class="panel-body">
             <div id="map-canvas" style="height:400px; width:100%"></div>
             <div id="map">
-                <br/>
-                <input id="hidemarkers" class="btn btn-primary btn-lg btn-block" type=button value="Убрать маркеры">
             </div>
           </div>
         </div>
@@ -175,11 +173,11 @@
           <div class="panel-body">
             <div class="form-group" id="carCapacity">
               <label class="col-lg-10 control-label  ">Выберите количество мест:</label>
-              <form:select path="carCapacity" items="${list}"/>
+              <form:select path="carCapacity" items="${list}" id="capacity"/>
             </div>
             <div class="form-group" id="cost">
               <label class="col-lg-10 control-label ">Укажите стоимость проезда, грн.:</label>
-              <form:select path="price" items="${list}"/>
+              <form:select path="price" items="${list}" id="cena"/>
             </div>
             <hr/>
 
@@ -194,6 +192,10 @@
                                         </span>
               </div>
             </div>
+              <input id="hidemarkers" class="btn btn-primary btn-sm" type=button value="Очистить">
+              <button type="submit" class="btn btn-primary btn-sm pull-right" onclick="return checkTrip();" id="saveTrip">
+                  Сохранить
+              </button>
           </div>
         </div>
       </div>
@@ -208,12 +210,16 @@
         <div class="h5" id="leftCoast">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${point.isLeft()}">
-              <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                     value="${point.id}"/>
-              <c:out value="${point.description}"/><br>
+              <div class="checkbox">
+                  <label>
+                      <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                             value="${point.id}"/>
+                      <c:out value="${point.description}"/><br>
+                  </label>
+              </div>
             </c:if>
           </c:forEach>
-          <div id="errorLeftBank"></div>
+          <div id="errorLeftBank" class="label label-warning"></div>
         </div>
       </div>
     </div>
@@ -225,17 +231,19 @@
         <div class="h5" id="rightCoast">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${!point.isLeft()}">
-              <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                     value="${point.id}"/>
-              <c:out value="${point.description}"/><br>
+              <div class="checkbox">
+                  <label>
+                      <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                             value="${point.id}"/>
+                      <c:out value="${point.description}"/><br>
+                  </label>
+              </div>
             </c:if>
           </c:forEach>
           <div id="errorRightBank" class="label label-warning"></div>
         </div>
       </div>
-      <button type="submit" class="btn btn-info btn-lg btn-block" onclick="return checkTrip();" id="saveTrip">
-        Сохранить
-      </button>
+
       <br>
       <br>
       <br>

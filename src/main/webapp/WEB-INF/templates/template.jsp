@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="${css}bootstrap.css">
   <link rel="stylesheet" href="${css}background.css">
   <link rel="stylesheet" href="${css}stickyFooter.css">
+
+  <t:insertAttribute name="head"/>
 </head>
 
 <body>

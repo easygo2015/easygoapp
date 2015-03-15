@@ -88,7 +88,7 @@ $(document).ready(function () {
         'email': function () {
             var name = $('#blockemail');
             var ele = $('#email');
-            var patt = /^.+@.+[.].{2,}$/i;
+            var patt = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
             if (!patt.test(ele.val())) {
                 validate.errors = true;
                 name.removeClass('has-success').addClass('has-error has-feedback');

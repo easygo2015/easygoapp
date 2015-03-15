@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.ConstraintViolationException;
+
 
 //Comment this annotation to view the stacktraces while developing
 @ControllerAdvice
@@ -26,4 +28,9 @@ public class AppExceptionHandlerController {
         model.addObject("message", "Произошла ошибка при работе с Базой Данных");
         return model;
     }
+
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ModelAndView handleEmailException(Exception ex, ModelAndView model){
+//        return model;
+//    }
 }

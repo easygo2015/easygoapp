@@ -3,6 +3,7 @@ package com.easygoapp.domain;
 import com.easygoapp.type.Gender;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -48,11 +49,12 @@ public class User extends AbstractPersistable<Long> {
 
     @NotNull
     @Size(min = 6, message = "Длина электронной почты должна содержать как минимум 6 символов")
-    @Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)" +
-            "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)" +
-            "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
-            "+(?:[a-zA-Z]){2,}\\.?)$",
-            message = "заданный имэйл не может существовать")
+//    @Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)" +
+//            "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)" +
+//            "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
+//            "+(?:[a-zA-Z]){2,}\\.?)$",
+//            message = "заданный имэйл не может существовать")
+    @Email
     @Column(name = "email")
     private String email;
 

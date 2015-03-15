@@ -31,6 +31,7 @@
       var mapOptions = {
         zoom: 11,
         center: myLatlng,
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -84,8 +85,15 @@
         }
       }
 
+        function setAllMap(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
       google.maps.event.addDomListener(window, 'load', function () {
-        setMarkers(map, x)
+        setMarkers(map, x);
+          setAllMap(null);
       });
     });
 
@@ -156,8 +164,6 @@
             <%--<h2>Map</h2>--%>
             <div id="map-canvas" style="height:400px; width:100%"></div>
             <div id="map">
-                <br/>
-              <input id="hidemarkers" class="btn btn-primary btn-lg btn-block" type=button value="Убрать маркеры">
             </div>
           </div>
         </div>
@@ -195,6 +201,10 @@
                                     </span>
               </div>
             </div>
+
+              <input id="hidemarkers" class="btn btn-primary btn-sm" type=button value="Очистить">
+              <button type="submit" class="btn btn-primary btn-sm pull-right">Поиск</button>
+
           </div>
         </div>
       </div>
@@ -207,9 +217,15 @@
         <div class="h5" id="start">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${point.isLeft()}">
-              <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                     value="${point.id}"/>
-              <c:out value="${point.description}"/><br>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                               value="${point.id}"/>
+                        <c:out value="${point.description}"/><br>
+                    </label>
+                </div>
+
             </c:if>
           </c:forEach>
         </div>
@@ -223,16 +239,21 @@
         <div class="h5" id="end">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${!point.isLeft()}">
-              <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                     value="${point.id}"/>
-              <c:out value="${point.description}"/><br>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                               value="${point.id}"/>
+                        <c:out value="${point.description}"/><br>
+                    </label>
+                </div>
+
             </c:if>
           </c:forEach>
         </div>
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary btn-lg btn-block">Поиск</button>
   </form:form>
 </div>
 
