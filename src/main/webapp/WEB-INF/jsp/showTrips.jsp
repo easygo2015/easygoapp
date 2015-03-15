@@ -3,6 +3,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="t" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="css" value="/assets/css/"/>
 <link rel="stylesheet" href="${css}createTrip.css">
@@ -30,7 +31,7 @@
         <c:forEach var="trip" varStatus="count" items="${tripsDriver}">
           <tr>
             <td><c:out value="${count.index+1}"/></td>
-            <td><c:out value="${trip.startTime}"/></td>
+            <td><fmt:formatDate value="${trip.startTime}" pattern="dd MMMM HH:mm"/></td>
             <td><c:out value="${trip.carCapacity}"/></td>
             <td><c:out value="${trip.price}"/></td>
             <td><c:forEach var="landing" items="${trip.getPassengerLanding()}">
@@ -76,7 +77,7 @@
         <c:forEach var="trip" varStatus="count" items="${tripsPassenger}">
           <tr>
             <td><c:out value="${count.index+1}"/></td>
-            <td><c:out value="${trip.startTime}"/></td>
+            <td><fmt:formatDate value="${trip.startTime}" pattern="dd MMMM HH:mm"/></td>
             <td><c:out value="${trip.price}"/></td>
             <td><c:forEach var="tripPoint" items="${trip.passengerNodePoints}">
               <div><c:out value="${tripPoint.description}"/></div>
