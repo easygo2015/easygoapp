@@ -165,7 +165,7 @@
             <div class="form-group">
               <div class="h4">От:</div>
               <div class="input-group date" id="datetimepicker1">
-                <form:input path="startTime" readonly="true" type="text" class="form-control"/>
+                <form:input path="startTime" type="text" class="form-control"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -176,7 +176,7 @@
               <h4>До:</h4>
 
               <div class="input-group date" id="datetimepicker2">
-                <form:input path="endTime" type="text" readonly="true" class="form-control"/>
+                <form:input path="endTime" type="text"  class="form-control"/>
                                     <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -288,9 +288,9 @@
           </c:forEach>
           </tbody>
         </table>
-        <c:if test="${dto.trips == null}">
-          <div><c:out value="К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами."/></div>
-        </c:if>
+        <%--<c:if test="${dto.trips == null}">--%>
+          <%--<div><c:out value="К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами."/></div>--%>
+        <%--</c:if>--%>
       </div>
     </div>
   </div>

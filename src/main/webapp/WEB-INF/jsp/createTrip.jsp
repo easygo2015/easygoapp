@@ -178,7 +178,7 @@
              <div class="form-group" id="timePicker">
               <!-- Элемент HTML с id равным datetimepicker1 -->
                <div class="input-group date" id="datetimepicker1">
-                <input type="text" readonly="true" class="form-control" name="startDate"/>
+                <input type="text" class="form-control" name="startDate"/>
                                         <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
