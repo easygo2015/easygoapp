@@ -119,7 +119,7 @@ insert into user_role values(18, 'ivan', 'ROLE_USER');
 insert into user values(19, 'Борис', 0, 'boris', '111111', null, '0931155505', 'boris@gmail.com');
 insert into user_role values(19, 'boris', 'ROLE_USER');
 
-insert into user values(20, 'Маргарита', 1, 'margo', '111111', null, '0959825122', 'margo@ukr.net');
+insert into user values(20, 'Марго', 1, 'margo', '111111', null, '0959825122', 'margo@ukr.net');
 insert into user_role values(20, 'margo', 'ROLE_USER');
 
 insert into user values(21, 'Анастасия', 1, 'annastasia', '111111', null, '0631111785', 'annastasia@i.ua');

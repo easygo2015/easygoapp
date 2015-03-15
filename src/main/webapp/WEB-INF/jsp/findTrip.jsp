@@ -287,7 +287,7 @@
           </c:forEach>
           </tbody>
         </table>
-        <c:if test="${dto.trips.isEmpty()}">
+        <c:if test="${dto.trips == null}">
           <div><c:out value="К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами."/></div>
         </c:if>
       </div>
