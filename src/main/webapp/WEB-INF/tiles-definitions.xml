@@ -30,10 +30,6 @@
     <put-attribute name="body" value="/WEB-INF/jsp/registration.jsp" />
   </definition>
 
-  <definition name="userInfo" extends="base">
-    <put-attribute name="body" value="/WEB-INF/jsp/userInfo.jsp" />
-  </definition>
-
   <definition name="admin" extends="base">
     <put-attribute name="header" value="/WEB-INF/templates/adminHeader.jsp" />
     <put-attribute name="body" value="/WEB-INF/jsp/admin.jsp" />

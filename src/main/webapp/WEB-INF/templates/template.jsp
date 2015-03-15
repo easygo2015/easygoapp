@@ -19,12 +19,14 @@
   <script src="${js}bootstrap.js"></script>
   <script src="${js}bootstrap.min.js"></script>
   <script src="${js}autoBreadcrumbs.js"></script>
+  <script src="${js}bootbox.min.js"></script>
   <!-- CSS  ================================================== -->
   <link rel="stylesheet" href="${css}bootstrap.css">
   <link rel="stylesheet" href="${css}background.css">
   <link rel="stylesheet" href="${css}stickyFooter.css">
 
-  <t:insertAttribute name="head"/>
+
+  <link rel="stylesheet" href="${css}custom.css">
 </head>
 
 <body>
@@ -35,6 +37,7 @@
   <%--body--%>
   <t:insertAttribute name="body"/>
   <%--footer--%>
+    <br>
   <t:insertAttribute name="footer"/>
 </div>
 </body>

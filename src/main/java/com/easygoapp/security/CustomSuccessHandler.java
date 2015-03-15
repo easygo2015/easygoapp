@@ -45,7 +45,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         if (isUser) {
-            return "/user";
+            return "/user/showTrips";
         } else if (isAdmin) {
             return "/admin";
         } else {

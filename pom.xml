@@ -183,6 +183,11 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootbox</artifactId>
+      <version>4.4.0</version>
+    </dependency>
 
     <!--Apache tiles-->
     <dependency>

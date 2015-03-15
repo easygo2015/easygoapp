@@ -2,8 +2,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+  $(document).on("click", ".alert", function(e) {
+    bootbox.alert("Hello world!", function() {
+      console.log("Alert Callback");
+    });
+  });
+</script>
 
-<title>Регитрация</title>
+<title>Регистрация</title>
 
 <div class="bs-docs-section">
   <div class="row">
@@ -17,6 +24,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="well bs-component">
+        <h6>${requestScope.message}</h6>
         <form:form class="form-horizontal" id="form" method="post" modelAttribute="user">
           <!---->
           <fieldset>
@@ -37,7 +45,7 @@
 
               <div class="col-lg-10">
                 <form:input type="text" path="name" class="form-control" id="fullname"
-                            placeholder="Введите ваше имя"/>
+                            placeholder="requestScope.message"/>
                 <span id="nameError" class="center-block hidden text-danger">минимум 3 символа</span>
               </div>
             </div>
@@ -151,8 +159,6 @@
 
   </div>
 </div>
-
-
 <script src="/assets/js/validate.js"></script>
 <script src="/assets/js/jquery.maskedinput.js"></script>
 <script>
