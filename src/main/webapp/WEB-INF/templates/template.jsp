@@ -37,7 +37,6 @@
   <%--body--%>
   <t:insertAttribute name="body"/>
   <%--footer--%>
-    <br>
   <t:insertAttribute name="footer"/>
 </div>
 </body>

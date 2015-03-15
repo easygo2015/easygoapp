@@ -14,10 +14,6 @@
     <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
   </definition>
 
-  <definition name="message" extends="base">
-    <put-attribute name="body" value="/WEB-INF/jsp/message.jsp" />
-  </definition>
-
   <definition name="user" extends="base">
     <put-attribute name="body" value="/WEB-INF/jsp/user.jsp" />
   </definition>

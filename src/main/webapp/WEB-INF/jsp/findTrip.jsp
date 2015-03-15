@@ -1,25 +1,22 @@
 <%@ page language="java" pageEncoding="utf-8" contentType="text/html;charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <title>Поиск поездки</title>
 
 <c:set var="js" value="/assets/js/"/>
 <c:set var="css" value="/assets/css/"/>
-<%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--%>
-<%--<script type="text/javascript" src="${js}jquery-2.1.3.min.js"></script>--%>
 <script type="text/javascript" src="${js}moment-with-locales.min.js"></script>
-<%--<script src="${js}bootstrap.js"></script>--%>
 <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
-<%--<script type="text/javascript" src="${js}validateTrip.js"></script>--%>
-<%--<link rel="stylesheet" href="${css}bootstrap.css">--%>
 <link rel="stylesheet" href="${css}bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" href="${css}custom.css"/>
+<link rel="stylesheet" href="${css}createTrip.css">
+<link rel="stylesheet" type="text/css" href="${css}bootstrap-tour.min.css"/>
 
 
 <%----%>
 <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
-<%--<script src="/assets/js/maps.js"></script>--%>
 <script>
   $(document).ready(function () {
     var map;
@@ -43,7 +40,7 @@
     $(function () {
       $('#datetimepicker1').datetimepicker(
           {
-            language: 'ru',
+            locale: 'ru',
             defaultDate: new Date(),
             minDate: new Date()
           }
@@ -53,7 +50,7 @@
     $(function () {
       $('#datetimepicker2').datetimepicker(
           {
-            language: 'ru',
+            locale: 'ru',
             defaultDate: new Date(),
             minDate: new Date()
           }
@@ -85,15 +82,15 @@
         }
       }
 
-        function setAllMap(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
+      function setAllMap(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
         }
+      }
 
       google.maps.event.addDomListener(window, 'load', function () {
         setMarkers(map, x);
-          setAllMap(null);
+        setAllMap(null);
       });
     });
 
@@ -110,7 +107,7 @@
 //                    alert("Вы нажали на КНОПКУ");
             // Removes the markers from the map, but keeps them in the array.
             setAllMap(null);
-                  $("input:checkbox:checked").removeAttr('checked');
+            $("input:checkbox:checked").removeAttr('checked');
           }
       )
     });
@@ -126,7 +123,7 @@
         if ($this.is(':checked')) {
           for (var i = 0; i <= markers.length; i++) {
             if (element == i) {
-                markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
+              markers[i].setIcon('https://www.google.com/mapfiles/marker_green.png');
               markers[i].setMap(map);
 
             }
@@ -149,9 +146,8 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
-        <h3 id="type">Поиск поездки</h3>
-      </div>
+      <h3 id="type">Поиск поездки</h3>
+      <br>
     </div>
   </div>
 
@@ -179,7 +175,7 @@
       <div class="bs-component">
         <div class="panel panel-default">
           <div class="panel-body">
-            Укажите интервал времени, когда Вы хотите найти поезду
+            Укажите интервал времени, когда Вы хотите найти поездку
             <hr/>
             <div class="form-group">
               <div class="h4">От:</div>
@@ -202,8 +198,8 @@
               </div>
             </div>
 
-              <input id="hidemarkers" class="btn btn-primary btn-sm" type=button value="Очистить">
-              <button type="submit" class="btn btn-primary btn-sm pull-right">Поиск</button>
+            <input id="hidemarkers" class="btn btn-primary btn-sm" type=button value="Очистить">
+            <button type="submit" class="btn btn-primary btn-sm pull-right">Поиск</button>
 
           </div>
         </div>
@@ -211,20 +207,20 @@
     </div>
     <div class="col-lg-4">
       <div class="bs-component">
-        Выберите подходящий Вам маршрут!<br/>
+        Выберите подходящий Вам маршрут!
         Левый берег:
         <hr/>
         <div class="h5" id="start">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${point.isLeft()}">
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                               value="${point.id}"/>
-                        <c:out value="${point.description}"/><br>
-                    </label>
-                </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                         value="${point.id}"/>
+                  <c:out value="${point.description}"/><br>
+                </label>
+              </div>
 
             </c:if>
           </c:forEach>
@@ -233,20 +229,20 @@
     </div>
     <div class="col-lg-4">
       <div class="bs-component">
-        Выберите подходящий Вам маршрут!<br/>
+        Выберите подходящий Вам маршрут!
         Правый берег:
         <hr/>
         <div class="h5" id="end">
           <c:forEach var="point" items="${points}" varStatus="status">
             <c:if test="${!point.isLeft()}">
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="passengerNodePoints[${status.index}].id"
-                               value="${point.id}"/>
-                        <c:out value="${point.description}"/><br>
-                    </label>
-                </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="passengerNodePoints[${status.index}].id"
+                         value="${point.id}"/>
+                  <c:out value="${point.description}"/><br>
+                </label>
+              </div>
 
             </c:if>
           </c:forEach>
@@ -261,29 +257,28 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
         <h1 id="tables">Расписание поездок</h1>
-      </div>
+      <br>
 
 
       <div class="bs-component">
         <table class="table table-bordered table-striped table-hover ">
-          <thead>
+          <thead class="customTableHead">
           <tr>
-            <th>№</th>
-            <th>Время старта поездки</th>
-            <th>Количество свободных мест</th>
-            <th>Стоимость проезда</th>
-            <th>Маршрут</th>
-            <th>Совпадения по маршруту</th>
-            <th>Занять место</th>
+            <th class="customTableHead">№</th>
+            <th class="customTableHead">Время старта поездки</th>
+            <th class="customTableHead">Количество свободных мест</th>
+            <th class="customTableHead">Стоимость проезда</th>
+            <th class="customTableHead">Маршрут</th>
+            <th class="customTableHead">Совпадения по маршруту</th>
+            <th class="customTableHead">Занять место</th>
           </tr>
           </thead>
           <tbody>
           <c:forEach var="trip" varStatus="count" items="${dto.trips}">
             <tr>
               <td><c:out value="${count.index+1}"/></td>
-              <td><c:out value="${trip.startTime}"/></td>
+              <td><fmt:formatDate value="${trip.startTime}" pattern="dd MMMM HH:mm"/></td>
               <td><c:out value="${trip.carCapacity}"/></td>
               <td><c:out value="${trip.price}"/></td>
               <td><c:forEach var="tripPoint" items="${trip.passengerNodePoints}">
@@ -313,6 +308,10 @@
         </c:if>
       </div>
     </div>
-  </div><a href="/user"><button type="button" class="btn btn-info" >Вернутся на мою страницу</button></a><hr>
+  </div>
+  <a href="/user">
+    <button type="button" class="btn btn-info">Вернутся на мою страницу</button>
+  </a>
+  <hr>
 </div>
 

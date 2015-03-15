@@ -3,7 +3,7 @@ table {
   border-spacing: 0 5px;
 }
 
-thead th {
+.customTableHead {
   background-color: #006DCC;
   color: white;
 }

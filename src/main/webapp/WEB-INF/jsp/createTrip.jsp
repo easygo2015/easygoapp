@@ -6,19 +6,12 @@
 
 <c:set var="js" value="/assets/js/"/>
 <c:set var="css" value="/assets/css/"/>
-<%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--%>
-<%--<script type="text/javascript" src="${js}jquery-2.1.3.min.js"></script>--%>
 <script type="text/javascript" src="${js}moment-with-locales.min.js"></script>
-<%--<script src="${js}bootstrap.js"></script>--%>
 <script type="text/javascript" src="${js}bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="${js}validateTrip.js"></script>
 <script type="text/javascript" src="${js}bootstrap-tour.min.js"></script>
-
-<%--<link rel="stylesheet" type="text/css" href="${css}bootstrap.css">--%>
 <link rel="stylesheet" type="text/css" href="${css}bootstrap-datetimepicker.min.css"/>
 <link rel="stylesheet" type="text/css" href="${css}custom.css"/>
-<link rel="stylesheet" type="text/css" href="${css}bootstrap-tour.min.css"/>
-
 
 <%----%>
 <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>
@@ -45,7 +38,7 @@
   $(function () {
     $('#datetimepicker1').datetimepicker(
         {
-          language: 'ru',
+          locale: 'ru',
           defaultDate: new Date(),
           minDate: new Date()
         }
@@ -143,9 +136,8 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
-      <div class="page-header">
         <h3 id="type">Создание поездки</h3>
-      </div>
+      <br>
     </div>
   </div>
 
