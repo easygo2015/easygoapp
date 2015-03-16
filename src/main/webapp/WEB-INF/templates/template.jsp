@@ -17,13 +17,13 @@
   <![endif]-->
   <script src="${js}jquery-2.1.3.min.js"></script>
   <script src="${js}bootstrap.js"></script>
-  <script src="${js}bootstrap.min.js"></script>
   <script src="${js}autoBreadcrumbs.js"></script>
   <script src="${js}bootbox.min.js"></script>
   <!-- CSS  ================================================== -->
   <link rel="stylesheet" href="${css}bootstrap.css">
   <link rel="stylesheet" href="${css}background.css">
   <link rel="stylesheet" href="${css}stickyFooter.css">
+  <link rel="stylesheet" href="${css}custom.css">
 
 
   <link rel="stylesheet" href="${css}custom.css">

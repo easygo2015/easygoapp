@@ -6,7 +6,7 @@
 
 <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6">
   <div>
-    <img class="img-rounded" src="/assets/img/failed.jpg">
+    <img class="img-rounded" src="/assets/img/failed.png">
   </div>
 
   <h1>Неверный логин или пароль</h1>

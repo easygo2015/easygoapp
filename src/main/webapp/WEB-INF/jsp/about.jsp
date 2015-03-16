@@ -55,9 +55,12 @@
               <a href="/">
                 <button type="button" class="btn btn-primary btn-md">Вернуться на главную</button>
               </a>
+
+              <sec:authorize ifAnyGranted="ROLE_ANONYMOUS">
               <a href="/registration">
                 <button type="button" class="btn btn-primary btn-md">Зарегистрироваться прямо сейчас</button>
               </a>
+              </sec:authorize>
             </div>
             <div class="col-lg-6 col-xs-12">
               <p align="right">С наилучшими пожеланиями: команда разработчиков

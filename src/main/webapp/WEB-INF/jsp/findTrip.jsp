@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${css}custom.css"/>
 <link rel="stylesheet" href="${css}createTrip.css">
 <link rel="stylesheet" type="text/css" href="${css}bootstrap-tour.min.css"/>
+<link rel="stylesheet" href="${css}createTrip.css">
 
 
 <%----%>
@@ -39,7 +40,7 @@
           {
             locale: 'ru',
             defaultDate: new Date(),
-            minDate: new Date()
+            minDate: (new Date(new Date().getTime() - 600000))
           }
       );
     });
@@ -48,7 +49,7 @@
           {
             locale: 'ru',
             defaultDate: new Date(),
-            minDate: new Date()
+            minDate: (new Date(new Date().getTime() - 600000))
           }
       );
     });
@@ -247,7 +248,7 @@
 
 
       <div class="bs-component">
-        <table class="table table-bordered table-striped table-hover ">
+        <table class="table table-striped table-hover ">
           <thead class="customTableHead">
           <tr>
             <th class="customTableHead">№</th>

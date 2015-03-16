@@ -8,7 +8,8 @@
   <div class="col-lg-11 col-sx-12">
     <div class="bs-component">
       <div class="well">
-        © Stanislav Markov All rights reserved. 2015
+        <a href="mailto:easygodndz@gmail.com?Subject=From%20EasyGo%20service" target="_top">
+          © Stanislav Markov All rights reserved. 2015</a>
       </div>
     </div>
   </div>

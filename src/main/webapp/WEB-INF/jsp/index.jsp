@@ -6,9 +6,8 @@
 <c:url value="/assets/img/" var="images"/>
 <c:url value="/assets/js/" var="js"/>
 <c:url value="/assets/js/" var="css"/>
-
 <title>EasyGo</title>
-
+<link rel="stylesheet" href="${css}bootstrap.min.css">
 <!-- Slider -->
 
 <div class="row">
