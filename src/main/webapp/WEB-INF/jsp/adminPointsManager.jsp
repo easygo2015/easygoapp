@@ -4,7 +4,7 @@
 <%@page session="true" %>
 <script src="/assets/js/deleteNotify.js"></script>
 <link rel="stylesheet" href="/assets/css/adminStyle.css">
-
+<title>Points Manager</title>
 
 <div class="row">
   <div class="col-lg-12">

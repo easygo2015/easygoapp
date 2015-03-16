@@ -4,7 +4,7 @@
 <%@page session="true" %>
 
 <title>Add PNP</title>
-
+<link rel="stylesheet" href="/assets/css/adminStyle.css">
 <c:set var="js" value="/assets/js/"/>
 <script src="${js}validatePoint.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=AIzaSyAlMDftXoxe0Ig9Dpip_Y0TCuLRWA_TVqg&sensor=false"></script>

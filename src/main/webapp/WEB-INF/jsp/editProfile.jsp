@@ -139,6 +139,7 @@
           <c:set var="classFail" value=""></c:set>
         </c:when>
       </c:choose>
+      </br>
       <div id="successMessage" class="${classSuccess} alert alert-success" role="alert">
         <p>Password successfully changed!</p>
       </div>

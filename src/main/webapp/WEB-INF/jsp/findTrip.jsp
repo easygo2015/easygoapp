@@ -288,9 +288,11 @@
           </c:forEach>
           </tbody>
         </table>
-        <%--<c:if test="${dto.trips == null}">--%>
-          <%--<div><c:out value="К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами."/></div>--%>
-        <%--</c:if>--%>
+        <c:if test="${not empty fail}">
+          <div class="alert alert-info text-center" role="alert">
+            <p><strong>К сожалению, по Вашему запросу не найдено ни одной поездки со свободными местами.</strong></p>
+          </div>
+        </c:if>
       </div>
     </div>
   </div>

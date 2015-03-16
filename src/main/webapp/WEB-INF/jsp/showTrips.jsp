@@ -100,3 +100,12 @@
     </div>
   </div>
 </c:if>
+<c:if test="${(tripsPassenger.size()==0) && (tripsDriver.size()==0)}">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="alert alert-info text-center" role="alert">
+        <p><strong>У вас пока нет ни одной поездки.</strong></p>
+      </div>
+    </div>
+  </div>
+</c:if>

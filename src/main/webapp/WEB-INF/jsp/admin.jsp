@@ -7,7 +7,7 @@
   <script src="${js}showModals.js"></script>
   <link rel="stylesheet" href="/assets/css/custom.css">
   <link rel="stylesheet" href="/assets/css/adminStyle.css">
-
+<title>Admin Room</title>
 <div class="col-lg-12">
   <div class="bs-component">
     <h1 align="center">ADMIN'S ROOM</h1>

@@ -83,6 +83,9 @@ public class FindTripController {
         }
         dto.setTrips(trips);
         List<PassengerNodePoint> allPoints = passengerNodePointService.findAll();
+        if (trips.isEmpty()){
+            model.addAttribute("fail","fail");
+        }
         model.addAttribute("dto", dto);
         model.addAttribute("points", allPoints);
         return "findTrip";
