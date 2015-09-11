@@ -7,9 +7,6 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -20,40 +17,24 @@ import java.util.List;
 @Table(name = "USER")
 public class User extends AbstractPersistable<Long> {
 
-
-    @Size(min = 2, message = "Длина имени должны содержать как минимум 2 символа")
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Size(min = 3, message = "Длина логина должны содержать как минимум 3 символа")
     @Column(name = "login", nullable = false)
     private String login;
 
-    @NotNull
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
-    @NotNull
-    @Size(min = 6, message = "Длина пароля должна содержать как минимум 6 символов")
     @Column(name = "password", nullable = false)
     private String password;
 
-
-    @Size(min = 6, message = "Длина номера телефона должна содержать как минимум 6 символов")
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "car")
     private String car;
 
-    @NotNull
-    @Size(min = 6, message = "Длина электронной почты должна содержать как минимум 6 символов")
-//    @Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)" +
-//            "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)" +
-//            "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
-//            "+(?:[a-zA-Z]){2,}\\.?)$",
-//            message = "заданный имэйл не может существовать")
     @Email
     @Column(name = "email")
     private String email;

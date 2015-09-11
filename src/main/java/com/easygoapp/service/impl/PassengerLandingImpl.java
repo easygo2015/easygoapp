@@ -7,8 +7,8 @@ import com.easygoapp.repository.PassengerLandingRepository;
 import com.easygoapp.service.PassengerLandingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Transactional
 @Service

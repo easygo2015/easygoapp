@@ -7,13 +7,12 @@ import com.easygoapp.repository.UserRepository;
 import com.easygoapp.service.TripService;
 import com.easygoapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Станислав on 28.02.2015.
@@ -26,9 +25,6 @@ public class UserServiceImpl extends AbstractCrudServiceImpl<User, Long> impleme
 
     @Autowired
     private TripService tripService;
-
-    @Autowired
-    private JavaMailSenderImpl mailSender;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {

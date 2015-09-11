@@ -20,12 +20,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by Станислав on 28.02.2015.
+ * Created by Stanislav Markov mailto: stasmarkov88@gmail.com
  */
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = RootConfig.REPOSITORY_PACKAGE)
 @EnableJpaRepositories("com.easygoapp.repository")
 @PropertySource({"classpath:db-mysql.properties"})
 public class PersistenceConfig {
